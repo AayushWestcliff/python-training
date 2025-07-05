@@ -15,3 +15,6 @@ nav:
 theme:
   name: readthedocs
   # name: material
+
+# Add this line
+cname: python.regmiaayush.com.np
