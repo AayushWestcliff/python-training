@@ -4,7 +4,14 @@ nav:
   - Getting Started: index.md
   - Introduction to Python: lectures/1.Introduction.md
   - Data Types: lectures/2.DataTypes.md
+  - Control Structures: lectures/3.ControlStructures.md
+  - Data Structures: lectures/4.DataStructures.md
+  - Functions: lectures/5.Functions.md
+  - File Handling: lectures/6.FileHandling.md
+  - OOP: lectures/7.OOP.md
+  - Errors and Exceptions: lectures/8.Error&Debugging.md
+  - Advanced Topics: lectures/9.AdvancedConcepts.md
     # - Python Download: index.md
 theme:
-  name: readthedocs
-  # name: material
+  # name: readthedocs
+  name: material

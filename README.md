@@ -1,5 +1,2 @@
-# python-training
+# Python Training
 
-```bash
-jupyter nbconvert --to markdown notebooks/1.Introduction.ipynb
-```
