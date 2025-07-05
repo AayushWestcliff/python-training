@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Advanced Topics - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Advanced Topics";
+        var mkdocs_page_input_path = "lectures/9.AdvancedConcepts.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Advanced Topics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-lambda-functions-anonymous-functions">🟢 1. Lambda Functions (Anonymous Functions)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-generators-iterators">🟢 2. Generators &amp; Iterators</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-list-comprehensions">🟢 3. List Comprehensions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-working-with-args-and-kwargs">🟢 4. Working with args and *kwargs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Advanced Topics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-advanced-python-concepts">📓 Python Programming - Advanced Python Concepts</h1>
+<hr />
+<h3 id="1-lambda-functions-anonymous-functions">🟢 <strong>1. Lambda Functions (Anonymous Functions)</strong></h3>
+<ul>
+<li>
+<p><code>lambda</code> creates small, one-line, anonymous functions.</p>
+</li>
+<li>
+<p>Often used with <code>map()</code>, <code>filter()</code>, <code>sorted()</code>, etc.</p>
+</li>
+</ul>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python"># Regular function
+def square(x):
+    return x ** 2
+
+print(square(5))
+
+# Lambda function
+square_lambda = lambda x: x ** 2
+print(square_lambda(5))
+</code></pre>
+<h2 id="2-generators-iterators">🟢 2. Generators &amp; Iterators</h2>
+<p><strong>Generators:</strong>
+- Use <code>yield</code> to produce a sequence of values lazily (one at a time).</p>
+<ul>
+<li>Saves memory compared to lists.</li>
+</ul>
+<p><strong>Iterators:</strong>
+- Any object with <code>__iter__()</code> and <code>__next__()</code> methods.</p>
+<p><strong>➤ Generator Example:</strong></p>
+<pre><code class="language-python">def count_up_to(n):
+    count = 1
+    while count &lt;= n:
+        yield count
+        count += 1
+print(count_up_to(5))  # This will print a generator object
+print(list(count_up_to(5)))
+for num in count_up_to(5):
+    print(num)
+</code></pre>
+<p><strong>➤ Iterator Example:</strong></p>
+<pre><code class="language-python">nums = [1, 2, 3]
+it = iter(nums)
+
+print(next(it))
+print(next(it))
+print(next(it))
+</code></pre>
+<h2 id="3-list-comprehensions">🟢 3. List Comprehensions</h2>
+<p><code>A concise way to create lists in a single line.</code></p>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python"># Without list comprehension
+squares = []
+for i in range(5):
+    squares.append(i ** 2)
+print(squares)
+
+# With list comprehension
+squares = [i ** 2 for i in range(5)]
+print(squares)
+
+# With condition
+evens = [i for i in range(10) if i % 2 == 0]
+print(evens)
+
+</code></pre>
+<h2 id="4-working-with-args-and-kwargs">🟢 4. Working with <em>args and </em>*kwargs</h2>
+<ul>
+<li>
+<p><code>*args</code>: Allows variable number of positional arguments.</p>
+</li>
+<li>
+<p><code>**kwargs</code>: Allows variable number of keyword arguments.</p>
+</li>
+</ul>
+<p><strong>➤ Example with *args:</strong></p>
+<pre><code class="language-python">def add(*numbers):
+    total = sum(numbers)
+    print(&quot;Sum:&quot;, total)
+
+add(1, 2, 3)
+add(4, 5)
+</code></pre>
+<p><strong>➤ Example with **kwargs:</strong></p>
+<pre><code class="language-python">def student_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f&quot;{key}: {value}&quot;)
+
+student_info(name=&quot;Alice&quot;, age=21, grade=&quot;A&quot;)
+</code></pre>
+<p><strong>➤ Using map() Function:</strong></p>
+<pre><code class="language-python">nums = [1, 2, 3, 4]
+squared = list(map(lambda x: x ** 2, nums))
+print(squared)
+</code></pre>
+<p><strong>➤ Using filter() Function:</strong></p>
+<pre><code class="language-python">nums = [1, 2, 3, 4, 5, 6]
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(evens)
+</code></pre>
+<p><strong>➤ Using reduce() Function</strong>
+- <code>reduce()</code> applies a function cumulatively to the items of a sequence.</p>
+<ul>
+<li>It is part of the <code>functools</code> module.</li>
+</ul>
+<pre><code class="language-python">from functools import reduce
+
+# Multiply all numbers in a list
+nums = [1, 2, 3, 4]
+
+product = reduce(lambda x, y: x * y, nums)
+print(product)
+
+</code></pre>
+<pre><code class="language-python">nums = [5, 10, 15]
+
+total_sum = reduce(lambda x, y: x + y, nums)
+print(total_sum)
+</code></pre>
+<p><strong>➤ Using enumerate():</strong></p>
+<pre><code class="language-python">fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+for index, fruit in enumerate(fruits, start=1):
+    print(index, fruit)
+</code></pre>
+<h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
+<p>✅ <code>map()</code>: Apply function to all items  </p>
+<p>✅ <code>filter()</code>: Filter items based on condition  </p>
+<p>✅ <code>reduce()</code>: Cumulatively apply function to reduce a sequence to a single value  </p>
+<p>✅ Lambda: One-line anonymous functions  </p>
+<p>✅ Generators: Produce values lazily with <code>yield</code>  </p>
+<p>✅ Iterators: Objects used to iterate over sequences  </p>
+<p>✅ List comprehensions: Compact way to build lists  </p>
+<p>✅ <em>args, </em>*kwargs: Flexible argument handling  </p>
+<h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<ol>
+<li>
+<p>Write a lambda function to multiply two numbers.</p>
+</li>
+<li>
+<p>Create a generator that yields even numbers from 1 to 10.</p>
+</li>
+<li>
+<p>Use list comprehension to create a list of squares for numbers 1 to 5.</p>
+</li>
+<li>
+<p>Write a function that accepts any number of arguments and prints their sum using *args.</p>
+</li>
+<li>
+<p>Write a function that accepts student details as keyword arguments and prints them.</p>
+</li>
+<li>
+<p>Use <code>map()</code> and <code>filter()</code> to square numbers and filter odd numbers from a list.</p>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../8.Error%26Debugging/" class="btn btn-neutral float-left" title="Errors and Exceptions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../8.Error%26Debugging/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

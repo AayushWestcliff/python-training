@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>File Handling - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File Handling";
+        var mkdocs_page_input_path = "lectures/6.FileHandling.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">File Handling</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-text-file-operations">🟢 1. Text File Operations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#python-provides-easy-ways-to-handle-files-for-reading-and-writing">Python provides easy ways to handle files for reading and writing.</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-file-path-handling-with-os-module">🟢 2. File Path Handling with os Module</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-working-with-csv-files">🟢 3. Working with CSV Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-working-with-json">🟢 4. Working with JSON</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File Handling</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-file-handling">📓 <strong>Python Programming -</strong> File Handling</h1>
+<hr />
+<h2 id="1-text-file-operations">🟢 1. Text File Operations</h2>
+<h3 id="python-provides-easy-ways-to-handle-files-for-reading-and-writing">Python provides easy ways to handle files for reading and writing.</h3>
+<p><strong>Common File Modes:</strong>
+- <code>'r'</code> → Read (default)</p>
+<ul>
+<li>
+<p><code>'w'</code> → Write (overwrites existing file or creates new)</p>
+</li>
+<li>
+<p><code>'a'</code> → Append (adds to existing file)</p>
+</li>
+<li>
+<p><code>'rb'</code> / <code>'wb'</code> → Read/Write binary files</p>
+</li>
+</ul>
+<p><strong>➤ Reading a Text File:</strong></p>
+<pre><code class="language-python"># Writing sample content for demonstration
+with open(&quot;../files/sample.txt&quot;, &quot;w&quot;) as file:
+    file.write(&quot;Hello, this is a text file.\nSecond line of text.&quot;)
+
+# Reading file
+with open(&quot;../files/sample.txt&quot;, &quot;r&quot;) as file:
+    content = file.read()
+    print(content)
+</code></pre>
+<p><strong>➤ Writing to a Text File:</strong></p>
+<pre><code class="language-python">with open(&quot;../files/output.txt&quot;, &quot;w&quot;) as file:
+    file.write(&quot;This is a new file.\nFile handling in Python is easy!&quot;)
+</code></pre>
+<h2 id="2-file-path-handling-with-os-module">🟢 2. File Path Handling with os Module</h2>
+<p><strong>The <code>os</code> module helps work with file paths in a platform-independent way.</strong></p>
+<pre><code class="language-python">import os
+
+# Current working directory
+print(&quot;Current Directory:&quot;, os.getcwd())
+
+# Create a file path
+file_path = os.path.join(os.getcwd(), &quot;output.txt&quot;)
+print(&quot;File Path:&quot;, file_path)
+</code></pre>
+<h2 id="3-working-with-csv-files">🟢 3. Working with CSV Files</h2>
+<p><strong>CSV (Comma-Separated Values):</strong>
+- Simple format for storing tabular data.</p>
+<ul>
+<li>Python provides the <code>csv</code> module to work with CSV files.</li>
+</ul>
+<p><strong>➤ Reading a CSV File:</strong></p>
+<pre><code class="language-python">import csv
+
+# Creating a sample CSV file
+with open(&quot;../files/data.csv&quot;, &quot;w&quot;, newline=&quot;&quot;) as file:
+    writer = csv.writer(file)
+    writer.writerow([&quot;Name&quot;, &quot;Age&quot;])
+    writer.writerow([&quot;Alice&quot;, 23])
+    writer.writerow([&quot;Bob&quot;, 28])
+
+# Reading the CSV file
+with open(&quot;../files/data.csv&quot;, &quot;r&quot;) as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+
+</code></pre>
+<p><strong>➤ Using Dictionaries in CSV Files:</strong></p>
+<pre><code class="language-python"># Writing using DictWriter
+with open(&quot;../files/data_dict.csv&quot;, &quot;w&quot;, newline=&quot;&quot;) as file:
+    fieldnames = [&quot;Name&quot;, &quot;Age&quot;]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerow({&quot;Name&quot;: &quot;Charlie&quot;, &quot;Age&quot;: 30})
+    writer.writerow({&quot;Name&quot;: &quot;Dana&quot;, &quot;Age&quot;: 26})
+
+# Reading using DictReader
+with open(&quot;../files/data_dict.csv&quot;, &quot;r&quot;) as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(row)
+</code></pre>
+<h2 id="4-working-with-json">🟢 4. Working with JSON</h2>
+<p><strong>JSON (JavaScript Object Notation):</strong>
+- Popular data format for exchanging data.</p>
+<ul>
+<li>Similar to Python dictionaries.</li>
+</ul>
+<p><strong>➤ Reading &amp; Writing JSON:</strong></p>
+<pre><code class="language-python">import json
+
+# Python dictionary
+person = {&quot;name&quot;: &quot;Eve&quot;, &quot;age&quot;: 29, &quot;skills&quot;: [&quot;Python&quot;, &quot;Data Science&quot;]}
+
+# Writing to JSON file
+with open(&quot;../files/person.json&quot;, &quot;w&quot;) as file:
+    json.dump(person, file)
+
+# Reading JSON file
+with open(&quot;../files/person.json&quot;, &quot;r&quot;) as file:
+    data = json.load(file)
+    print(data)
+
+</code></pre>
+<p><strong>➤ Parsing JSON Strings:</strong></p>
+<pre><code class="language-python"># JSON string
+json_str = '{&quot;name&quot;: &quot;Frank&quot;, &quot;age&quot;: 32}'
+
+# Converting JSON string to dictionary
+person = json.loads(json_str)
+print(person[&quot;name&quot;])
+</code></pre>
+<p><strong>Example Prompt to ChatGPT:</strong>
+```
+"Generate Python code to read a JSON file containing student records and print their names."</p>
+<h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
+<p>✅ File operations: reading, writing, appending  </p>
+<p>✅ Use <code>os</code> module for file path handling  </p>
+<p>✅ CSV files: <code>csv.reader</code>, <code>csv.writer</code>, and dictionaries  </p>
+<p>✅ JSON: Read, write, parse structured data  </p>
+<h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<ol>
+<li>
+<p>Write a program to create a text file with your name and age.</p>
+</li>
+<li>
+<p>Read the file you just created and print its contents.</p>
+</li>
+<li>
+<p>Create a CSV file with three student records (name, age).</p>
+</li>
+<li>
+<p>Read and print all names from the CSV file.</p>
+</li>
+<li>
+<p>Write a program to save a dictionary as a JSON file and read it back.</p>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../5.Functions/" class="btn btn-neutral float-left" title="Functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../7.OOP/" class="btn btn-neutral float-right" title="OOP">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../5.Functions/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../7.OOP/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

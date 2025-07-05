@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>OOP - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "OOP";
+        var mkdocs_page_input_path = "lectures/7.OOP.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">OOP</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-classes-objects">🟢 1. Classes &amp; Objects</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-class-vs-object-attributes">🟢 2. Class vs Object Attributes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-initializing-object-attributes-with-__init__">🟢 3. Initializing Object Attributes with __init__()</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-the-self-keyword">🟢 4. The self Keyword</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-inheritance">🟢 5. Inheritance</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-polymorphism-operator-overloading">🟢 6. Polymorphism &amp; Operator Overloading</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#polymorphism">Polymorphism:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#operator-overloading">Operator Overloading:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-function-overriding-encapsulation">🟢 7. Function Overriding &amp; Encapsulation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-overriding">Function Overriding:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#encapsulation">Encapsulation:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">OOP</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-object-oriented-programming-oop">📓 Python Programming - Object-Oriented Programming (OOP)</h1>
+<hr />
+<h2 id="1-classes-objects">🟢 1. Classes &amp; Objects</h2>
+<p><strong>What is OOP?</strong></p>
+<ul>
+<li>
+<p>Organizes code around real-world entities (objects).</p>
+</li>
+<li>
+<p><strong>Class</strong>: Blueprint for creating objects.</p>
+</li>
+<li>
+<p><strong>Object</strong>: An instance of a class.</p>
+</li>
+</ul>
+<pre><code class="language-python"># Defining a class
+class Student:
+    pass
+
+# Creating an object
+s1 = Student()
+print(type(s1))
+</code></pre>
+<h2 id="2-class-vs-object-attributes">🟢 2. Class vs Object Attributes</h2>
+<ul>
+<li>
+<p><strong>Class attributes</strong>: Shared by all objects.</p>
+</li>
+<li>
+<p><strong>Object attributes</strong>: Unique to each object.</p>
+</li>
+</ul>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python">class Student:
+    college = &quot;Westcliff University&quot;  # Class attribute
+
+    def __init__(self, name, age):
+        self.name = name  # Object attribute
+        self.age = age
+
+s1 = Student(&quot;Alice&quot;, 20)
+s2 = Student(&quot;Bob&quot;, 22)
+
+print(s1.name, s1.college)
+print(s2.name, s2.college)
+
+</code></pre>
+<h2 id="3-initializing-object-attributes-with-__init__">🟢 3. Initializing Object Attributes with <code>__init__()</code></h2>
+<p><code>__init__()</code> is a special method that runs when an object is created. <em>(Like Constructor)</em></p>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python">class Car:
+    def __init__(self, brand, year):
+        self.brand = brand
+        self.year = year
+
+c1 = Car(&quot;Toyota&quot;, 2020)
+print(c1.brand, c1.year)
+</code></pre>
+<h2 id="4-the-self-keyword">🟢 4. The <code>self</code> Keyword</h2>
+<ul>
+<li>
+<p>Refers to the current object.</p>
+</li>
+<li>
+<p>Used to access object attributes and methods.</p>
+</li>
+</ul>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python">class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(f&quot;{self.name} says Woof!&quot;)
+
+d = Dog(&quot;Buddy&quot;)
+d.speak()
+</code></pre>
+<h2 id="5-inheritance">🟢 5. Inheritance</h2>
+<p><em>Inheritance allows a class to use properties and methods of another class.</em></p>
+<p><strong>Types:</strong>
+- Single Inheritance</p>
+<ul>
+<li>
+<p>Multiple Inheritance</p>
+</li>
+<li>
+<p>Multi-Level Inheritance</p>
+</li>
+</ul>
+<p><strong>➤ Single Inheritance:</strong></p>
+<pre><code class="language-python">class Animal:
+    def speak(self):
+        print(&quot;Animal sound&quot;)
+
+class Dog(Animal):
+    def bark(self):
+        print(&quot;Woof!&quot;)
+
+d = Dog()
+d.speak()
+d.bark()
+</code></pre>
+<p><strong>➤ Multiple Inheritance:</strong></p>
+<pre><code class="language-python">class A:
+    def show_a(self):
+        print(&quot;A&quot;)
+
+class B:
+    def show_b(self):
+        print(&quot;B&quot;)
+
+class C(A, B):
+    pass
+
+c = C()
+c.show_a()
+c.show_b()
+
+</code></pre>
+<p><strong>➤ Multi-Level Inheritance:</strong></p>
+<pre><code class="language-python">class Grandparent:
+    def grandparent_func(self):
+        print(&quot;Grandparent&quot;)
+
+class Parent(Grandparent):
+    def parent_func(self):
+        print(&quot;Parent&quot;)
+
+class Child(Parent):
+    def child_func(self):
+        print(&quot;Child&quot;)
+
+c = Child()
+c.grandparent_func()
+c.parent_func()
+c.child_func()
+</code></pre>
+<h2 id="6-polymorphism-operator-overloading">🟢 6. Polymorphism &amp; Operator Overloading</h2>
+<h3 id="polymorphism">Polymorphism:</h3>
+<ul>
+<li>Same function name but different behaviors.</li>
+</ul>
+<h3 id="operator-overloading">Operator Overloading:</h3>
+<ul>
+<li>Using special methods to define how operators behave for custom objects.</li>
+</ul>
+<p><strong>➤ Polymorphism Example:</strong></p>
+<pre><code class="language-python">class Cat:
+    def sound(self):
+        print(&quot;Meow&quot;)
+
+class Dog:
+    def sound(self):
+        print(&quot;Woof&quot;)
+
+animals = [Cat(), Dog()]
+for animal in animals:
+    animal.sound()
+</code></pre>
+<p><code>Traditional Overloading Does Not Work in Python</code></p>
+<pre><code class="language-python">def greet(name):
+    print(f&quot;Hello, {name}!&quot;)
+
+def greet(name, age):
+    print(f&quot;Hello, {name}! You are {age} years old.&quot;)
+
+greet(&quot;Alice&quot;)  # ❌ TypeError: greet() missing 1 required positional argument: 'age'
+</code></pre>
+<p>But there is some work around this. Discuss how to implement function overloading in Python using default arguments or variable-length arguments.</p>
+<p><strong>➤ Operator Overloading Example:</strong></p>
+<pre><code class="language-python">class Point:
+    def __init__(self, x):
+        self.x = x
+
+    def __add__(self, other):
+        return Point(self.x + other.x)
+
+p1 = Point(5)
+p2 = Point(10)
+result = p1 + p2
+print(result.x)
+</code></pre>
+<h2 id="7-function-overriding-encapsulation">🟢 7. Function Overriding &amp; Encapsulation</h2>
+<h3 id="function-overriding">Function Overriding:</h3>
+<ul>
+<li>Child class redefines a method from the parent class.</li>
+</ul>
+<h3 id="encapsulation">Encapsulation:</h3>
+<ul>
+<li>Restricts direct access to variables using private/protected attributes.</li>
+</ul>
+<p><strong>➤ Function Overriding Example:</strong></p>
+<pre><code class="language-python">class Animal:
+    def speak(self):
+        print(&quot;Animal sound&quot;)
+
+class Dog(Animal):
+    def speak(self):
+        print(&quot;Woof!&quot;)
+
+d = Dog()
+d.speak()
+
+</code></pre>
+<p><strong>➤ Encapsulation Example:</strong></p>
+<pre><code class="language-python">class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance  # Private attribute
+
+    def get_balance(self):
+        return self.__balance
+
+    def deposit(self, amount):
+        self.__balance += amount
+
+acc = BankAccount(1000)
+acc.deposit(500)
+print(acc.get_balance())
+</code></pre>
+<h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
+<p>✅ OOP models real-world entities with classes and objects  </p>
+<p>✅ Class attributes shared, object attributes unique  </p>
+<p>✅ Inheritance promotes code reuse  </p>
+<p>✅ Polymorphism enables flexibility  </p>
+<p>✅ Operator overloading customizes behavior  </p>
+<p>✅ Function overriding &amp; encapsulation provide safety and control  </p>
+<h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<ol>
+<li>
+<p>Create a <code>Car</code> class with brand and year, and display details using a method.</p>
+</li>
+<li>
+<p>Demonstrate single inheritance with <code>Animal</code> → <code>Bird</code>.</p>
+</li>
+<li>
+<p>Create a class <code>Rectangle</code> that overloads <code>+</code> to add areas of two rectangles.</p>
+</li>
+<li>
+<p>Use encapsulation to hide a bank account's balance and provide methods to deposit/withdraw.</p>
+</li>
+<li>
+<p>Demonstrate function overriding using a parent-child class structure.</p>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../6.FileHandling/" class="btn btn-neutral float-left" title="File Handling"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../8.Error%26Debugging/" class="btn btn-neutral float-right" title="Errors and Exceptions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../6.FileHandling/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../8.Error%26Debugging/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

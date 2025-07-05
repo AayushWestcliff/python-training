@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Data Structures - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Data Structures";
+        var mkdocs_page_input_path = "lectures/4.DataStructures.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Data Structures</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-lists">🟢 1. Lists</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-tuples">🟢 2. Tuples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-sets">🟢 3. Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-dictionaries">🟢 4. Dictionaries</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Data Structures</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-data-structures">📓 <strong>Python Programming - Data Structures</strong></h1>
+<hr />
+<h2 id="1-lists">🟢 1. Lists</h2>
+<p><strong>Lists in Python:</strong>
+- Ordered, mutable (can be changed) collection of items.</p>
+<ul>
+<li>Can store mixed data types.</li>
+</ul>
+<pre><code class="language-python"># Creating a list
+fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+print(fruits)
+</code></pre>
+<p><strong>➤ Indexing, Slicing &amp; Negative Indexing:</strong></p>
+<pre><code class="language-python"># Indexing
+print(fruits[0])  # First item
+print(fruits[-1])  # Last item
+
+# Slicing
+print(fruits[0:2])  # First two items
+
+</code></pre>
+<p><strong>➤ Looping Through Lists &amp; Conditions:</strong></p>
+<pre><code class="language-python">for fruit in fruits:
+    if fruit.startswith(&quot;b&quot;):
+        print(f&quot;{fruit} starts with 'b'&quot;)
+</code></pre>
+<p><strong>➤ Useful List Methods:</strong></p>
+<pre><code class="language-python"># Adding items
+fruits.append(&quot;orange&quot;)
+print(fruits)
+
+fruits.insert(1, &quot;mango&quot;)
+print(fruits)
+
+# Removing items
+fruits.remove(&quot;banana&quot;)
+print(fruits)
+
+# Sorting
+fruits.sort()
+print(fruits)
+</code></pre>
+<p><strong>➤ List Comprehension with Conditions:</strong></p>
+<pre><code class="language-python"># Create list of squares for even numbers from 0 to 10
+squares = [x**2 for x in range(11) if x % 2 == 0]
+print(squares)
+</code></pre>
+<h2 id="2-tuples">🟢 2. Tuples</h2>
+<p><strong>Tuples:</strong>
+- Ordered, immutable collection.</p>
+<ul>
+<li>
+<p>Faster than lists.</p>
+</li>
+<li>
+<p>Suitable for fixed data.</p>
+</li>
+</ul>
+<pre><code class="language-python"># Creating a tuple
+dimensions = (10, 20, 30)
+print(dimensions)
+
+# Indexing and Slicing
+print(dimensions[1])
+print(dimensions[:2])
+
+# Looping
+for dim in dimensions:
+    print(dim)
+
+</code></pre>
+<p><strong>➤ List vs Tuple:</strong></p>
+<ul>
+<li>
+<p>List: <strong>Mutable</strong> → You can modify contents.</p>
+</li>
+<li>
+<p>Tuple: <strong>Immutable</strong> → Contents cannot be changed.</p>
+</li>
+<li>
+<p>Lists have more built-in methods compared to tuples.</p>
+</li>
+<li>
+<p>Use lists for homogeneous items and tuples for heterogeneous items.</p>
+</li>
+</ul>
+<p><strong>➤ Switching Between Lists and Tuples:</strong></p>
+<pre><code class="language-python"># List to Tuple
+my_list = [1, 2, 3]
+my_tuple = tuple(my_list)
+print(my_tuple)
+
+# Tuple to List
+new_list = list(my_tuple)
+print(new_list)
+</code></pre>
+<p><strong>➤ Tuple Unpacking:</strong></p>
+<pre><code class="language-python">person = (&quot;Alice&quot;, 25, &quot;Engineer&quot;)
+name, age, profession = person
+print(name, age, profession)
+</code></pre>
+<h2 id="3-sets">🟢 3. Sets</h2>
+<p><strong>Sets:</strong>
+- Unordered collection of unique items.</p>
+<ul>
+<li>Used for mathematical operations like union, intersection, etc.</li>
+</ul>
+<p><strong>➤ Basic Set Operations:</strong></p>
+<pre><code class="language-python"># Creating sets
+colors = {&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;}
+print(colors)
+
+# Adding, Removing, Discarding
+colors.add(&quot;yellow&quot;)
+print(colors)
+
+colors.remove(&quot;green&quot;)  # Raises error if not present
+print(colors)
+
+colors.discard(&quot;purple&quot;)  # No error if not present
+print(colors)
+
+</code></pre>
+<p><strong>➤ Set Operations:</strong></p>
+<pre><code class="language-python">a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+print(&quot;Union:&quot;, a | b)
+print(&quot;Intersection:&quot;, a &amp; b)
+print(&quot;Difference:&quot;, a - b)
+</code></pre>
+<p><strong>➤ Frozenset vs Set:</strong></p>
+<ul>
+<li>
+<p><code>set</code> → Mutable  </p>
+</li>
+<li>
+<p><code>frozenset</code> → Immutable  </p>
+</li>
+</ul>
+<pre><code class="language-python">fs = frozenset([1, 2, 3])
+print(fs)
+</code></pre>
+<h2 id="4-dictionaries">🟢 4. Dictionaries</h2>
+<p><strong>Dictionaries:</strong>
+- Collection of key-value pairs.</p>
+<ul>
+<li>Keys must be unique.</li>
+</ul>
+<p><strong>➤ Creating &amp; Accessing:</strong></p>
+<pre><code class="language-python">student = {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 22, &quot;grade&quot;: &quot;A&quot;}
+print(student[&quot;name&quot;])
+</code></pre>
+<p><strong>➤ Useful Dictionary Methods:</strong></p>
+<pre><code class="language-python"># Get with default
+print(student.get(&quot;age&quot;))
+print(student.get(&quot;major&quot;, &quot;Not specified&quot;))
+
+# Update
+student.update({&quot;grade&quot;: &quot;A+&quot;, &quot;major&quot;: &quot;CS&quot;})
+print(student)
+
+# Keys, Values
+print(student.keys())
+print(student.values())
+
+# Pop
+student.pop(&quot;age&quot;)
+print(student)
+
+</code></pre>
+<p><strong>➤ Dictionary Comprehension:</strong></p>
+<pre><code class="language-python"># Squares of numbers
+squares = {x: x**2 for x in range(5)}
+print(squares)
+
+# Filtering even squares
+even_squares = {k: v for k, v in squares.items() if v % 2 == 0}
+print(even_squares)
+
+</code></pre>
+<p><strong>➤ Nested Dictionaries:</strong></p>
+<pre><code class="language-python"># Student with nested details
+student = {
+    &quot;name&quot;: &quot;Alice&quot;,
+    &quot;subjects&quot;: {&quot;Math&quot;: 90, &quot;Science&quot;: 95}
+}
+
+print(student[&quot;subjects&quot;][&quot;Math&quot;])
+</code></pre>
+<h3 id="quick-recap">🎯 Quick Recap</h3>
+<p>✅ Lists → Ordered, mutable  </p>
+<p>✅ Tuples → Ordered, immutable  </p>
+<p>✅ Sets → Unordered, unique items  </p>
+<p>✅ Dictionaries → Key-value pairs  </p>
+<p>✅ Use list/dictionary comprehension for concise code  </p>
+<h3 id="practice-exercises">📝 Practice Exercises</h3>
+<ol>
+<li>
+<p>Create a list of your favorite 5 movies and sort them.</p>
+</li>
+<li>
+<p>Convert a list of numbers to a tuple and unpack the first three numbers.</p>
+</li>
+<li>
+<p>Find common elements between two sets.</p>
+</li>
+<li>
+<p>Create a dictionary for a book with title, author, and year. Add a genre to it.</p>
+</li>
+<li>
+<p>Use dictionary comprehension to map numbers from 1 to 5 to their cubes.</p>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../3.ControlStructures/" class="btn btn-neutral float-left" title="Control Structures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../5.Functions/" class="btn btn-neutral float-right" title="Functions">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../3.ControlStructures/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../5.Functions/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

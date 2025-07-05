@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Control Structures - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Control Structures";
+        var mkdocs_page_input_path = "lectures/3.ControlStructures.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Control Structures</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-conditional-statements">1. Conditional Statements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-loops">2. Loops</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-looping-over-tuples-strings-dictionaries">3. Looping Over Tuples, Strings, &amp; Dictionaries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-special-loops-forelse">4. Special Loops: for/else</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-else-block-after-a-for-loop-executes-if-the-loop-completes-normally-no-break">The else block after a for loop executes if the loop completes normally (no break).</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-nested-loops-and-flow-control">5. Nested Loops and Flow Control</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-special-statements-pass-continue-break">6. Special Statements: pass, continue, break</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-resolving-real-world-problems">7. Resolving Real-World Problems</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Control Structures</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-control-structures">📓 Python Programming - Control Structures</h1>
+<hr />
+<h2 id="1-conditional-statements">1. Conditional Statements</h2>
+<p><strong>Conditional Statements in Python:</strong>
+- Used to make decisions based on conditions.</p>
+<ul>
+<li>Keywords: <code>if</code>, <code>elif</code>, <code>else</code>.</li>
+</ul>
+<pre><code class="language-python"># Simple if-else
+age = 20
+
+if age &gt;= 18:
+    print(&quot;You are eligible to vote.&quot;)
+else:
+    print(&quot;You are not eligible to vote.&quot;)
+
+# if-elif-else
+marks = 85
+
+if marks &gt;= 90:
+    print(&quot;Grade: A+&quot;)
+elif marks &gt;= 75:
+    print(&quot;Grade: A&quot;)
+elif marks &gt;= 60:
+    print(&quot;Grade: B&quot;)
+else:
+    print(&quot;Grade: C&quot;)
+</code></pre>
+<h2 id="2-loops">2. Loops</h2>
+<p><strong>Python supports two main types of loops:</strong>
+1. <code>for</code> loop → Iterate over sequences (strings, lists, tuples, etc.)</p>
+<ol>
+<li><code>while</code> loop → Repeats while a condition is True</li>
+</ol>
+<p><strong>➤ For Loop Example:</strong></p>
+<pre><code class="language-python"># Loop over a range of numbers - For loop example
+for i in range(5):
+    print(i)
+</code></pre>
+<pre><code class="language-python"># Loop over a list - For loop example
+fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+for fruit in fruits:
+    print(fruit)
+</code></pre>
+<p><strong>➤ While Loop Example:</strong></p>
+<pre><code class="language-python"># Print numbers 1 to 5 using while loop
+count = 1
+while count &lt;= 5:
+    print(count)
+    count += 1
+</code></pre>
+<pre><code class="language-python"># Print even numbers from 1 to 10 using while loop
+count = 1
+while count &lt;= 10:
+    if count % 2 == 0:
+        print(count)
+    count += 1
+</code></pre>
+<h2 id="3-looping-over-tuples-strings-dictionaries">3. Looping Over Tuples, Strings, &amp; Dictionaries</h2>
+<pre><code class="language-python"># Tuple
+colors = (&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+for color in colors:
+    print(color)
+
+# String
+for char in &quot;Python&quot;:
+    print(char)
+
+# Dictionary
+student = {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 21}
+for key, value in student.items():
+    print(f&quot;{key}: {value}&quot;)
+</code></pre>
+<h2 id="4-special-loops-forelse">4. Special Loops: for/else</h2>
+<h4 id="the-else-block-after-a-for-loop-executes-if-the-loop-completes-normally-no-break">The <code>else</code> block after a <code>for</code> loop executes if the loop completes normally (no <code>break</code>).</h4>
+<pre><code class="language-python"># Check if a number is prime
+num = 7
+for i in range(2, num):
+    if num % i == 0:
+        print(f&quot;{num} is not prime.&quot;)
+        break
+else:
+    print(f&quot;{num} is prime.&quot;)
+</code></pre>
+<h2 id="5-nested-loops-and-flow-control">5. Nested Loops and Flow Control</h2>
+<pre><code class="language-python"># Nested loop for multiplication table
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(f&quot;{i} x {j} = {i * j}&quot;)
+    print(&quot;---&quot;)
+</code></pre>
+<h2 id="6-special-statements-pass-continue-break">6. Special Statements: pass, continue, break</h2>
+<pre><code class="language-python"># pass - placeholder
+for i in range(3):
+    pass  # Does nothing, placeholder for future code
+
+print(&quot;=&quot;*5)
+# continue - skip current iteration
+for i in range(5):
+    if i == 2:
+        continue
+    print(i)
+print(&quot;=&quot;*5)
+# break - exit loop
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+print(&quot;=&quot;*5)
+</code></pre>
+<h2 id="7-resolving-real-world-problems">7. Resolving Real-World Problems</h2>
+<p><strong>Let's solve a simple real-world problem using control structures.</strong></p>
+<pre><code class="language-python"># Simple password validation
+correct_password = &quot;python123&quot;
+attempts = 3
+
+while attempts &gt; 0:
+    pwd = input(&quot;Enter password: &quot;)
+    if pwd == correct_password:
+        print(&quot;Access granted!&quot;)
+        break
+    else:
+        print(&quot;Incorrect password. Try again.&quot;)
+        attempts -= 1
+
+if attempts == 0:
+    print(&quot;Access denied. Too many failed attempts.&quot;)
+
+</code></pre>
+<p><strong>🛠️ AI Tool:</strong> Google Colab - Gemini Or Github Copilot</p>
+<p>You can explore AI tools like <strong>Gemini</strong> inside Google Colab to assist with understanding Python code, generating examples, or debugging.</p>
+<p><strong>Example:</strong>
+- Use Google Colab's built-in chat assistant for hints or suggestions.</p>
+<ul>
+<li>
+<p>Explore AI code completion to speed up your coding.</p>
+</li>
+<li>
+<p>Alternative: Github Copilot</p>
+</li>
+</ul>
+<p><strong>🎯 Quick Recap</strong></p>
+<ul>
+<li>
+<p>Use <code>if</code>, <code>elif</code>, <code>else</code> for decision-making  </p>
+</li>
+<li>
+<p><code>for</code> and <code>while</code> loops help with repetition  </p>
+</li>
+<li>
+<p>Loop over sequences like tuples, strings, dictionaries  </p>
+</li>
+<li>
+<p>Special loop structures: <code>for/else</code>  </p>
+</li>
+<li>
+<p>Use <code>pass</code>, <code>continue</code>, <code>break</code> for flow control  </p>
+</li>
+<li>
+<p>Practice solving real-world problems  </p>
+</li>
+</ul>
+<h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<ol>
+<li>
+<p>Write a program that checks whether a number is positive, negative, or zero.</p>
+</li>
+<li>
+<p>Print all even numbers from 1 to 20 using a <code>for</code> loop.</p>
+</li>
+<li>
+<p>Create a simple calculator using <code>if-elif-else</code>.</p>
+</li>
+<li>
+<p>Use nested loops to print a pattern like:</p>
+</li>
+</ol>
+<pre><code>*
+**
+***
+****
+*****
+
+******
+*****
+****
+***
+**
+*
+
+     *
+    ***
+   *****
+  *******
+ *********
+***********
+</code></pre>
+<ol>
+<li>Write a program to validate password input with a maximum of 3 attempts.</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../2.DataTypes/" class="btn btn-neutral float-left" title="Data Types"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../4.DataStructures/" class="btn btn-neutral float-right" title="Data Structures">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../2.DataTypes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../4.DataStructures/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

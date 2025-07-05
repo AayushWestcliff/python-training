@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Functions - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Functions";
+        var mkdocs_page_input_path = "lectures/5.Functions.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Functions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-defining-functions-with-def-keyword">🟢 1. Defining Functions with def Keyword</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-parameters-arguments-return-statements">🟢 2. Parameters, Arguments &amp; Return Statements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-returning-multiple-values">🟢 3. Returning Multiple Values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-default-keyword-arguments">🟢 4. Default &amp; Keyword Arguments</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-anonymous-functions-lambda">🟢 5. Anonymous Functions (lambda)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-nested-functions-closures">🟢 6. Nested Functions &amp; Closures</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-scopes-in-python-local-global">🟢 7. Scopes in Python: Local &amp; Global</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Functions</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <hr />
+<h1 id="python-programming-functions"><strong>📓 Python Programming - Functions</strong></h1>
+<hr />
+<h2 id="1-defining-functions-with-def-keyword">🟢 1. Defining Functions with def Keyword</h2>
+<p>Functions allow us to group reusable pieces of code.</p>
+<p><strong>Syntax:</strong></p>
+<pre><code class="language-python">def function_name(parameters):
+    # code block
+    return value
+</code></pre>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python"># Simple function
+def greet():
+    print(&quot;Hello, welcome to Python class!&quot;)
+
+greet()
+</code></pre>
+<h2 id="2-parameters-arguments-return-statements">🟢 2. Parameters, Arguments &amp; Return Statements</h2>
+<ul>
+<li>
+<p><strong>Parameter:</strong> The variable listed inside parentheses in function definition.</p>
+</li>
+<li>
+<p><strong>Argument:</strong> The value passed to the function.</p>
+</li>
+<li>
+<p><code>return</code> sends a result back to the caller.</p>
+</li>
+</ul>
+<pre><code class="language-python">def add(a, b):
+    return a + b
+
+result = add(5, 3)
+print(&quot;Sum:&quot;, result)
+</code></pre>
+<h2 id="3-returning-multiple-values">🟢 3. Returning Multiple Values</h2>
+<p><strong>You can return multiple values as a tuple.</strong></p>
+<pre><code class="language-python">def calculate(x, y):
+    sum_ = x + y
+    diff = x - y
+    multiply = x * y
+    return sum_, diff, multiply
+
+s, d, m = calculate(10, 4)
+print(&quot;Sum:&quot;, s)
+print(&quot;Difference:&quot;, d)
+print(&quot;Multiplication:&quot;, m)
+</code></pre>
+<h2 id="4-default-keyword-arguments">🟢 4. Default &amp; Keyword Arguments</h2>
+<p><strong>Default arguments:</strong> Provide default values if no argument is passed.</p>
+<p><strong>Keyword arguments:</strong> Specify arguments by name during function call.</p>
+<pre><code class="language-python"># Default argument
+def greet(name=&quot;Guest&quot;):
+    print(f&quot;Hello, {name}!&quot;)
+
+greet()
+greet(&quot;Alice&quot;)
+
+# Keyword argument
+def student(name, age):
+    print(f&quot;Name: {name}, Age: {age}&quot;)
+
+student(age=21, name=&quot;Bob&quot;)
+</code></pre>
+<h2 id="5-anonymous-functions-lambda">🟢 5. Anonymous Functions (lambda)</h2>
+<p><code>lambda</code> functions are small, one-line anonymous functions.</p>
+<pre><code class="language-python"># Lambda function for square
+square = lambda x: x ** 2
+print(square(5))
+
+# Lambda with multiple arguments
+add = lambda a, b: a + b
+print(add(3, 4))
+</code></pre>
+<h2 id="6-nested-functions-closures">🟢 6. Nested Functions &amp; Closures</h2>
+<p>You can define functions inside other functions.</p>
+<p><strong>Closure:</strong> Inner function remembers variables from the outer function.</p>
+<pre><code class="language-python">def outer():
+    msg = &quot;Python is fun!&quot;
+
+    def inner():
+        print(msg)
+
+    return inner
+
+my_func = outer()
+my_func()
+</code></pre>
+<h2 id="7-scopes-in-python-local-global">🟢 7. Scopes in Python: Local &amp; Global</h2>
+<ul>
+<li>
+<p><strong>Local Scope:</strong> Variables defined inside a function.</p>
+</li>
+<li>
+<p><strong>Global Scope:</strong> Variables defined outside all functions.</p>
+</li>
+</ul>
+<p><strong>➤ Example:</strong></p>
+<pre><code class="language-python">x = 10  # Global variable
+
+def show():
+    x = 5  # Local variable
+    print(&quot;Inside function:&quot;, x)
+
+show()
+print(&quot;Outside function:&quot;, x)
+</code></pre>
+<p><strong>➤ Global Keyword Example:</strong></p>
+<pre><code class="language-python">x = 10
+
+def modify():
+    global x
+    x = 20
+
+modify()
+print(&quot;After modification:&quot;, x)
+</code></pre>
+<h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
+<p>✅ Functions are reusable code blocks.  </p>
+<p>✅ Can return multiple values.  </p>
+<p>✅ Default and keyword arguments improve flexibility.  </p>
+<p>✅ Lambda functions create simple anonymous functions.  </p>
+<p>✅ Nested functions &amp; closures allow for advanced design.  </p>
+<p>✅ Understand local vs global scope.  </p>
+<h2 id="practice-exercises">📝 Practice Exercises</h2>
+<ol>
+<li>
+<p>Write a function to find the maximum of two numbers.</p>
+</li>
+<li>
+<p>Create a lambda function to calculate the cube of a number.</p>
+</li>
+<li>
+<p>Write a function that returns the sum, product, and difference of two numbers.</p>
+</li>
+<li>
+<p>Use a default argument to greet a user if no name is provided.</p>
+</li>
+<li>
+<p>Demonstrate variable scope by defining a global variable and modifying it inside a function.</p>
+</li>
+</ol>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../4.DataStructures/" class="btn btn-neutral float-left" title="Data Structures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../6.FileHandling/" class="btn btn-neutral float-right" title="File Handling">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../4.DataStructures/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../6.FileHandling/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
