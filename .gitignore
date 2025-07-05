@@ -1,3 +1,27 @@
 *.json
 *.csv
 *.txt
+env
+.env
+site
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+# Ignore virtual environment directories
+venv/
+.env/
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+.github/
+# Ignore logs
+logs/
+*.log
+# Ignore data files
+data/
+*.h5
+*.pkl

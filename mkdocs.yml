@@ -1,0 +1,9 @@
+site_name: Python Module
+site_description: Python Training for BSIT Students (Kings College)
+nav:
+  - Getting Started: index.md
+  - Introduction to Python: lectures/1.Introduction.md
+    # - Python Download: index.md
+# theme: readthedocs
+theme:
+  name: material
