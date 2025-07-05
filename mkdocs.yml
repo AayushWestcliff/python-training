@@ -5,6 +5,6 @@ nav:
   - Introduction to Python: lectures/1.Introduction.md
   - Data Types: lectures/2.DataTypes.md
     # - Python Download: index.md
-theme: readthedocs
-# theme:
-#   name: material
+theme:
+  name: readthedocs
+  # name: material

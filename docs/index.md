@@ -1,17 +1,9 @@
-# Welcome to MkDocs
+## Welcome to Python Module
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Hi, I’m Aayush, your instructor for this session.
 
-## Commands
+Welcome to the Kings College Python Training!
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+I’m excited to be part of your learning journey and would love to stay connected beyond this session. Whether you have questions, want to share ideas, or just expand your professional network — feel free to reach out!
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+[🔗 Connect with me on LinkedIn](https://www.linkedin.com/in/aayush-regmi-6631ab1b5/)
