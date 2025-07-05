@@ -13,5 +13,5 @@ nav:
   - Advanced Topics: lectures/9.AdvancedConcepts.md
     # - Python Download: index.md
 theme:
-  # name: readthedocs
-  name: material
+  name: readthedocs
+  # name: material
