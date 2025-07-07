@@ -71,36 +71,14 @@
     <li class="toctree-l2"><a class="reference internal" href="#6-special-statements-pass-continue-break">6. Special Statements: pass, continue, break</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#7-resolving-real-world-problems">7. Resolving Real-World Problems</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-matchcase-statement-python-310">8. Match/Case Statement (Python 3.10+)</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
     </li>
         </ul>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
                 </li>
               </ul>
       </div>
@@ -155,6 +133,34 @@ elif marks &gt;= 60:
 else:
     print(&quot;Grade: C&quot;)
 </code></pre>
+<p><strong>Nested Conditionals &amp; Ternary Operator:</strong></p>
+<pre><code class="language-python"># Nested conditionals
+age = 25
+has_license = True
+
+if age &gt;= 18:
+    if has_license:
+        print(&quot;You can drive!&quot;)
+    else:
+        print(&quot;You need a license to drive.&quot;)
+else:
+    print(&quot;You're too young to drive.&quot;)
+
+# Ternary operator (conditional expression)
+result = &quot;Pass&quot; if marks &gt;= 60 else &quot;Fail&quot;
+print(f&quot;Result: {result}&quot;)
+
+# Multiple conditions with logical operators
+temperature = 25
+weather = &quot;sunny&quot;
+
+if temperature &gt; 20 and weather == &quot;sunny&quot;:
+    print(&quot;Perfect weather for outdoor activities!&quot;)
+elif temperature &gt; 20 or weather == &quot;cloudy&quot;:
+    print(&quot;Good weather for a walk.&quot;)
+else:
+    print(&quot;Stay indoors!&quot;)
+</code></pre>
 <h2 id="2-loops">2. Loops</h2>
 <p><strong>Python supports two main types of loops:</strong>
 1. <code>for</code> loop → Iterate over sequences (strings, lists, tuples, etc.)</p>
@@ -165,6 +171,39 @@ else:
 <pre><code class="language-python"># Loop over a range of numbers - For loop example
 for i in range(5):
     print(i)
+</code></pre>
+<p><strong>Understanding range() and enumerate():</strong></p>
+<pre><code class="language-python"># Different ways to use range()
+print(&quot;range(5):&quot;)
+for i in range(5):
+    print(i, end=&quot; &quot;)
+print()
+
+print(&quot;range(2, 8):&quot;)
+for i in range(2, 8):
+    print(i, end=&quot; &quot;)
+print()
+
+print(&quot;range(0, 10, 2):&quot;)
+for i in range(0, 10, 2):
+    print(i, end=&quot; &quot;)
+print()
+
+print(&quot;range(10, 0, -2):&quot;)
+for i in range(10, 0, -2):
+    print(i, end=&quot; &quot;)
+print()
+
+# Using enumerate() to get index and value
+fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;, &quot;date&quot;]
+print(&quot;\nUsing enumerate():&quot;)
+for index, fruit in enumerate(fruits):
+    print(f&quot;{index}: {fruit}&quot;)
+
+# Starting enumerate from a different number
+print(&quot;\nEnumerate starting from 1:&quot;)
+for index, fruit in enumerate(fruits, 1):
+    print(f&quot;{index}. {fruit}&quot;)
 </code></pre>
 <pre><code class="language-python"># Loop over a list - For loop example
 fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
@@ -177,6 +216,37 @@ count = 1
 while count &lt;= 5:
     print(count)
     count += 1
+</code></pre>
+<p><strong>While/Else Loop &amp; Infinite Loop Prevention:</strong></p>
+<pre><code class="language-python"># While-else loop
+count = 1
+while count &lt;= 3:
+    print(f&quot;Count: {count}&quot;)
+    count += 1
+else:
+    print(&quot;Loop completed successfully!&quot;)
+
+# Infinite loop prevention with safety counter
+safety_counter = 0
+MAX_ITERATIONS = 1000
+
+while True:
+    safety_counter += 1
+    # Your loop logic here
+    if safety_counter &gt;= MAX_ITERATIONS:
+        print(&quot;Safety break: Maximum iterations reached&quot;)
+        break
+    # Simulating some condition that would normally break the loop
+    if safety_counter &gt;= 5:
+        print(&quot;Normal break condition met&quot;)
+        break
+    print(f&quot;Iteration {safety_counter}&quot;)
+
+# Common infinite loop mistake (commented to prevent actual infinite loop)
+# x = 10
+# while x &gt; 0:
+#     print(x)
+#     # Forgot to decrement x - this would run forever!
 </code></pre>
 <pre><code class="language-python"># Print even numbers from 1 to 10 using while loop
 count = 1
@@ -199,6 +269,35 @@ for char in &quot;Python&quot;:
 student = {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 21}
 for key, value in student.items():
     print(f&quot;{key}: {value}&quot;)
+</code></pre>
+<p><strong>Advanced Looping Techniques:</strong></p>
+<pre><code class="language-python"># Using zip() to iterate over multiple sequences
+names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;]
+ages = [25, 30, 35]
+cities = [&quot;New York&quot;, &quot;London&quot;, &quot;Tokyo&quot;]
+
+print(&quot;Using zip():&quot;)
+for name, age, city in zip(names, ages, cities):
+    print(f&quot;{name} is {age} years old and lives in {city}&quot;)
+
+# Using reversed() to iterate backwards
+print(&quot;\nUsing reversed():&quot;)
+for fruit in reversed([&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]):
+    print(fruit)
+
+# List comprehensions (brief introduction)
+print(&quot;\nList comprehensions:&quot;)
+numbers = [1, 2, 3, 4, 5]
+squares = [x**2 for x in numbers]
+print(f&quot;Squares: {squares}&quot;)
+
+even_squares = [x**2 for x in numbers if x % 2 == 0]
+print(f&quot;Even squares: {even_squares}&quot;)
+
+# Nested list comprehension
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat_list = [item for row in matrix for item in row]
+print(f&quot;Flattened matrix: {flat_list}&quot;)
 </code></pre>
 <h2 id="4-special-loops-forelse">4. Special Loops: for/else</h2>
 <h4 id="the-else-block-after-a-for-loop-executes-if-the-loop-completes-normally-no-break">The <code>else</code> block after a <code>for</code> loop executes if the loop completes normally (no <code>break</code>).</h4>
@@ -223,19 +322,61 @@ for i in range(1, 4):
 for i in range(3):
     pass  # Does nothing, placeholder for future code
 
-print(&quot;=&quot;*5)
+print(&quot;=&quot; * 5)
 # continue - skip current iteration
 for i in range(5):
     if i == 2:
         continue
     print(i)
-print(&quot;=&quot;*5)
+print(&quot;=&quot; * 5)
 # break - exit loop
 for i in range(5):
     if i == 3:
         break
     print(i)
-print(&quot;=&quot;*5)
+print(&quot;=&quot; * 5)
+</code></pre>
+<p><strong>Error Handling in Loops:</strong></p>
+<pre><code class="language-python"># Handling errors in loops
+numbers = [&quot;1&quot;, &quot;2&quot;, &quot;three&quot;, &quot;4&quot;, &quot;5&quot;]
+
+print(&quot;Processing numbers with error handling:&quot;)
+for num_str in numbers:
+    try:
+        num = int(num_str)
+        print(f&quot;Number: {num}, Square: {num**2}&quot;)
+    except ValueError:
+        print(f&quot;'{num_str}' is not a valid number, skipping...&quot;)
+
+# Using flags to control loop behavior
+print(&quot;\nUsing flags:&quot;)
+found = False
+target = 3
+numbers = [1, 2, 3, 4, 5]
+
+for num in numbers:
+    if num == target:
+        print(f&quot;Found {target}!&quot;)
+        found = True
+        break
+
+if not found:
+    print(f&quot;{target} not found in the list&quot;)
+
+# Breaking out of nested loops using functions
+def find_in_matrix(matrix, target):
+    for i, row in enumerate(matrix):
+        for j, value in enumerate(row):
+            if value == target:
+                return i, j
+    return None
+
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+result = find_in_matrix(matrix, 5)
+if result:
+    print(f&quot;Found at position: {result}&quot;)
+else:
+    print(&quot;Not found&quot;)
 </code></pre>
 <h2 id="7-resolving-real-world-problems">7. Resolving Real-World Problems</h2>
 <p><strong>Let's solve a simple real-world problem using control structures.</strong></p>
@@ -255,6 +396,57 @@ while attempts &gt; 0:
 if attempts == 0:
     print(&quot;Access denied. Too many failed attempts.&quot;)
 
+</code></pre>
+<h2 id="8-matchcase-statement-python-310">8. Match/Case Statement (Python 3.10+)</h2>
+<p><strong>The <code>match/case</code> statement is Python's version of switch-case from other languages.</strong></p>
+<pre><code class="language-python"># Basic match/case example
+day = &quot;Monday&quot;
+
+match day:
+    case &quot;Monday&quot;:
+        print(&quot;Start of the work week!&quot;)
+    case &quot;Tuesday&quot; | &quot;Wednesday&quot; | &quot;Thursday&quot;:
+        print(&quot;Midweek days&quot;)
+    case &quot;Friday&quot;:
+        print(&quot;TGIF!&quot;)
+    case &quot;Saturday&quot; | &quot;Sunday&quot;:
+        print(&quot;Weekend!&quot;)
+    case _:
+        print(&quot;Invalid day&quot;)
+
+# Match with conditions
+score = 85
+
+match score:
+    case x if x &gt;= 90:
+        grade = &quot;A&quot;
+    case x if x &gt;= 80:
+        grade = &quot;B&quot;
+    case x if x &gt;= 70:
+        grade = &quot;C&quot;
+    case x if x &gt;= 60:
+        grade = &quot;D&quot;
+    case _:
+        grade = &quot;F&quot;
+
+print(f&quot;Score: {score}, Grade: {grade}&quot;)
+
+# Match with data structures
+def process_data(data):
+    match data:
+        case {&quot;type&quot;: &quot;user&quot;, &quot;name&quot;: str(name)}:
+            return f&quot;Hello, {name}!&quot;
+        case {&quot;type&quot;: &quot;product&quot;, &quot;name&quot;: str(name), &quot;price&quot;: float(price)}:
+            return f&quot;Product: {name}, Price: ${price}&quot;
+        case list() if len(data) &gt; 0:
+            return f&quot;List with {len(data)} items&quot;
+        case _:
+            return &quot;Unknown data format&quot;
+
+# Test the function
+print(process_data({&quot;type&quot;: &quot;user&quot;, &quot;name&quot;: &quot;Alice&quot;}))
+print(process_data({&quot;type&quot;: &quot;product&quot;, &quot;name&quot;: &quot;Laptop&quot;, &quot;price&quot;: 999.99}))
+print(process_data([1, 2, 3, 4, 5]))
 </code></pre>
 <p><strong>🛠️ AI Tool:</strong> Google Colab - Gemini Or Github Copilot</p>
 <p>You can explore AI tools like <strong>Gemini</strong> inside Google Colab to assist with understanding Python code, generating examples, or debugging.</p>
@@ -290,6 +482,7 @@ if attempts == 0:
 </li>
 </ul>
 <h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<p><strong>Basic Exercises:</strong></p>
 <ol>
 <li>
 <p>Write a program that checks whether a number is positive, negative, or zero.</p>
@@ -301,38 +494,59 @@ if attempts == 0:
 <p>Create a simple calculator using <code>if-elif-else</code>.</p>
 </li>
 <li>
-<p>Use nested loops to print a pattern like:</p>
+<p>Write a program to validate password input with a maximum of 3 attempts.</p>
 </li>
 </ol>
-<pre><code>*
-**
-***
-****
-*****
-
-******
-*****
-****
-***
-**
-*
-
-     *
-    ***
-   *****
-  *******
- *********
-***********
-</code></pre>
+<p><strong>Intermediate Exercises:</strong></p>
 <ol>
-<li>Write a program to validate password input with a maximum of 3 attempts.</li>
+<li>
+<p>Create a number guessing game where the computer picks a random number and the user has to guess it.</p>
+</li>
+<li>
+<p>Write a program that prints the multiplication table for any given number.</p>
+</li>
+<li>
+<p>Use nested loops to print patterns like triangles and diamonds.</p>
+</li>
+<li>
+<p>Create a menu-driven program using match/case (if available) or if-elif-else.</p>
+</li>
+</ol>
+<p><strong>Advanced Exercises:</strong></p>
+<ol>
+<li>
+<p>Write a program that finds all prime numbers up to a given number using nested loops.</p>
+</li>
+<li>
+<p>Create a simple ATM system with balance checking, withdrawal, and deposit features.</p>
+</li>
+<li>
+<p>Build a word frequency counter that counts how many times each word appears in a sentence.</p>
+</li>
+<li>
+<p>Write a program that validates user input and keeps asking until valid data is entered.</p>
+</li>
+</ol>
+<p><strong>Challenge Exercises:</strong></p>
+<ol>
+<li>
+<p>Create a simple text-based adventure game using control structures.</p>
+</li>
+<li>
+<p>Build a grade management system that can add, remove, and calculate average grades.</p>
+</li>
+<li>
+<p>Write a program that simulates a simple voting system with candidate validation.</p>
+</li>
+<li>
+<p>Create a loan eligibility checker based on multiple criteria (age, income, credit score).</p>
+</li>
 </ol>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../2.DataTypes/" class="btn btn-neutral float-left" title="Data Types"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../4.DataStructures/" class="btn btn-neutral float-right" title="Data Structures">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -357,8 +571,6 @@ if attempts == 0:
     
       <span><a href="../2.DataTypes/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../4.DataStructures/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
