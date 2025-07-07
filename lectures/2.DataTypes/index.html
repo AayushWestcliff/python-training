@@ -146,22 +146,33 @@ print(is_student,type(is_student))
 data = None
 print(data,type(data))
 </code></pre>
-<pre><code>Alice &lt;class 'str'&gt;
-25 &lt;class 'int'&gt;
-5.7 &lt;class 'float'&gt;
-(2+3j) &lt;class 'complex'&gt;
-True &lt;class 'bool'&gt;
-None &lt;class 'NoneType'&gt;
-</code></pre>
-<p><strong>Variable Naming Rules:</strong>
-- Must start with a letter or underscore (_)
-- Can contain letters, numbers, and underscores
-- Case-sensitive (<code>name</code> and <code>Name</code> are different)
-- Cannot use Python keywords (like <code>if</code>, <code>for</code>, <code>class</code>)</p>
-<p><strong>Naming Conventions:</strong>
-- Use descriptive names: <code>user_age</code> instead of <code>a</code>
-- Use snake_case: <code>first_name</code> instead of <code>firstName</code>
-- Constants in UPPER_CASE: <code>MAX_SIZE = 100</code></p>
+<p><strong>Variable Naming Rules:</strong></p>
+<ul>
+<li>
+<p>Must start with a letter or underscore (_)</p>
+</li>
+<li>
+<p>Can contain letters, numbers, and underscores</p>
+</li>
+<li>
+<p>Case-sensitive (<code>name</code> and <code>Name</code> are different)</p>
+</li>
+<li>
+<p>Cannot use Python keywords (like <code>if</code>, <code>for</code>, <code>class</code>)</p>
+</li>
+</ul>
+<p><strong>Naming Conventions:</strong></p>
+<ul>
+<li>
+<p>Use descriptive names: <code>user_age</code> instead of <code>a</code></p>
+</li>
+<li>
+<p>Use snake_case: <code>first_name</code> instead of <code>firstName</code></p>
+</li>
+<li>
+<p>Constants in UPPER_CASE: <code>MAX_SIZE = 100</code></p>
+</li>
+</ul>
 <pre><code class="language-python"># Valid variable names
 user_name = &quot;Alice&quot;
 age_2024 = 25
@@ -180,9 +191,6 @@ print(f&quot;a={a}, b={b}, c={c}&quot;)
 # my-name = &quot;Invalid&quot;    # Cannot contain hyphens
 # class = &quot;Invalid&quot;      # Cannot use Python keywords
 </code></pre>
-<pre><code>x=1, y=2, z=3
-a=10, b=10, c=10
-</code></pre>
 <pre><code class="language-python">one = 1
 two = 2
 three = one + two
@@ -192,9 +200,6 @@ hello = &quot;hello&quot;
 world = &quot;world&quot;
 helloworld = hello + &quot; &quot; + world
 print(helloworld)
-</code></pre>
-<pre><code>3
-hello world
 </code></pre>
 <h3 id="2-input-and-output-functions">2. Input and Output Functions</h3>
 <p><strong>Output: <code>print()</code></strong>
@@ -208,13 +213,15 @@ print(&quot;Hello, World!&quot;)
 name = input(&quot;Enter your name: &quot;)
 print(&quot;Welcome,&quot;, name)
 </code></pre>
-<pre><code>Hello, World!
-Welcome, je
-Welcome, je
-</code></pre>
-<p><strong>Important Note about input():</strong>
-- <code>input()</code> always returns a string, even if the user enters a number
-- You need to convert it to the appropriate type if needed</p>
+<p><strong>Important Note about input():</strong></p>
+<ul>
+<li>
+<p><code>input()</code> always returns a string, even if the user enters a number</p>
+</li>
+<li>
+<p>You need to convert it to the appropriate type if needed</p>
+</li>
+</ul>
 <pre><code class="language-python"># Input is always a string
 user_input = input(&quot;Enter a number: &quot;)
 print(f&quot;You entered: {user_input} (type: {type(user_input)})&quot;)
@@ -229,9 +236,6 @@ except ValueError:
 
 # Alternative: Convert directly (but handle errors)
 # age = int(input(&quot;Enter your age: &quot;))  # This can crash if not a number
-</code></pre>
-<pre><code>You entered: 9 (type: &lt;class 'str'&gt;)
-Double of your number: 18
 </code></pre>
 <h3 id="3-working-with-format-method-f-strings-escape-sequences">3. Working with format() Method, f-Strings, &amp; Escape Sequences</h3>
 <p>** String Formatting:
@@ -265,21 +269,11 @@ print(&quot;Hello\tWorld&quot;)  # Tab
 print(&quot;Line 1\nLine 2&quot;)  # New line
 print(&quot;She said, \&quot;Python is fun!\&quot;&quot;)
 </code></pre>
-<pre><code>My name is Vini and I am 23 years old.
-My name is Vini and I am 23 years old.
-Hello   World
-Line 1
-Line 2
-She said, "Python is fun!"
-</code></pre>
 <pre><code class="language-python">name = &quot;John&quot;
 print(&quot;Hello, %s!&quot; % name)
 
 mylist = [1,2,3]
 print(&quot;A list: %s&quot; % mylist)
-</code></pre>
-<pre><code>Hello, John!
-A list: [1, 2, 3]
 </code></pre>
 <p><code>%s</code> - String (or any object with a string representation, like numbers)</p>
 <p><code>%d</code> - Integers</p>
@@ -320,25 +314,39 @@ print(&quot;Floor Division:&quot;, a // b)
 print(&quot;Modulus:&quot;, a % b)
 print(&quot;Exponent:&quot;, a ** b)
 </code></pre>
-<pre><code>Addition: 13
-Subtraction: 7
-Multiplication: 30
-Division: 3.3333333333333335
-Floor Division: 3
-Modulus: 1
-Exponent: 1000
-</code></pre>
-<p><strong>Comparison Operators:</strong>
-- <code>==</code> → Equal to
-- <code>!=</code> → Not equal to
-- <code>&gt;</code> → Greater than
-- <code>&lt;</code> → Less than
-- <code>&gt;=</code> → Greater than or equal to
-- <code>&lt;=</code> → Less than or equal to</p>
-<p><strong>Logical Operators:</strong>
-- <code>and</code> → Both conditions must be True
-- <code>or</code> → At least one condition must be True
-- <code>not</code> → Reverses the result</p>
+<p><strong>Comparison Operators:</strong></p>
+<ul>
+<li>
+<p><code>==</code> → Equal to</p>
+</li>
+<li>
+<p><code>!=</code> → Not equal to</p>
+</li>
+<li>
+<p><code>&gt;</code> → Greater than</p>
+</li>
+<li>
+<p><code>&lt;</code> → Less than</p>
+</li>
+<li>
+<p><code>&gt;=</code> → Greater than or equal to</p>
+</li>
+<li>
+<p><code>&lt;=</code> → Less than or equal to</p>
+</li>
+</ul>
+<p><strong>Logical Operators:</strong></p>
+<ul>
+<li>
+<p><code>and</code> → Both conditions must be True</p>
+</li>
+<li>
+<p><code>or</code> → At least one condition must be True</p>
+</li>
+<li>
+<p><code>not</code> → Reverses the result</p>
+</li>
+</ul>
 <pre><code class="language-python"># Comparison operators
 x = 10
 y = 5
@@ -359,19 +367,6 @@ print(&quot;\nLogical Operations:&quot;)
 print(f&quot;Can drive: {age &gt;= 18 and has_license}&quot;)
 print(f&quot;Student or senior: {age &lt; 25 or age &gt; 65}&quot;)
 print(f&quot;Not a teenager: {not (13 &lt;= age &lt;= 19)}&quot;)
-</code></pre>
-<pre><code>Comparison Results:
-x == y: False
-x != y: True
-x &gt; y: True
-x &lt; y: False
-x &gt;= y: True
-x &lt;= y: False
-
-Logical Operations:
-Can drive: True
-Student or senior: True
-Not a teenager: True
 </code></pre>
 <h3 id="5-type-casting-type-checking-validation">5. Type Casting, Type Checking, &amp; Validation</h3>
 <p><strong>Type Casting:</strong>
@@ -395,11 +390,6 @@ if user_input.isdigit():
 else:
     print(&quot;Invalid input. Please enter a number.&quot;)
 
-</code></pre>
-<pre><code>7
-&lt;class 'int'&gt;
-You entered: 9
-You entered: 9
 </code></pre>
 <p><strong>More Type Conversion Examples:</strong></p>
 <pre><code class="language-python"># Various type conversions
@@ -434,23 +424,16 @@ print(f&quot;bool(None): {bool(None)}&quot;)
 # int(&quot;hello&quot;)  # ValueError
 # float(&quot;not_a_number&quot;)  # ValueError
 </code></pre>
-<pre><code>=== Type Conversions ===
-String to int: 42
-String to float: 3.14
-Int to string: '100'
-Float to string: '3.14159'
-Float to int: 3
-Bool to int: 1, 0
-Bool to string: 'True'
-bool(0): False
-bool(''): False
-bool('hello'): True
-bool(None): False
-</code></pre>
 <h3 id="6-constants-and-variable-scope">6. Constants and Variable Scope</h3>
-<p><strong>Constants:</strong>
-- Python doesn't have true constants, but convention is to use ALL_CAPS
-- These are variables that shouldn't be changed after assignment</p>
+<p><strong>Constants:</strong></p>
+<ul>
+<li>
+<p>Python doesn't have true constants, but convention is to use ALL_CAPS</p>
+</li>
+<li>
+<p>These are variables that shouldn't be changed after assignment</p>
+</li>
+</ul>
 <pre><code class="language-python"># Constants (by convention)
 PI = 3.14159
 MAX_USERS = 100
@@ -476,14 +459,6 @@ def demo_function():
 demo_function()
 print(f&quot;Outside function: {global_var}&quot;)
 # print(local_var)  # This would cause an error - local_var not accessible
-</code></pre>
-<pre><code>Pi value: 3.14159
-Maximum users: 100
-App name: My Python App
-Area of circle with radius 5: 78.53975
-Inside function: I'm global
-Inside function: I'm local
-Outside function: I'm global
 </code></pre>
 <p><strong>Quick Recap</strong></p>
 <p>✅ Python supports multiple data types (string, int, float, etc.)  </p>
@@ -570,29 +545,6 @@ for i in range(1,max+1):
     print(&quot; &quot; * (max - i) + &quot;*&quot; * (2 * i - 1))
 print(&quot;=&quot;*15)
 
-</code></pre>
-<pre><code>===============
-
-*
-**
-***
-****
-*****
-===============
-******
-*****
-****
-***
-**
-*
-===============
-     *
-    ***
-   *****
-  *******
- *********
-***********
-===============
 </code></pre>
 <p>Solution:</p>
 <pre><code class="language-python"># change this code
