@@ -54,6 +54,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#4-python-framework-syntax">4. Python Framework &amp; Syntax</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-the-zen-of-python-best-practices">5. The Zen of Python &amp; Best Practices</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
     </li>
     </ul>
@@ -65,30 +67,6 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../5.Functions/">Functions</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../6.FileHandling/">File Handling</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../7.OOP/">OOP</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../8.Error%26Debugging/">Errors and Exceptions</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../9.AdvancedConcepts/">Advanced Topics</a>
                 </li>
               </ul>
       </div>
@@ -238,22 +216,31 @@ if x &gt; 5:
     print(&quot;x is greater than 5&quot;)
 
 </code></pre>
+<pre><code class="language-python"># Variables and Data Types
+name = &quot;Chirag&quot;        # String
+age = 25               # Integer
+height = 5.6           # Float
+is_student = True      # Boolean
+
+print(f&quot;Name: {name}, Age: {age}, Height: {height}, Student: {is_student}&quot;)
+
+# Comments in Python
+# This is a single-line comment
+
+&quot;&quot;&quot;
+This is a multi-line comment
+or docstring
+&quot;&quot;&quot;
+
+# Python's dynamic typing
+x = 10        # x is an integer
+x = &quot;hello&quot;   # now x is a string
+x = [1, 2, 3] # now x is a list
+print(&quot;Dynamic typing demo:&quot;, x)
+</code></pre>
 <pre><code class="language-python">import cowsay
 
 cowsay.kitty(&quot;I am a kitty! not a snake!&quot;)
-</code></pre>
-<pre><code>  __________________________
-| I am a kitty! not a snake! |
-  ==========================
-                             \
-                              \
-                               \
-                                \
-                                 ("`-'  '-/") .___..--' ' "`-._
-                                  ` *_ *  )    `-.   (      ) .`-.__. `)
-                                   (_Y_.) ' ._   )   `._` ;  `` -. .-'
-                                _.. `--'_..-_/   /--' _ .' ,4
-                               ( i l ),-''  ( l i),'  ( ( ! .-'
 </code></pre>
 <p><strong>Let's try basic operations:</strong></p>
 <ul>
@@ -278,6 +265,21 @@ print(&quot;Difference:&quot;, a - b)
 print(&quot;Product:&quot;, a * b)
 print(&quot;Division:&quot;, a / b)
 </code></pre>
+<pre><code class="language-python"># Getting user input
+# name = input(&quot;What's your name? &quot;)
+# age = input(&quot;How old are you? &quot;)
+# print(f&quot;Hello {name}! You are {age} years old.&quot;)
+
+# Note: Uncomment the above lines to try interactive input
+
+# String operations
+message = &quot;Python Programming&quot;
+print(&quot;Original:&quot;, message)
+print(&quot;Uppercase:&quot;, message.upper())
+print(&quot;Lowercase:&quot;, message.lower())
+print(&quot;Length:&quot;, len(message))
+print(&quot;Replace:&quot;, message.replace(&quot;Python&quot;, &quot;Amazing Python&quot;))
+</code></pre>
 <ul>
 <li>
 <p>Python is simple, versatile, and powerful  </p>
@@ -298,17 +300,54 @@ print(&quot;Division:&quot;, a / b)
 <p>Hands-on coding encouraged  </p>
 </li>
 </ul>
+<h3 id="5-the-zen-of-python-best-practices">5. The Zen of Python &amp; Best Practices</h3>
+<p><strong>🧘 Python Philosophy:</strong>
+Python follows the "Zen of Python" principles - try running <code>import this</code> in Python!</p>
+<pre><code class="language-python"># The Zen of Python
+import this
+</code></pre>
+<p><strong>📋 Python Naming Conventions:</strong>
+- Variables: <code>snake_case</code> (e.g., <code>user_name</code>, <code>total_count</code>)
+- Functions: <code>snake_case</code> (e.g., <code>calculate_area()</code>, <code>get_user_input()</code>)
+- Classes: <code>PascalCase</code> (e.g., <code>UserAccount</code>, <code>DataProcessor</code>)
+- Constants: <code>UPPER_CASE</code> (e.g., <code>MAX_SIZE</code>, <code>DEFAULT_TIMEOUT</code>)</p>
+<pre><code class="language-python"># Basic Error Handling
+try:
+    number = int(&quot;not_a_number&quot;)
+except ValueError as e:
+    print(f&quot;Oops! That's not a valid number: {e}&quot;)
+
+# Better approach
+try:
+    user_input = &quot;42&quot;  # This would normally be input()
+    number = int(user_input)
+    result = 100 / number
+    print(f&quot;Result: {result}&quot;)
+except ValueError:
+    print(&quot;Please enter a valid number!&quot;)
+except ZeroDivisionError:
+    print(&quot;Cannot divide by zero!&quot;)
+except Exception as e:
+    print(f&quot;Something went wrong: {e}&quot;)
+</code></pre>
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
+<p><strong>Basic Exercises:</strong></p>
 <ol>
-<li>
-<p>Print your name using Python.</p>
-</li>
-<li>
-<p>Try basic arithmetic operations (addition, subtraction, multiplication, division).</p>
-</li>
-<li>
-<p>Explore Google Colab or Jupyter Notebook and run your first Python code.</p>
-</li>
+<li>Print your name using Python.</li>
+<li>Try basic arithmetic operations (addition, subtraction, multiplication, division).</li>
+<li>Explore Google Colab or Jupyter Notebook and run your first Python code.</li>
+</ol>
+<p><strong>Intermediate Exercises:</strong></p>
+<ol>
+<li>Create variables for your name, age, and favorite color, then print them in a formatted sentence.</li>
+<li>Write a program that calculates the area of a rectangle (length × width).</li>
+<li>Try the <code>import this</code> command and read through the Zen of Python.</li>
+</ol>
+<p><strong>Challenge Exercises:</strong></p>
+<ol>
+<li>Create a simple calculator that adds two numbers (use variables, not input for now).</li>
+<li>Write a program that converts temperature from Celsius to Fahrenheit using the formula: F = (C × 9/5) + 32.</li>
+<li>Practice string operations: take a sentence and print it in uppercase, lowercase, and count its characters.</li>
 </ol>
               
             </div>
