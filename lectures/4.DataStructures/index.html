@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>4.DataStructures - Python Module</title>
+    <title>Data Structures - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "4.DataStructures";
+        var mkdocs_page_name = "Data Structures";
         var mkdocs_page_input_path = "lectures/4.DataStructures.md";
         var mkdocs_page_url = null;
       </script>
@@ -55,6 +55,34 @@
                 <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
                 </li>
               </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Data Structures</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-lists">1. Lists</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-tuples">2. Tuples</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-sets">3. Sets</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-dictionaries">4. Dictionaries</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-additional-data-structures">5. Additional Data Structures</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-performance-when-to-use-each-structure">6. Performance &amp; When to Use Each Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-converting-between-data-structures">7. Converting Between Data Structures</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -69,7 +97,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">4.DataStructures</li>
+      <li class="breadcrumb-item active">Data Structures</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -81,7 +109,7 @@
                 <hr />
 <h1 id="python-programming-data-structures">📓 <strong>Python Programming - Data Structures</strong></h1>
 <hr />
-<h2 id="1-lists">🟢 1. Lists</h2>
+<h2 id="1-lists">1. Lists</h2>
 <p><strong>Lists in Python:</strong>
 - Ordered, mutable (can be changed) collection of items.</p>
 <ul>
@@ -90,6 +118,8 @@
 <pre><code class="language-python"># Creating a list
 fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
 print(fruits)
+</code></pre>
+<pre><code>['apple', 'banana', 'cherry']
 </code></pre>
 <p><strong>➤ Indexing, Slicing &amp; Negative Indexing:</strong></p>
 <pre><code class="language-python"># Indexing
@@ -121,12 +151,81 @@ print(fruits)
 fruits.sort()
 print(fruits)
 </code></pre>
+<p><strong>➤ More List Methods &amp; Operations:</strong></p>
+<pre><code class="language-python"># More list methods
+numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+print(&quot;Original list:&quot;, numbers)
+
+# Count occurrences
+print(&quot;Count of 1:&quot;, numbers.count(1))
+
+# Find index
+print(&quot;Index of 4:&quot;, numbers.index(4))
+
+# Extend (vs append)
+numbers.extend([7, 8])  # Adds multiple items
+print(&quot;After extend:&quot;, numbers)
+
+# Reverse
+numbers.reverse()
+print(&quot;After reverse:&quot;, numbers)
+
+# Clear
+temp_list = [1, 2, 3]
+temp_list.clear()
+print(&quot;After clear:&quot;, temp_list)
+
+# Copy (shallow vs deep)
+original = [1, [2, 3], 4]
+shallow_copy = original.copy()
+deep_copy = original[:]  # Simple way for lists
+print(&quot;Original:&quot;, original)
+print(&quot;Shallow copy:&quot;, shallow_copy)
+
+# List concatenation and repetition
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+combined = list1 + list2
+print(&quot;Combined:&quot;, combined)
+
+repeated = [0] * 5
+print(&quot;Repeated:&quot;, repeated)
+</code></pre>
 <p><strong>➤ List Comprehension with Conditions:</strong></p>
 <pre><code class="language-python"># Create list of squares for even numbers from 0 to 10
 squares = [x**2 for x in range(11) if x % 2 == 0]
 print(squares)
 </code></pre>
-<h2 id="2-tuples">🟢 2. Tuples</h2>
+<p><strong>➤ Nested Lists (2D Lists):</strong></p>
+<pre><code class="language-python"># Creating a 2D list (matrix)
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(&quot;Matrix:&quot;, matrix)
+
+# Accessing elements
+print(&quot;Element at [1][2]:&quot;, matrix[1][2])
+
+# Iterating through 2D list
+print(&quot;All elements:&quot;)
+for row in matrix:
+    for element in row:
+        print(element, end=&quot; &quot;)
+    print()  # New line after each row
+
+# Using enumerate for indices
+print(&quot;With indices:&quot;)
+for i, row in enumerate(matrix):
+    for j, element in enumerate(row):
+        print(f&quot;[{i}][{j}] = {element}&quot;)
+
+# List comprehension for 2D
+flattened = [element for row in matrix for element in row]
+print(&quot;Flattened:&quot;, flattened)
+
+# Creating a 2D list with comprehension
+multiplication_table = [[i * j for j in range(1, 4)] for i in range(1, 4)]
+print(&quot;Multiplication table:&quot;, multiplication_table)
+</code></pre>
+<h2 id="2-tuples">2. Tuples</h2>
 <p><strong>Tuples:</strong>
 - Ordered, immutable collection.</p>
 <ul>
@@ -149,6 +248,50 @@ print(dimensions[:2])
 for dim in dimensions:
     print(dim)
 
+</code></pre>
+<p><strong>➤ More Tuple Operations:</strong></p>
+<pre><code class="language-python"># Tuple methods
+numbers = (1, 2, 3, 2, 4, 2, 5)
+print(&quot;Original tuple:&quot;, numbers)
+print(&quot;Count of 2:&quot;, numbers.count(2))
+print(&quot;Index of 3:&quot;, numbers.index(3))
+
+# Tuple concatenation
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+combined = tuple1 + tuple2
+print(&quot;Combined tuple:&quot;, combined)
+
+# Tuple repetition
+repeated = (0,) * 5  # Note the comma for single element tuple
+print(&quot;Repeated tuple:&quot;, repeated)
+
+# Single element tuple (important!)
+single = (42,)  # Comma is required
+not_tuple = (42)  # This is just an integer
+print(&quot;Single element tuple:&quot;, single, type(single))
+print(&quot;Not a tuple:&quot;, not_tuple, type(not_tuple))
+
+# Nested tuples
+nested = ((1, 2), (3, 4), (5, 6))
+print(&quot;Nested tuple:&quot;, nested)
+print(&quot;Access nested element:&quot;, nested[1][0])
+
+# Named tuples (from collections module)
+from collections import namedtuple
+
+# Define a named tuple
+Point = namedtuple('Point', ['x', 'y'])
+Student = namedtuple('Student', ['name', 'age', 'grade'])
+
+# Create instances
+p = Point(10, 20)
+student = Student('Alice', 20, 'A')
+
+print(&quot;Point:&quot;, p)
+print(&quot;Access by name:&quot;, p.x, p.y)
+print(&quot;Student:&quot;, student)
+print(&quot;Student name:&quot;, student.name)
 </code></pre>
 <p><strong>➤ List vs Tuple:</strong></p>
 <ul>
@@ -180,7 +323,7 @@ print(new_list)
 name, age, profession = person
 print(name, age, profession)
 </code></pre>
-<h2 id="3-sets">🟢 3. Sets</h2>
+<h2 id="3-sets">3. Sets</h2>
 <p><strong>Sets:</strong>
 - Unordered collection of unique items.</p>
 <ul>
@@ -202,6 +345,49 @@ colors.discard(&quot;purple&quot;)  # No error if not present
 print(colors)
 
 </code></pre>
+<p><strong>➤ More Set Operations &amp; Methods:</strong></p>
+<pre><code class="language-python"># Set from list (removes duplicates)
+numbers = [1, 2, 2, 3, 3, 3, 4, 5]
+unique_numbers = set(numbers)
+print(&quot;Original list:&quot;, numbers)
+print(&quot;Unique set:&quot;, unique_numbers)
+
+# Set methods
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+print(&quot;Set1:&quot;, set1)
+print(&quot;Set2:&quot;, set2)
+
+# Union (all elements)
+print(&quot;Union (|):&quot;, set1 | set2)
+print(&quot;Union method:&quot;, set1.union(set2))
+
+# Intersection (common elements)
+print(&quot;Intersection (&amp;):&quot;, set1 &amp; set2)
+print(&quot;Intersection method:&quot;, set1.intersection(set2))
+
+# Difference (elements in set1 but not in set2)
+print(&quot;Difference (-):&quot;, set1 - set2)
+print(&quot;Difference method:&quot;, set1.difference(set2))
+
+# Symmetric difference (elements in either set, but not both)
+print(&quot;Symmetric difference (^):&quot;, set1 ^ set2)
+print(&quot;Symmetric difference method:&quot;, set1.symmetric_difference(set2))
+
+# Subset and superset checks
+small_set = {1, 2}
+print(&quot;Is {1, 2} subset of set1?&quot;, small_set.issubset(set1))
+print(&quot;Is set1 superset of {1, 2}?&quot;, set1.issuperset(small_set))
+
+# Disjoint sets (no common elements)
+set3 = {10, 11, 12}
+print(&quot;Are set1 and set3 disjoint?&quot;, set1.isdisjoint(set3))
+
+# Set comprehension
+even_squares = {x**2 for x in range(10) if x % 2 == 0}
+print(&quot;Even squares:&quot;, even_squares)
+</code></pre>
 <p><strong>➤ Set Operations:</strong></p>
 <pre><code class="language-python">a = {1, 2, 3, 4}
 b = {3, 4, 5, 6}
@@ -222,7 +408,7 @@ print(&quot;Difference:&quot;, a - b)
 <pre><code class="language-python">fs = frozenset([1, 2, 3])
 print(fs)
 </code></pre>
-<h2 id="4-dictionaries">🟢 4. Dictionaries</h2>
+<h2 id="4-dictionaries">4. Dictionaries</h2>
 <p><strong>Dictionaries:</strong>
 - Collection of key-value pairs.</p>
 <ul>
@@ -250,6 +436,56 @@ student.pop(&quot;age&quot;)
 print(student)
 
 </code></pre>
+<p><strong>➤ More Dictionary Methods &amp; Operations:</strong></p>
+<pre><code class="language-python"># Dictionary from lists
+keys = ['name', 'age', 'city']
+values = ['Bob', 25, 'London']
+person = dict(zip(keys, values))
+print(&quot;Dictionary from lists:&quot;, person)
+
+# Dictionary methods
+inventory = {'apples': 50, 'bananas': 30, 'cherries': 20}
+print(&quot;Original inventory:&quot;, inventory)
+
+# Items, keys, values iteration
+print(&quot;Items:&quot;)
+for item in inventory.items():
+    print(item)
+
+print(&quot;Key-value pairs:&quot;)
+for key, value in inventory.items():
+    print(f&quot;{key}: {value}&quot;)
+
+# Popitem (removes and returns last item)
+last_item = inventory.popitem()
+print(&quot;Popped item:&quot;, last_item)
+print(&quot;After popitem:&quot;, inventory)
+
+# Setdefault (get or set default value)
+inventory.setdefault('oranges', 0)
+print(&quot;After setdefault:&quot;, inventory)
+
+# Dictionary merging (Python 3.9+)
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+# merged = dict1 | dict2  # Python 3.9+
+merged = {**dict1, **dict2}  # Works in older versions
+print(&quot;Merged dictionary:&quot;, merged)
+
+# Dictionary with default values
+from collections import defaultdict
+dd = defaultdict(int)  # Default value is 0
+dd['a'] += 1
+dd['b'] += 2
+print(&quot;Default dict:&quot;, dict(dd))
+
+# Counter (specialized dictionary)
+from collections import Counter
+text = &quot;hello world&quot;
+char_count = Counter(text)
+print(&quot;Character count:&quot;, char_count)
+print(&quot;Most common:&quot;, char_count.most_common(3))
+</code></pre>
 <p><strong>➤ Dictionary Comprehension:</strong></p>
 <pre><code class="language-python"># Squares of numbers
 squares = {x: x**2 for x in range(5)}
@@ -275,7 +511,204 @@ print(student[&quot;subjects&quot;][&quot;Math&quot;])
 <p>✅ Sets → Unordered, unique items  </p>
 <p>✅ Dictionaries → Key-value pairs  </p>
 <p>✅ Use list/dictionary comprehension for concise code  </p>
+<h2 id="5-additional-data-structures">5. Additional Data Structures</h2>
+<p><strong>Python provides several specialized data structures in the <code>collections</code> module:</strong></p>
+<pre><code class="language-python"># Deque (double-ended queue)
+from collections import deque
+
+# Create a deque
+dq = deque([1, 2, 3, 4, 5])
+print(&quot;Original deque:&quot;, dq)
+
+# Add to both ends
+dq.appendleft(0)
+dq.append(6)
+print(&quot;After adding to both ends:&quot;, dq)
+
+# Remove from both ends
+left_item = dq.popleft()
+right_item = dq.pop()
+print(f&quot;Removed {left_item} from left, {right_item} from right&quot;)
+print(&quot;After removal:&quot;, dq)
+
+# Rotate
+dq.rotate(2)  # Rotate right by 2
+print(&quot;After rotating right by 2:&quot;, dq)
+
+# OrderedDict (remembers insertion order)
+from collections import OrderedDict
+od = OrderedDict()
+od['first'] = 1
+od['second'] = 2
+od['third'] = 3
+print(&quot;OrderedDict:&quot;, od)
+
+# Move to end
+od.move_to_end('first')
+print(&quot;After moving 'first' to end:&quot;, od)
+
+# ChainMap (combines multiple dictionaries)
+from collections import ChainMap
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'c': 3, 'd': 4}
+dict3 = {'e': 5, 'f': 6}
+
+chain = ChainMap(dict1, dict2, dict3)
+print(&quot;ChainMap:&quot;, chain)
+print(&quot;Value of 'a':&quot;, chain['a'])
+print(&quot;All keys:&quot;, list(chain.keys()))
+</code></pre>
+<h2 id="6-performance-when-to-use-each-structure">6. Performance &amp; When to Use Each Structure</h2>
+<p><strong>Time Complexity Comparison:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>List</th>
+<th>Tuple</th>
+<th>Set</th>
+<th>Dictionary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access by index</td>
+<td>O(1)</td>
+<td>O(1)</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Access by key</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>O(n)</td>
+<td>O(n)</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Insert</td>
+<td>O(n)</td>
+<td>N/A</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>O(n)</td>
+<td>N/A</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>When to Use Each:</strong>
+- <strong>List</strong>: When you need ordered, mutable data with duplicates
+- <strong>Tuple</strong>: When you need ordered, immutable data (coordinates, database records)
+- <strong>Set</strong>: When you need unique elements and fast membership testing
+- <strong>Dictionary</strong>: When you need key-value mapping with fast lookups</p>
+<pre><code class="language-python"># Practical examples of when to use each structure
+
+# Example 1: Shopping cart (List - ordered, allows duplicates)
+shopping_cart = ['apple', 'banana', 'apple', 'orange']
+print(&quot;Shopping cart:&quot;, shopping_cart)
+
+# Example 2: GPS coordinates (Tuple - immutable, fixed structure)
+locations = [
+    ('New York', 40.7128, -74.0060),
+    ('London', 51.5074, -0.1278),
+    ('Tokyo', 35.6762, 139.6503)
+]
+print(&quot;Locations:&quot;, locations)
+
+# Example 3: Unique visitors (Set - no duplicates)
+unique_visitors = {'user1', 'user2', 'user1', 'user3'}
+print(&quot;Unique visitors:&quot;, unique_visitors)
+
+# Example 4: User profiles (Dictionary - key-value mapping)
+user_profiles = {
+    'user1': {'name': 'Alice', 'age': 25},
+    'user2': {'name': 'Bob', 'age': 30},
+    'user3': {'name': 'Charlie', 'age': 35}
+}
+print(&quot;User profiles:&quot;, user_profiles)
+
+# Memory usage comparison
+import sys
+list_data = [1, 2, 3, 4, 5]
+tuple_data = (1, 2, 3, 4, 5)
+set_data = {1, 2, 3, 4, 5}
+dict_data = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e'}
+
+print(f&quot;List memory: {sys.getsizeof(list_data)} bytes&quot;)
+print(f&quot;Tuple memory: {sys.getsizeof(tuple_data)} bytes&quot;)
+print(f&quot;Set memory: {sys.getsizeof(set_data)} bytes&quot;)
+print(f&quot;Dict memory: {sys.getsizeof(dict_data)} bytes&quot;)
+</code></pre>
+<h2 id="7-converting-between-data-structures">7. Converting Between Data Structures</h2>
+<p><strong>Converting between different data structures is often necessary:</strong></p>
+<pre><code class="language-python"># Converting between data structures
+original_list = [1, 2, 3, 2, 4, 5]
+print(&quot;Original list:&quot;, original_list)
+
+# List to other structures
+list_to_tuple = tuple(original_list)
+list_to_set = set(original_list)  # Removes duplicates
+print(&quot;List to tuple:&quot;, list_to_tuple)
+print(&quot;List to set:&quot;, list_to_set)
+
+# Tuple to other structures
+tuple_to_list = list(list_to_tuple)
+tuple_to_set = set(list_to_tuple)
+print(&quot;Tuple to list:&quot;, tuple_to_list)
+print(&quot;Tuple to set:&quot;, tuple_to_set)
+
+# Set to other structures
+set_to_list = list(list_to_set)
+set_to_tuple = tuple(list_to_set)
+print(&quot;Set to list:&quot;, set_to_list)
+print(&quot;Set to tuple:&quot;, set_to_tuple)
+
+# Dictionary conversions
+sample_dict = {'a': 1, 'b': 2, 'c': 3}
+print(&quot;Original dict:&quot;, sample_dict)
+
+# Dictionary to lists/tuples/sets
+dict_keys = list(sample_dict.keys())
+dict_values = list(sample_dict.values())
+dict_items = list(sample_dict.items())
+print(&quot;Dict keys:&quot;, dict_keys)
+print(&quot;Dict values:&quot;, dict_values)
+print(&quot;Dict items:&quot;, dict_items)
+
+# Lists to dictionary
+keys = ['name', 'age', 'city']
+values = ['Alice', 25, 'Boston']
+list_to_dict = dict(zip(keys, values))
+print(&quot;Lists to dict:&quot;, list_to_dict)
+
+# List of tuples to dictionary
+tuple_list = [('x', 1), ('y', 2), ('z', 3)]
+tuples_to_dict = dict(tuple_list)
+print(&quot;Tuples to dict:&quot;, tuples_to_dict)
+
+# String to other structures
+text = &quot;hello&quot;
+string_to_list = list(text)
+string_to_tuple = tuple(text)
+string_to_set = set(text)  # Removes duplicate characters
+print(&quot;String to list:&quot;, string_to_list)
+print(&quot;String to tuple:&quot;, string_to_tuple)
+print(&quot;String to set:&quot;, string_to_set)
+</code></pre>
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
+<p><strong>Basic Exercises:</strong></p>
 <ol>
 <li>
 <p>Create a list of your favorite 5 movies and sort them.</p>
@@ -293,9 +726,66 @@ print(student[&quot;subjects&quot;][&quot;Math&quot;])
 <p>Use dictionary comprehension to map numbers from 1 to 5 to their cubes.</p>
 </li>
 </ol>
+<p><strong>Intermediate Exercises:</strong></p>
+<ol>
+<li>
+<p>Create a 2D list representing a 3x3 matrix and print it row by row.</p>
+</li>
+<li>
+<p>Remove duplicates from a list while preserving order (without using set).</p>
+</li>
+<li>
+<p>Create a word frequency counter using a dictionary.</p>
+</li>
+<li>
+<p>Use set operations to find students taking both Math and Science courses.</p>
+</li>
+<li>
+<p>Implement a simple phone book using nested dictionaries.</p>
+</li>
+</ol>
+<p><strong>Advanced Exercises:</strong></p>
+<ol>
+<li>
+<p>Create a function that flattens a nested list of any depth.</p>
+</li>
+<li>
+<p>Build a simple inventory system using dictionaries and lists.</p>
+</li>
+<li>
+<p>Use collections.Counter to analyze text and find the most common words.</p>
+</li>
+<li>
+<p>Create a student grading system with multiple subjects and calculate averages.</p>
+</li>
+<li>
+<p>Implement a simple cache system using dictionaries.</p>
+</li>
+</ol>
+<p><strong>Challenge Exercises:</strong></p>
+<ol>
+<li>
+<p>Create a data structure to represent a family tree using nested dictionaries.</p>
+</li>
+<li>
+<p>Build a simple database system that can store and query student records.</p>
+</li>
+<li>
+<p>Implement a text-based menu system for a restaurant using data structures.</p>
+</li>
+<li>
+<p>Create a library management system with books, authors, and borrowers.</p>
+</li>
+<li>
+<p>Build a simple social network representation using dictionaries and sets.</p>
+</li>
+</ol>
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../3.ControlStructures/" class="btn btn-neutral float-left" title="Control Structures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
 
   <hr/>
 
@@ -317,6 +807,8 @@ print(student[&quot;subjects&quot;][&quot;Math&quot;])
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
     
+    
+      <span><a href="../3.ControlStructures/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>
