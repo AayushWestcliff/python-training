@@ -1,5 +1,6 @@
 site_name: Python Module
 site_description: Python Training for BSIT Students (Kings College)
+
 nav:
   - Getting Started: index.md
   - Introduction to Python: lectures/1.Introduction.md
@@ -15,6 +16,18 @@ nav:
 theme:
   name: readthedocs
   # name: material
+  features:
+    - header.autohide
+    - announce.dismiss
+    - navigation.footer
+  # footer: "© 2025 Aayush Regmi • All rights reserved."
+  # name: material
+
+extra:
+  generator: false
+      
+copyright: Copyright &copy; 2025 - Aayush Raj Regmi
+
 
 # Add this line
-cname: python.regmiaayush.com.np
+# cname: python.regmiaayush.com.np
