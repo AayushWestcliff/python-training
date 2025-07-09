@@ -28,6 +28,9 @@
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
       
 
 
@@ -55,7 +58,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -106,6 +116,32 @@
         </div>
       </div>
     </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -643,9 +679,8 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code>Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.
+<div class="highlight"><pre><span></span><code>Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.
 </code></pre></div>
-
 <h3 id="4-python-framework-syntax">4. Python Framework &amp; Syntax</h3>
 <p><strong>Python Syntax Basics:</strong>
 - Case-sensitive</p>
@@ -665,10 +700,9 @@
 <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is greater than 5&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code>I thought Python was a snake... why am I coding?
+<div class="highlight"><pre><span></span><code>I thought Python was a snake... why am I coding?
 x is greater than 5
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="c1"># Variables and Data Types</span>
 <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Chirag&quot;</span>        <span class="c1"># String</span>
 <span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>               <span class="c1"># Integer</span>
@@ -691,15 +725,14 @@ x is greater than 5
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1"># now x is a list</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dynamic typing demo:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code><span class="n">Name</span><span class="o">:</span><span class="w"> </span><span class="n">Chirag</span><span class="o">,</span><span class="w"> </span><span class="n">Age</span><span class="o">:</span><span class="w"> </span><span class="mi">25</span><span class="o">,</span><span class="w"> </span><span class="n">Height</span><span class="o">:</span><span class="w"> </span><span class="mf">5.6</span><span class="o">,</span><span class="w"> </span><span class="n">Student</span><span class="o">:</span><span class="w"> </span><span class="n">True</span>
-<span class="n">Dynamic</span><span class="w"> </span><span class="n">typing</span><span class="w"> </span><span class="n">demo</span><span class="o">:</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code>Name: Chirag, Age: 25, Height: 5.6, Student: True
+Dynamic typing demo: [1, 2, 3]
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cowsay</span>
 
 <span class="n">cowsay</span><span class="o">.</span><span class="n">kitty</span><span class="p">(</span><span class="s2">&quot;I am a kitty! not a snake!&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code>  __________________________
+<div class="highlight"><pre><span></span><code>  __________________________
 | I am a kitty! not a snake! |
   ==========================
                              \
@@ -707,12 +740,11 @@ x is greater than 5
                                \
                                 \
                                  (&quot;`-&#39;  &#39;-/&quot;) .___..--&#39; &#39; &quot;`-._
-                                  <span class="sb">` *_ *  )    `</span>-.   (      ) .`-.__. <span class="sb">`)</span>
-<span class="sb">                                   (_Y_.) &#39; ._   )   `</span>._` ;  `` -. .-&#39;
-                                <span class="ge">_.. `--&#39;_</span>..-_/   /--&#39; _ .&#39; ,4
+                                  ` *_ *  )    `-.   (      ) .`-.__. `)
+                                   (_Y_.) &#39; ._   )   `._` ;  `` -. .-&#39;
+                                _.. `--&#39;_..-_/   /--&#39; _ .&#39; ,4
                                ( i l ),-&#39;&#39;  ( l i),&#39;  ( ( ! .-&#39;
 </code></pre></div>
-
 <p><strong>Let's try basic operations:</strong></p>
 <ul>
 <li>
@@ -736,13 +768,12 @@ x is greater than 5
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Product:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Division:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code><span class="n">Python</span><span class="o">:</span><span class="w"> </span><span class="n">Less</span><span class="w"> </span><span class="n">hiss</span><span class="o">,</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">code</span><span class="o">.</span>
-<span class="n">Sum</span><span class="o">:</span><span class="w"> </span><span class="mi">8</span>
-<span class="n">Difference</span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
-<span class="n">Product</span><span class="o">:</span><span class="w"> </span><span class="mi">15</span>
-<span class="n">Division</span><span class="o">:</span><span class="w"> </span><span class="mf">1.6666666666666667</span>
+<div class="highlight"><pre><span></span><code>Python: Less hiss, more code.
+Sum: 8
+Difference: 2
+Product: 15
+Division: 1.6666666666666667
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="c1"># Getting user input</span>
 <span class="c1"># name = input(&quot;What&#39;s your name? &quot;)</span>
 <span class="c1"># age = input(&quot;How old are you? &quot;)</span>
@@ -758,13 +789,12 @@ x is greater than 5
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replace:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;Amazing Python&quot;</span><span class="p">))</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code><span class="n">Original</span><span class="o">:</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">Programming</span>
-<span class="n">Uppercase</span><span class="o">:</span><span class="w"> </span><span class="n">PYTHON</span><span class="w"> </span><span class="n">PROGRAMMING</span>
-<span class="n">Lowercase</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">programming</span>
-<span class="n">Length</span><span class="o">:</span><span class="w"> </span><span class="mi">18</span>
-<span class="n">Replace</span><span class="o">:</span><span class="w"> </span><span class="n">Amazing</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">Programming</span>
+<div class="highlight"><pre><span></span><code>Original: Python Programming
+Uppercase: PYTHON PROGRAMMING
+Lowercase: python programming
+Length: 18
+Replace: Amazing Python Programming
 </code></pre></div>
-
 <ul>
 <li>
 <p>Python is simple, versatile, and powerful  </p>
@@ -791,29 +821,28 @@ Python follows the "Zen of Python" principles - try running <code>import this</c
 <div class="highlight"><pre><span></span><code><span class="c1"># The Zen of Python</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">this</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code><span class="n">The</span><span class="w"> </span><span class="n">Zen</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">Python</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Tim</span><span class="w"> </span><span class="n">Peters</span>
+<div class="highlight"><pre><span></span><code>The Zen of Python, by Tim Peters
 
-<span class="n">Beautiful</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">ugly</span><span class="p">.</span>
-<span class="n">Explicit</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">implicit</span><span class="p">.</span>
-<span class="n">Simple</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">complex</span><span class="p">.</span>
-<span class="n">Complex</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">complicated</span><span class="p">.</span>
-<span class="n">Flat</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">nested</span><span class="p">.</span>
-<span class="n">Sparse</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">dense</span><span class="p">.</span>
-<span class="n">Readability</span><span class="w"> </span><span class="n">counts</span><span class="p">.</span>
-<span class="n">Special</span><span class="w"> </span><span class="n">cases</span><span class="w"> </span><span class="n">aren</span><span class="c">&#39;t special enough to break the rules.</span>
-<span class="n">Although</span><span class="w"> </span><span class="n">practicality</span><span class="w"> </span><span class="n">beats</span><span class="w"> </span><span class="n">purity</span><span class="p">.</span>
-<span class="n">Errors</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">never</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="n">silently</span><span class="p">.</span>
-<span class="n">Unless</span><span class="w"> </span><span class="n">explicitly</span><span class="w"> </span><span class="n">silenced</span><span class="p">.</span>
-<span class="ow">In</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">ambiguity</span><span class="p">,</span><span class="w"> </span><span class="n">refuse</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">temptation</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span>
-<span class="n">There</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">one</span><span class="o">--</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">preferably</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">--</span><span class="n">obvious</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">it</span><span class="p">.</span>
-<span class="n">Although</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">obvious</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="n">you</span><span class="c">&#39;re Dutch.</span>
-<span class="n">Now</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">never</span><span class="p">.</span>
-<span class="n">Although</span><span class="w"> </span><span class="n">never</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">often</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="o">*</span><span class="n">right</span><span class="o">*</span><span class="w"> </span><span class="n">now</span><span class="p">.</span>
-<span class="k">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">hard</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">explain</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="c">&#39;s a bad idea.</span>
-<span class="k">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">easy</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">explain</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="n">idea</span><span class="p">.</span>
-<span class="n">Namespaces</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">honking</span><span class="w"> </span><span class="n">great</span><span class="w"> </span><span class="n">idea</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="k">let</span><span class="c">&#39;s do more of those!</span>
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren&#39;t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you&#39;re Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let&#39;s do more of those!
 </code></pre></div>
-
 <p><strong>📋 Python Naming Conventions:</strong></p>
 <ul>
 <li>
@@ -848,10 +877,9 @@ Python follows the "Zen of Python" principles - try running <code>import this</c
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Something went wrong: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="codehilite"><pre><span></span><code>Oops! That&#39;s not a valid number: invalid literal for int() with base 10: &#39;not_a_number&#39;
+<div class="highlight"><pre><span></span><code>Oops! That&#39;s not a valid number: invalid literal for int() with base 10: &#39;not_a_number&#39;
 Result: 2.380952380952381
 </code></pre></div>
-
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
 <p><strong>Basic Exercises:</strong></p>
 <ol>
