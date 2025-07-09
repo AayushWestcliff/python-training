@@ -1,102 +1,545 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Introduction to Python - Python Module</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Introduction to Python";
-        var mkdocs_page_input_path = "lectures/1.Introduction.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python Training for BSIT Students (Kings College)">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../2.DataTypes/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>Introduction to Python - Python Module</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python Module
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Introduction to Python</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-what-exactly-is-python">1. What exactly is Python?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-pythons-root-and-ecosystem">2. Python's Root and Ecosystem</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-python-installation-ides-setting-up">3. Python Installation &amp; IDEs Setting Up</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-python-framework-syntax">4. Python Framework &amp; Syntax</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#5-the-zen-of-python-best-practices">5. The Zen of Python &amp; Best Practices</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
-    </li>
-    </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
-                </li>
-              </ul>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-programming-introduction-to-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Python Module" class="md-header__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Python Module
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to Python
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python Module</a>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Introduction to Python</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <hr />
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Python Module" class="md-nav__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Python Module
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Python
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Python
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#python-programming-introduction-to-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      📓 Python Programming - Introduction to Python
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📓 Python Programming - Introduction to Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-exactly-is-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What exactly is Python?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pythons-root-and-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Python's Root and Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-installation-ides-setting-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Python Installation &amp; IDEs Setting Up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-python-framework-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Python Framework &amp; Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-the-zen-of-python-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. The Zen of Python &amp; Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Practice Exercises
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.DataTypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.ControlStructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.DataStructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#python-programming-introduction-to-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      📓 Python Programming - Introduction to Python
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📓 Python Programming - Introduction to Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-what-exactly-is-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. What exactly is Python?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pythons-root-and-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Python's Root and Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-python-installation-ides-setting-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Python Installation &amp; IDEs Setting Up
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-python-framework-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Python Framework &amp; Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-the-zen-of-python-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. The Zen of Python &amp; Best Practices
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Practice Exercises
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Introduction to Python</h1>
+
+<hr />
 <h2 id="python-programming-introduction-to-python">📓 Python Programming - Introduction to Python</h2>
 <hr />
 <h3 id="1-what-exactly-is-python">1. What exactly is Python?</h3>
@@ -196,12 +639,13 @@
 <p>Write your Python code and press Shift + Enter to run</p>
 </li>
 </ol>
-<pre><code class="language-python"># Simple Python code in Colab
+<div class="highlight"><pre><span></span><code><span class="c1"># Simple Python code in Colab</span>
 
-print(&quot;Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.&quot;)
-</code></pre>
-<pre><code>Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.
+</code></pre></div>
+
 <h3 id="4-python-framework-syntax">4. Python Framework &amp; Syntax</h3>
 <p><strong>Python Syntax Basics:</strong>
 - Case-sensitive</p>
@@ -213,60 +657,62 @@ print(&quot;Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.&quot;)
 <p>Easy to read and write</p>
 </li>
 </ul>
-<pre><code class="language-python"># Printing a message
-print(&quot;I thought Python was a snake... why am I coding?&quot;)
+<div class="highlight"><pre><span></span><code><span class="c1"># Printing a message</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I thought Python was a snake... why am I coding?&quot;</span><span class="p">)</span>
 
-# Indentation defines code blocks
-x = 10
-if x &gt; 5:
-    print(&quot;x is greater than 5&quot;)
-
-</code></pre>
-<pre><code>I thought Python was a snake... why am I coding?
+<span class="c1"># Indentation defines code blocks</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is greater than 5&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>I thought Python was a snake... why am I coding?
 x is greater than 5
-</code></pre>
-<pre><code class="language-python"># Variables and Data Types
-name = &quot;Chirag&quot;        # String
-age = 25               # Integer
-height = 5.6           # Float
-is_student = True      # Boolean
+</code></pre></div>
 
-print(f&quot;Name: {name}, Age: {age}, Height: {height}, Student: {is_student}&quot;)
+<div class="highlight"><pre><span></span><code><span class="c1"># Variables and Data Types</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Chirag&quot;</span>        <span class="c1"># String</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>               <span class="c1"># Integer</span>
+<span class="n">height</span> <span class="o">=</span> <span class="mf">5.6</span>           <span class="c1"># Float</span>
+<span class="n">is_student</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># Boolean</span>
 
-# Comments in Python
-# This is a single-line comment
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Age: </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">, Height: </span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">, Student: </span><span class="si">{</span><span class="n">is_student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-&quot;&quot;&quot;
-This is a multi-line comment
-or docstring
-&quot;&quot;&quot;
+<span class="c1"># Comments in Python</span>
+<span class="c1"># This is a single-line comment</span>
 
-# Python's dynamic typing
-x = 10        # x is an integer
-x = &quot;hello&quot;   # now x is a string
-x = [1, 2, 3] # now x is a list
-print(&quot;Dynamic typing demo:&quot;, x)
-</code></pre>
-<pre><code>Name: Chirag, Age: 25, Height: 5.6, Student: True
-Dynamic typing demo: [1, 2, 3]
-</code></pre>
-<pre><code class="language-python">import cowsay
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This is a multi-line comment</span>
+<span class="sd">or docstring</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
-cowsay.kitty(&quot;I am a kitty! not a snake!&quot;)
-</code></pre>
-<pre><code>  __________________________
+<span class="c1"># Python&#39;s dynamic typing</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>        <span class="c1"># x is an integer</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>   <span class="c1"># now x is a string</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1"># now x is a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dynamic typing demo:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">Name</span><span class="o">:</span><span class="w"> </span><span class="n">Chirag</span><span class="o">,</span><span class="w"> </span><span class="n">Age</span><span class="o">:</span><span class="w"> </span><span class="mi">25</span><span class="o">,</span><span class="w"> </span><span class="n">Height</span><span class="o">:</span><span class="w"> </span><span class="mf">5.6</span><span class="o">,</span><span class="w"> </span><span class="n">Student</span><span class="o">:</span><span class="w"> </span><span class="n">True</span>
+<span class="n">Dynamic</span><span class="w"> </span><span class="n">typing</span><span class="w"> </span><span class="n">demo</span><span class="o">:</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">]</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cowsay</span>
+
+<span class="n">cowsay</span><span class="o">.</span><span class="n">kitty</span><span class="p">(</span><span class="s2">&quot;I am a kitty! not a snake!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>  __________________________
 | I am a kitty! not a snake! |
   ==========================
                              \
                               \
                                \
                                 \
-                                 ("`-'  '-/") .___..--' ' "`-._
-                                  ` *_ *  )    `-.   (      ) .`-.__. `)
-                                   (_Y_.) ' ._   )   `._` ;  `` -. .-'
-                                _.. `--'_..-_/   /--' _ .' ,4
-                               ( i l ),-''  ( l i),'  ( ( ! .-'
-</code></pre>
+                                 (&quot;`-&#39;  &#39;-/&quot;) .___..--&#39; &#39; &quot;`-._
+                                  <span class="sb">` *_ *  )    `</span>-.   (      ) .`-.__. <span class="sb">`)</span>
+<span class="sb">                                   (_Y_.) &#39; ._   )   `</span>._` ;  `` -. .-&#39;
+                                <span class="ge">_.. `--&#39;_</span>..-_/   /--&#39; _ .&#39; ,4
+                               ( i l ),-&#39;&#39;  ( l i),&#39;  ( ( ! .-&#39;
+</code></pre></div>
+
 <p><strong>Let's try basic operations:</strong></p>
 <ul>
 <li>
@@ -279,44 +725,46 @@ cowsay.kitty(&quot;I am a kitty! not a snake!&quot;)
 <p>Using variables</p>
 </li>
 </ul>
-<pre><code class="language-python"># Print statement
-print(&quot;Python: Less hiss, more code.&quot;)
+<div class="highlight"><pre><span></span><code><span class="c1"># Print statement</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python: Less hiss, more code.&quot;</span><span class="p">)</span>
 
-# Arithmetic operations
-a = 5
-b = 3
-print(&quot;Sum:&quot;, a + b)
-print(&quot;Difference:&quot;, a - b)
-print(&quot;Product:&quot;, a * b)
-print(&quot;Division:&quot;, a / b)
-</code></pre>
-<pre><code>Python: Less hiss, more code.
-Sum: 8
-Difference: 2
-Product: 15
-Division: 1.6666666666666667
-</code></pre>
-<pre><code class="language-python"># Getting user input
-# name = input(&quot;What's your name? &quot;)
-# age = input(&quot;How old are you? &quot;)
-# print(f&quot;Hello {name}! You are {age} years old.&quot;)
+<span class="c1"># Arithmetic operations</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Product:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Division:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">Python</span><span class="o">:</span><span class="w"> </span><span class="n">Less</span><span class="w"> </span><span class="n">hiss</span><span class="o">,</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">code</span><span class="o">.</span>
+<span class="n">Sum</span><span class="o">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="n">Difference</span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">Product</span><span class="o">:</span><span class="w"> </span><span class="mi">15</span>
+<span class="n">Division</span><span class="o">:</span><span class="w"> </span><span class="mf">1.6666666666666667</span>
+</code></pre></div>
 
-# Note: Uncomment the above lines to try interactive input
+<div class="highlight"><pre><span></span><code><span class="c1"># Getting user input</span>
+<span class="c1"># name = input(&quot;What&#39;s your name? &quot;)</span>
+<span class="c1"># age = input(&quot;How old are you? &quot;)</span>
+<span class="c1"># print(f&quot;Hello {name}! You are {age} years old.&quot;)</span>
 
-# String operations
-message = &quot;Python Programming&quot;
-print(&quot;Original:&quot;, message)
-print(&quot;Uppercase:&quot;, message.upper())
-print(&quot;Lowercase:&quot;, message.lower())
-print(&quot;Length:&quot;, len(message))
-print(&quot;Replace:&quot;, message.replace(&quot;Python&quot;, &quot;Amazing Python&quot;))
-</code></pre>
-<pre><code>Original: Python Programming
-Uppercase: PYTHON PROGRAMMING
-Lowercase: python programming
-Length: 18
-Replace: Amazing Python Programming
-</code></pre>
+<span class="c1"># Note: Uncomment the above lines to try interactive input</span>
+
+<span class="c1"># String operations</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Python Programming&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Uppercase:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowercase:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replace:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;Amazing Python&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">Original</span><span class="o">:</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">Programming</span>
+<span class="n">Uppercase</span><span class="o">:</span><span class="w"> </span><span class="n">PYTHON</span><span class="w"> </span><span class="n">PROGRAMMING</span>
+<span class="n">Lowercase</span><span class="o">:</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="n">programming</span>
+<span class="n">Length</span><span class="o">:</span><span class="w"> </span><span class="mi">18</span>
+<span class="n">Replace</span><span class="o">:</span><span class="w"> </span><span class="n">Amazing</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">Programming</span>
+</code></pre></div>
+
 <ul>
 <li>
 <p>Python is simple, versatile, and powerful  </p>
@@ -340,31 +788,32 @@ Replace: Amazing Python Programming
 <h3 id="5-the-zen-of-python-best-practices">5. The Zen of Python &amp; Best Practices</h3>
 <p><strong>🧘 Python Philosophy:</strong>
 Python follows the "Zen of Python" principles - try running <code>import this</code> in Python!</p>
-<pre><code class="language-python"># The Zen of Python
-import this
-</code></pre>
-<pre><code>The Zen of Python, by Tim Peters
+<div class="highlight"><pre><span></span><code><span class="c1"># The Zen of Python</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">this</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="n">The</span><span class="w"> </span><span class="n">Zen</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">Python</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">Tim</span><span class="w"> </span><span class="n">Peters</span>
 
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren't special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you're Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it's a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let's do more of those!
-</code></pre>
+<span class="n">Beautiful</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">ugly</span><span class="p">.</span>
+<span class="n">Explicit</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">implicit</span><span class="p">.</span>
+<span class="n">Simple</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">complex</span><span class="p">.</span>
+<span class="n">Complex</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">complicated</span><span class="p">.</span>
+<span class="n">Flat</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">nested</span><span class="p">.</span>
+<span class="n">Sparse</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">dense</span><span class="p">.</span>
+<span class="n">Readability</span><span class="w"> </span><span class="n">counts</span><span class="p">.</span>
+<span class="n">Special</span><span class="w"> </span><span class="n">cases</span><span class="w"> </span><span class="n">aren</span><span class="c">&#39;t special enough to break the rules.</span>
+<span class="n">Although</span><span class="w"> </span><span class="n">practicality</span><span class="w"> </span><span class="n">beats</span><span class="w"> </span><span class="n">purity</span><span class="p">.</span>
+<span class="n">Errors</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">never</span><span class="w"> </span><span class="n">pass</span><span class="w"> </span><span class="n">silently</span><span class="p">.</span>
+<span class="n">Unless</span><span class="w"> </span><span class="n">explicitly</span><span class="w"> </span><span class="n">silenced</span><span class="p">.</span>
+<span class="ow">In</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">face</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">ambiguity</span><span class="p">,</span><span class="w"> </span><span class="n">refuse</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">temptation</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">guess</span><span class="p">.</span>
+<span class="n">There</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">one</span><span class="o">--</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">preferably</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="o">--</span><span class="n">obvious</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">it</span><span class="p">.</span>
+<span class="n">Although</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">way</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">obvious</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="n">you</span><span class="c">&#39;re Dutch.</span>
+<span class="n">Now</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">never</span><span class="p">.</span>
+<span class="n">Although</span><span class="w"> </span><span class="n">never</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">often</span><span class="w"> </span><span class="n">better</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="o">*</span><span class="n">right</span><span class="o">*</span><span class="w"> </span><span class="n">now</span><span class="p">.</span>
+<span class="k">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">hard</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">explain</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="c">&#39;s a bad idea.</span>
+<span class="k">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">implementation</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="n">easy</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">explain</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="n">idea</span><span class="p">.</span>
+<span class="n">Namespaces</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">honking</span><span class="w"> </span><span class="n">great</span><span class="w"> </span><span class="n">idea</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="k">let</span><span class="c">&#39;s do more of those!</span>
+</code></pre></div>
+
 <p><strong>📋 Python Naming Conventions:</strong></p>
 <ul>
 <li>
@@ -380,28 +829,29 @@ Namespaces are one honking great idea -- let's do more of those!
 <p>Constants: <code>UPPER_CASE</code> (e.g., <code>MAX_SIZE</code>, <code>DEFAULT_TIMEOUT</code>)</p>
 </li>
 </ul>
-<pre><code class="language-python"># Basic Error Handling
-try:
-    number = int(&quot;not_a_number&quot;)
-except ValueError as e:
-    print(f&quot;Oops! That's not a valid number: {e}&quot;)
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic Error Handling</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;not_a_number&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oops! That&#39;s not a valid number: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Better approach
-try:
-    user_input = &quot;42&quot;  # This would normally be input()
-    number = int(user_input)
-    result = 100 / number
-    print(f&quot;Result: {result}&quot;)
-except ValueError:
-    print(&quot;Please enter a valid number!&quot;)
-except ZeroDivisionError:
-    print(&quot;Cannot divide by zero!&quot;)
-except Exception as e:
-    print(f&quot;Something went wrong: {e}&quot;)
-</code></pre>
-<pre><code>Oops! That's not a valid number: invalid literal for int() with base 10: 'not_a_number'
+<span class="c1"># Better approach</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;42&quot;</span>  <span class="c1"># This would normally be input()</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">number</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a valid number!&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot divide by zero!&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Something went wrong: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>Oops! That&#39;s not a valid number: invalid literal for int() with base 10: &#39;not_a_number&#39;
 Result: 2.380952380952381
-</code></pre>
+</code></pre></div>
+
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
 <p><strong>Basic Exercises:</strong></p>
 <ol>
@@ -439,52 +889,98 @@ Result: 2.380952380952381
 <p>Practice string operations: take a sentence and print it in uppercase, lowercase, and count its characters.</p>
 </li>
 </ol>
-              
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../.." class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../2.DataTypes/" class="btn btn-neutral float-right" title="Data Types">Next <span class="icon icon-circle-arrow-right"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
           
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      </main>
+      
+        <footer class="md-footer">
+  
     
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Getting Started">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Getting Started
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../2.DataTypes/" class="md-footer__link md-footer__link--next" aria-label="Next: Data Types">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data Types
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
-      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../2.DataTypes/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 - Aayush Raj Regmi
+    </div>
+  
+  
 </div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "announce.dismiss", "navigation.footer"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
 </html>
