@@ -6,7 +6,7 @@ nav:
   - Introduction to Python: lectures/1.Introduction.md
   - Data Types: lectures/2.DataTypes.md
   - Control Structures: lectures/3.ControlStructures.md
-  # - Data Structures: lectures/4.DataStructures.md
+  - Data Structures: lectures/4.DataStructures.md
   # - Functions: lectures/5.Functions.md
   # - File Handling: lectures/6.FileHandling.md
   # - OOP: lectures/7.OOP.md
