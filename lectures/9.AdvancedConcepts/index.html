@@ -1,88 +1,425 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>9.AdvancedConcepts - Python Module</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "9.AdvancedConcepts";
-        var mkdocs_page_input_path = "lectures/9.AdvancedConcepts.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python Training for BSIT Students (Kings College)">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>9.AdvancedConcepts - Python Module</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python Module
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../4.DataStructures/">Data Structures</a>
-                </li>
-              </ul>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-programming-advanced-python-concepts" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Python Module" class="md-header__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Python Module
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              9.AdvancedConcepts
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python Module</a>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">9.AdvancedConcepts</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <hr />
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Python Module" class="md-nav__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Python Module
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.DataTypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.ControlStructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.DataStructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-lambda-functions-anonymous-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 1. Lambda Functions (Anonymous Functions)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generators-iterators" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 2. Generators &amp; Iterators
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-list-comprehensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 3. List Comprehensions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-working-with-args-and-kwargs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 4. Working with args and *kwargs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟢 4. Working with args and *kwargs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Quick Recap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Practice Exercises
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<hr />
 <h1 id="python-programming-advanced-python-concepts">📓 Python Programming - Advanced Python Concepts</h1>
 <hr />
 <h3 id="1-lambda-functions-anonymous-functions">🟢 <strong>1. Lambda Functions (Anonymous Functions)</strong></h3>
@@ -95,16 +432,16 @@
 </li>
 </ul>
 <p><strong>➤ Example:</strong></p>
-<pre><code class="language-python"># Regular function
-def square(x):
-    return x ** 2
+<div class="highlight"><pre><span></span><code><span class="c1"># Regular function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
 
-print(square(5))
+<span class="nb">print</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
 
-# Lambda function
-square_lambda = lambda x: x ** 2
-print(square_lambda(5))
-</code></pre>
+<span class="c1"># Lambda function</span>
+<span class="n">square_lambda</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">square_lambda</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
 <h2 id="2-generators-iterators">🟢 2. Generators &amp; Iterators</h2>
 <p><strong>Generators:</strong>
 - Use <code>yield</code> to produce a sequence of values lazily (one at a time).</p>
@@ -114,42 +451,41 @@ print(square_lambda(5))
 <p><strong>Iterators:</strong>
 - Any object with <code>__iter__()</code> and <code>__next__()</code> methods.</p>
 <p><strong>➤ Generator Example:</strong></p>
-<pre><code class="language-python">def count_up_to(n):
-    count = 1
-    while count &lt;= n:
-        yield count
-        count += 1
-print(count_up_to(5))  # This will print a generator object
-print(list(count_up_to(5)))
-for num in count_up_to(5):
-    print(num)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">count_up_to</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">count</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count_up_to</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># This will print a generator object</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">count_up_to</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">count_up_to</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Iterator Example:</strong></p>
-<pre><code class="language-python">nums = [1, 2, 3]
-it = iter(nums)
+<div class="highlight"><pre><span></span><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 
-print(next(it))
-print(next(it))
-print(next(it))
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+</code></pre></div>
 <h2 id="3-list-comprehensions">🟢 3. List Comprehensions</h2>
 <p><code>A concise way to create lists in a single line.</code></p>
 <p><strong>➤ Example:</strong></p>
-<pre><code class="language-python"># Without list comprehension
-squares = []
-for i in range(5):
-    squares.append(i ** 2)
-print(squares)
+<div class="highlight"><pre><span></span><code><span class="c1"># Without list comprehension</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">squares</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
 
-# With list comprehension
-squares = [i ** 2 for i in range(5)]
-print(squares)
+<span class="c1"># With list comprehension</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
 
-# With condition
-evens = [i for i in range(10) if i % 2 == 0]
-print(evens)
-
-</code></pre>
+<span class="c1"># With condition</span>
+<span class="n">evens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">evens</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="4-working-with-args-and-kwargs">🟢 4. Working with <em>args and </em>*kwargs</h2>
 <ul>
 <li>
@@ -160,54 +496,53 @@ print(evens)
 </li>
 </ul>
 <p><strong>➤ Example with *args:</strong></p>
-<pre><code class="language-python">def add(*numbers):
-    total = sum(numbers)
-    print(&quot;Sum:&quot;, total)
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 
-add(1, 2, 3)
-add(4, 5)
-</code></pre>
+<span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Example with **kwargs:</strong></p>
-<pre><code class="language-python">def student_info(**kwargs):
-    for key, value in kwargs.items():
-        print(f&quot;{key}: {value}&quot;)
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">student_info</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-student_info(name=&quot;Alice&quot;, age=21, grade=&quot;A&quot;)
-</code></pre>
+<span class="n">student_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Using map() Function:</strong></p>
-<pre><code class="language-python">nums = [1, 2, 3, 4]
-squared = list(map(lambda x: x ** 2, nums))
-print(squared)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">squared</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squared</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Using filter() Function:</strong></p>
-<pre><code class="language-python">nums = [1, 2, 3, 4, 5, 6]
-evens = list(filter(lambda x: x % 2 == 0, nums))
-print(evens)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">evens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nums</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">evens</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Using reduce() Function</strong>
 - <code>reduce()</code> applies a function cumulatively to the items of a sequence.</p>
 <ul>
 <li>It is part of the <code>functools</code> module.</li>
 </ul>
-<pre><code class="language-python">from functools import reduce
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
 
-# Multiply all numbers in a list
-nums = [1, 2, 3, 4]
+<span class="c1"># Multiply all numbers in a list</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
-product = reduce(lambda x, y: x * y, nums)
-print(product)
+<span class="n">product</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">,</span> <span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 
-</code></pre>
-<pre><code class="language-python">nums = [5, 10, 15]
-
-total_sum = reduce(lambda x, y: x + y, nums)
-print(total_sum)
-</code></pre>
+<span class="n">total_sum</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total_sum</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Using enumerate():</strong></p>
-<pre><code class="language-python">fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
-for index, fruit in enumerate(fruits, start=1):
-    print(index, fruit)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">fruit</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
 <p>✅ <code>map()</code>: Apply function to all items  </p>
 <p>✅ <code>filter()</code>: Filter items based on condition  </p>
@@ -238,44 +573,60 @@ for index, fruit in enumerate(fruits, start=1):
 <p>Use <code>map()</code> and <code>filter()</code> to square numbers and filter odd numbers from a list.</p>
 </li>
 </ol>
-              
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
           
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      </main>
+      
+        <footer class="md-footer">
+  
     
-    
-    
-  </span>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 - Aayush Raj Regmi
+    </div>
+  
+  
 </div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "announce.dismiss", "navigation.footer"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
 </html>

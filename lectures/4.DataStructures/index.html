@@ -1,112 +1,597 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Data Structures - Python Module</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
     
-      <script>
-        // Current page data
-        var mkdocs_page_name = "Data Structures";
-        var mkdocs_page_input_path = "lectures/4.DataStructures.md";
-        var mkdocs_page_url = null;
-      </script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python Training for BSIT Students (Kings College)">
+      
+      
+      
+      
+        <link rel="prev" href="../3.ControlStructures/">
+      
+      
+        <link rel="next" href="../5.Functions/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+    
+      
+        <title>Data Structures - Python Module</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
 
-<body class="wy-body-for-nav" role="document">
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python Module
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../1.Introduction/">Introduction to Python</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../2.DataTypes/">Data Types</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../3.ControlStructures/">Control Structures</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Data Structures</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-lists">1. Lists</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-tuples">2. Tuples</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-sets">3. Sets</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-dictionaries">4. Dictionaries</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#5-additional-data-structures">5. Additional Data Structures</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#6-performance-when-to-use-each-structure">6. Performance &amp; When to Use Each Structure</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#7-converting-between-data-structures">7. Converting Between Data Structures</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#practice-exercises">📝 Practice Exercises</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                </li>
-              </ul>
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-programming-data-structures" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Python Module" class="md-header__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Python Module
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Structures
+            
+          </span>
+        </div>
       </div>
     </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python Module</a>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
         
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
       </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Data Structures</li>
-    <li class="wy-breadcrumbs-aside">
-    </li>
-  </ul>
-  <hr/>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
               
-                <hr />
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Python Module" class="md-nav__button md-logo" aria-label="Python Module" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Python Module
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.Introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.DataTypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.ControlStructures/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Control Structures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Structures
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Lists
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Tuples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Sets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Quick Recap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-additional-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Additional Data Structures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-performance-when-to-use-each-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Performance &amp; When to Use Each Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-converting-between-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Converting Between Data Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Converting Between Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Practice Exercises
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.Functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Functions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Lists
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Tuples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-sets" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Sets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-dictionaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Dictionaries
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Dictionaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Quick Recap
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-additional-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Additional Data Structures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-performance-when-to-use-each-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Performance &amp; When to Use Each Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-converting-between-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Converting Between Data Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Converting Between Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#practice-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Practice Exercises
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<hr />
 <h1 id="python-programming-data-structures">📓 <strong>Python Programming - Data Structures</strong></h1>
 <hr />
 <h2 id="1-lists">1. Lists</h2>
@@ -115,116 +600,113 @@
 <ul>
 <li>Can store mixed data types.</li>
 </ul>
-<pre><code class="language-python"># Creating a list
-fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
-print(fruits)
-</code></pre>
-<pre><code>['apple', 'banana', 'cherry']
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating a list</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Indexing, Slicing &amp; Negative Indexing:</strong></p>
-<pre><code class="language-python"># Indexing
-print(fruits[0])  # First item
-print(fruits[-1])  # Last item
+<div class="highlight"><pre><span></span><code><span class="c1"># Indexing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># First item</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Last item</span>
 
-# Slicing
-print(fruits[0:2])  # First two items
-
-</code></pre>
+<span class="c1"># Slicing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># First two items</span>
+</code></pre></div>
 <p><strong>➤ Looping Through Lists &amp; Conditions:</strong></p>
-<pre><code class="language-python">for fruit in fruits:
-    if fruit.startswith(&quot;b&quot;):
-        print(f&quot;{fruit} starts with 'b'&quot;)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">fruit</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2"> starts with &#39;b&#39;&quot;</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Useful List Methods:</strong></p>
-<pre><code class="language-python"># Adding items
-fruits.append(&quot;orange&quot;)
-print(fruits)
+<div class="highlight"><pre><span></span><code><span class="c1"># Adding items</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
-fruits.insert(1, &quot;mango&quot;)
-print(fruits)
+<span class="n">fruits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;mango&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
-# Removing items
-fruits.remove(&quot;banana&quot;)
-print(fruits)
+<span class="c1"># Removing items</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
-# Sorting
-fruits.sort()
-print(fruits)
-</code></pre>
+<span class="c1"># Sorting</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ More List Methods &amp; Operations:</strong></p>
-<pre><code class="language-python"># More list methods
-numbers = [3, 1, 4, 1, 5, 9, 2, 6]
-print(&quot;Original list:&quot;, numbers)
+<div class="highlight"><pre><span></span><code><span class="c1"># More list methods</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
-# Count occurrences
-print(&quot;Count of 1:&quot;, numbers.count(1))
+<span class="c1"># Count occurrences</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count of 1:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
-# Find index
-print(&quot;Index of 4:&quot;, numbers.index(4))
+<span class="c1"># Find index</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index of 4:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 
-# Extend (vs append)
-numbers.extend([7, 8])  # Adds multiple items
-print(&quot;After extend:&quot;, numbers)
+<span class="c1"># Extend (vs append)</span>
+<span class="n">numbers</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>  <span class="c1"># Adds multiple items</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After extend:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
-# Reverse
-numbers.reverse()
-print(&quot;After reverse:&quot;, numbers)
+<span class="c1"># Reverse</span>
+<span class="n">numbers</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After reverse:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
-# Clear
-temp_list = [1, 2, 3]
-temp_list.clear()
-print(&quot;After clear:&quot;, temp_list)
+<span class="c1"># Clear</span>
+<span class="n">temp_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">temp_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After clear:&quot;</span><span class="p">,</span> <span class="n">temp_list</span><span class="p">)</span>
 
-# Copy (shallow vs deep)
-original = [1, [2, 3], 4]
-shallow_copy = original.copy()
-deep_copy = original[:]  # Simple way for lists
-print(&quot;Original:&quot;, original)
-print(&quot;Shallow copy:&quot;, shallow_copy)
+<span class="c1"># Copy (shallow vs deep)</span>
+<span class="n">original</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">shallow_copy</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">deep_copy</span> <span class="o">=</span> <span class="n">original</span><span class="p">[:]</span>  <span class="c1"># Simple way for lists</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original:&quot;</span><span class="p">,</span> <span class="n">original</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shallow copy:&quot;</span><span class="p">,</span> <span class="n">shallow_copy</span><span class="p">)</span>
 
-# List concatenation and repetition
-list1 = [1, 2, 3]
-list2 = [4, 5, 6]
-combined = list1 + list2
-print(&quot;Combined:&quot;, combined)
+<span class="c1"># List concatenation and repetition</span>
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combined:&quot;</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
 
-repeated = [0] * 5
-print(&quot;Repeated:&quot;, repeated)
-</code></pre>
+<span class="n">repeated</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repeated:&quot;</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ List Comprehension with Conditions:</strong></p>
-<pre><code class="language-python"># Create list of squares for even numbers from 0 to 10
-squares = [x**2 for x in range(11) if x % 2 == 0]
-print(squares)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create list of squares for even numbers from 0 to 10</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Nested Lists (2D Lists):</strong></p>
-<pre><code class="language-python"># Creating a 2D list (matrix)
-matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-print(&quot;Matrix:&quot;, matrix)
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating a 2D list (matrix)</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
 
-# Accessing elements
-print(&quot;Element at [1][2]:&quot;, matrix[1][2])
+<span class="c1"># Accessing elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at [1][2]:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
 
-# Iterating through 2D list
-print(&quot;All elements:&quot;)
-for row in matrix:
-    for element in row:
-        print(element, end=&quot; &quot;)
-    print()  # New line after each row
+<span class="c1"># Iterating through 2D list</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All elements:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># New line after each row</span>
 
-# Using enumerate for indices
-print(&quot;With indices:&quot;)
-for i, row in enumerate(matrix):
-    for j, element in enumerate(row):
-        print(f&quot;[{i}][{j}] = {element}&quot;)
+<span class="c1"># Using enumerate for indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With indices:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# List comprehension for 2D
-flattened = [element for row in matrix for element in row]
-print(&quot;Flattened:&quot;, flattened)
+<span class="c1"># List comprehension for 2D</span>
+<span class="n">flattened</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flattened:&quot;</span><span class="p">,</span> <span class="n">flattened</span><span class="p">)</span>
 
-# Creating a 2D list with comprehension
-multiplication_table = [[i * j for j in range(1, 4)] for i in range(1, 4)]
-print(&quot;Multiplication table:&quot;, multiplication_table)
-</code></pre>
+<span class="c1"># Creating a 2D list with comprehension</span>
+<span class="n">multiplication_table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiplication table:&quot;</span><span class="p">,</span> <span class="n">multiplication_table</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="2-tuples">2. Tuples</h2>
 <p><strong>Tuples:</strong>
 - Ordered, immutable collection.</p>
@@ -236,63 +718,62 @@ print(&quot;Multiplication table:&quot;, multiplication_table)
 <p>Suitable for fixed data.</p>
 </li>
 </ul>
-<pre><code class="language-python"># Creating a tuple
-dimensions = (10, 20, 30)
-print(dimensions)
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating a tuple</span>
+<span class="n">dimensions</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span>
 
-# Indexing and Slicing
-print(dimensions[1])
-print(dimensions[:2])
+<span class="c1"># Indexing and Slicing</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dimensions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dimensions</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
 
-# Looping
-for dim in dimensions:
-    print(dim)
-
-</code></pre>
+<span class="c1"># Looping</span>
+<span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">dimensions</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ More Tuple Operations:</strong></p>
-<pre><code class="language-python"># Tuple methods
-numbers = (1, 2, 3, 2, 4, 2, 5)
-print(&quot;Original tuple:&quot;, numbers)
-print(&quot;Count of 2:&quot;, numbers.count(2))
-print(&quot;Index of 3:&quot;, numbers.index(3))
+<div class="highlight"><pre><span></span><code><span class="c1"># Tuple methods</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original tuple:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count of 2:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index of 3:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
-# Tuple concatenation
-tuple1 = (1, 2, 3)
-tuple2 = (4, 5, 6)
-combined = tuple1 + tuple2
-print(&quot;Combined tuple:&quot;, combined)
+<span class="c1"># Tuple concatenation</span>
+<span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">tuple1</span> <span class="o">+</span> <span class="n">tuple2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combined tuple:&quot;</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
 
-# Tuple repetition
-repeated = (0,) * 5  # Note the comma for single element tuple
-print(&quot;Repeated tuple:&quot;, repeated)
+<span class="c1"># Tuple repetition</span>
+<span class="n">repeated</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">5</span>  <span class="c1"># Note the comma for single element tuple</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repeated tuple:&quot;</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
 
-# Single element tuple (important!)
-single = (42,)  # Comma is required
-not_tuple = (42)  # This is just an integer
-print(&quot;Single element tuple:&quot;, single, type(single))
-print(&quot;Not a tuple:&quot;, not_tuple, type(not_tuple))
+<span class="c1"># Single element tuple (important!)</span>
+<span class="n">single</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">,)</span>  <span class="c1"># Comma is required</span>
+<span class="n">not_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># This is just an integer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single element tuple:&quot;</span><span class="p">,</span> <span class="n">single</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">single</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a tuple:&quot;</span><span class="p">,</span> <span class="n">not_tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">not_tuple</span><span class="p">))</span>
 
-# Nested tuples
-nested = ((1, 2), (3, 4), (5, 6))
-print(&quot;Nested tuple:&quot;, nested)
-print(&quot;Access nested element:&quot;, nested[1][0])
+<span class="c1"># Nested tuples</span>
+<span class="n">nested</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nested tuple:&quot;</span><span class="p">,</span> <span class="n">nested</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access nested element:&quot;</span><span class="p">,</span> <span class="n">nested</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
-# Named tuples (from collections module)
-from collections import namedtuple
+<span class="c1"># Named tuples (from collections module)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
-# Define a named tuple
-Point = namedtuple('Point', ['x', 'y'])
-Student = namedtuple('Student', ['name', 'age', 'grade'])
+<span class="c1"># Define a named tuple</span>
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">Student</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Student&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">])</span>
 
-# Create instances
-p = Point(10, 20)
-student = Student('Alice', 20, 'A')
+<span class="c1"># Create instances</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 
-print(&quot;Point:&quot;, p)
-print(&quot;Access by name:&quot;, p.x, p.y)
-print(&quot;Student:&quot;, student)
-print(&quot;Student name:&quot;, student.name)
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Point:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access by name:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student:&quot;</span><span class="p">,</span> <span class="n">student</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student name:&quot;</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ List vs Tuple:</strong></p>
 <ul>
 <li>
@@ -309,20 +790,20 @@ print(&quot;Student name:&quot;, student.name)
 </li>
 </ul>
 <p><strong>➤ Switching Between Lists and Tuples:</strong></p>
-<pre><code class="language-python"># List to Tuple
-my_list = [1, 2, 3]
-my_tuple = tuple(my_list)
-print(my_tuple)
+<div class="highlight"><pre><span></span><code><span class="c1"># List to Tuple</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">my_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
 
-# Tuple to List
-new_list = list(my_tuple)
-print(new_list)
-</code></pre>
+<span class="c1"># Tuple to List</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Tuple Unpacking:</strong></p>
-<pre><code class="language-python">person = (&quot;Alice&quot;, 25, &quot;Engineer&quot;)
-name, age, profession = person
-print(name, age, profession)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">person</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Engineer&quot;</span><span class="p">)</span>
+<span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">profession</span> <span class="o">=</span> <span class="n">person</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">profession</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="3-sets">3. Sets</h2>
 <p><strong>Sets:</strong>
 - Unordered collection of unique items.</p>
@@ -330,72 +811,71 @@ print(name, age, profession)
 <li>Used for mathematical operations like union, intersection, etc.</li>
 </ul>
 <p><strong>➤ Basic Set Operations:</strong></p>
-<pre><code class="language-python"># Creating sets
-colors = {&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;}
-print(colors)
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating sets</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
-# Adding, Removing, Discarding
-colors.add(&quot;yellow&quot;)
-print(colors)
+<span class="c1"># Adding, Removing, Discarding</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;yellow&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
-colors.remove(&quot;green&quot;)  # Raises error if not present
-print(colors)
+<span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>  <span class="c1"># Raises error if not present</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
-colors.discard(&quot;purple&quot;)  # No error if not present
-print(colors)
-
-</code></pre>
+<span class="n">colors</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>  <span class="c1"># No error if not present</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ More Set Operations &amp; Methods:</strong></p>
-<pre><code class="language-python"># Set from list (removes duplicates)
-numbers = [1, 2, 2, 3, 3, 3, 4, 5]
-unique_numbers = set(numbers)
-print(&quot;Original list:&quot;, numbers)
-print(&quot;Unique set:&quot;, unique_numbers)
+<div class="highlight"><pre><span></span><code><span class="c1"># Set from list (removes duplicates)</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">unique_numbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique set:&quot;</span><span class="p">,</span> <span class="n">unique_numbers</span><span class="p">)</span>
 
-# Set methods
-set1 = {1, 2, 3, 4, 5}
-set2 = {4, 5, 6, 7, 8}
+<span class="c1"># Set methods</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span>
 
-print(&quot;Set1:&quot;, set1)
-print(&quot;Set2:&quot;, set2)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set1:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set2:&quot;</span><span class="p">,</span> <span class="n">set2</span><span class="p">)</span>
 
-# Union (all elements)
-print(&quot;Union (|):&quot;, set1 | set2)
-print(&quot;Union method:&quot;, set1.union(set2))
+<span class="c1"># Union (all elements)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union (|):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
-# Intersection (common elements)
-print(&quot;Intersection (&amp;):&quot;, set1 &amp; set2)
-print(&quot;Intersection method:&quot;, set1.intersection(set2))
+<span class="c1"># Intersection (common elements)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection (&amp;):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
-# Difference (elements in set1 but not in set2)
-print(&quot;Difference (-):&quot;, set1 - set2)
-print(&quot;Difference method:&quot;, set1.difference(set2))
+<span class="c1"># Difference (elements in set1 but not in set2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference (-):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
-# Symmetric difference (elements in either set, but not both)
-print(&quot;Symmetric difference (^):&quot;, set1 ^ set2)
-print(&quot;Symmetric difference method:&quot;, set1.symmetric_difference(set2))
+<span class="c1"># Symmetric difference (elements in either set, but not both)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Symmetric difference (^):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Symmetric difference method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
-# Subset and superset checks
-small_set = {1, 2}
-print(&quot;Is {1, 2} subset of set1?&quot;, small_set.issubset(set1))
-print(&quot;Is set1 superset of {1, 2}?&quot;, set1.issuperset(small_set))
+<span class="c1"># Subset and superset checks</span>
+<span class="n">small_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is {1, 2} subset of set1?&quot;</span><span class="p">,</span> <span class="n">small_set</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is set1 superset of {1, 2}?&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">small_set</span><span class="p">))</span>
 
-# Disjoint sets (no common elements)
-set3 = {10, 11, 12}
-print(&quot;Are set1 and set3 disjoint?&quot;, set1.isdisjoint(set3))
+<span class="c1"># Disjoint sets (no common elements)</span>
+<span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are set1 and set3 disjoint?&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>
 
-# Set comprehension
-even_squares = {x**2 for x in range(10) if x % 2 == 0}
-print(&quot;Even squares:&quot;, even_squares)
-</code></pre>
+<span class="c1"># Set comprehension</span>
+<span class="n">even_squares</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Even squares:&quot;</span><span class="p">,</span> <span class="n">even_squares</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Set Operations:</strong></p>
-<pre><code class="language-python">a = {1, 2, 3, 4}
-b = {3, 4, 5, 6}
+<div class="highlight"><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
 
-print(&quot;Union:&quot;, a | b)
-print(&quot;Intersection:&quot;, a &amp; b)
-print(&quot;Difference:&quot;, a - b)
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Frozenset vs Set:</strong></p>
 <ul>
 <li>
@@ -405,9 +885,9 @@ print(&quot;Difference:&quot;, a - b)
 <p><code>frozenset</code> → Immutable  </p>
 </li>
 </ul>
-<pre><code class="language-python">fs = frozenset([1, 2, 3])
-print(fs)
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">fs</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="4-dictionaries">4. Dictionaries</h2>
 <p><strong>Dictionaries:</strong>
 - Collection of key-value pairs.</p>
@@ -415,96 +895,94 @@ print(fs)
 <li>Keys must be unique.</li>
 </ul>
 <p><strong>➤ Creating &amp; Accessing:</strong></p>
-<pre><code class="language-python">student = {&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 22, &quot;grade&quot;: &quot;A&quot;}
-print(student[&quot;name&quot;])
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;grade&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+</code></pre></div>
 <p><strong>➤ Useful Dictionary Methods:</strong></p>
-<pre><code class="language-python"># Get with default
-print(student.get(&quot;age&quot;))
-print(student.get(&quot;major&quot;, &quot;Not specified&quot;))
+<div class="highlight"><pre><span></span><code><span class="c1"># Get with default</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="s2">&quot;Not specified&quot;</span><span class="p">))</span>
 
-# Update
-student.update({&quot;grade&quot;: &quot;A+&quot;, &quot;major&quot;: &quot;CS&quot;})
-print(student)
+<span class="c1"># Update</span>
+<span class="n">student</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;grade&quot;</span><span class="p">:</span> <span class="s2">&quot;A+&quot;</span><span class="p">,</span> <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="s2">&quot;CS&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
-# Keys, Values
-print(student.keys())
-print(student.values())
+<span class="c1"># Keys, Values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
-# Pop
-student.pop(&quot;age&quot;)
-print(student)
-
-</code></pre>
+<span class="c1"># Pop</span>
+<span class="n">student</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ More Dictionary Methods &amp; Operations:</strong></p>
-<pre><code class="language-python"># Dictionary from lists
-keys = ['name', 'age', 'city']
-values = ['Bob', 25, 'London']
-person = dict(zip(keys, values))
-print(&quot;Dictionary from lists:&quot;, person)
+<div class="highlight"><pre><span></span><code><span class="c1"># Dictionary from lists</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">]</span>
+<span class="n">person</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dictionary from lists:&quot;</span><span class="p">,</span> <span class="n">person</span><span class="p">)</span>
 
-# Dictionary methods
-inventory = {'apples': 50, 'bananas': 30, 'cherries': 20}
-print(&quot;Original inventory:&quot;, inventory)
+<span class="c1"># Dictionary methods</span>
+<span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;cherries&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original inventory:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
-# Items, keys, values iteration
-print(&quot;Items:&quot;)
-for item in inventory.items():
-    print(item)
+<span class="c1"># Items, keys, values iteration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Items:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-print(&quot;Key-value pairs:&quot;)
-for key, value in inventory.items():
-    print(f&quot;{key}: {value}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key-value pairs:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Popitem (removes and returns last item)
-last_item = inventory.popitem()
-print(&quot;Popped item:&quot;, last_item)
-print(&quot;After popitem:&quot;, inventory)
+<span class="c1"># Popitem (removes and returns last item)</span>
+<span class="n">last_item</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Popped item:&quot;</span><span class="p">,</span> <span class="n">last_item</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After popitem:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
-# Setdefault (get or set default value)
-inventory.setdefault('oranges', 0)
-print(&quot;After setdefault:&quot;, inventory)
+<span class="c1"># Setdefault (get or set default value)</span>
+<span class="n">inventory</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;oranges&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After setdefault:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
-# Dictionary merging (Python 3.9+)
-dict1 = {'a': 1, 'b': 2}
-dict2 = {'c': 3, 'd': 4}
-# merged = dict1 | dict2  # Python 3.9+
-merged = {**dict1, **dict2}  # Works in older versions
-print(&quot;Merged dictionary:&quot;, merged)
+<span class="c1"># Dictionary merging (Python 3.9+)</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="c1"># merged = dict1 | dict2  # Python 3.9+</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">dict1</span><span class="p">,</span> <span class="o">**</span><span class="n">dict2</span><span class="p">}</span>  <span class="c1"># Works in older versions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged dictionary:&quot;</span><span class="p">,</span> <span class="n">merged</span><span class="p">)</span>
 
-# Dictionary with default values
-from collections import defaultdict
-dd = defaultdict(int)  # Default value is 0
-dd['a'] += 1
-dd['b'] += 2
-print(&quot;Default dict:&quot;, dict(dd))
+<span class="c1"># Dictionary with default values</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Default value is 0</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default dict:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dd</span><span class="p">))</span>
 
-# Counter (specialized dictionary)
-from collections import Counter
-text = &quot;hello world&quot;
-char_count = Counter(text)
-print(&quot;Character count:&quot;, char_count)
-print(&quot;Most common:&quot;, char_count.most_common(3))
-</code></pre>
+<span class="c1"># Counter (specialized dictionary)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span>
+<span class="n">char_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character count:&quot;</span><span class="p">,</span> <span class="n">char_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most common:&quot;</span><span class="p">,</span> <span class="n">char_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
 <p><strong>➤ Dictionary Comprehension:</strong></p>
-<pre><code class="language-python"># Squares of numbers
-squares = {x: x**2 for x in range(5)}
-print(squares)
+<div class="highlight"><pre><span></span><code><span class="c1"># Squares of numbers</span>
+<span class="n">squares</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">squares</span><span class="p">)</span>
 
-# Filtering even squares
-even_squares = {k: v for k, v in squares.items() if v % 2 == 0}
-print(even_squares)
-
-</code></pre>
+<span class="c1"># Filtering even squares</span>
+<span class="n">even_squares</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">squares</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">even_squares</span><span class="p">)</span>
+</code></pre></div>
 <p><strong>➤ Nested Dictionaries:</strong></p>
-<pre><code class="language-python"># Student with nested details
-student = {
-    &quot;name&quot;: &quot;Alice&quot;,
-    &quot;subjects&quot;: {&quot;Math&quot;: 90, &quot;Science&quot;: 95}
-}
+<div class="highlight"><pre><span></span><code><span class="c1"># Student with nested details</span>
+<span class="n">student</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subjects&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Math&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;Science&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">}</span>
+<span class="p">}</span>
 
-print(student[&quot;subjects&quot;][&quot;Math&quot;])
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;subjects&quot;</span><span class="p">][</span><span class="s2">&quot;Math&quot;</span><span class="p">])</span>
+</code></pre></div>
 <h3 id="quick-recap">🎯 Quick Recap</h3>
 <p>✅ Lists → Ordered, mutable  </p>
 <p>✅ Tuples → Ordered, immutable  </p>
@@ -513,51 +991,51 @@ print(student[&quot;subjects&quot;][&quot;Math&quot;])
 <p>✅ Use list/dictionary comprehension for concise code  </p>
 <h2 id="5-additional-data-structures">5. Additional Data Structures</h2>
 <p><strong>Python provides several specialized data structures in the <code>collections</code> module:</strong></p>
-<pre><code class="language-python"># Deque (double-ended queue)
-from collections import deque
+<div class="highlight"><pre><span></span><code><span class="c1"># Deque (double-ended queue)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 
-# Create a deque
-dq = deque([1, 2, 3, 4, 5])
-print(&quot;Original deque:&quot;, dq)
+<span class="c1"># Create a deque</span>
+<span class="n">dq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original deque:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
-# Add to both ends
-dq.appendleft(0)
-dq.append(6)
-print(&quot;After adding to both ends:&quot;, dq)
+<span class="c1"># Add to both ends</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After adding to both ends:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
-# Remove from both ends
-left_item = dq.popleft()
-right_item = dq.pop()
-print(f&quot;Removed {left_item} from left, {right_item} from right&quot;)
-print(&quot;After removal:&quot;, dq)
+<span class="c1"># Remove from both ends</span>
+<span class="n">left_item</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+<span class="n">right_item</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed </span><span class="si">{</span><span class="n">left_item</span><span class="si">}</span><span class="s2"> from left, </span><span class="si">{</span><span class="n">right_item</span><span class="si">}</span><span class="s2"> from right&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removal:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
-# Rotate
-dq.rotate(2)  # Rotate right by 2
-print(&quot;After rotating right by 2:&quot;, dq)
+<span class="c1"># Rotate</span>
+<span class="n">dq</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Rotate right by 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After rotating right by 2:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
-# OrderedDict (remembers insertion order)
-from collections import OrderedDict
-od = OrderedDict()
-od['first'] = 1
-od['second'] = 2
-od['third'] = 3
-print(&quot;OrderedDict:&quot;, od)
+<span class="c1"># OrderedDict (remembers insertion order)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;second&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;third&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OrderedDict:&quot;</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
 
-# Move to end
-od.move_to_end('first')
-print(&quot;After moving 'first' to end:&quot;, od)
+<span class="c1"># Move to end</span>
+<span class="n">od</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After moving &#39;first&#39; to end:&quot;</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
 
-# ChainMap (combines multiple dictionaries)
-from collections import ChainMap
-dict1 = {'a': 1, 'b': 2}
-dict2 = {'c': 3, 'd': 4}
-dict3 = {'e': 5, 'f': 6}
+<span class="c1"># ChainMap (combines multiple dictionaries)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">dict3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
 
-chain = ChainMap(dict1, dict2, dict3)
-print(&quot;ChainMap:&quot;, chain)
-print(&quot;Value of 'a':&quot;, chain['a'])
-print(&quot;All keys:&quot;, list(chain.keys()))
-</code></pre>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">,</span> <span class="n">dict3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ChainMap:&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of &#39;a&#39;:&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All keys:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</code></pre></div>
 <h2 id="6-performance-when-to-use-each-structure">6. Performance &amp; When to Use Each Structure</h2>
 <p><strong>Time Complexity Comparison:</strong></p>
 <table>
@@ -613,100 +1091,100 @@ print(&quot;All keys:&quot;, list(chain.keys()))
 - <strong>Tuple</strong>: When you need ordered, immutable data (coordinates, database records)
 - <strong>Set</strong>: When you need unique elements and fast membership testing
 - <strong>Dictionary</strong>: When you need key-value mapping with fast lookups</p>
-<pre><code class="language-python"># Practical examples of when to use each structure
+<div class="highlight"><pre><span></span><code><span class="c1"># Practical examples of when to use each structure</span>
 
-# Example 1: Shopping cart (List - ordered, allows duplicates)
-shopping_cart = ['apple', 'banana', 'apple', 'orange']
-print(&quot;Shopping cart:&quot;, shopping_cart)
+<span class="c1"># Example 1: Shopping cart (List - ordered, allows duplicates)</span>
+<span class="n">shopping_cart</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shopping cart:&quot;</span><span class="p">,</span> <span class="n">shopping_cart</span><span class="p">)</span>
 
-# Example 2: GPS coordinates (Tuple - immutable, fixed structure)
-locations = [
-    ('New York', 40.7128, -74.0060),
-    ('London', 51.5074, -0.1278),
-    ('Tokyo', 35.6762, 139.6503)
-]
-print(&quot;Locations:&quot;, locations)
+<span class="c1"># Example 2: GPS coordinates (Tuple - immutable, fixed structure)</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;New York&#39;</span><span class="p">,</span> <span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="mf">51.5074</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1278</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">,</span> <span class="mf">35.6762</span><span class="p">,</span> <span class="mf">139.6503</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Locations:&quot;</span><span class="p">,</span> <span class="n">locations</span><span class="p">)</span>
 
-# Example 3: Unique visitors (Set - no duplicates)
-unique_visitors = {'user1', 'user2', 'user1', 'user3'}
-print(&quot;Unique visitors:&quot;, unique_visitors)
+<span class="c1"># Example 3: Unique visitors (Set - no duplicates)</span>
+<span class="n">unique_visitors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="s1">&#39;user2&#39;</span><span class="p">,</span> <span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="s1">&#39;user3&#39;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique visitors:&quot;</span><span class="p">,</span> <span class="n">unique_visitors</span><span class="p">)</span>
 
-# Example 4: User profiles (Dictionary - key-value mapping)
-user_profiles = {
-    'user1': {'name': 'Alice', 'age': 25},
-    'user2': {'name': 'Bob', 'age': 30},
-    'user3': {'name': 'Charlie', 'age': 35}
-}
-print(&quot;User profiles:&quot;, user_profiles)
+<span class="c1"># Example 4: User profiles (Dictionary - key-value mapping)</span>
+<span class="n">user_profiles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;user1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="s1">&#39;user2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="s1">&#39;user3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Charlie&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User profiles:&quot;</span><span class="p">,</span> <span class="n">user_profiles</span><span class="p">)</span>
 
-# Memory usage comparison
-import sys
-list_data = [1, 2, 3, 4, 5]
-tuple_data = (1, 2, 3, 4, 5)
-set_data = {1, 2, 3, 4, 5}
-dict_data = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e'}
+<span class="c1"># Memory usage comparison</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">list_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">tuple_data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">set_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+<span class="n">dict_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;e&#39;</span><span class="p">}</span>
 
-print(f&quot;List memory: {sys.getsizeof(list_data)} bytes&quot;)
-print(f&quot;Tuple memory: {sys.getsizeof(tuple_data)} bytes&quot;)
-print(f&quot;Set memory: {sys.getsizeof(set_data)} bytes&quot;)
-print(f&quot;Dict memory: {sys.getsizeof(dict_data)} bytes&quot;)
-</code></pre>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tuple memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">set_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dict memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">dict_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="7-converting-between-data-structures">7. Converting Between Data Structures</h2>
 <p><strong>Converting between different data structures is often necessary:</strong></p>
-<pre><code class="language-python"># Converting between data structures
-original_list = [1, 2, 3, 2, 4, 5]
-print(&quot;Original list:&quot;, original_list)
+<div class="highlight"><pre><span></span><code><span class="c1"># Converting between data structures</span>
+<span class="n">original_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">original_list</span><span class="p">)</span>
 
-# List to other structures
-list_to_tuple = tuple(original_list)
-list_to_set = set(original_list)  # Removes duplicates
-print(&quot;List to tuple:&quot;, list_to_tuple)
-print(&quot;List to set:&quot;, list_to_set)
+<span class="c1"># List to other structures</span>
+<span class="n">list_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>
+<span class="n">list_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>  <span class="c1"># Removes duplicates</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List to tuple:&quot;</span><span class="p">,</span> <span class="n">list_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List to set:&quot;</span><span class="p">,</span> <span class="n">list_to_set</span><span class="p">)</span>
 
-# Tuple to other structures
-tuple_to_list = list(list_to_tuple)
-tuple_to_set = set(list_to_tuple)
-print(&quot;Tuple to list:&quot;, tuple_to_list)
-print(&quot;Tuple to set:&quot;, tuple_to_set)
+<span class="c1"># Tuple to other structures</span>
+<span class="n">tuple_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">list_to_tuple</span><span class="p">)</span>
+<span class="n">tuple_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">list_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple to list:&quot;</span><span class="p">,</span> <span class="n">tuple_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple to set:&quot;</span><span class="p">,</span> <span class="n">tuple_to_set</span><span class="p">)</span>
 
-# Set to other structures
-set_to_list = list(list_to_set)
-set_to_tuple = tuple(list_to_set)
-print(&quot;Set to list:&quot;, set_to_list)
-print(&quot;Set to tuple:&quot;, set_to_tuple)
+<span class="c1"># Set to other structures</span>
+<span class="n">set_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">list_to_set</span><span class="p">)</span>
+<span class="n">set_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_to_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set to list:&quot;</span><span class="p">,</span> <span class="n">set_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set to tuple:&quot;</span><span class="p">,</span> <span class="n">set_to_tuple</span><span class="p">)</span>
 
-# Dictionary conversions
-sample_dict = {'a': 1, 'b': 2, 'c': 3}
-print(&quot;Original dict:&quot;, sample_dict)
+<span class="c1"># Dictionary conversions</span>
+<span class="n">sample_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original dict:&quot;</span><span class="p">,</span> <span class="n">sample_dict</span><span class="p">)</span>
 
-# Dictionary to lists/tuples/sets
-dict_keys = list(sample_dict.keys())
-dict_values = list(sample_dict.values())
-dict_items = list(sample_dict.items())
-print(&quot;Dict keys:&quot;, dict_keys)
-print(&quot;Dict values:&quot;, dict_values)
-print(&quot;Dict items:&quot;, dict_items)
+<span class="c1"># Dictionary to lists/tuples/sets</span>
+<span class="n">dict_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">dict_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">dict_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict keys:&quot;</span><span class="p">,</span> <span class="n">dict_keys</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict values:&quot;</span><span class="p">,</span> <span class="n">dict_values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict items:&quot;</span><span class="p">,</span> <span class="n">dict_items</span><span class="p">)</span>
 
-# Lists to dictionary
-keys = ['name', 'age', 'city']
-values = ['Alice', 25, 'Boston']
-list_to_dict = dict(zip(keys, values))
-print(&quot;Lists to dict:&quot;, list_to_dict)
+<span class="c1"># Lists to dictionary</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;Boston&#39;</span><span class="p">]</span>
+<span class="n">list_to_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lists to dict:&quot;</span><span class="p">,</span> <span class="n">list_to_dict</span><span class="p">)</span>
 
-# List of tuples to dictionary
-tuple_list = [('x', 1), ('y', 2), ('z', 3)]
-tuples_to_dict = dict(tuple_list)
-print(&quot;Tuples to dict:&quot;, tuples_to_dict)
+<span class="c1"># List of tuples to dictionary</span>
+<span class="n">tuple_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">tuples_to_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">tuple_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuples to dict:&quot;</span><span class="p">,</span> <span class="n">tuples_to_dict</span><span class="p">)</span>
 
-# String to other structures
-text = &quot;hello&quot;
-string_to_list = list(text)
-string_to_tuple = tuple(text)
-string_to_set = set(text)  # Removes duplicate characters
-print(&quot;String to list:&quot;, string_to_list)
-print(&quot;String to tuple:&quot;, string_to_tuple)
-print(&quot;String to set:&quot;, string_to_set)
-</code></pre>
+<span class="c1"># String to other structures</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="n">string_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">string_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">string_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># Removes duplicate characters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to list:&quot;</span><span class="p">,</span> <span class="n">string_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to tuple:&quot;</span><span class="p">,</span> <span class="n">string_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to set:&quot;</span><span class="p">,</span> <span class="n">string_to_set</span><span class="p">)</span>
+</code></pre></div>
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
 <p><strong>Basic Exercises:</strong></p>
 <ol>
@@ -780,49 +1258,98 @@ print(&quot;String to set:&quot;, string_to_set)
 <p>Build a simple social network representation using dictionaries and sets.</p>
 </li>
 </ol>
-              
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
             </div>
-          </div><footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../3.ControlStructures/" class="btn btn-neutral float-left" title="Control Structures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
-  </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
           
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
+        
+      </main>
+      
+        <footer class="md-footer">
+  
     
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../3.ControlStructures/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Control Structures">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Control Structures
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5.Functions/" class="md-footer__link md-footer__link--next" aria-label="Next: Functions">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Functions
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
     
-      <span><a href="../3.ControlStructures/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-  </span>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 - Aayush Raj Regmi
+    </div>
+  
+  
 </div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "announce.dismiss", "navigation.footer"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
 </html>
