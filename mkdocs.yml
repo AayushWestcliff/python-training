@@ -12,22 +12,38 @@ nav:
   # - OOP: lectures/7.OOP.md
   # - Errors and Exceptions: lectures/8.ErrorDebugging.md
   # - Advanced Topics: lectures/9.AdvancedConcepts.md
-    # - Python Download: index.md
+  # - Python Download: index.md
+
 theme:
-  name: readthedocs
-  # name: material
+  name: material
   features:
     - header.autohide
     - announce.dismiss
     - navigation.footer
-  # footer: "© 2025 Aayush Regmi • All rights reserved."
-  # name: material
+  code:
+    highlighting: true
+    light: default
+    dark: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  # You can remove 'codehilite' if pymdownx.highlight covers your needs
 
 extra:
   generator: false
       
 copyright: Copyright &copy; 2025 - Aayush Raj Regmi
-
-
-# Add this line
-# cname: python.regmiaayush.com.np
