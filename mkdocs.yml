@@ -3,6 +3,7 @@ site_description: Python Training for BSIT Students (Kings College)
 
 nav:
   - Getting Started: index.md
+  - Installation Guide: lectures/Installation.md
   - Introduction to Python: lectures/1.Introduction.md
   - Data Types: lectures/2.DataTypes.md
   - Control Structures: lectures/3.ControlStructures.md
