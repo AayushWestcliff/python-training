@@ -448,7 +448,7 @@
         <li class="md-nav__item">
   <a href="#1-try-except-blocks" class="md-nav__link">
     <span class="md-ellipsis">
-      🟢 1. Try-Except Blocks
+      1. Try-Except Blocks
     </span>
   </a>
   
@@ -457,7 +457,7 @@
         <li class="md-nav__item">
   <a href="#2-catching-specific-exceptions" class="md-nav__link">
     <span class="md-ellipsis">
-      🟢 2. Catching Specific Exceptions
+      2. Catching Specific Exceptions
     </span>
   </a>
   
@@ -466,7 +466,7 @@
         <li class="md-nav__item">
   <a href="#3-using-else-finally" class="md-nav__link">
     <span class="md-ellipsis">
-      🟢 3. Using else &amp; finally
+      3. Using else &amp; finally
     </span>
   </a>
   
@@ -475,7 +475,7 @@
         <li class="md-nav__item">
   <a href="#4-generating-and-creating-custom-exceptions" class="md-nav__link">
     <span class="md-ellipsis">
-      🟢 4. Generating and Creating Custom Exceptions
+      4. Generating and Creating Custom Exceptions
     </span>
   </a>
   
@@ -484,11 +484,56 @@
         <li class="md-nav__item">
   <a href="#5-problem-solving-strategies" class="md-nav__link">
     <span class="md-ellipsis">
-      🟢 5. Problem-Solving Strategies
+      5. Problem-Solving Strategies
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🟢 5. Problem-Solving Strategies">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-common-python-error-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Common Python Error Types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-debugging-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Debugging Techniques
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-assertions-and-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Assertions and Testing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-exception-chaining-and-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Exception Chaining and Context
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-error-handling-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Error Handling Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Error Handling Best Practices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -533,7 +578,7 @@
 <hr />
 <h1 id="python-programming-error-handling-and-debugging">📓 Python Programming - Error Handling and Debugging</h1>
 <hr />
-<h2 id="1-try-except-blocks">🟢 1. Try-Except Blocks</h2>
+<h2 id="1-try-except-blocks">1. Try-Except Blocks</h2>
 <p><strong>Error handling prevents programs from crashing due to unexpected issues.</strong></p>
 <p>The basic structure:</p>
 <div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
@@ -553,7 +598,7 @@
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input! Please enter a number.</span><span class="se">\n</span><span class="s2">Exception:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="2-catching-specific-exceptions">🟢 2. Catching Specific Exceptions</h2>
+<h2 id="2-catching-specific-exceptions">2. Catching Specific Exceptions</h2>
 <p><code>It's better to catch specific exceptions to handle different errors appropriately.</code></p>
 <div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
     <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">))</span>
@@ -565,7 +610,7 @@
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;An unexpected error occurred:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="3-using-else-finally">🟢 3. Using else &amp; finally</h2>
+<h2 id="3-using-else-finally">3. Using else &amp; finally</h2>
 <ul>
 <li>
 <p><strong>else:</strong> Runs if no exceptions occur.  </p>
@@ -583,7 +628,7 @@
 <span class="k">finally</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This always runs.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="4-generating-and-creating-custom-exceptions">🟢 4. Generating and Creating Custom Exceptions</h2>
+<h2 id="4-generating-and-creating-custom-exceptions">4. Generating and Creating Custom Exceptions</h2>
 <ul>
 <li>
 <p>You can use <code>raise</code> to generate exceptions.</p>
@@ -602,6 +647,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">NegativeAgeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
     <span class="k">pass</span>
 
+
 <span class="n">age</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
 
 <span class="k">try</span><span class="p">:</span>
@@ -610,25 +656,413 @@
 <span class="k">except</span> <span class="n">NegativeAgeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="5-problem-solving-strategies">🟢 5. Problem-Solving Strategies</h2>
+<h2 id="5-problem-solving-strategies">5. Problem-Solving Strategies</h2>
 <p>✅ Understand the error message.  </p>
 <p>✅ Use print statements or debugging tools to trace the problem.  </p>
 <p>✅ Break the code into smaller parts.  </p>
 <p>✅ Handle exceptions gracefully using try-except blocks.  </p>
 <p>✅ Anticipate common errors (e.g., invalid input, division by zero).  </p>
 <p>✅ Write custom exceptions for specific situations.  </p>
+<h2 id="6-common-python-error-types">6. Common Python Error Types</h2>
+<p><strong>Understanding common errors helps you debug faster:</strong></p>
+<ul>
+<li>
+<p><strong>SyntaxError</strong>: Invalid Python syntax</p>
+</li>
+<li>
+<p><strong>NameError</strong>: Variable not defined</p>
+</li>
+<li>
+<p><strong>TypeError</strong>: Wrong data type used</p>
+</li>
+<li>
+<p><strong>IndexError</strong>: List index out of range</p>
+</li>
+<li>
+<p><strong>KeyError</strong>: Dictionary key doesn't exist</p>
+</li>
+<li>
+<p><strong>FileNotFoundError</strong>: File doesn't exist</p>
+</li>
+<li>
+<p><strong>ImportError</strong>: Module can't be imported</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Examples of common errors (commented out to avoid actual errors)</span>
+
+<span class="c1"># 1. SyntaxError</span>
+<span class="c1"># print(&quot;Hello World&quot;  # Missing closing parenthesis</span>
+
+<span class="c1"># 2. NameError</span>
+<span class="c1"># print(undefined_variable)  # Variable not defined</span>
+
+<span class="c1"># 3. TypeError</span>
+<span class="c1"># result = &quot;5&quot; + 10  # Can&#39;t add string and integer</span>
+
+<span class="c1"># 4. IndexError</span>
+<span class="c1"># my_list = [1, 2, 3]</span>
+<span class="c1"># print(my_list[5])  # Index 5 doesn&#39;t exist</span>
+
+<span class="c1"># 5. KeyError</span>
+<span class="c1"># my_dict = {&quot;name&quot;: &quot;John&quot;}</span>
+<span class="c1"># print(my_dict[&quot;age&quot;])  # Key &#39;age&#39; doesn&#39;t exist</span>
+
+<span class="c1"># 6. FileNotFoundError</span>
+<span class="c1"># with open(&quot;nonexistent.txt&quot;, &quot;r&quot;) as file:</span>
+<span class="c1">#     content = file.read()</span>
+
+<span class="c1"># Let&#39;s demonstrate with proper error handling:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_errors</span><span class="p">():</span>
+    <span class="c1"># Handling IndexError</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IndexError caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Handling KeyError</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">my_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">my_dict</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;KeyError caught: Missing key </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Handling TypeError</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;5&quot;</span> <span class="o">+</span> <span class="mi">10</span>
+    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TypeError caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">demonstrate_errors</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="7-debugging-techniques">7. Debugging Techniques</h2>
+<p><strong>Different ways to find and fix bugs in your code:</strong></p>
+<ol>
+<li>
+<p><strong>Print Debugging</strong>: Add print statements to track values</p>
+</li>
+<li>
+<p><strong>Python Debugger (pdb)</strong>: Step through code line by line</p>
+</li>
+<li>
+<p><strong>IDE Debugger</strong>: Use VS Code's built-in debugger</p>
+</li>
+<li>
+<p><strong>Logging</strong>: Better than print statements for production code</p>
+</li>
+</ol>
+<p><strong>➤ Print Debugging Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_average</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input numbers: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Step </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, added </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">, total now: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final average: </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Debug print</span>
+    <span class="k">return</span> <span class="n">average</span>
+
+<span class="c1"># Test with debug prints</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">calculate_average</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Better approach: Use a debug flag</span>
+<span class="n">DEBUG</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">debug_print</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">DEBUG</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[DEBUG] </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_average_v2</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">debug_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input numbers: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="n">debug_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sum: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="n">debug_print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">average</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Version 2 with debug flag ---&quot;</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">calculate_average_v2</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>➤ Using Python's Logging Module:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="c1"># Configure logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">divide_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting division: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Division by zero attempted!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Cannot divide by zero&quot;</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Division successful: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;An error occurred during division&quot;</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+<span class="c1"># Test logging</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing with logging ===&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="n">divide_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result 1: </span><span class="si">{</span><span class="n">result1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">result2</span> <span class="o">=</span> <span class="n">divide_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result 2: </span><span class="si">{</span><span class="n">result2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Different log levels</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a debug message&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This is an info message&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;This is a warning message&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;This is an error message&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;This is a critical message&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="8-assertions-and-testing">8. Assertions and Testing</h2>
+<p><strong>Assertions help catch bugs early by checking assumptions:</strong></p>
+<ul>
+<li>
+<p><code>assert</code> statement checks if a condition is True</p>
+</li>
+<li>
+<p>Raises <code>AssertionError</code> if condition is False</p>
+</li>
+<li>
+<p>Used for debugging and testing</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic assertion examples</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Factorial is not defined for negative numbers&quot;</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;Input must be an integer&quot;</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">*=</span> <span class="n">i</span>
+
+    <span class="c1"># Assert the result makes sense</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Factorial should always be positive&quot;</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test assertions</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;5! = </span><span class="si">{</span><span class="n">calculate_factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;0! = </span><span class="si">{</span><span class="n">calculate_factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># This will raise AssertionError</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(-1)! = </span><span class="si">{</span><span class="n">calculate_factorial</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Assertion failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Assertions in testing</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_factorial</span><span class="p">():</span>
+    <span class="c1"># Test cases</span>
+    <span class="k">assert</span> <span class="n">calculate_factorial</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;0! should be 1&quot;</span>
+    <span class="k">assert</span> <span class="n">calculate_factorial</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;1! should be 1&quot;</span>
+    <span class="k">assert</span> <span class="n">calculate_factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">120</span><span class="p">,</span> <span class="s2">&quot;5! should be 120&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All factorial tests passed!&quot;</span><span class="p">)</span>
+
+<span class="n">test_factorial</span><span class="p">()</span>
+
+<span class="c1"># Assertions for debugging</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">divide_positive_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Both numbers must be positive&quot;</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+
+    <span class="c1"># Check our assumption about the result</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Result should be positive when dividing positive numbers&quot;</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">divide_positive_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Division result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># This will fail the assertion</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">divide_positive_numbers</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Assertion error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="9-exception-chaining-and-context">9. Exception Chaining and Context</h2>
+<p><strong>Preserve error context when re-raising exceptions:</strong></p>
+<ul>
+<li>
+<p><code>raise ... from ...</code> - Explicit chaining</p>
+</li>
+<li>
+<p><code>raise</code> - Implicit chaining</p>
+</li>
+<li>
+<p>Helps track the original cause of errors</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">read_config_file</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of exception chaining&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">config</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Chain the original exception</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration file &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+    <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># Chain with more context</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON in configuration file &#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example showing exception context&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">read_config_file</span><span class="p">(</span><span class="s2">&quot;nonexistent_config.json&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">config</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original cause: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Re-raise with additional context</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to initialize application&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+<span class="c1"># Test exception chaining</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">process_data</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caused by: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original cause: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="o">.</span><span class="n">__cause__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example with suppress chaining</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">clean_reraise</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="c1"># Suppress the original exception chain</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid calculation&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">clean_reraise</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Suppressed chain error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Has cause: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Will be None</span>
+</code></pre></div>
+<h2 id="10-error-handling-best-practices">10. Error Handling Best Practices</h2>
+<p><strong>Guidelines for writing robust, maintainable code:</strong></p>
+<p>✅ <strong>Be specific</strong>: Catch specific exceptions, not generic <code>Exception</code>  </p>
+<p>✅ <strong>Fail fast</strong>: Use assertions to catch bugs early  </p>
+<p>✅ <strong>Log errors</strong>: Use logging instead of print for production code  </p>
+<p>✅ <strong>Don't ignore</strong>: Always handle or log exceptions  </p>
+<p>✅ <strong>Clean up</strong>: Use <code>finally</code> or context managers for cleanup  </p>
+<p>✅ <strong>Document</strong>: Specify what exceptions your functions can raise  </p>
+<p>✅ <strong>Test</strong>: Write tests for both success and failure cases</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Example of good error handling practices</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DatabaseError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom exception for database operations&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserNotFoundError</span><span class="p">(</span><span class="n">DatabaseError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when user is not found in database&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve user by ID from database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        user_id (int): The user ID to search for</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: User information</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If user_id is not an integer</span>
+<span class="sd">        UserNotFoundError: If user is not found</span>
+<span class="sd">        DatabaseError: If database connection fails</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Input validation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;user_id must be an integer, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">user_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;user_id must be positive&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Simulate database lookup</span>
+    <span class="n">fake_database</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;alice@example.com&quot;</span><span class="p">}}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Simulate potential database connection error</span>
+        <span class="k">if</span> <span class="n">user_id</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Database connection lost&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fake_database</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UserNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User with ID </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+
+        <span class="n">user</span> <span class="o">=</span> <span class="n">fake_database</span><span class="p">[</span><span class="n">user_id</span><span class="p">]</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully retrieved user </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">user</span>
+
+    <span class="k">except</span> <span class="ne">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database connection failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">DatabaseError</span><span class="p">(</span><span class="s2">&quot;Failed to connect to database&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+<span class="c1"># Example usage with proper error handling</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">101</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Trying to get user </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">get_user_by_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success: </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">UserNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User not found: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">DatabaseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original cause: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run the example</span>
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div>
 <h3 id="quick-recap"><strong>🎯 Quick Recap</strong></h3>
-<p>✅ Use try-except to catch errors and prevent crashes.  </p>
-<p>✅ Catch specific exceptions for better error handling.  </p>
-<p>✅ else and finally provide structured error handling.  </p>
-<p>✅ Custom exceptions allow for clear, descriptive error messages.  </p>
-<p>✅ Debugging is an essential skill for reliable code.  </p>
+<p>✅ Use try-except to catch errors and prevent crashes</p>
+<p>✅ Catch specific exceptions for better error handling</p>
+<p>✅ else and finally provide structured error handling</p>
+<p>✅ Custom exceptions allow for clear, descriptive error messages</p>
+<p>✅ Know common Python error types for faster debugging</p>
+<p>✅ Use debugging techniques: print statements, logging, assertions</p>
+<p>✅ Exception chaining preserves error context</p>
+<p>✅ Follow best practices for robust, maintainable code</p>
+<p>✅ Debugging is an essential skill for reliable code</p>
 <h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>
+<p><strong>Basic Level:</strong></p>
 <ol>
 <li>Write a program that asks for two numbers and divides them. Handle:</li>
-<li>
-<p>ValueError for invalid inputs</p>
-</li>
+<li>ValueError for invalid inputs</li>
 <li>
 <p>ZeroDivisionError for division by zero</p>
 </li>
@@ -640,6 +1074,36 @@
 </li>
 <li>
 <p>Intentionally raise an exception if a negative number is entered for age.</p>
+</li>
+</ol>
+<p><strong>Intermediate Level:</strong></p>
+<ol>
+<li>
+<p>Write a function that catches different types of errors (IndexError, KeyError, TypeError) and prints specific messages for each.</p>
+</li>
+<li>
+<p>Create a simple calculator with proper error handling and logging.</p>
+</li>
+<li>
+<p>Use assertions to validate input in a function that calculates square roots.</p>
+</li>
+<li>
+<p>Write a program that demonstrates exception chaining when processing user data.</p>
+</li>
+</ol>
+<p><strong>Advanced Level:</strong></p>
+<ol>
+<li>
+<p>Build a file processor that handles multiple types of errors and uses logging instead of print statements.</p>
+</li>
+<li>
+<p>Create a custom exception hierarchy for a banking system (InsufficientFundsError, InvalidAccountError, etc.).</p>
+</li>
+<li>
+<p>Write a robust function with proper documentation that specifies all possible exceptions it can raise.</p>
+</li>
+<li>
+<p>Implement a retry mechanism that attempts an operation multiple times before giving up.</p>
 </li>
 </ol>
 
