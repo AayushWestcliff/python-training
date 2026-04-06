@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Project Description (PRG400) - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Project Description (PRG400)";
+        var mkdocs_page_input_path = "prg400/ProjectDescription.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Project Description (PRG400)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#objective">Objective</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#core-requirements">Core Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#solid-principles-applied">SOLID Principles — Applied</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#s-single-responsibility-principle">S — Single Responsibility Principle</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#o-openclosed-principle">O — Open/Closed Principle</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#l-liskov-substitution-principle">L — Liskov Substitution Principle</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#i-interface-segregation-principle">I — Interface Segregation Principle</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#d-dependency-inversion-principle">D — Dependency Inversion Principle</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-factor-app-methodology">12-Factor App Methodology</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#required-project-structure">Required Project Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dockerfile-requirements">Dockerfile Requirements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-the-right-way">Configuration — The Right Way</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-timeline">Project Timeline</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#week-2-architecture-design-proposal">Week 2: Architecture Design &amp; Proposal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-3-literature-technical-review">Week 3: Literature &amp; Technical Review</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-4-project-scaffold-core-models">Week 4: Project Scaffold &amp; Core Models</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-5-repository-service-layer">Week 5: Repository &amp; Service Layer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-6-api-layer-integration">Week 6: API Layer &amp; Integration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-7-hardening-testing-documentation">Week 7: Hardening, Testing &amp; Documentation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#week-8-deployment-demo-submission">Week 8: Deployment, Demo &amp; Submission</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#final-project-report-structure">Final Project Report Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sample-project-ideas">Sample Project Ideas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#recommended-tools-libraries">Recommended Tools &amp; Libraries</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#evaluation-criteria">Evaluation Criteria</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#academic-integrity">Academic Integrity</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Advanced Python</li>
+      <li class="breadcrumb-item active">Project Description (PRG400)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="prg-400-advanced-python-course-project">PRG 400: Advanced Python – Course Project</h1>
+<p>Welcome to the <strong>PRG 400: Advanced Python</strong> course project!</p>
+<p>This project challenges you to engineer a <strong>production-grade web application</strong> using professional software development practices — from architecture and design patterns to containerization and deployment.</p>
+<p>You will apply <strong>SOLID principles</strong>, <strong>12-Factor App methodology</strong>, and <strong>modular software design</strong> to build something real, maintainable, and deployable.</p>
+<hr />
+<h2 id="objective">Objective</h2>
+<p>By the end of this project, you will:</p>
+<ul>
+<li>Architect a clean, modular Python web application following <strong>SOLID principles</strong></li>
+<li>Apply <strong>12-Factor App</strong> practices for configuration, logging, and environment management</li>
+<li>Build a <strong>RESTful API backend</strong> using <strong>FastAPI</strong> or <strong>Flask</strong></li>
+<li>Containerize your application using <strong>Docker</strong> and <strong>Docker Compose</strong></li>
+<li>Write <strong>unit and integration tests</strong> with meaningful coverage</li>
+<li>Deploy your application to a cloud platform</li>
+<li>Document your architecture decisions and reflect on engineering tradeoffs</li>
+</ul>
+<hr />
+<h2 id="core-requirements">Core Requirements</h2>
+<p>Every project <strong>must</strong> include:</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web Framework</td>
+<td>FastAPI (recommended) or Django or Flask</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>PostgreSQL or SQLite (via SQLAlchemy ORM)</td>
+</tr>
+<tr>
+<td>Containerization</td>
+<td><code>Dockerfile</code> + <code>docker-compose.yml</code></td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Environment variables via <code>.env</code> (never hardcoded)</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Unit tests with <code>pytest</code> (minimum 60% coverage)</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td>Structured logging (no bare <code>print()</code> statements in production code)</td>
+</tr>
+<tr>
+<td>Code Quality</td>
+<td><code>ruff</code> or <code>flake8</code> linting, <code>black</code> formatting</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td><code>README.md</code> with setup, architecture, and API docs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="solid-principles-applied">SOLID Principles — Applied</h2>
+<p>Your project must <strong>demonstrably apply</strong> all five SOLID principles. You will be evaluated on how intentionally and correctly each is used — not just whether the terms appear in your code.</p>
+<h3 id="s-single-responsibility-principle">S — Single Responsibility Principle</h3>
+<blockquote>
+<p><em>A class or module should have only one reason to change.</em></p>
+</blockquote>
+<p>Each module in your project should own <strong>one concern</strong>. A route handler should not also format data, validate input, AND write to the database. Split responsibilities across layers.</p>
+<p><strong>Example in your project:</strong>
+<div class="highlight"><pre><span></span><code>app/
+├── api/routes/         # HTTP layer only — receives requests, returns responses
+├── services/           # Business logic only — orchestrates domain rules
+├── repositories/       # Data access only — talks to the database
+├── models/             # Domain entities — data shapes and validation
+└── core/               # App-wide concerns — config, logging, exceptions
+</code></pre></div></p>
+<h3 id="o-openclosed-principle">O — Open/Closed Principle</h3>
+<blockquote>
+<p><em>Software entities should be open for extension, but closed for modification.</em></p>
+</blockquote>
+<p>Design your core logic so new features can be added <strong>without editing existing code</strong>. Use abstract base classes, dependency injection, and strategy patterns.</p>
+<p><strong>Example:</strong> An <code>NotificationService</code> that accepts any <code>NotificationChannel</code> (email, SMS, webhook) without its core logic ever changing:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NotificationChannel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">EmailChannel</span><span class="p">(</span><span class="n">NotificationChannel</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># send email</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">SMSChannel</span><span class="p">(</span><span class="n">NotificationChannel</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># send SMS</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">NotificationService</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">NotificationChannel</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span> <span class="o">=</span> <span class="n">channel</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_channel</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">recipient</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="l-liskov-substitution-principle">L — Liskov Substitution Principle</h3>
+<blockquote>
+<p><em>Subtypes must be substitutable for their base types without altering program correctness.</em></p>
+</blockquote>
+<p>If you use inheritance or abstract classes, any subclass must honour the full contract of its parent. A subclass should never <strong>weaken preconditions</strong>, <strong>strengthen postconditions</strong>, or raise unexpected exceptions.</p>
+<p><strong>What to watch for:</strong> If you find yourself writing <code>if isinstance(obj, SubclassX)</code> inside shared logic, LSP is likely violated.</p>
+<h3 id="i-interface-segregation-principle">I — Interface Segregation Principle</h3>
+<blockquote>
+<p><em>Clients should not be forced to depend on interfaces they do not use.</em></p>
+</blockquote>
+<p>Prefer many small, focused interfaces over one large "god" interface. If a class only needs read access to a repository, it should depend on a <code>ReadableRepository</code>, not a full <code>CRUDRepository</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Readable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Writable</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">):</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span> <span class="o">...</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ReadWriteRepository</span><span class="p">(</span><span class="n">Readable</span><span class="p">,</span> <span class="n">Writable</span><span class="p">):</span> <span class="o">...</span>
+</code></pre></div>
+<h3 id="d-dependency-inversion-principle">D — Dependency Inversion Principle</h3>
+<blockquote>
+<p><em>High-level modules should not depend on low-level modules. Both should depend on abstractions.</em></p>
+</blockquote>
+<p>Your service layer should <strong>never import</strong> a concrete database class directly. Inject dependencies through constructors or FastAPI's <code>Depends()</code> system.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bad — high-level service knows about low-level detail</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">PostgresUserRepository</span><span class="p">()</span>   <span class="c1"># ❌ tightly coupled</span>
+
+<span class="c1"># Good — depends on abstraction, injected from outside</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">:</span> <span class="n">UserRepository</span><span class="p">):</span>  <span class="c1"># ✅ abstraction injected</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repo</span> <span class="o">=</span> <span class="n">repo</span>
+</code></pre></div>
+<hr />
+<h2 id="12-factor-app-methodology">12-Factor App Methodology</h2>
+<p>Your application must follow the <a href="https://12factor.net/">12-Factor App</a> principles. Below is how each factor maps to your project.</p>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>What You Must Do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>I. Codebase</strong></td>
+<td>One Git repo, one app. No sharing code between apps via copy-paste.</td>
+</tr>
+<tr>
+<td><strong>II. Dependencies</strong></td>
+<td>All dependencies declared in <code>requirements.txt</code> or <code>pyproject.toml</code>. Nothing assumed to be pre-installed.</td>
+</tr>
+<tr>
+<td><strong>III. Config</strong></td>
+<td>All config (DB URLs, secrets, ports) loaded from environment variables. Use <code>python-dotenv</code> locally. Never commit <code>.env</code>.</td>
+</tr>
+<tr>
+<td><strong>IV. Backing Services</strong></td>
+<td>Treat your database, cache, or email provider as attached resources — swappable via config, not code changes.</td>
+</tr>
+<tr>
+<td><strong>V. Build, Release, Run</strong></td>
+<td>Dockerfile separates build from run. <code>docker-compose</code> manages release and run stages.</td>
+</tr>
+<tr>
+<td><strong>VI. Processes</strong></td>
+<td>Your app must be stateless. No in-memory session state. Store state in the database or cache.</td>
+</tr>
+<tr>
+<td><strong>VII. Port Binding</strong></td>
+<td>Your app exposes itself on a port (e.g., <code>8000</code>) defined by environment variable, not hardcoded.</td>
+</tr>
+<tr>
+<td><strong>VIII. Concurrency</strong></td>
+<td>Design so multiple workers can run in parallel. Avoid global mutable state.</td>
+</tr>
+<tr>
+<td><strong>IX. Disposability</strong></td>
+<td>App starts fast, shuts down gracefully. Handle <code>SIGTERM</code> for clean shutdown.</td>
+</tr>
+<tr>
+<td><strong>X. Dev/Prod Parity</strong></td>
+<td>Docker Compose ensures local dev mirrors production. No "works on my machine."</td>
+</tr>
+<tr>
+<td><strong>XI. Logs</strong></td>
+<td>Log to <code>stdout</code>/<code>stderr</code> as structured events (JSON preferred). Never write log files manually.</td>
+</tr>
+<tr>
+<td><strong>XII. Admin Processes</strong></td>
+<td>DB migrations run as one-off tasks (e.g., <code>alembic upgrade head</code>) not embedded in app startup.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="required-project-structure">Required Project Structure</h2>
+<p>Your repository <strong>must</strong> follow this structure (you may add to it, but not remove required parts):</p>
+<div class="highlight"><pre><span></span><code>your-project/
+│
+├── app/
+│   ├── __init__.py
+│   ├── main.py                  # App entry point, FastAPI/Flask app factory
+│   │
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── routes/              # Route handlers (one file per resource)
+│   │   │   ├── __init__.py
+│   │   │   └── items.py
+│   │   └── dependencies.py      # FastAPI Depends() injections
+│   │
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── config.py            # Pydantic BaseSettings — loads from env
+│   │   ├── logging.py           # Structured logger setup
+│   │   └── exceptions.py        # Custom exception classes
+│   │
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── domain.py            # Pure domain entities (Pydantic / dataclasses)
+│   │   └── orm.py               # SQLAlchemy ORM models
+│   │
+│   ├── repositories/
+│   │   ├── __init__.py
+│   │   ├── base.py              # Abstract base repository (interface)
+│   │   └── item_repository.py   # Concrete implementation
+│   │
+│   └── services/
+│       ├── __init__.py
+│       └── item_service.py      # Business logic, depends on repository interface
+│
+├── tests/
+│   ├── __init__.py
+│   ├── conftest.py              # Pytest fixtures, test DB setup
+│   ├── unit/
+│   │   └── test_item_service.py
+│   └── integration/
+│       └── test_item_routes.py
+│
+├── migrations/                  # Alembic migration scripts
+│   ├── env.py
+│   └── versions/
+│
+├── .env.example                 # Template for env vars — committed to repo
+├── .env                         # Actual secrets — NEVER committed (in .gitignore)
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── docker-compose.test.yml      # Separate compose for running tests
+├── requirements.txt
+├── pyproject.toml               # Linting, formatting, test config
+├── alembic.ini
+└── README.md                    # Your project&#39;s own README
+</code></pre></div>
+<hr />
+<h2 id="dockerfile-requirements">Dockerfile Requirements</h2>
+<p>Your <code>Dockerfile</code> must use a <strong>multi-stage build</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Stage 1: Builder — install dependencies</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Install dependencies into a virtual environment</span>
+<span class="k">RUN</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+
+<span class="c"># Stage 2: Runtime — lean final image</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">runtime</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># Copy only the venv and app code — no build tools in production image</span>
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
+<span class="k">COPY</span><span class="w"> </span>./app<span class="w"> </span>./app
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c"># Run as non-root user (security best practice)</span>
+<span class="k">RUN</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Your <code>docker-compose.yml</code> must define at minimum:
+- An <code>app</code> service (your web application)
+- A <code>db</code> service (PostgreSQL)
+- Proper use of <code>environment</code>, <code>depends_on</code>, <code>volumes</code>, and <code>healthcheck</code></p>
+<hr />
+<h2 id="configuration-the-right-way">Configuration — The Right Way</h2>
+<p>Use <strong>Pydantic <code>BaseSettings</code></strong> to load all configuration from environment variables:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/core/config.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSettings</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;My App&quot;</span>
+    <span class="n">database_url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+        <span class="n">env_file</span> <span class="o">=</span> <span class="s2">&quot;.env&quot;</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
+</code></pre></div>
+<p>Your <code>.env.example</code> (committed) should list every variable with placeholder values:</p>
+<div class="highlight"><pre><span></span><code>DATABASE_URL=postgresql://user:password@localhost:5432/mydb
+SECRET_KEY=changeme
+DEBUG=false
+PORT=8000
+</code></pre></div>
+<p>Your <code>.env</code> (never committed) holds the real values for local development.</p>
+<hr />
+<h2 id="project-timeline">Project Timeline</h2>
+<h3 id="week-2-architecture-design-proposal">Week 2: Architecture Design &amp; Proposal</h3>
+<ul>
+<li>Choose your project domain (see ideas below)</li>
+<li>Define your data models, API endpoints, and service boundaries</li>
+<li>Sketch your layered architecture (routes → services → repositories)</li>
+<li>Identify which SOLID principles apply where</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- 1–2 page Architecture Proposal
+- Entity-Relationship Diagram (ERD)
+- Endpoint design table (method, path, description, auth required)</p>
+<hr />
+<h3 id="week-3-literature-technical-review">Week 3: Literature &amp; Technical Review</h3>
+<ul>
+<li>Review 2–3 open-source Python web applications on GitHub</li>
+<li>Evaluate their architecture: Do they follow SRP? Are services testable? Is config handled properly?</li>
+<li>Identify what you will do differently or improve upon</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- Technical Review Report (2–3 pages)
+- Annotated links to reviewed repositories with critique notes</p>
+<hr />
+<h3 id="week-4-project-scaffold-core-models">Week 4: Project Scaffold &amp; Core Models</h3>
+<ul>
+<li>Initialize your repository with the required folder structure</li>
+<li>Set up <code>Dockerfile</code>, <code>docker-compose.yml</code>, and <code>.env.example</code></li>
+<li>Implement domain models and ORM models</li>
+<li>Configure Alembic and create your first migration</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- Running Docker Compose stack (app + db)
+- At least one Alembic migration applied
+- <code>GET /health</code> endpoint returning <code>{"status": "ok"}</code></p>
+<hr />
+<h3 id="week-5-repository-service-layer">Week 5: Repository &amp; Service Layer</h3>
+<ul>
+<li>Implement abstract base repository and at least one concrete repository</li>
+<li>Implement service layer with dependency injection</li>
+<li>Write unit tests for service layer using mock repositories</li>
+<li>Demonstrate Dependency Inversion and Open/Closed principles in code</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- Working service + repository layer with tests
+- Test coverage report showing ≥ 50% coverage on service layer</p>
+<hr />
+<h3 id="week-6-api-layer-integration">Week 6: API Layer &amp; Integration</h3>
+<ul>
+<li>Implement all API routes using FastAPI/Flask</li>
+<li>Connect routes → services → repositories through dependency injection</li>
+<li>Add request validation (Pydantic schemas)</li>
+<li>Add structured logging to all service operations</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- All planned endpoints implemented and manually testable via Swagger UI or Postman
+- Integration tests for at least 3 endpoints</p>
+<hr />
+<h3 id="week-7-hardening-testing-documentation">Week 7: Hardening, Testing &amp; Documentation</h3>
+<ul>
+<li>Achieve ≥ 60% overall test coverage</li>
+<li>Add error handling (custom exceptions, proper HTTP status codes)</li>
+<li>Write your project's own <code>README.md</code> with: setup guide, environment variables, how to run tests, API reference</li>
+<li>Run linter (<code>ruff</code>/<code>flake8</code>) and formatter (<code>black</code>) — zero errors</li>
+</ul>
+<p><strong>Deliverable:</strong>
+- Test coverage report (HTML output from <code>pytest --cov</code>)
+- Clean linting output
+- Complete project <code>README.md</code></p>
+<hr />
+<h3 id="week-8-deployment-demo-submission">Week 8: Deployment, Demo &amp; Submission</h3>
+<ul>
+<li>Deploy using one of: <strong>Railway</strong>, <strong>Render</strong>, <strong>Fly.io</strong>, or <strong>a VPS with Docker</strong></li>
+<li>Live application must be accessible via public URL</li>
+<li>Present your application (7–10 minutes) — demo, architecture walkthrough, and reflection</li>
+<li>Submit final report</li>
+</ul>
+<p><strong>Deliverables:</strong>
+- Live Deployment URL
+- Final Project Report (4–6 pages) — see report structure below
+- Presentation Slides
+- Final GitHub repository (clean commit history, no secrets committed)</p>
+<hr />
+<h2 id="final-project-report-structure">Final Project Report Structure</h2>
+<p>Your report must cover:</p>
+<ol>
+<li><strong>Project Overview</strong> — What does your app do? Who is it for?</li>
+<li><strong>Architecture Diagram</strong> — Layered diagram showing routes, services, repositories, DB</li>
+<li><strong>SOLID Principles Applied</strong> — One section per principle: where it appears, why you used it, what problem it solves</li>
+<li><strong>12-Factor Compliance</strong> — Which factors you implemented and how</li>
+<li><strong>Testing Strategy</strong> — What you tested, how, and your coverage results</li>
+<li><strong>Deployment</strong> — Platform chosen, deployment steps, any challenges</li>
+<li><strong>Reflection</strong> — What you would do differently; what you learned</li>
+</ol>
+<hr />
+<h2 id="sample-project-ideas">Sample Project Ideas</h2>
+<p>Choose a domain that interests you. The technical requirements are the same regardless of domain.</p>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Project Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Healthcare</td>
+<td>Patient appointment scheduling API</td>
+</tr>
+<tr>
+<td>Finance</td>
+<td>Personal budget tracker with category analysis</td>
+</tr>
+<tr>
+<td>Education</td>
+<td>Course enrollment and grade management system</td>
+</tr>
+<tr>
+<td>E-Commerce</td>
+<td>Product catalog and order management API</td>
+</tr>
+<tr>
+<td>Productivity</td>
+<td>Task manager with priority queues and deadlines</td>
+</tr>
+<tr>
+<td>IoT / Monitoring</td>
+<td>Sensor data ingestion and threshold alerting API</td>
+</tr>
+<tr>
+<td>HR</td>
+<td>Employee leave request and approval workflow</td>
+</tr>
+<tr>
+<td>Library</td>
+<td>Book lending and reservation management system</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="recommended-tools-libraries">Recommended Tools &amp; Libraries</h2>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web Framework</td>
+<td>FastAPI (preferred), Flask</td>
+</tr>
+<tr>
+<td>ORM</td>
+<td>SQLAlchemy 2.x</td>
+</tr>
+<tr>
+<td>Migrations</td>
+<td>Alembic</td>
+</tr>
+<tr>
+<td>Validation</td>
+<td>Pydantic v2</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>pytest, pytest-cov, httpx (for FastAPI)</td>
+</tr>
+<tr>
+<td>Mocking</td>
+<td>pytest-mock, unittest.mock</td>
+</tr>
+<tr>
+<td>Config</td>
+<td>pydantic-settings, python-dotenv</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td>Python <code>logging</code> module with JSON formatter (<code>python-json-logger</code>)</td>
+</tr>
+<tr>
+<td>Linting</td>
+<td>ruff</td>
+</tr>
+<tr>
+<td>Formatting</td>
+<td>black</td>
+</tr>
+<tr>
+<td>Containerization</td>
+<td>Docker, Docker Compose</td>
+</tr>
+<tr>
+<td>API Docs</td>
+<td>Swagger UI (built into FastAPI), Postman</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>Railway, Render, Fly.io</td>
+</tr>
+<tr>
+<td>Diagramming</td>
+<td>draw.io, Lucidchart, Mermaid (in Markdown)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="evaluation-criteria">Evaluation Criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Weight</th>
+<th>Key Rubric Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture Proposal &amp; ERD</td>
+<td>10%</td>
+<td>Clarity of design, layer separation, endpoint planning</td>
+</tr>
+<tr>
+<td>Technical Review Report</td>
+<td>5%</td>
+<td>Depth of analysis, actionable takeaways</td>
+</tr>
+<tr>
+<td>SOLID Principles (in code)</td>
+<td>20%</td>
+<td>Correct and intentional application of all 5 principles</td>
+</tr>
+<tr>
+<td>12-Factor Compliance</td>
+<td>10%</td>
+<td>Config from env, stateless design, Docker parity, structured logs</td>
+</tr>
+<tr>
+<td>Repository &amp; Service Layer</td>
+<td>15%</td>
+<td>Abstraction quality, dependency injection, testability</td>
+</tr>
+<tr>
+<td>API Layer &amp; Functionality</td>
+<td>10%</td>
+<td>Correctness, validation, error handling, HTTP semantics</td>
+</tr>
+<tr>
+<td>Testing &amp; Coverage</td>
+<td>15%</td>
+<td>Coverage ≥ 60%, meaningful tests (not just happy path)</td>
+</tr>
+<tr>
+<td>Deployment &amp; Presentation</td>
+<td>10%</td>
+<td>Live app, clear demo, architecture explanation</td>
+</tr>
+<tr>
+<td>Final Report</td>
+<td>5%</td>
+<td>Completeness, reflection quality, accuracy</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>100%</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="academic-integrity">Academic Integrity</h2>
+<ul>
+<li>All code must be your own work</li>
+<li>You may use libraries, documentation, and AI tools as references — but you must be able to explain every line of your code</li>
+<li>Copying code from other students or repositories without attribution is a violation of academic policy</li>
+<li>If you use an AI coding assistant, note it in your report and describe how you used it</li>
+</ul>
+<hr />
+<h2 id="getting-started">Getting Started</h2>
+<p>Once you accept this GitHub Classroom assignment, clone your repository and begin:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clone your repo</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-org/your-repo.git
+<span class="nb">cd</span><span class="w"> </span>your-repo
+
+<span class="c1"># Copy the example env file</span>
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+<span class="c1"># Edit .env with your local values</span>
+
+<span class="c1"># Build and start the stack</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+
+<span class="c1"># In a separate terminal — run migrations</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+
+<span class="c1"># Run tests</span>
+docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.test.yml<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<p>Your app will be available at <code>http://localhost:8000</code><br />
+API documentation: <code>http://localhost:8000/docs</code></p>
+<hr />
+<blockquote>
+<p><em>Good engineers do not just write code that works. They write code that is readable, testable, maintainable, and deployable by someone who has never met them.</em></p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../asyncio/" class="btn btn-neutral float-left" title="Async Programming"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../asyncio/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
