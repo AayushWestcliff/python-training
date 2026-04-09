@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Python Bindings (C/C++) - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Python Bindings (C/C++)";
+        var mkdocs_page_input_path = "prg400/PythonBindings.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Python Bindings (C/C++)</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-python-bindings">Why Python Bindings?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#real-world-examples">Real-World Examples</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-python-talks-to-cc">How Python Talks to C/C++</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#overview-of-binding-approaches">Overview of Binding Approaches</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-ctypes-calling-c-from-python-no-compilation-needed">1. ctypes -- Calling C from Python (No Compilation Needed)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-concepts">Key Concepts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#11-creating-a-simple-c-library">1.1 Creating a Simple C Library</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-loading-and-calling-c-functions-with-ctypes">1.2 Loading and Calling C Functions with ctypes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-working-with-pointers-and-arrays">1.3 Working with Pointers and Arrays</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#14-working-with-strings">1.4 Working with Strings</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#15-ctypes-type-mapping-reference">1.5 ctypes Type Mapping Reference</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#16-calling-system-libraries-with-ctypes">1.6 Calling System Libraries with ctypes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#try-it-use-ctypes-to-call-strlen">Try It: Use ctypes to call strlen</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-cffi-c-foreign-function-interface">2. cffi -- C Foreign Function Interface</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-cffi-over-ctypes">Why cffi over ctypes?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#21-abi-mode-loading-existing-libraries">2.1 ABI Mode -- Loading Existing Libraries</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-api-mode-compile-c-code-inline">2.2 API Mode -- Compile C Code Inline</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ctypes-vs-cffi-comparison">ctypes vs cffi Comparison</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-python-c-api-writing-extension-modules">3. Python C API -- Writing Extension Modules</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#when-to-use-the-c-api">When to Use the C API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#trade-offs">Trade-offs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#31-anatomy-of-a-c-extension-module">3.1 Anatomy of a C Extension Module</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-pyarg_parsetuple-format-codes">3.2 PyArg_ParseTuple Format Codes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33-reference-counting-the-critical-concept">3.3 Reference Counting: The Critical Concept</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-pybind11-modern-c-bindings">4. pybind11 -- Modern C++ Bindings</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-pybind11">Why pybind11?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#41-a-simple-pybind11-module">4.1 A Simple pybind11 Module</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-cython-python-like-syntax-c-like-speed">5. Cython -- Python-like Syntax, C-like Speed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-cython">Why Cython?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#51-basic-cython-adding-type-declarations">5.1 Basic Cython: Adding Type Declarations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#52-cython-with-c-functions">5.2 Cython with C Functions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#53-wrapping-existing-c-code-with-cython">5.3 Wrapping Existing C Code with Cython</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-performance-comparison">6. Performance Comparison</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-structures-and-complex-data-types">7. Structures and Complex Data Types</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71-structs-with-ctypes">7.1 Structs with ctypes</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-callbacks-passing-python-functions-to-c">8. Callbacks: Passing Python Functions to C</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-swig-simplified-wrapper-and-interface-generator">9. SWIG -- Simplified Wrapper and Interface Generator</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#how-swig-works">How SWIG Works</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#when-to-use-swig">When to Use SWIG</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#swig-interface-file-example">SWIG Interface File Example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-choosing-the-right-approach">10. Choosing the Right Approach</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#decision-flowchart">Decision Flowchart</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#summary-table">Summary Table</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11-best-practices-and-common-pitfalls">11. Best Practices and Common Pitfalls</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dos">Do's</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#donts">Don'ts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#memory-safety">Memory Safety</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exercises">Exercises</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-matrix-multiplication-with-ctypes">Exercise 1: Matrix Multiplication with ctypes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-string-processing-with-cffi">Exercise 2: String Processing with cffi</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-3-cython-optimization">Exercise 3: Cython Optimization</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cleanup">Cleanup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's Next?</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Advanced Python</li>
+      <li class="breadcrumb-item active">Python Bindings (C/C++)</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="python-bindings-connecting-python-to-cc">Python Bindings: Connecting Python to C/C++</h1>
+<blockquote>
+<p><em>"Python is great for prototyping and glue code, but when you need raw speed, you call C."</em></p>
+</blockquote>
+<hr />
+<h3 id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this notebook, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> what Python bindings are and why they matter</li>
+<li><strong>Use</strong> <code>ctypes</code> to call C functions from Python</li>
+<li><strong>Use</strong> <code>cffi</code> as a modern alternative to <code>ctypes</code></li>
+<li><strong>Write</strong> C extension modules using the Python C API</li>
+<li><strong>Use</strong> <code>pybind11</code> to create Python bindings for C++ code</li>
+<li><strong>Use</strong> Cython to write high-performance Python extensions</li>
+<li><strong>Compare</strong> different binding approaches and choose the right one for a given scenario</li>
+</ol>
+<hr />
+<h2 id="why-python-bindings">Why Python Bindings?</h2>
+<hr />
+<p>Python is powerful and easy to write, but it's <strong>slow</strong> compared to compiled languages like C and C++. Python bindings let you:</p>
+<ul>
+<li><strong>Speed up</strong> performance-critical code (numerical computation, image processing)</li>
+<li><strong>Reuse</strong> existing C/C++ libraries (OpenSSL, SQLite, system APIs)</li>
+<li><strong>Access</strong> hardware and OS features not available in pure Python</li>
+<li><strong>Wrap</strong> legacy codebases with a Pythonic interface</li>
+</ul>
+<h3 id="real-world-examples">Real-World Examples</h3>
+<table>
+<thead>
+<tr>
+<th>Python Library</th>
+<th>Underlying C/C++ Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NumPy</td>
+<td>C and Fortran numerical routines</td>
+</tr>
+<tr>
+<td>TensorFlow</td>
+<td>C++ computation engine</td>
+</tr>
+<tr>
+<td>Pillow (PIL)</td>
+<td>C image decoding libraries</td>
+</tr>
+<tr>
+<td>sqlite3</td>
+<td>SQLite C library</td>
+</tr>
+<tr>
+<td>OpenCV (cv2)</td>
+<td>C++ computer vision library</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="how-python-talks-to-cc">How Python Talks to C/C++</h3>
+<div class="highlight"><pre><span></span><code> Your Python Code
+       |
+       v
+ [Binding Layer]   &lt;-- ctypes, cffi, C API, pybind11, Cython
+       |
+       v
+ Compiled C/C++ Code (.so / .dll / .dylib)
+       |
+       v
+ Hardware (CPU, GPU, etc.)
+</code></pre></div>
+<p>The <strong>binding layer</strong> translates between Python objects and C/C++ data types.</p>
+<hr />
+<h2 id="overview-of-binding-approaches">Overview of Binding Approaches</h2>
+<hr />
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Language</th>
+<th>Difficulty</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctypes</code></td>
+<td>C</td>
+<td>Easy</td>
+<td>Call existing shared libraries</td>
+</tr>
+<tr>
+<td><code>cffi</code></td>
+<td>C</td>
+<td>Easy-Medium</td>
+<td>Modern alternative to ctypes</td>
+</tr>
+<tr>
+<td>Python C API</td>
+<td>C</td>
+<td>Hard</td>
+<td>Maximum control, build extension modules</td>
+</tr>
+<tr>
+<td><code>pybind11</code></td>
+<td>C++</td>
+<td>Medium</td>
+<td>Modern C++ bindings with clean syntax</td>
+</tr>
+<tr>
+<td>Cython</td>
+<td>C/C++</td>
+<td>Medium</td>
+<td>Write C extensions using Python-like syntax</td>
+</tr>
+<tr>
+<td>SWIG</td>
+<td>C/C++</td>
+<td>Medium</td>
+<td>Auto-generate bindings for multiple languages</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-ctypes-calling-c-from-python-no-compilation-needed">1. <code>ctypes</code> -- Calling C from Python (No Compilation Needed)</h2>
+<hr />
+<p><code>ctypes</code> is a <strong>built-in</strong> Python module. It lets you load shared libraries (<code>.so</code> on Linux, <code>.dll</code> on Windows, <code>.dylib</code> on macOS) and call their functions directly.</p>
+<h3 id="key-concepts">Key Concepts</h3>
+<ul>
+<li>No need to write any C code yourself -- just load existing libraries</li>
+<li>You must manually specify argument types and return types</li>
+<li>Part of Python's standard library (no <code>pip install</code> needed)</li>
+</ul>
+<h3 id="11-creating-a-simple-c-library">1.1 Creating a Simple C Library</h3>
+<p>Let's start by writing a small C file and compiling it into a shared library.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Write a C source file</span>
+<span class="n">c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;stdio.h&gt;</span>
+<span class="s2">#include &lt;math.h&gt;</span>
+
+<span class="s2">// A simple function: add two integers</span>
+<span class="s2">int add(int a, int b) {</span>
+<span class="s2">    return a + b;</span>
+<span class="s2">}</span>
+
+<span class="s2">// Multiply two doubles</span>
+<span class="s2">double multiply(double a, double b) {</span>
+<span class="s2">    return a * b;</span>
+<span class="s2">}</span>
+
+<span class="s2">// Compute factorial iteratively</span>
+<span class="s2">long long factorial(int n) {</span>
+<span class="s2">    long long result = 1;</span>
+<span class="s2">    for (int i = 2; i &lt;= n; i++) {</span>
+<span class="s2">        result *= i;</span>
+<span class="s2">    }</span>
+<span class="s2">    return result;</span>
+<span class="s2">}</span>
+
+<span class="s2">// Modify an array in-place: square each element</span>
+<span class="s2">void square_array(double* arr, int size) {</span>
+<span class="s2">    for (int i = 0; i &lt; size; i++) {</span>
+<span class="s2">        arr[i] = arr[i] * arr[i];</span>
+<span class="s2">    }</span>
+<span class="s2">}</span>
+
+<span class="s2">// Return a greeting string</span>
+<span class="s2">const char* greet(const char* name) {</span>
+<span class="s2">    static char buffer[256];</span>
+<span class="s2">    snprintf(buffer, sizeof(buffer), &quot;Hello, </span><span class="si">%s</span><span class="s2">! Welcome from C.&quot;, name);</span>
+<span class="s2">    return buffer;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mylib.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C source file written: mylib.c&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>C source file written: mylib.c
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
+
+<span class="c1"># Step 2: Compile the C code into a shared library</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>  <span class="c1"># macOS</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for macOS...&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;-fPIC&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.dylib&quot;</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for Linux...&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.so&quot;</span><span class="p">,</span> <span class="s2">&quot;-fPIC&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.so&quot;</span>
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># Windows</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for Windows...&quot;</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dll&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.dll&quot;</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled successfully: </span><span class="si">{</span><span class="n">lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compilation failed:</span><span class="se">\n</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Compiling for macOS...
+Compiled successfully: mylib.dylib
+</code></pre></div>
+<h3 id="12-loading-and-calling-c-functions-with-ctypes">1.2 Loading and Calling C Functions with <code>ctypes</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Load the shared library</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">lib_name</span><span class="p">))</span>
+
+<span class="c1"># --- Calling add(int, int) -&gt; int ---</span>
+<span class="c1"># By default, ctypes assumes int arguments and int return</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(10, 25) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">factorial</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(5) = </span><span class="si">{</span><span class="n">factorial</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>add(10, 25) = 35
+factorial(5) = 120
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Calling multiply(double, double) -&gt; double ---</span>
+<span class="c1"># For non-int types, we MUST specify argtypes and restype</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;multiply(3.14, 2.0) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>multiply(3.14, 2.0) = 6.28
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Calling factorial(int) -&gt; long long ---</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_longlong</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>factorial(5) = 120
+factorial(10) = 3628800
+factorial(20) = 2432902008176640000
+</code></pre></div>
+<h3 id="13-working-with-pointers-and-arrays">1.3 Working with Pointers and Arrays</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Calling square_array(double*, int) -&gt; void ---</span>
+<span class="c1"># We need to create a C-compatible array from Python</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># void return</span>
+
+<span class="c1"># Create a C array of 5 doubles</span>
+<span class="n">ArrayType</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">ArrayType</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># The C function modified our array in-place!</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Before: [1.0, 2.0, 3.0, 4.0, 5.0]
+After:  [1.0, 4.0, 9.0, 16.0, 25.0]
+</code></pre></div>
+<h3 id="14-working-with-strings">1.4 Working with Strings</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># --- Calling greet(const char*) -&gt; const char* ---</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">]</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
+
+<span class="c1"># C strings are bytes in Python, so we encode</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Aayush&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">greeting</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Hello, Aayush! Welcome from C.
+</code></pre></div>
+<h3 id="15-ctypes-type-mapping-reference">1.5 <code>ctypes</code> Type Mapping Reference</h3>
+<table>
+<thead>
+<tr>
+<th>C Type</th>
+<th><code>ctypes</code> Type</th>
+<th>Python Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td><code>c_int</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td><code>c_long</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td><code>c_longlong</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td><code>c_float</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td><code>c_double</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td><code>c_char</code></td>
+<td><code>bytes</code> (1 char)</td>
+</tr>
+<tr>
+<td><code>char*</code></td>
+<td><code>c_char_p</code></td>
+<td><code>bytes</code> or <code>None</code></td>
+</tr>
+<tr>
+<td><code>void*</code></td>
+<td><code>c_void_p</code></td>
+<td><code>int</code> or <code>None</code></td>
+</tr>
+<tr>
+<td><code>int*</code></td>
+<td><code>POINTER(c_int)</code></td>
+<td><code>ctypes</code> array</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td><code>c_bool</code></td>
+<td><code>bool</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="16-calling-system-libraries-with-ctypes">1.6 Calling System Libraries with <code>ctypes</code></h3>
+<p>You don't always need to write your own C code. You can call <strong>system libraries</strong> directly.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ctypes.util</span>
+
+<span class="c1"># Find and load the C math library</span>
+<span class="n">libm_path</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_library</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Math library path: </span><span class="si">{</span><span class="n">libm_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">libm_path</span><span class="p">:</span>
+    <span class="n">libm</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">libm_path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># On some systems, math functions are in libc</span>
+    <span class="n">libm</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Call the C sqrt function</span>
+<span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+<span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;C sqrt(144.0) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">144.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Call the C pow function</span>
+<span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+<span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;C pow(2, 10) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Math library path: /usr/lib/libm.dylib
+C sqrt(144.0) = 12.0
+C pow(2, 10) = 1024.0
+</code></pre></div>
+<h3 id="try-it-use-ctypes-to-call-strlen">Try It: Use ctypes to call <code>strlen</code></h3>
+<p>Load the C standard library and call the <code>strlen</code> function to find the length of a string.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
+<span class="c1"># Hint: strlen takes a const char* and returns a size_t (use c_size_t)</span>
+<span class="c1"># libc = ctypes.CDLL(None)  # loads the default C library</span>
+
+<span class="c1"># libc.strlen.argtypes = [???]</span>
+<span class="c1"># libc.strlen.restype = ???</span>
+<span class="c1"># result = libc.strlen(b&quot;Hello, World!&quot;)</span>
+<span class="c1"># print(f&quot;strlen = {result}&quot;)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
+<span class="c1"># Hint: strlen takes a const char* and returns a size_t (use c_size_t)</span>
+<span class="n">libc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># loads the default C library</span>
+
+<span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">]</span>
+<span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>strlen = 13
+</code></pre></div>
+<hr />
+<h2 id="2-cffi-c-foreign-function-interface">2. <code>cffi</code> -- C Foreign Function Interface</h2>
+<hr />
+<p><code>cffi</code> is a more modern and Pythonic alternative to <code>ctypes</code>. It has two modes:</p>
+<ul>
+<li><strong>ABI mode</strong> (like ctypes): Load and call shared libraries at runtime</li>
+<li><strong>API mode</strong>: Compile C code at build time for better performance and safety</li>
+</ul>
+<h3 id="why-cffi-over-ctypes">Why <code>cffi</code> over <code>ctypes</code>?</h3>
+<ul>
+<li>You write C declarations in actual C syntax (not ctypes wrappers)</li>
+<li>Better error messages</li>
+<li>Supports both ABI and API (compiled) mode</li>
+<li>Used by PyPy for its C extension support</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install cffi if needed</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">cffi</span> <span class="o">-</span><span class="n">q</span>
+</code></pre></div>
+<h3 id="21-abi-mode-loading-existing-libraries">2.1 ABI Mode -- Loading Existing Libraries</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cffi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FFI</span>
+
+<span class="n">ffi</span> <span class="o">=</span> <span class="n">FFI</span><span class="p">()</span>
+
+<span class="c1"># Declare the C functions we want to call</span>
+<span class="c1"># This looks like actual C header declarations!</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    int add(int a, int b);</span>
+<span class="s2">    double multiply(double a, double b);</span>
+<span class="s2">    long long factorial(int n);</span>
+<span class="s2">    void square_array(double* arr, int size);</span>
+<span class="s2">    const char* greet(const char* name);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load our compiled library</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">lib_name</span><span class="p">))</span>
+
+<span class="c1"># Call functions -- much cleaner than ctypes!</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(15, 27) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;multiply(2.5, 4.0) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(12) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>add(15, 27) = 42
+multiply(2.5, 4.0) = 10.0
+factorial(12) = 479001600
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Working with arrays in cffi</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;double[5]&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After:  </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Before: [1.0, 2.0, 3.0, 4.0, 5.0]
+After:  [1.0, 4.0, 9.0, 16.0, 25.0]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Working with strings in cffi</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Student&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Hello, Student! Welcome from C.
+</code></pre></div>
+<h3 id="22-api-mode-compile-c-code-inline">2.2 API Mode -- Compile C Code Inline</h3>
+<p>API mode compiles C code at build time, giving you better performance and type safety.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">cffi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FFI</span>
+
+<span class="n">ffi_builder</span> <span class="o">=</span> <span class="n">FFI</span><span class="p">()</span>
+
+<span class="c1"># Define the interface (what Python sees)</span>
+<span class="n">ffi_builder</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    int fibonacci(int n);</span>
+<span class="s2">    double distance(double x1, double y1, double x2, double y2);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Provide the actual C implementation</span>
+<span class="n">ffi_builder</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span><span class="s2">&quot;_math_helpers&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    #include &lt;math.h&gt;</span>
+
+<span class="s2">    int fibonacci(int n) {</span>
+<span class="s2">        if (n &lt;= 1) return n;</span>
+<span class="s2">        int a = 0, b = 1;</span>
+<span class="s2">        for (int i = 2; i &lt;= n; i++) {</span>
+<span class="s2">            int temp = a + b;</span>
+<span class="s2">            a = b;</span>
+<span class="s2">            b = temp;</span>
+<span class="s2">        }</span>
+<span class="s2">        return b;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    double distance(double x1, double y1, double x2, double y2) {</span>
+<span class="s2">        return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));</span>
+<span class="s2">    }</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">libraries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>  <span class="c1"># link against libm for sqrt</span>
+<span class="p">)</span>
+
+<span class="c1"># Compile the extension module</span>
+<span class="n">ffi_builder</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>generating ./_math_helpers.c
+the current directory is &#39;/Users/aayush/Documents/Kings/python-training/prg400&#39;
+
+
+ld: warning: duplicate -rpath &#39;/Users/aayush/micromamba/envs/stats/lib&#39; ignored
+
+
+
+
+
+&#39;/Users/aayush/Documents/Kings/python-training/prg400/_math_helpers.cpython-310-darwin.so&#39;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../lib&quot;</span><span class="p">))</span>
+<span class="c1"># Now import and use the compiled module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">_math_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ffi</span><span class="p">,</span> <span class="n">lib</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fibonacci(10) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fibonacci(30) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(1,2 -&gt; 4,6) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>fibonacci(10) = 55
+fibonacci(30) = 832040
+distance(0,0 -&gt; 3,4) = 5.0
+distance(1,2 -&gt; 4,6) = 5.0000
+</code></pre></div>
+<h3 id="ctypes-vs-cffi-comparison"><code>ctypes</code> vs <code>cffi</code> Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>ctypes</code></th>
+<th><code>cffi</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Part of stdlib</td>
+<td>Yes</td>
+<td>No (pip install)</td>
+</tr>
+<tr>
+<td>Type declarations</td>
+<td>Python objects (<code>c_int</code>, <code>c_double</code>)</td>
+<td>C syntax (<code>int</code>, <code>double</code>)</td>
+</tr>
+<tr>
+<td>Compilation support</td>
+<td>No (ABI only)</td>
+<td>Yes (API mode)</td>
+</tr>
+<tr>
+<td>Error messages</td>
+<td>Cryptic (segfaults)</td>
+<td>Better error reporting</td>
+</tr>
+<tr>
+<td>PyPy support</td>
+<td>Limited</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td>Learning curve</td>
+<td>Lower</td>
+<td>Slightly higher</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-python-c-api-writing-extension-modules">3. Python C API -- Writing Extension Modules</h2>
+<hr />
+<p>The <strong>Python C API</strong> lets you write C code that directly creates Python objects. This is how CPython itself is built and how many high-performance libraries (like NumPy) work internally.</p>
+<h3 id="when-to-use-the-c-api">When to Use the C API</h3>
+<ul>
+<li>You need <strong>maximum performance</strong> and control</li>
+<li>You're building a library that will be distributed to many users</li>
+<li>You want tight integration with Python's internals</li>
+</ul>
+<h3 id="trade-offs">Trade-offs</h3>
+<ul>
+<li>Most complex approach -- lots of boilerplate</li>
+<li>Manual reference counting (<code>Py_INCREF</code> / <code>Py_DECREF</code>)</li>
+<li>Easy to introduce memory leaks or segfaults</li>
+<li>Only works with CPython (not PyPy, Jython, etc.)</li>
+</ul>
+<h3 id="31-anatomy-of-a-c-extension-module">3.1 Anatomy of a C Extension Module</h3>
+<p>A C extension module has three parts:</p>
+<ol>
+<li><strong>Function implementations</strong> -- the actual C functions that do work</li>
+<li><strong>Method table</strong> -- maps Python function names to C function pointers</li>
+<li><strong>Module definition</strong> -- describes the module to Python</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Let&#39;s write a complete C extension module</span>
+<span class="n">c_extension_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;Python.h&gt;</span>
+
+<span class="s2">// ========================================</span>
+<span class="s2">// Part 1: Function Implementations</span>
+<span class="s2">// ========================================</span>
+
+<span class="s2">// Every C function that will be callable from Python has the signature:</span>
+<span class="s2">//   static PyObject* func_name(PyObject* self, PyObject* args)</span>
+
+<span class="s2">static PyObject* mymodule_add(PyObject* self, PyObject* args) {</span>
+<span class="s2">    int a, b;</span>
+
+<span class="s2">    // Parse Python arguments: &quot;ii&quot; means two integers</span>
+<span class="s2">    if (!PyArg_ParseTuple(args, &quot;ii&quot;, &amp;a, &amp;b)) {</span>
+<span class="s2">        return NULL;  // Raise TypeError on parse failure</span>
+<span class="s2">    }</span>
+
+<span class="s2">    // Return a Python int object</span>
+<span class="s2">    return PyLong_FromLong(a + b);</span>
+<span class="s2">}</span>
+
+<span class="s2">static PyObject* mymodule_fibonacci(PyObject* self, PyObject* args) {</span>
+<span class="s2">    int n;</span>
+
+<span class="s2">    if (!PyArg_ParseTuple(args, &quot;i&quot;, &amp;n)) {</span>
+<span class="s2">        return NULL;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    if (n &lt; 0) {</span>
+<span class="s2">        PyErr_SetString(PyExc_ValueError, &quot;n must be non-negative&quot;);</span>
+<span class="s2">        return NULL;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    long long a = 0, b = 1;</span>
+<span class="s2">    for (int i = 0; i &lt; n; i++) {</span>
+<span class="s2">        long long temp = a + b;</span>
+<span class="s2">        a = b;</span>
+<span class="s2">        b = temp;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    return PyLong_FromLongLong(a);</span>
+<span class="s2">}</span>
+
+<span class="s2">static PyObject* mymodule_sum_list(PyObject* self, PyObject* args) {</span>
+<span class="s2">    PyObject* list_obj;</span>
+
+<span class="s2">    // &quot;O&quot; means a single Python object</span>
+<span class="s2">    if (!PyArg_ParseTuple(args, &quot;O&quot;, &amp;list_obj)) {</span>
+<span class="s2">        return NULL;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    // Verify it&#39;s actually a list</span>
+<span class="s2">    if (!PyList_Check(list_obj)) {</span>
+<span class="s2">        PyErr_SetString(PyExc_TypeError, &quot;Expected a list&quot;);</span>
+<span class="s2">        return NULL;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    double total = 0.0;</span>
+<span class="s2">    Py_ssize_t size = PyList_Size(list_obj);</span>
+
+<span class="s2">    for (Py_ssize_t i = 0; i &lt; size; i++) {</span>
+<span class="s2">        PyObject* item = PyList_GetItem(list_obj, i);  // Borrowed reference</span>
+
+<span class="s2">        if (PyLong_Check(item)) {</span>
+<span class="s2">            total += PyLong_AsDouble(item);</span>
+<span class="s2">        } else if (PyFloat_Check(item)) {</span>
+<span class="s2">            total += PyFloat_AsDouble(item);</span>
+<span class="s2">        } else {</span>
+<span class="s2">            PyErr_SetString(PyExc_TypeError, &quot;List must contain only numbers&quot;);</span>
+<span class="s2">            return NULL;</span>
+<span class="s2">        }</span>
+<span class="s2">    }</span>
+
+<span class="s2">    return PyFloat_FromDouble(total);</span>
+<span class="s2">}</span>
+
+<span class="s2">// ========================================</span>
+<span class="s2">// Part 2: Method Table</span>
+<span class="s2">// ========================================</span>
+
+<span class="s2">static PyMethodDef MyModuleMethods[] = {</span>
+<span class="s2">    {&quot;add&quot;,       mymodule_add,       METH_VARARGS, &quot;Add two integers.&quot;},</span>
+<span class="s2">    {&quot;fibonacci&quot;, mymodule_fibonacci, METH_VARARGS, &quot;Compute nth Fibonacci number.&quot;},</span>
+<span class="s2">    {&quot;sum_list&quot;,  mymodule_sum_list,  METH_VARARGS, &quot;Sum a list of numbers.&quot;},</span>
+<span class="s2">    {NULL, NULL, 0, NULL}  // Sentinel: marks end of table</span>
+<span class="s2">};</span>
+
+<span class="s2">// ========================================</span>
+<span class="s2">// Part 3: Module Definition</span>
+<span class="s2">// ========================================</span>
+
+<span class="s2">static struct PyModuleDef mymodule = {</span>
+<span class="s2">    PyModuleDef_HEAD_INIT,</span>
+<span class="s2">    &quot;mymodule&quot;,           // Module name</span>
+<span class="s2">    &quot;A sample C extension module for demonstration.&quot;,  // Docstring</span>
+<span class="s2">    -1,                    // -1 means module keeps state in global variables</span>
+<span class="s2">    MyModuleMethods        // Method table</span>
+<span class="s2">};</span>
+
+<span class="s2">// Module initialization function</span>
+<span class="s2">// MUST be named PyInit_&lt;modulename&gt;</span>
+<span class="s2">PyMODINIT_FUNC PyInit_mymodule(void) {</span>
+<span class="s2">    return PyModule_Create(&amp;mymodule);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mymodule.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_extension_code</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C extension source written: mymodule.c&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>C extension source written: mymodule.c
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write a setup.py to build the extension</span>
+<span class="n">setup_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">from setuptools import setup, Extension</span>
+
+<span class="s2">module = Extension(</span>
+<span class="s2">    &#39;mymodule&#39;,</span>
+<span class="s2">    sources=[&#39;mymodule.c&#39;],</span>
+<span class="s2">)</span>
+
+<span class="s2">setup(</span>
+<span class="s2">    name=&#39;mymodule&#39;,</span>
+<span class="s2">    version=&#39;1.0&#39;,</span>
+<span class="s2">    description=&#39;A sample C extension module&#39;,</span>
+<span class="s2">    ext_modules=[module],</span>
+<span class="s2">)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;setup.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">setup_code</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setup.py written&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>setup.py written
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build the extension module</span>
+<span class="err">!</span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="o">|</span> <span class="n">tail</span> <span class="o">-</span><span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>building &#39;mymodule&#39; extension
+clang -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -I/Users/aayush/micromamba/envs/stats/include/python3.10 -c mymodule.c -o build/temp.macosx-11.0-arm64-cpython-310/mymodule.o
+clang -bundle -undefined dynamic_lookup -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib build/temp.macosx-11.0-arm64-cpython-310/mymodule.o -o build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so
+ld: warning: duplicate -rpath &#39;/Users/aayush/micromamba/envs/stats/lib&#39; ignored
+copying build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so -&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use our C extension module!</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mymodule</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.add(100, 200) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.fibonacci(10) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.fibonacci(50) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.sum_list([1, 2.5, 3, 4.5]) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>mymodule.add(100, 200) = 300
+mymodule.fibonacci(10) = 55
+mymodule.fibonacci(50) = 12586269025
+mymodule.sum_list([1, 2.5, 3, 4.5]) = 11.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Error handling works too!</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">(</span><span class="s2">&quot;not a list&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Caught error: n must be non-negative
+Caught error: Expected a list
+Caught error: List must contain only numbers
+</code></pre></div>
+<h3 id="32-pyarg_parsetuple-format-codes">3.2 PyArg_ParseTuple Format Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>C Type</th>
+<th>Python Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>i</code></td>
+<td><code>int</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td><code>long</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>L</code></td>
+<td><code>long long</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td><code>float</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td><code>double</code></td>
+<td><code>float</code></td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td><code>const char*</code></td>
+<td><code>str</code></td>
+</tr>
+<tr>
+<td><code>O</code></td>
+<td><code>PyObject*</code></td>
+<td>any object</td>
+</tr>
+<tr>
+<td><code>O!</code></td>
+<td><code>PyObject*</code> (with type check)</td>
+<td>specific type</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>--</td>
+<td>marks start of optional args</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-reference-counting-the-critical-concept">3.3 Reference Counting: The Critical Concept</h3>
+<p>In the C API, <strong>you</strong> manage memory. Every Python object has a reference count.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// You got a NEW reference (you own it) -- must DECREF when done</span>
+<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="c1">// ... use result ...</span>
+<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w">  </span><span class="c1">// Release your reference</span>
+
+<span class="c1">// You got a BORROWED reference (someone else owns it) -- do NOT DECREF</span>
+<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyList_GetItem</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Borrowed!</span>
+<span class="c1">// ... use item but do NOT Py_DECREF(item) ...</span>
+</code></pre></div>
+<p><strong>Rules:</strong>
+- Functions that <strong>create</strong> objects give you a <strong>new</strong> reference (you must DECREF)
+- Functions that <strong>get</strong> items from containers give you a <strong>borrowed</strong> reference (don't DECREF)
+- When returning an object from your function, you transfer ownership to the caller
+- <code>Py_INCREF</code> if you want to keep a borrowed reference alive</p>
+<hr />
+<h2 id="4-pybind11-modern-c-bindings">4. <code>pybind11</code> -- Modern C++ Bindings</h2>
+<hr />
+<p><code>pybind11</code> is a <strong>header-only</strong> C++ library that makes it easy to expose C++ code to Python. It's inspired by Boost.Python but is much lighter and uses modern C++11/14/17 features.</p>
+<h3 id="why-pybind11">Why <code>pybind11</code>?</h3>
+<ul>
+<li>Clean, modern C++ syntax</li>
+<li>Automatic type conversions (STL containers &lt;-&gt; Python types)</li>
+<li>Supports classes, inheritance, overloading, lambdas</li>
+<li>Header-only -- easy to integrate</li>
+<li>The <strong>most popular</strong> way to create C++ bindings today</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install pybind11</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pybind11</span> <span class="o">-</span><span class="n">q</span>
+</code></pre></div>
+<h3 id="41-a-simple-pybind11-module">4.1 A Simple pybind11 Module</h3>
+<div class="highlight"><pre><span></span><code><span class="n">cpp_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;pybind11/pybind11.h&gt;</span>
+<span class="s2">#include &lt;pybind11/stl.h&gt;  // For automatic STL &lt;-&gt; Python conversions</span>
+<span class="s2">#include &lt;string&gt;</span>
+<span class="s2">#include &lt;vector&gt;</span>
+<span class="s2">#include &lt;numeric&gt;</span>
+<span class="s2">#include &lt;cmath&gt;</span>
+<span class="s2">#include &lt;algorithm&gt;</span>
+
+<span class="s2">namespace py = pybind11;</span>
+
+<span class="s2">// ---- Simple Functions ----</span>
+
+<span class="s2">int add(int a, int b) {</span>
+<span class="s2">    return a + b;</span>
+<span class="s2">}</span>
+
+<span class="s2">double hypotenuse(double a, double b) {</span>
+<span class="s2">    return std::sqrt(a * a + b * b);</span>
+<span class="s2">}</span>
+
+<span class="s2">std::string repeat_string(const std::string&amp; s, int n) {</span>
+<span class="s2">    std::string result;</span>
+<span class="s2">    for (int i = 0; i &lt; n; i++) {</span>
+<span class="s2">        result += s;</span>
+<span class="s2">    }</span>
+<span class="s2">    return result;</span>
+<span class="s2">}</span>
+
+<span class="s2">// ---- Working with STL Containers ----</span>
+
+<span class="s2">// pybind11 automatically converts std::vector &lt;-&gt; Python list!</span>
+<span class="s2">std::vector&lt;int&gt; range_vec(int start, int end) {</span>
+<span class="s2">    std::vector&lt;int&gt; result;</span>
+<span class="s2">    for (int i = start; i &lt; end; i++) {</span>
+<span class="s2">        result.push_back(i);</span>
+<span class="s2">    }</span>
+<span class="s2">    return result;</span>
+<span class="s2">}</span>
+
+<span class="s2">double dot_product(const std::vector&lt;double&gt;&amp; a, const std::vector&lt;double&gt;&amp; b) {</span>
+<span class="s2">    if (a.size() != b.size()) {</span>
+<span class="s2">        throw std::runtime_error(&quot;Vectors must have the same length&quot;);</span>
+<span class="s2">    }</span>
+<span class="s2">    return std::inner_product(a.begin(), a.end(), b.begin(), 0.0);</span>
+<span class="s2">}</span>
+
+<span class="s2">// ---- A C++ Class Exposed to Python ----</span>
+
+<span class="s2">class Vector2D {</span>
+<span class="s2">public:</span>
+<span class="s2">    double x, y;</span>
+
+<span class="s2">    Vector2D(double x = 0, double y = 0) : x(x), y(y) </span><span class="si">{}</span>
+
+<span class="s2">    double magnitude() const {</span>
+<span class="s2">        return std::sqrt(x * x + y * y);</span>
+<span class="s2">    }</span>
+
+<span class="s2">    Vector2D normalized() const {</span>
+<span class="s2">        double mag = magnitude();</span>
+<span class="s2">        if (mag == 0) throw std::runtime_error(&quot;Cannot normalize zero vector&quot;);</span>
+<span class="s2">        return Vector2D(x / mag, y / mag);</span>
+<span class="s2">    }</span>
+
+<span class="s2">    Vector2D operator+(const Vector2D&amp; other) const {</span>
+<span class="s2">        return Vector2D(x + other.x, y + other.y);</span>
+<span class="s2">    }</span>
+
+<span class="s2">    double dot(const Vector2D&amp; other) const {</span>
+<span class="s2">        return x * other.x + y * other.y;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    std::string repr() const {</span>
+<span class="s2">        return &quot;Vector2D(&quot; + std::to_string(x) + &quot;, &quot; + std::to_string(y) + &quot;)&quot;;</span>
+<span class="s2">    }</span>
+<span class="s2">};</span>
+
+<span class="s2">// ---- Module Definition ----</span>
+
+<span class="s2">PYBIND11_MODULE(mathtools, m) {</span>
+<span class="s2">    m.doc() = &quot;A C++ math utilities module built with pybind11&quot;;</span>
+
+<span class="s2">    // Bind simple functions</span>
+<span class="s2">    m.def(&quot;add&quot;, &amp;add, &quot;Add two integers&quot;,</span>
+<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));  // Named arguments!</span>
+
+<span class="s2">    m.def(&quot;hypotenuse&quot;, &amp;hypotenuse, &quot;Compute hypotenuse&quot;,</span>
+<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));</span>
+
+<span class="s2">    m.def(&quot;repeat_string&quot;, &amp;repeat_string, &quot;Repeat a string n times&quot;,</span>
+<span class="s2">          py::arg(&quot;s&quot;), py::arg(&quot;n&quot;) = 2);  // Default argument!</span>
+
+<span class="s2">    m.def(&quot;range_vec&quot;, &amp;range_vec, &quot;Create a vector of integers&quot;,</span>
+<span class="s2">          py::arg(&quot;start&quot;), py::arg(&quot;end&quot;));</span>
+
+<span class="s2">    m.def(&quot;dot_product&quot;, &amp;dot_product, &quot;Compute dot product of two vectors&quot;,</span>
+<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));</span>
+
+<span class="s2">    // Bind a C++ class</span>
+<span class="s2">    py::class_&lt;Vector2D&gt;(m, &quot;Vector2D&quot;)</span>
+<span class="s2">        .def(py::init&lt;double, double&gt;(),   // Constructor</span>
+<span class="s2">             py::arg(&quot;x&quot;) = 0, py::arg(&quot;y&quot;) = 0)</span>
+<span class="s2">        .def_readwrite(&quot;x&quot;, &amp;Vector2D::x)  // Public attributes</span>
+<span class="s2">        .def_readwrite(&quot;y&quot;, &amp;Vector2D::y)</span>
+<span class="s2">        .def(&quot;magnitude&quot;, &amp;Vector2D::magnitude)</span>
+<span class="s2">        .def(&quot;normalized&quot;, &amp;Vector2D::normalized)</span>
+<span class="s2">        .def(&quot;dot&quot;, &amp;Vector2D::dot, py::arg(&quot;other&quot;))</span>
+<span class="s2">        .def(&quot;__add__&quot;, &amp;Vector2D::operator+)  // Python operator overloading!</span>
+<span class="s2">        .def(&quot;__repr__&quot;, &amp;Vector2D::repr);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mathtools.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cpp_code</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C++ source written: mathtools.cpp&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>C++ source written: mathtools.cpp
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build using pybind11&#39;s build helpers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pybind11</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sysconfig</span>
+
+<span class="c1"># Get compiler flags</span>
+<span class="n">include_flags</span> <span class="o">=</span> <span class="err">!</span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pybind11</span> <span class="o">--</span><span class="n">includes</span>
+<span class="n">include_flags</span> <span class="o">=</span> <span class="n">include_flags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">ext_suffix</span> <span class="o">=</span> <span class="n">sysconfig</span><span class="o">.</span><span class="n">get_config_var</span><span class="p">(</span><span class="s1">&#39;EXT_SUFFIX&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Include flags: </span><span class="si">{</span><span class="n">include_flags</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extension suffix: </span><span class="si">{</span><span class="n">ext_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compile</span>
+<span class="err">!</span><span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">O2</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">17</span> <span class="o">-</span><span class="n">fPIC</span> <span class="o">-</span><span class="n">undefined</span> <span class="n">dynamic_lookup</span> <span class="p">{</span><span class="n">include_flags</span><span class="p">}</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">mathtools</span><span class="p">{</span><span class="n">ext_suffix</span><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Include flags: -I/Users/aayush/micromamba/envs/stats/include/python3.10 -I/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/pybind11/include
+Extension suffix: .cpython-310-darwin.so
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">mathtools</span>
+
+<span class="c1"># Simple functions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(a=5, b=3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hypotenuse(3, 4) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repeat_string(&#39;Ha&#39;, 3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">&#39;Ha&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repeat_string(&#39;Hi&#39;) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">&#39;Hi&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">  (default n=2)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>add(a=5, b=3) = 8
+hypotenuse(3, 4) = 5.0
+repeat_string(&#39;Ha&#39;, 3) = HaHaHa
+repeat_string(&#39;Hi&#39;) = HiHi  (default n=2)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># STL containers converted automatically!</span>
+<span class="n">nums</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">range_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;range_vec(1, 6) = </span><span class="si">{</span><span class="n">nums</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Pass Python lists to C++ std::vector</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">dot_product</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dot_product([1,2,3], [4,5,6]) = </span><span class="si">{</span><span class="n">dp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>range_vec(1, 6) = [1, 2, 3, 4, 5]
+Type: &lt;class &#39;list&#39;&gt;
+dot_product([1,2,3], [4,5,6]) = 32.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using the C++ class from Python</span>
+<span class="n">v1</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">v2</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1 = </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v2 = </span><span class="si">{</span><span class="n">v2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.magnitude() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.normalized() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1 + v2 = </span><span class="si">{</span><span class="n">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.dot(v2) = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Access attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.x = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, v1.y = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After v1.x = 10: </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>v1 = Vector2D(3.000000, 4.000000)
+v2 = Vector2D(1.000000, 2.000000)
+v1.magnitude() = 5.0
+v1.normalized() = Vector2D(0.600000, 0.800000)
+v1 + v2 = Vector2D(4.000000, 6.000000)
+v1.dot(v2) = 11.0
+v1.x = 3.0, v1.y = 4.0
+After v1.x = 10: Vector2D(10.000000, 4.000000)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># C++ exceptions become Python exceptions!</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mathtools</span><span class="o">.</span><span class="n">dot_product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">zero</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Caught: Vectors must have the same length
+Caught: Cannot normalize zero vector
+</code></pre></div>
+<hr />
+<h2 id="5-cython-python-like-syntax-c-like-speed">5. Cython -- Python-like Syntax, C-like Speed</h2>
+<hr />
+<p>Cython is a <strong>superset of Python</strong> that adds optional C type declarations. You write <code>.pyx</code> files that look almost like Python but compile to C.</p>
+<h3 id="why-cython">Why Cython?</h3>
+<ul>
+<li>Easiest migration path from pure Python to C speed</li>
+<li>Write Python-like code with type annotations for speed</li>
+<li>Can also wrap existing C/C++ libraries</li>
+<li>Used by major projects: scikit-learn, pandas, lxml</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">cython</span> <span class="o">-</span><span class="n">q</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Cython can be used directly in Jupyter with the %%cython magic</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">Cython</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>The Cython extension is already loaded. To reload it, use:
+  %reload_ext Cython
+</code></pre></div>
+<h3 id="51-basic-cython-adding-type-declarations">5.1 Basic Cython: Adding Type Declarations</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pure Python version -- for comparison</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">python_primes</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all primes up to n using trial division.&quot;&quot;&quot;</span>
+    <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">divisor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">candidate</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
+            <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">primes</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="n">python_primes</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>3.09 ms ± 77.7 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
+<span class="c"># Cython version -- almost the same code, but with type declarations!</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cython_primes</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all primes up to n using trial division (Cython).&quot;&quot;&quot;</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">primes</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">candidate</span><span class="p">,</span> <span class="nf">divisor</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">bint</span> <span class="nf">is_prime</span>
+
+    <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
+        <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">for</span> <span class="n">divisor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">candidate</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
+                <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
+            <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">primes</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Compare performance!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pure Python:&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">python_primes</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cython:&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">cython_primes</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># Verify correctness</span>
+<span class="c1"># assert python_primes(100) == cython_primes(100)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">python_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cython_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Results match! Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cython_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> primes up to 100&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Pure Python:
+3.03 ms ± 146 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+
+Cython:
+438 μs ± 11.7 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 37, 41, 43, 47, 49, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+Results match! Found 27 primes up to 100
+</code></pre></div>
+<h3 id="52-cython-with-c-functions">5.2 Cython with C Functions</h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
+<span class="c"># Cython can call C standard library functions directly!</span>
+<span class="k">from</span><span class="w"> </span><span class="nn">libc.math</span><span class="w"> </span><span class="k">cimport</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">M_PI</span>
+<span class="k">from</span><span class="w"> </span><span class="nn">libc.stdlib</span><span class="w"> </span><span class="k">cimport</span> <span class="n">malloc</span><span class="p">,</span> <span class="n">free</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fast_distance</span><span class="p">(</span><span class="n">double</span> <span class="n">x1</span><span class="p">,</span> <span class="n">double</span> <span class="n">y1</span><span class="p">,</span> <span class="n">double</span> <span class="n">x2</span><span class="p">,</span> <span class="n">double</span> <span class="n">y2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Euclidean distance using C&#39;s sqrt.&quot;&quot;&quot;</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dx</span><span class="w"> </span><span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dy</span><span class="w"> </span><span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">circle_points</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate n points on a unit circle.&quot;&quot;&quot;</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">points</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">angle</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">points</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">fast_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">circle_points</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">8 points on unit circle:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Point </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>distance(0,0 -&gt; 3,4) = 5.0
+
+8 points on unit circle:
+  Point 0: ( 1.0000,  0.0000)
+  Point 1: ( 0.7071,  0.7071)
+  Point 2: ( 0.0000,  1.0000)
+  Point 3: (-0.7071,  0.7071)
+  Point 4: (-1.0000,  0.0000)
+  Point 5: (-0.7071, -0.7071)
+  Point 6: (-0.0000, -1.0000)
+  Point 7: ( 0.7071, -0.7071)
+</code></pre></div>
+<h3 id="53-wrapping-existing-c-code-with-cython">5.3 Wrapping Existing C Code with Cython</h3>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
+<span class="c"># Cython can wrap external C functions</span>
+<span class="c"># First, declare the C interface (like a header file)</span>
+
+<span class="k">cdef</span><span class="w"> </span><span class="kr">extern</span> <span class="k">from</span> <span class="s">&quot;string.h&quot;</span><span class="p">:</span>
+    <span class="n">size_t</span> <span class="n">strlen</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+    <span class="nb">int</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s1</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s2</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">c_string_length</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get string length using C&#39;s strlen.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">c_string_compare</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s1</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">s2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare strings using C&#39;s strcmp.</span>
+<span class="sd">    Returns: negative if s1 &lt; s2, 0 if equal, positive if s1 &gt; s2&quot;&quot;&quot;</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">result</span><span class="w"> </span><span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mf">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &lt; {s2}&quot;</span>
+    <span class="k">elif</span> <span class="n">result</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} == {s2}&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &gt; {s2}&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Hello&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Python Bindings&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Python Bindings&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;banana&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;zebra&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;aardvark&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>strlen(&#39;Hello&#39;) = 5
+strlen(&#39;Python Bindings&#39;) = 15
+
+strcmp: b&#39;apple&#39; &lt; b&#39;banana&#39;
+strcmp: b&#39;hello&#39; == b&#39;hello&#39;
+strcmp: b&#39;zebra&#39; &gt; b&#39;aardvark&#39;
+</code></pre></div>
+<hr />
+<h2 id="6-performance-comparison">6. Performance Comparison</h2>
+<hr />
+<p>Let's benchmark all approaches on the same task: computing the sum of squares of a large list.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cython_sum_squares</span><span class="p">(</span><span class="nb">list</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">total</span><span class="w"> </span><span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">x</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
+    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">n</span><span class="w"> </span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">total</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Prepare test data</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100001</span><span class="p">))</span>  <span class="c1"># 100,000 numbers</span>
+
+<span class="c1"># --- Pure Python ---</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">python_sum_squares</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="c1"># --- ctypes version ---</span>
+<span class="c1"># Reload the ctypes library (lib was overwritten by the cffi API mode import above)</span>
+<span class="n">ctypes_lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">lib_name</span><span class="p">))</span>
+<span class="n">ctypes_lib</span><span class="o">.</span><span class="n">square_array</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+<span class="n">ctypes_lib</span><span class="o">.</span><span class="n">square_array</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ctypes_sum_squares</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">ArrType</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">ArrType</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">ctypes_lib</span><span class="o">.</span><span class="n">square_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+<span class="c1"># --- Benchmark ---</span>
+<span class="n">approaches</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Pure Python&quot;</span><span class="p">,</span> <span class="n">python_sum_squares</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Python built-in sum&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">&quot;ctypes (C)&quot;</span><span class="p">,</span> <span class="n">ctypes_sum_squares</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Cython&quot;</span><span class="p">,</span> <span class="n">cython_sum_squares</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Approach&#39;</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Time (ms)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Speedup&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">baseline</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">approaches</span><span class="p">:</span>
+    <span class="c1"># Warm up</span>
+    <span class="n">func</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+
+    <span class="c1"># Time it</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">1000</span>  <span class="c1"># ms</span>
+
+    <span class="k">if</span> <span class="n">baseline</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">baseline</span> <span class="o">=</span> <span class="n">elapsed</span>
+
+    <span class="n">speedup</span> <span class="o">=</span> <span class="n">baseline</span> <span class="o">/</span> <span class="n">elapsed</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">&gt;10.3f</span><span class="si">}</span><span class="s2">ms </span><span class="si">{</span><span class="n">speedup</span><span class="si">:</span><span class="s2">&gt;9.1f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Approach                     Time (ms)    Speedup
+--------------------------------------------------
+Pure Python                    2.690ms       1.0x
+Python built-in sum            2.276ms       1.2x
+ctypes (C)                     8.426ms       0.3x
+Cython                         0.608ms       4.4x
+</code></pre></div>
+<hr />
+<h2 id="7-structures-and-complex-data-types">7. Structures and Complex Data Types</h2>
+<hr />
+<p>Real-world C/C++ code often uses structs. Let's see how each approach handles them.</p>
+<h3 id="71-structs-with-ctypes">7.1 Structs with <code>ctypes</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write a C library with structs</span>
+<span class="n">struct_c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;stdio.h&gt;</span>
+<span class="s2">#include &lt;math.h&gt;</span>
+<span class="s2">#include &lt;string.h&gt;</span>
+
+<span class="s2">typedef struct {</span>
+<span class="s2">    double x;</span>
+<span class="s2">    double y;</span>
+<span class="s2">    double z;</span>
+<span class="s2">} Point3D;</span>
+
+<span class="s2">double point_distance(Point3D* a, Point3D* b) {</span>
+<span class="s2">    double dx = b-&gt;x - a-&gt;x;</span>
+<span class="s2">    double dy = b-&gt;y - a-&gt;y;</span>
+<span class="s2">    double dz = b-&gt;z - a-&gt;z;</span>
+<span class="s2">    return sqrt(dx*dx + dy*dy + dz*dz);</span>
+<span class="s2">}</span>
+
+<span class="s2">void point_midpoint(Point3D* a, Point3D* b, Point3D* result) {</span>
+<span class="s2">    result-&gt;x = (a-&gt;x + b-&gt;x) / 2.0;</span>
+<span class="s2">    result-&gt;y = (a-&gt;y + b-&gt;y) / 2.0;</span>
+<span class="s2">    result-&gt;z = (a-&gt;z + b-&gt;z) / 2.0;</span>
+<span class="s2">}</span>
+
+<span class="s2">typedef struct {</span>
+<span class="s2">    char name[64];</span>
+<span class="s2">    int age;</span>
+<span class="s2">    double gpa;</span>
+<span class="s2">} Student;</span>
+
+<span class="s2">void print_student(Student* s) {</span>
+<span class="s2">    printf(&quot;Student: </span><span class="si">%s</span><span class="s2">, Age: </span><span class="si">%d</span><span class="s2">, GPA: </span><span class="si">%.2f</span><span class="s2">\n&quot;, s-&gt;name, s-&gt;age, s-&gt;gpa);</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;structs.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">struct_c_code</span><span class="p">)</span>
+
+<span class="c1"># Compile</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">dylib</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.dylib&quot;</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">so</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">lm</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.so&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">dll</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.dll&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled: </span><span class="si">{</span><span class="n">struct_lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Compiled: structs.dylib
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Define the C struct as a Python class</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point3D</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Point3D(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span> <span class="o">*</span> <span class="mi">64</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;gpa&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+    <span class="p">]</span>
+
+<span class="c1"># Load the library</span>
+<span class="n">slib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">struct_lib_name</span><span class="p">))</span>
+
+<span class="c1"># Set up function signatures</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">point_distance</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point3D</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point3D</span><span class="p">)]</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">point_distance</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+
+<span class="n">slib</span><span class="o">.</span><span class="n">point_midpoint</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point3D</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point3D</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Point3D</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">point_midpoint</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Create struct instances and use them</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">slib</span><span class="o">.</span><span class="n">point_distance</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance between </span><span class="si">{</span><span class="n">p1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">p2</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">dist</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">mid</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">()</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">point_midpoint</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p2</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Midpoint = </span><span class="si">{</span><span class="n">mid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Distance between Point3D(1.0, 2.0, 3.0) and Point3D(4.0, 6.0, 3.0) = 5.0000
+Midpoint = Point3D(2.5, 4.0, 3.0)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using a struct with strings</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">print_student</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Student</span><span class="p">)]</span>
+<span class="n">slib</span><span class="o">.</span><span class="n">print_student</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<span class="n">student</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Alice Johnson&quot;</span>  <span class="c1"># C strings are bytes</span>
+<span class="n">student</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">21</span>
+<span class="n">student</span><span class="o">.</span><span class="n">gpa</span> <span class="o">=</span> <span class="mf">3.85</span>
+
+<span class="n">slib</span><span class="o">.</span><span class="n">print_student</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">student</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Student: Alice Johnson, Age: 21, GPA: 3.85
+</code></pre></div>
+<hr />
+<h2 id="8-callbacks-passing-python-functions-to-c">8. Callbacks: Passing Python Functions to C</h2>
+<hr />
+<p>Sometimes C code needs to call back into Python. This is common in event-driven code, sorting algorithms, and numerical methods.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write C code that accepts function pointers</span>
+<span class="n">callback_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">#include &lt;stdio.h&gt;</span>
+
+<span class="s2">// Type for a callback function: takes a double, returns a double</span>
+<span class="s2">typedef double (*MathFunc)(double);</span>
+
+<span class="s2">// Apply a function to each element of an array</span>
+<span class="s2">void apply_func(double* arr, int size, MathFunc func) {</span>
+<span class="s2">    for (int i = 0; i &lt; size; i++) {</span>
+<span class="s2">        arr[i] = func(arr[i]);</span>
+<span class="s2">    }</span>
+<span class="s2">}</span>
+
+<span class="s2">// Numerical integration using the trapezoidal rule</span>
+<span class="s2">double integrate(MathFunc f, double a, double b, int n) {</span>
+<span class="s2">    double h = (b - a) / n;</span>
+<span class="s2">    double sum = 0.5 * (f(a) + f(b));</span>
+<span class="s2">    for (int i = 1; i &lt; n; i++) {</span>
+<span class="s2">        sum += f(a + i * h);</span>
+<span class="s2">    }</span>
+<span class="s2">    return sum * h;</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;callbacks.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">callback_code</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">dylib</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.dylib&quot;</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">so</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.so&quot;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">dll</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.dll&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled: </span><span class="si">{</span><span class="n">cb_lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Compiled: callbacks.dylib
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="c1"># Define the callback type: double (*)(double)</span>
+<span class="n">MATHFUNC</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CFUNCTYPE</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)</span>
+
+<span class="c1"># Load the library</span>
+<span class="n">cblib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">cb_lib_name</span><span class="p">))</span>
+
+<span class="c1"># Set up apply_func</span>
+<span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">MATHFUNC</span>
+<span class="p">]</span>
+<span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Create a Python callback and wrap it</span>
+<span class="nd">@MATHFUNC</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="nd">@MATHFUNC</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+<span class="c1"># Apply the callback</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">square</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Squared:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Reset and try cube</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cube</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cubed:    </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Original: [1.0, 2.0, 3.0, 4.0, 5.0]
+Squared:  [1.0, 4.0, 9.0, 16.0, 25.0]
+Cubed:    [1.0, 8.0, 27.0, 64.0, 125.0]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Numerical integration with callbacks</span>
+<span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">MATHFUNC</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+<span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+
+<span class="c1"># Integrate sin(x) from 0 to pi =&gt; should be 2.0</span>
+<span class="nd">@MATHFUNC</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sin_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sin_func</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Integral of sin(x) from 0 to pi = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 2.0)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Integrate x^2 from 0 to 1 =&gt; should be 1/3 = 0.333...</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Integral of x^2 from 0 to 1 = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 0.333333)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Integral of sin(x) from 0 to pi = 2.000000 (expected: 2.0)
+Integral of x^2 from 0 to 1 = 0.333333 (expected: 0.333333)
+</code></pre></div>
+<hr />
+<h2 id="9-swig-simplified-wrapper-and-interface-generator">9. SWIG -- Simplified Wrapper and Interface Generator</h2>
+<hr />
+<p>SWIG is a tool that <strong>automatically generates</strong> binding code for multiple languages (Python, Java, Ruby, etc.) from C/C++ header files.</p>
+<h3 id="how-swig-works">How SWIG Works</h3>
+<div class="highlight"><pre><span></span><code>  mylib.h (C/C++ header)  +  mylib.i (SWIG interface file)
+                    |
+                    v
+              swig -python
+                    |
+                    v
+        mylib_wrap.c (auto-generated)  +  mylib.py (Python wrapper)
+                    |
+                    v
+              gcc / compile
+                    |
+                    v
+           _mylib.so (shared library)
+</code></pre></div>
+<h3 id="when-to-use-swig">When to Use SWIG</h3>
+<ul>
+<li>You have a large existing C/C++ codebase</li>
+<li>You need bindings for multiple languages (not just Python)</li>
+<li>You want auto-generated wrappers with minimal hand-written code</li>
+</ul>
+<h3 id="swig-interface-file-example">SWIG Interface File Example</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// mylib.i -- SWIG interface file</span>
+<span class="o">%</span><span class="n">module</span><span class="w"> </span><span class="n">mylib</span>
+<span class="o">%</span><span class="p">{</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mylib.h&quot;</span><span class="c1">    // Include our header</span>
+<span class="o">%</span><span class="p">}</span>
+
+<span class="c1">// Tell SWIG which functions to wrap</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</code></pre></div>
+<p>Then build with:
+<div class="highlight"><pre><span></span><code>swig<span class="w"> </span>-python<span class="w"> </span>mylib.i
+gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> </span>-I/usr/include/python3.x<span class="w"> </span>mylib.c<span class="w"> </span>mylib_wrap.c<span class="w"> </span>-o<span class="w"> </span>_mylib.so
+</code></pre></div></p>
+<p>SWIG is powerful but has a steeper learning curve and generates verbose wrapper code. For new projects, <strong>pybind11</strong> or <strong>Cython</strong> are generally preferred.</p>
+<hr />
+<h2 id="10-choosing-the-right-approach">10. Choosing the Right Approach</h2>
+<hr />
+<h3 id="decision-flowchart">Decision Flowchart</h3>
+<div class="highlight"><pre><span></span><code>Do you already have a compiled C/C++ library (.so/.dll)?
+  |
+  +-- YES --&gt; Is it a simple API (few functions)?
+  |             |
+  |             +-- YES --&gt; Use ctypes or cffi (ABI mode)
+  |             +-- NO  --&gt; Use cffi (API mode) or pybind11
+  |
+  +-- NO --&gt; Are you writing new performance-critical code?
+               |
+               +-- In C?   --&gt; Python C API or cffi (API mode)
+               +-- In C++? --&gt; pybind11
+               +-- Prefer Python-like syntax? --&gt; Cython
+</code></pre></div>
+<h3 id="summary-table">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Best For</th>
+<th>Avoid When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctypes</code></td>
+<td>Quick prototyping, calling system libs</td>
+<td>Complex APIs, C++</td>
+</tr>
+<tr>
+<td><code>cffi</code></td>
+<td>Clean C bindings, PyPy support</td>
+<td>C++ classes</td>
+</tr>
+<tr>
+<td>Python C API</td>
+<td>Maximum control, CPython internals</td>
+<td>Rapid development</td>
+</tr>
+<tr>
+<td><code>pybind11</code></td>
+<td>C++ code, classes, templates</td>
+<td>Pure C projects</td>
+</tr>
+<tr>
+<td>Cython</td>
+<td>Speeding up Python code incrementally</td>
+<td>When you can't install Cython</td>
+</tr>
+<tr>
+<td>SWIG</td>
+<td>Multi-language bindings, large codebases</td>
+<td>Small projects</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-best-practices-and-common-pitfalls">11. Best Practices and Common Pitfalls</h2>
+<hr />
+<h3 id="dos">Do's</h3>
+<ul>
+<li>Always set <code>argtypes</code> and <code>restype</code> in ctypes (prevents segfaults)</li>
+<li>Handle memory management carefully (who allocates? who frees?)</li>
+<li>Test with small inputs before scaling up</li>
+<li>Use <code>try/except</code> around C calls -- crashes in C can be hard to debug</li>
+<li>Document the expected C types for each function</li>
+</ul>
+<h3 id="donts">Don'ts</h3>
+<ul>
+<li>Don't forget that C strings are bytes (<code>b"hello"</code>) not Python strings</li>
+<li>Don't pass Python objects to C functions that expect C types</li>
+<li>Don't ignore return values that indicate errors</li>
+<li>Don't assume the same binary works across OS/architecture</li>
+<li>Don't use <code>ctypes</code> for performance-critical tight loops (overhead per call)</li>
+</ul>
+<h3 id="memory-safety">Memory Safety</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># DANGEROUS: buffer overflow!</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)()</span>
+<span class="n">arr</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># Writing past the end -- undefined behavior!</span>
+
+<span class="c1"># SAFE: check bounds yourself</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="n">size</span><span class="p">)()</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">:</span>
+    <span class="n">arr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+</code></pre></div>
+<hr />
+<h2 id="exercises">Exercises</h2>
+<hr />
+<h3 id="exercise-1-matrix-multiplication-with-ctypes">Exercise 1: Matrix Multiplication with ctypes</h3>
+<p>Write a C function that multiplies two 3x3 matrices, compile it, and call it from Python using <code>ctypes</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
+<span class="c1"># 1. Write a C function: void mat_mult(double* A, double* B, double* C, int n)</span>
+<span class="c1"># 2. Compile it into a shared library</span>
+<span class="c1"># 3. Load it with ctypes and call it</span>
+<span class="c1"># 4. Verify the result against Python&#39;s manual calculation</span>
+</code></pre></div>
+<h3 id="exercise-2-string-processing-with-cffi">Exercise 2: String Processing with cffi</h3>
+<p>Use cffi (API mode) to write a C function that:
+- Takes a string and a character
+- Returns the count of that character in the string</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
+<span class="c1"># Use ffi.cdef() and ffi.set_source() to define and compile the function</span>
+</code></pre></div>
+<h3 id="exercise-3-cython-optimization">Exercise 3: Cython Optimization</h3>
+<p>Take this pure Python function and optimize it with Cython type declarations. Measure the speedup.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Optimize this with Cython:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mandelbrot_python</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a Mandelbrot set.&quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+            <span class="n">c_real</span> <span class="o">=</span> <span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">width</span>
+            <span class="n">c_imag</span> <span class="o">=</span> <span class="p">(</span><span class="n">row</span> <span class="o">-</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="n">height</span>
+            <span class="n">z_real</span><span class="p">,</span> <span class="n">z_imag</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span>
+            <span class="n">iteration</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">z_real</span> <span class="o">*</span> <span class="n">z_real</span> <span class="o">+</span> <span class="n">z_imag</span> <span class="o">*</span> <span class="n">z_imag</span> <span class="o">&lt;</span> <span class="mf">4.0</span> <span class="ow">and</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
+                <span class="n">z_real</span><span class="p">,</span> <span class="n">z_imag</span> <span class="o">=</span> <span class="n">z_real</span> <span class="o">*</span> <span class="n">z_real</span> <span class="o">-</span> <span class="n">z_imag</span> <span class="o">*</span> <span class="n">z_imag</span> <span class="o">+</span> <span class="n">c_real</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">z_real</span> <span class="o">*</span> <span class="n">z_imag</span> <span class="o">+</span> <span class="n">c_imag</span>
+                <span class="n">iteration</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">iteration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Hint: Add cdef declarations for all numeric variables</span>
+<span class="c1"># Use %%cython magic in the next cell</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your Cython version here using %%cython magic</span>
+</code></pre></div>
+<hr />
+<h2 id="cleanup">Cleanup</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clean up generated files</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+
+<span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;mylib.c&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.so&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structs.c&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.so&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.dll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;callbacks.c&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.so&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.dll&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mathtools.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;mathtools*.so&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mymodule.c&quot;</span><span class="p">,</span> <span class="s2">&quot;mymodule*.so&quot;</span><span class="p">,</span> <span class="s2">&quot;mymodule*.cpython*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;setup.py&quot;</span><span class="p">,</span> <span class="s2">&quot;_math_helpers*&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Remove build directory</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Removed: build/&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cleanup complete!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Removed: mylib.c
+Removed: mylib.dylib
+Removed: structs.c
+Removed: structs.dylib
+Removed: callbacks.c
+Removed: callbacks.dylib
+Removed: mathtools.cpp
+Removed: mathtools.cpython-310-darwin.so
+Removed: mymodule.c
+Removed: mymodule.cpython-310-darwin.so
+Removed: setup.py
+Removed: _math_helpers.o
+Removed: _math_helpers.cpython-310-darwin.so
+Removed: _math_helpers.c
+Removed: build/
+
+Cleanup complete!
+</code></pre></div>
+<hr />
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>What We Covered</th>
+<th>Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ctypes</strong></td>
+<td>Built-in, load any shared library, manual type mapping</td>
+</tr>
+<tr>
+<td><strong>cffi</strong></td>
+<td>Cleaner C declarations, supports compilation (API mode)</td>
+</tr>
+<tr>
+<td><strong>Python C API</strong></td>
+<td>Full control, lots of boilerplate, manual refcounting</td>
+</tr>
+<tr>
+<td><strong>pybind11</strong></td>
+<td>Best for C++, automatic conversions, clean syntax</td>
+</tr>
+<tr>
+<td><strong>Cython</strong></td>
+<td>Python-like syntax compiles to C, easy optimization path</td>
+</tr>
+<tr>
+<td><strong>SWIG</strong></td>
+<td>Auto-generates bindings, good for multi-language support</td>
+</tr>
+<tr>
+<td><strong>Structs</strong></td>
+<td>Mirror C structs in Python with ctypes.Structure</td>
+</tr>
+<tr>
+<td><strong>Callbacks</strong></td>
+<td>Pass Python functions to C using CFUNCTYPE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="whats-next">What's Next?</h3>
+<ul>
+<li>Explore NumPy's C API for array-level bindings</li>
+<li>Look into <code>maturin</code> and <code>PyO3</code> for Rust-Python bindings</li>
+<li>Study how major libraries (NumPy, Pandas) use these techniques internally</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../asyncio/" class="btn btn-neutral float-left" title="Async Programming"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ProjectDescription/" class="btn btn-neutral float-right" title="Project Description (PRG400)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../asyncio/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ProjectDescription/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
