@@ -110,9 +110,13 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-installing-locally-with-pip-install-e">Section 4 — Installing Locally with pip install -e .</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#editable-install-vs-regular-install">Editable Install vs Regular Install</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#cli">CLI</a>
+    <li class="toctree-l3"><a class="reference internal" href="#how-it-works-under-the-hood">How It Works Under the Hood</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#section-5-entry-points-creating-cli-commands">Section 5 — Entry Points: Creating CLI Commands</a>
         <ul>
@@ -286,40 +290,40 @@
 <div class="highlight"><pre><span></span><code>You write code
      |
      v
-[ pyproject.toml ]  ← describes your package (name, version, deps...)
+[ pyproject.toml ]  &lt;- describes your package (name, version, deps...)
      |
      v
-[ python -m build ]  ← packages your code into a distributable format
+[ python -m build ]  &lt;- packages your code into a distributable format
      |
      v
-[ .whl file ]  ← the &quot;wheel&quot; — what pip installs
+[ .whl file ]  &lt;- the &quot;wheel&quot; - what pip installs
      |
      v
-[ pip upload to PyPI ]  ← published for anyone to install
+[ pip upload to PyPI ]  &lt;- published for anyone to install
      |
      v
-[ pip install texttools ]  ← your users install it
+[ pip install texttools ]  &lt;- your users install it
 </code></pre></div>
 <p>We will build every step of this chain today.</p>
 <hr />
 <h2 id="section-2-anatomy-of-a-modern-python-package">Section 2 — Anatomy of a Modern Python Package</h2>
 <h3 id="the-src-layout">The <code>src/</code> Layout</h3>
 <p>There are two common ways to lay out a Python package. We will use the <strong><code>src/</code> layout</strong> — the modern, recommended approach:</p>
-<div class="highlight"><pre><span></span><code>texttools/                   ← project root (repo root)
-│
-├── src/
-│   └── texttools/           ← the actual Python package
-│       ├── __init__.py      ← makes it a package, exposes public API
-│       ├── core.py          ← core utility functions
-│       └── cli.py           ← command-line interface
-│
-├── tests/
-│   └── test_core.py         ← unit tests
-│
-├── pyproject.toml           ← package metadata and build config
-└── README.md
+<div class="highlight"><pre><span></span><code>texttools/                   &lt;- project root (repo root)
+|
++-- src/
+|   +-- texttools/           &lt;- the actual Python package
+|       +-- __init__.py      &lt;- makes it a package, exposes public API
+|       +-- core.py          &lt;- core utility functions
+|       +-- cli.py           &lt;- command-line interface
+|
++-- tests/
+|   +-- test_core.py         &lt;- unit tests
+|
++-- pyproject.toml           &lt;- package metadata and build config
++-- README.md
 </code></pre></div>
-<p><strong>Why <code>src/</code>?</strong> Without it, Python can accidentally import your local folder instead of the installed package. The <code>src/</code> directory forces Python to only use the installed version during testing — which means your tests actually reflect what users experience.</p>
+<p><strong>Why <code>src/</code>?</strong> Without it, Python can accidentally import your local folder instead of the installed package. The <code>src/</code> directory forces Python to only use the installed version during testing.</p>
 <table>
 <thead>
 <tr>
@@ -349,17 +353,13 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
 
-<span class="c1"># Re-export the public API so users can do:</span>
-<span class="c1"># from texttools import word_count</span>
-<span class="c1"># instead of:</span>
-<span class="c1"># from texttools.core import word_count</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">texttools.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_count</span><span class="p">,</span> <span class="n">reverse_words</span><span class="p">,</span> <span class="n">title_case_smart</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;word_count&quot;</span><span class="p">,</span> <span class="s2">&quot;reverse_words&quot;</span><span class="p">,</span> <span class="s2">&quot;title_case_smart&quot;</span><span class="p">]</span>
 </code></pre></div>
 <blockquote>
-<p><strong><code>__version__</code></strong> is the conventional way to expose your package version in code. Users can check it with <code>import texttools; print(texttools.__version__)</code>.</p>
-<p><strong><code>__all__</code></strong> controls what <code>from texttools import *</code> exports. Defining it is a good practice — it makes your public API explicit.</p>
+<p><strong><code>__version__</code></strong> is the conventional way to expose your package version in code.</p>
+<p><strong><code>__all__</code></strong> controls what <code>from texttools import *</code> exports. Defining it makes your public API explicit.</p>
 </blockquote>
 <hr />
 <h3 id="building-texttools-step-1-create-the-file-structure">Building <code>texttools</code> — Step 1: Create the File Structure</h3>
@@ -367,8 +367,8 @@
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
 
-<span class="c1"># We&#39;ll build the package inside a temporary working directory</span>
-<span class="c1"># so it doesn&#39;t interfere with this notebook&#39;s environment.</span>
+<span class="c1"># Build the package inside a temporary working directory</span>
+<span class="c1"># so it does not interfere with this notebook environment.</span>
 
 <span class="n">BASE</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;texttools_project&quot;</span><span class="p">)</span>
 
@@ -384,97 +384,27 @@
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/core.py — the actual utility functions</span>
+<div class="highlight"><pre><span></span><code>Directories created:
+  texttools_project/src/texttools
+  texttools_project/tests
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/core.py - the actual utility functions</span>
 
-<span class="n">core_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&quot;&quot;&quot;Core text utility functions for texttools.&quot;&quot;&quot;</span>
-
-
-<span class="s1">def word_count(text: str) -&gt; dict:</span>
-<span class="s1">    &quot;&quot;&quot;Count the frequency of each word in a string.</span>
-
-<span class="s1">    Args:</span>
-<span class="s1">        text: The input string to analyse.</span>
-
-<span class="s1">    Returns:</span>
-<span class="s1">        A dictionary mapping each word (lowercased) to its count.</span>
-
-<span class="s1">    Example:</span>
-<span class="s1">        &gt;&gt;&gt; word_count(&quot;the cat sat on the mat&quot;)</span>
-<span class="s1">        {&#39;the&#39;: 2, &#39;cat&#39;: 1, &#39;sat&#39;: 1, &#39;on&#39;: 1, &#39;mat&#39;: 1}</span>
-<span class="s1">    &quot;&quot;&quot;</span>
-<span class="s1">    words = text.lower().split()</span>
-<span class="s1">    counts: dict = </span><span class="si">{}</span>
-<span class="s1">    for word in words:</span>
-<span class="s1">        # Strip basic punctuation</span>
-<span class="s1">        word = word.strip(&quot;.,!?;:</span><span class="se">\&quot;</span><span class="s1">&#39;&quot;)</span>
-<span class="s1">        if word:</span>
-<span class="s1">            counts[word] = counts.get(word, 0) + 1</span>
-<span class="s1">    return counts</span>
-
-
-<span class="s1">def reverse_words(text: str) -&gt; str:</span>
-<span class="s1">    &quot;&quot;&quot;Reverse the order of words in a string.</span>
-
-<span class="s1">    Args:</span>
-<span class="s1">        text: The input string.</span>
-
-<span class="s1">    Returns:</span>
-<span class="s1">        A new string with word order reversed.</span>
-
-<span class="s1">    Example:</span>
-<span class="s1">        &gt;&gt;&gt; reverse_words(&quot;Hello World&quot;)</span>
-<span class="s1">        &#39;World Hello&#39;</span>
-<span class="s1">    &quot;&quot;&quot;</span>
-<span class="s1">    return &quot; &quot;.join(reversed(text.split()))</span>
-
-
-<span class="s1">def title_case_smart(text: str) -&gt; str:</span>
-<span class="s1">    &quot;&quot;&quot;Convert a string to title case, skipping common short words.</span>
-
-<span class="s1">    Short connector words (a, an, the, and, but, or, for, nor, on,</span>
-<span class="s1">    at, to, by, in, of, up) remain lowercase unless they are the</span>
-<span class="s1">    first or last word.</span>
-
-<span class="s1">    Args:</span>
-<span class="s1">        text: The input string.</span>
-
-<span class="s1">    Returns:</span>
-<span class="s1">        A title-cased string respecting common style guidelines.</span>
-
-<span class="s1">    Example:</span>
-<span class="s1">        &gt;&gt;&gt; title_case_smart(&quot;the lord of the rings&quot;)</span>
-<span class="s1">        &#39;The Lord of the Rings&#39;</span>
-<span class="s1">    &quot;&quot;&quot;</span>
-<span class="s1">    SKIP = {&quot;a&quot;, &quot;an&quot;, &quot;the&quot;, &quot;and&quot;, &quot;but&quot;, &quot;or&quot;, &quot;for&quot;, &quot;nor&quot;,</span>
-<span class="s1">            &quot;on&quot;, &quot;at&quot;, &quot;to&quot;, &quot;by&quot;, &quot;in&quot;, &quot;of&quot;, &quot;up&quot;}</span>
-<span class="s1">    words = text.lower().split()</span>
-<span class="s1">    result = []</span>
-<span class="s1">    for i, word in enumerate(words):</span>
-<span class="s1">        if i == 0 or i == len(words) - 1 or word not in SKIP:</span>
-<span class="s1">            result.append(word.capitalize())</span>
-<span class="s1">        else:</span>
-<span class="s1">            result.append(word)</span>
-<span class="s1">    return &quot; &quot;.join(result)</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">core_code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Core text utility functions for texttools.</span><span class="se">\&quot;\&quot;\&quot;\n\n\n</span><span class="s2">def word_count(text: str) -&gt; dict:</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Count the frequency of each word in a string.</span><span class="se">\n\n</span><span class="s2">    Args:</span><span class="se">\n</span><span class="s2">        text: The input string to analyse.</span><span class="se">\n\n</span><span class="s2">    Returns:</span><span class="se">\n</span><span class="s2">        A dictionary mapping each word (lowercased) to its count.</span><span class="se">\n\n</span><span class="s2">    Example:</span><span class="se">\n</span><span class="s2">        &gt;&gt;&gt; word_count(</span><span class="se">\&quot;</span><span class="s2">the cat sat on the mat</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        {&#39;the&#39;: 2, &#39;cat&#39;: 1, &#39;sat&#39;: 1, &#39;on&#39;: 1, &#39;mat&#39;: 1}</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;\n</span><span class="s2">    words = text.lower().split()</span><span class="se">\n</span><span class="s2">    counts: dict = </span><span class="si">{}</span><span class="se">\n</span><span class="s2">    for word in words:</span><span class="se">\n</span><span class="s2">        # Strip basic punctuation</span><span class="se">\n</span><span class="s2">        word = word.strip(</span><span class="se">\&quot;</span><span class="s2">.,!?;:&#39;</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        if word:</span><span class="se">\n</span><span class="s2">            counts[word] = counts.get(word, 0) + 1</span><span class="se">\n</span><span class="s2">    return counts</span><span class="se">\n\n\n</span><span class="s2">def reverse_words(text: str) -&gt; str:</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Reverse the order of words in a string.</span><span class="se">\n\n</span><span class="s2">    Args:</span><span class="se">\n</span><span class="s2">        text: The input string.</span><span class="se">\n\n</span><span class="s2">    Returns:</span><span class="se">\n</span><span class="s2">        A new string with word order reversed.</span><span class="se">\n\n</span><span class="s2">    Example:</span><span class="se">\n</span><span class="s2">        &gt;&gt;&gt; reverse_words(</span><span class="se">\&quot;</span><span class="s2">Hello World</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        &#39;World Hello&#39;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;\n</span><span class="s2">    return </span><span class="se">\&quot;</span><span class="s2"> </span><span class="se">\&quot;</span><span class="s2">.join(reversed(text.split()))</span><span class="se">\n\n\n</span><span class="s2">def title_case_smart(text: str) -&gt; str:</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Convert a string to title case, skipping common short words.</span><span class="se">\n\n</span><span class="s2">    Short connector words (a, an, the, and, but, or, for, nor, on,</span><span class="se">\n</span><span class="s2">    at, to, by, in, of, up) remain lowercase unless they are the</span><span class="se">\n</span><span class="s2">    first or last word.</span><span class="se">\n\n</span><span class="s2">    Args:</span><span class="se">\n</span><span class="s2">        text: The input string.</span><span class="se">\n\n</span><span class="s2">    Returns:</span><span class="se">\n</span><span class="s2">        A title-cased string respecting common style guidelines.</span><span class="se">\n\n</span><span class="s2">    Example:</span><span class="se">\n</span><span class="s2">        &gt;&gt;&gt; title_case_smart(</span><span class="se">\&quot;</span><span class="s2">the lord of the rings</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        &#39;The Lord of the Rings&#39;</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;\n</span><span class="s2">    SKIP = {</span><span class="se">\&quot;</span><span class="s2">a</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">an</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">the</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">and</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">but</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">or</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">for</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">nor</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">            </span><span class="se">\&quot;</span><span class="s2">on</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">at</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">to</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">by</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">in</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">of</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">up</span><span class="se">\&quot;</span><span class="s2">}</span><span class="se">\n</span><span class="s2">    words = text.lower().split()</span><span class="se">\n</span><span class="s2">    result = []</span><span class="se">\n</span><span class="s2">    for i, word in enumerate(words):</span><span class="se">\n</span><span class="s2">        if i == 0 or i == len(words) - 1 or word not in SKIP:</span><span class="se">\n</span><span class="s2">            result.append(word.capitalize())</span><span class="se">\n</span><span class="s2">        else:</span><span class="se">\n</span><span class="s2">            result.append(word)</span><span class="se">\n</span><span class="s2">    return </span><span class="se">\&quot;</span><span class="s2"> </span><span class="se">\&quot;</span><span class="s2">.join(result)</span><span class="se">\n</span><span class="s2">&quot;</span>
 
 <span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="s2">&quot;texttools&quot;</span> <span class="o">/</span> <span class="s2">&quot;core.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">core_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;core.py written.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/__init__.py — the public API</span>
+<div class="highlight"><pre><span></span><code>core.py written.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/__init__.py - the public API</span>
 
-<span class="n">init_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&quot;&quot;&quot;texttools — a small text utility library.&quot;&quot;&quot;</span>
-
-<span class="s1">__version__ = &quot;0.1.0&quot;</span>
-
-<span class="s1">from texttools.core import word_count, reverse_words, title_case_smart</span>
-
-<span class="s1">__all__ = [&quot;word_count&quot;, &quot;reverse_words&quot;, &quot;title_case_smart&quot;]</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">init_code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">texttools - a small text utility library.</span><span class="se">\&quot;\&quot;\&quot;\n\n</span><span class="s2">__version__ = </span><span class="se">\&quot;</span><span class="s2">0.1.0</span><span class="se">\&quot;\n\n</span><span class="s2">from texttools.core import word_count, reverse_words, title_case_smart</span><span class="se">\n\n</span><span class="s2">__all__ = [</span><span class="se">\&quot;</span><span class="s2">word_count</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">reverse_words</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">title_case_smart</span><span class="se">\&quot;</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&quot;</span>
 
 <span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="s2">&quot;texttools&quot;</span> <span class="o">/</span> <span class="s2">&quot;__init__.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">init_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;__init__.py written.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>__init__.py written.
 </code></pre></div>
 <hr />
 <h2 id="section-3-pyprojecttoml-deep-dive">Section 3 — <code>pyproject.toml</code> Deep Dive</h2>
@@ -483,24 +413,21 @@
 <h3 id="build-system"><code>[build-system]</code></h3>
 <p>Tells pip <strong>how</strong> to build your package. We use <code>setuptools</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[build-system]</span>
-<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools&gt;=68&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">]</span>
-<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.backends.legacy:build&quot;</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools&gt;=42&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
 </code></pre></div>
 <h3 id="project"><code>[project]</code></h3>
-<p>Describes <strong>what</strong> your package is — the metadata pip uses to register it on PyPI:</p>
+<p>Describes <strong>what</strong> your package is:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[project]</span>
-<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools&quot;</span><span class="w">         </span><span class="c1"># must be unique on PyPI</span>
-<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="w">          </span><span class="c1"># SemVer — we&#39;ll cover this in Section 9</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
 <span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;A small text utility library&quot;</span>
 <span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;you@example.com&quot;</span><span class="p">}]</span>
 <span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
 <span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.8&quot;</span>
 <span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span><span class="p">}</span>
-
-<span class="c1"># Runtime dependencies — pip installs these automatically</span>
 <span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
 
-<span class="c1"># PyPI classifiers — help users discover your package</span>
 <span class="n">classifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="s2">&quot;License :: OSI Approved :: MIT License&quot;</span><span class="p">,</span>
@@ -511,96 +438,59 @@
 <p>Defines CLI commands (covered in Section 5):</p>
 <div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
 <span class="n">texttools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools.cli:main&quot;</span>
-<span class="c1">#             ^module  ^function</span>
+<span class="c1">#  command     module   function</span>
 </code></pre></div>
 <h3 id="toolsetuptoolspackagesfind"><code>[tool.setuptools.packages.find]</code></h3>
 <p>Tells setuptools where to find your package — critical for the <code>src/</code> layout:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[tool.setuptools.packages.find]</span>
-<span class="n">where</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">]</span><span class="w">   </span><span class="c1"># look for packages inside the src/ directory</span>
+<span class="n">where</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write the pyproject.toml for texttools</span>
 
-<span class="n">pyproject</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">[build-system]</span>
-<span class="s1">requires = [&quot;setuptools&gt;=68&quot;, &quot;wheel&quot;]</span>
-<span class="s1">build-backend = &quot;setuptools.backends.legacy:build&quot;</span>
-
-<span class="s1">[project]</span>
-<span class="s1">name = &quot;texttools&quot;</span>
-<span class="s1">version = &quot;0.1.0&quot;</span>
-<span class="s1">description = &quot;A small text utility library for word analysis and formatting&quot;</span>
-<span class="s1">authors = [{name = &quot;Your Name&quot;, email = &quot;you@example.com&quot;}]</span>
-<span class="s1">readme = &quot;README.md&quot;</span>
-<span class="s1">requires-python = &quot;&gt;=3.8&quot;</span>
-<span class="s1">license = {text = &quot;MIT&quot;}</span>
-<span class="s1">dependencies = []</span>
-
-<span class="s1">classifiers = [</span>
-<span class="s1">    &quot;Programming Language :: Python :: 3&quot;,</span>
-<span class="s1">    &quot;License :: OSI Approved :: MIT License&quot;,</span>
-<span class="s1">    &quot;Operating System :: OS Independent&quot;,</span>
-<span class="s1">]</span>
-
-<span class="s1">[project.scripts]</span>
-<span class="s1">texttools = &quot;texttools.cli:main&quot;</span>
-
-<span class="s1">[tool.setuptools.packages.find]</span>
-<span class="s1">where = [&quot;src&quot;]</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">pyproject</span> <span class="o">=</span> <span class="s2">&quot;[build-system]</span><span class="se">\n</span><span class="s2">requires = [</span><span class="se">\&quot;</span><span class="s2">setuptools&gt;=42</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">wheel</span><span class="se">\&quot;</span><span class="s2">]</span><span class="se">\n</span><span class="s2">build-backend = </span><span class="se">\&quot;</span><span class="s2">setuptools.build_meta</span><span class="se">\&quot;\n\n</span><span class="s2">[project]</span><span class="se">\n</span><span class="s2">name = </span><span class="se">\&quot;</span><span class="s2">texttools</span><span class="se">\&quot;\n</span><span class="s2">version = </span><span class="se">\&quot;</span><span class="s2">0.1.0</span><span class="se">\&quot;\n</span><span class="s2">description = </span><span class="se">\&quot;</span><span class="s2">A small text utility library for word analysis and formatting</span><span class="se">\&quot;\n</span><span class="s2">authors = [{name = </span><span class="se">\&quot;</span><span class="s2">Your Name</span><span class="se">\&quot;</span><span class="s2">, email = </span><span class="se">\&quot;</span><span class="s2">you@example.com</span><span class="se">\&quot;</span><span class="s2">}]</span><span class="se">\n</span><span class="s2">readme = </span><span class="se">\&quot;</span><span class="s2">README.md</span><span class="se">\&quot;\n</span><span class="s2">requires-python = </span><span class="se">\&quot;</span><span class="s2">&gt;=3.8</span><span class="se">\&quot;\n</span><span class="s2">license = {text = </span><span class="se">\&quot;</span><span class="s2">MIT</span><span class="se">\&quot;</span><span class="s2">}</span><span class="se">\n</span><span class="s2">dependencies = []</span><span class="se">\n\n</span><span class="s2">classifiers = [</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">Programming Language :: Python :: 3</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">License :: OSI Approved :: MIT License</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">Operating System :: OS Independent</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">]</span><span class="se">\n\n</span><span class="s2">[project.scripts]</span><span class="se">\n</span><span class="s2">texttools = </span><span class="se">\&quot;</span><span class="s2">texttools.cli:main</span><span class="se">\&quot;\n\n</span><span class="s2">[tool.setuptools.packages.find]</span><span class="se">\n</span><span class="s2">where = [</span><span class="se">\&quot;</span><span class="s2">src</span><span class="se">\&quot;</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&quot;</span>
 
 <span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;pyproject.toml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">pyproject</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pyproject.toml written.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Write a minimal README.md (required by pyproject.toml)</span>
-
-<span class="n">readme</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1"># texttools</span>
-
-<span class="s1">A small text utility library for word analysis and formatting.</span>
-
-<span class="s1">## Installation</span>
-
-<span class="s1">```bash</span>
-<span class="s1">pip install texttools</span>
+<div class="highlight"><pre><span></span><code>pyproject.toml written.
 </code></pre></div>
-<h2 id="usage">Usage</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">texttools</span><span class="w"> </span><span class="kn">import</span> <span class="n">word_count</span><span class="p">,</span> <span class="n">reverse_words</span><span class="p">,</span> <span class="n">title_case_smart</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write a minimal README.md (referenced by pyproject.toml)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">word_count</span><span class="p">(</span><span class="s2">&quot;the cat sat on the mat&quot;</span><span class="p">))</span>
-<span class="c1"># {&#39;the&#39;: 2, &#39;cat&#39;: 1, &#39;sat&#39;: 1, &#39;on&#39;: 1, &#39;mat&#39;: 1}</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s2">&quot;# texttools</span><span class="se">\n\n</span><span class="s2">A small text utility library for word analysis and formatting.</span><span class="se">\n\n</span><span class="s2">## Installation</span><span class="se">\n\n</span><span class="s2">```bash</span><span class="se">\n</span><span class="s2">pip install texttools</span><span class="se">\n</span><span class="s2">```</span><span class="se">\n\n</span><span class="s2">## Usage</span><span class="se">\n\n</span><span class="s2">```python</span><span class="se">\n</span><span class="s2">from texttools import word_count, reverse_words, title_case_smart</span><span class="se">\n\n</span><span class="s2">print(word_count(</span><span class="se">\&quot;</span><span class="s2">the cat sat on the mat</span><span class="se">\&quot;</span><span class="s2">))</span><span class="se">\n</span><span class="s2"># {&#39;the&#39;: 2, &#39;cat&#39;: 1, &#39;sat&#39;: 1, &#39;on&#39;: 1, &#39;mat&#39;: 1}</span><span class="se">\n\n</span><span class="s2">print(reverse_words(</span><span class="se">\&quot;</span><span class="s2">Hello World</span><span class="se">\&quot;</span><span class="s2">))</span><span class="se">\n</span><span class="s2"># &#39;World Hello&#39;</span><span class="se">\n\n</span><span class="s2">print(title_case_smart(</span><span class="se">\&quot;</span><span class="s2">the lord of the rings</span><span class="se">\&quot;</span><span class="s2">))</span><span class="se">\n</span><span class="s2"># &#39;The Lord of the Rings&#39;</span><span class="se">\n</span><span class="s2">```</span><span class="se">\n\n</span><span class="s2">## CLI</span><span class="se">\n\n</span><span class="s2">```bash</span><span class="se">\n</span><span class="s2">texttools count </span><span class="se">\&quot;</span><span class="s2">the cat sat on the mat</span><span class="se">\&quot;\n</span><span class="s2">texttools reverse </span><span class="se">\&quot;</span><span class="s2">Hello World</span><span class="se">\&quot;\n</span><span class="s2">texttools titlecase </span><span class="se">\&quot;</span><span class="s2">the lord of the rings</span><span class="se">\&quot;\n</span><span class="s2">```</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">reverse_words</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">))</span>
-<span class="c1"># &#39;World Hello&#39;</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">title_case_smart</span><span class="p">(</span><span class="s2">&quot;the lord of the rings&quot;</span><span class="p">))</span>
-<span class="c1"># &#39;The Lord of the Rings&#39;</span>
+<span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;README.md&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">readme</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;README.md written.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="cli">CLI</h2>
-<p><div class="highlight"><pre><span></span><code>texttools<span class="w"> </span>count<span class="w"> </span><span class="s2">&quot;the cat sat on the mat&quot;</span>
-texttools<span class="w"> </span>reverse<span class="w"> </span><span class="s2">&quot;Hello World&quot;</span>
-texttools<span class="w"> </span>titlecase<span class="w"> </span><span class="s2">&quot;the lord of the rings&quot;</span>
+<div class="highlight"><pre><span></span><code>README.md written.
 </code></pre></div>
-'''</p>
-<p>(BASE / "README.md").write_text(readme)
-print("README.md written.")
-<div class="highlight"><pre><span></span><code>---
-
-## Section 4 — Installing Locally with `pip install -e .`
-
-Before publishing to PyPI, you want to use and test your package locally. The `-e` flag stands for **editable install**.
-
-### Editable Install vs Regular Install
-
-| Mode | Command | How it works |
-|---|---|---|
-| Regular | `pip install .` | Copies files into `site-packages` — changes to source require reinstall |
-| Editable | `pip install -e .` | Links to your source — changes are reflected immediately |
-
-**Editable mode is the standard workflow during development.** You edit your source files, and the changes are live without reinstalling.
-
-### How It Works Under the Hood
-</code></pre></div>
-pip install -e texttools_project/
+<hr />
+<h2 id="section-4-installing-locally-with-pip-install-e">Section 4 — Installing Locally with <code>pip install -e .</code></h2>
+<p>Before publishing to PyPI, you want to use and test your package locally. The <code>-e</code> flag stands for <strong>editable install</strong>.</p>
+<h3 id="editable-install-vs-regular-install">Editable Install vs Regular Install</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Command</th>
+<th>How it works</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regular</td>
+<td><code>pip install .</code></td>
+<td>Copies files into <code>site-packages</code> — changes require reinstall</td>
+</tr>
+<tr>
+<td>Editable</td>
+<td><code>pip install -e .</code></td>
+<td>Links to your source — changes are reflected immediately</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Editable mode is the standard workflow during development.</strong></p>
+<h3 id="how-it-works-under-the-hood">How It Works Under the Hood</h3>
+<div class="highlight"><pre><span></span><code>pip install -e texttools_project/
      |
      v
 reads pyproject.toml
@@ -609,42 +499,44 @@ reads pyproject.toml
 creates a .pth file in site-packages pointing to src/
      |
      v
-Python can now find 'import texttools'
-<div class="highlight"><pre><span></span><code>```python
-# Install the package in editable mode
-# The &#39;.&#39; means &quot;current directory&quot; — we use the path to our project folder
+Python can now find &#39;import texttools&#39;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
 
-import subprocess, sys
+<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">BASE</span><span class="p">),</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">],</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 
-result = subprocess.run(
-    [sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;-e&quot;, str(BASE), &quot;--quiet&quot;],
-    capture_output=True,
-    text=True
-)
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Package installed successfully.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 
-if result.returncode == 0:
-    print(&quot;Package installed successfully.&quot;)
-else:
-    print(&quot;Error:&quot;)
-    print(result.stderr)
-</code></pre></div></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verify the install — import and use the package</span>
+<span class="c1"># Make the package importable in the current kernel session</span>
+<span class="c1"># (pip editable installs use .pth files, loaded at startup, not dynamically)</span>
+<span class="n">src_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">src_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">src_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">src_path</span><span class="si">}</span><span class="s2"> to sys.path&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Package installed successfully.
+Added texttools_project/src to sys.path
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify the install</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
-
-<span class="c1"># Force a fresh import (needed if texttools was already imported above)</span>
-<span class="k">if</span> <span class="s2">&quot;texttools&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="k">del</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s2">&quot;texttools&quot;</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;texttools&quot;</span><span class="p">):</span>
-            <span class="k">del</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+<span class="c1"># Force a fresh import in case texttools was already loaded</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;texttools&quot;</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">texttools</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;texttools version: </span><span class="si">{</span><span class="n">texttools</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="c1"># Try the functions</span>
 <span class="n">sample</span> <span class="o">=</span> <span class="s2">&quot;the quick brown fox jumps over the lazy dog&quot;</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;word_count():&quot;</span><span class="p">)</span>
@@ -658,74 +550,39 @@ else:
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;title_case_smart():&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">texttools</span><span class="o">.</span><span class="n">title_case_smart</span><span class="p">(</span><span class="s2">&quot;the lord of the rings: the return of the king&quot;</span><span class="p">))</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>texttools version: 0.1.0
+
+word_count():
+{&#39;the&#39;: 2, &#39;quick&#39;: 1, &#39;brown&#39;: 1, &#39;fox&#39;: 1, &#39;jumps&#39;: 1, &#39;over&#39;: 1, &#39;lazy&#39;: 1, &#39;dog&#39;: 1}
+
+reverse_words():
+dog lazy the over jumps fox brown quick the
+
+title_case_smart():
+The Lord of the Rings: the Return of the King
+</code></pre></div>
 <hr />
 <h2 id="section-5-entry-points-creating-cli-commands">Section 5 — Entry Points: Creating CLI Commands</h2>
 <p>Entry points let users run your package as a command from the terminal:</p>
 <div class="highlight"><pre><span></span><code>$<span class="w"> </span>texttools<span class="w"> </span>count<span class="w"> </span><span class="s2">&quot;the cat sat on the mat&quot;</span>
-the:<span class="w"> </span><span class="m">2</span>
 cat:<span class="w"> </span><span class="m">1</span>
 mat:<span class="w"> </span><span class="m">1</span>
 on:<span class="w">  </span><span class="m">1</span>
 sat:<span class="w"> </span><span class="m">1</span>
+the:<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <h3 id="how-it-works">How It Works</h3>
 <p>When pip installs your package, it reads <code>[project.scripts]</code> in <code>pyproject.toml</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
 <span class="n">texttools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools.cli:main&quot;</span>
-<span class="c1">#  ^          ^             ^</span>
-<span class="c1">#  command    module        function to call</span>
+<span class="c1">#  command     module   function</span>
 </code></pre></div>
-<p>pip creates a small wrapper executable (<code>texttools</code>) in the system's <code>bin/</code> directory that simply calls <code>texttools.cli.main()</code>.</p>
+<p>pip creates a small wrapper executable (<code>texttools</code>) in the system <code>bin/</code> directory that calls <code>texttools.cli.main()</code>.</p>
 <h3 id="writing-the-cli-module">Writing the CLI Module</h3>
-<p>The <code>cli.py</code> module uses <code>argparse</code> to parse command-line arguments. The <code>main()</code> function is the entry point.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/cli.py — command-line interface</span>
+<p>The <code>cli.py</code> module uses <code>argparse</code> to parse command-line arguments.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># src/texttools/cli.py - command-line interface</span>
 
-<span class="n">cli_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&quot;&quot;&quot;Command-line interface for texttools.&quot;&quot;&quot;</span>
-
-<span class="s1">import argparse</span>
-<span class="s1">import sys</span>
-<span class="s1">from texttools.core import word_count, reverse_words, title_case_smart</span>
-
-
-<span class="s1">def main() -&gt; None:</span>
-<span class="s1">    &quot;&quot;&quot;Entry point for the texttools CLI.&quot;&quot;&quot;</span>
-<span class="s1">    parser = argparse.ArgumentParser(</span>
-<span class="s1">        prog=&quot;texttools&quot;,</span>
-<span class="s1">        description=&quot;Text utility commands&quot;,</span>
-<span class="s1">    )</span>
-
-<span class="s1">    subparsers = parser.add_subparsers(dest=&quot;command&quot;, required=True)</span>
-
-<span class="s1">    # --- count command ---</span>
-<span class="s1">    count_parser = subparsers.add_parser(&quot;count&quot;, help=&quot;Count word frequencies&quot;)</span>
-<span class="s1">    count_parser.add_argument(&quot;text&quot;, help=&quot;Text to analyse&quot;)</span>
-
-<span class="s1">    # --- reverse command ---</span>
-<span class="s1">    reverse_parser = subparsers.add_parser(&quot;reverse&quot;, help=&quot;Reverse word order&quot;)</span>
-<span class="s1">    reverse_parser.add_argument(&quot;text&quot;, help=&quot;Text to reverse&quot;)</span>
-
-<span class="s1">    # --- titlecase command ---</span>
-<span class="s1">    title_parser = subparsers.add_parser(&quot;titlecase&quot;, help=&quot;Smart title case&quot;)</span>
-<span class="s1">    title_parser.add_argument(&quot;text&quot;, help=&quot;Text to convert&quot;)</span>
-
-<span class="s1">    args = parser.parse_args()</span>
-
-<span class="s1">    if args.command == &quot;count&quot;:</span>
-<span class="s1">        counts = word_count(args.text)</span>
-<span class="s1">        for word, n in sorted(counts.items()):</span>
-<span class="s1">            print(f&quot;</span><span class="si">{word}</span><span class="s1">: </span><span class="si">{n}</span><span class="s1">&quot;)</span>
-
-<span class="s1">    elif args.command == &quot;reverse&quot;:</span>
-<span class="s1">        print(reverse_words(args.text))</span>
-
-<span class="s1">    elif args.command == &quot;titlecase&quot;:</span>
-<span class="s1">        print(title_case_smart(args.text))</span>
-
-
-<span class="s1">if __name__ == &quot;__main__&quot;:</span>
-<span class="s1">    main()</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">cli_code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Command-line interface for texttools.</span><span class="se">\&quot;\&quot;\&quot;\n\n</span><span class="s2">import argparse</span><span class="se">\n</span><span class="s2">import sys</span><span class="se">\n</span><span class="s2">from texttools.core import word_count, reverse_words, title_case_smart</span><span class="se">\n\n\n</span><span class="s2">def main() -&gt; None:</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Entry point for the texttools CLI.</span><span class="se">\&quot;\&quot;\&quot;\n</span><span class="s2">    parser = argparse.ArgumentParser(</span><span class="se">\n</span><span class="s2">        prog=</span><span class="se">\&quot;</span><span class="s2">texttools</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        description=</span><span class="se">\&quot;</span><span class="s2">Text utility commands</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    )</span><span class="se">\n\n</span><span class="s2">    subparsers = parser.add_subparsers(dest=</span><span class="se">\&quot;</span><span class="s2">command</span><span class="se">\&quot;</span><span class="s2">, required=True)</span><span class="se">\n\n</span><span class="s2">    # count command</span><span class="se">\n</span><span class="s2">    count_parser = subparsers.add_parser(</span><span class="se">\&quot;</span><span class="s2">count</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Count word frequencies</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">    count_parser.add_argument(</span><span class="se">\&quot;</span><span class="s2">text</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Text to analyse</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    # reverse command</span><span class="se">\n</span><span class="s2">    reverse_parser = subparsers.add_parser(</span><span class="se">\&quot;</span><span class="s2">reverse</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Reverse word order</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">    reverse_parser.add_argument(</span><span class="se">\&quot;</span><span class="s2">text</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Text to reverse</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    # titlecase command</span><span class="se">\n</span><span class="s2">    title_parser = subparsers.add_parser(</span><span class="se">\&quot;</span><span class="s2">titlecase</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Smart title case</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">    title_parser.add_argument(</span><span class="se">\&quot;</span><span class="s2">text</span><span class="se">\&quot;</span><span class="s2">, help=</span><span class="se">\&quot;</span><span class="s2">Text to convert</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    args = parser.parse_args()</span><span class="se">\n\n</span><span class="s2">    if args.command == </span><span class="se">\&quot;</span><span class="s2">count</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\n</span><span class="s2">        counts = word_count(args.text)</span><span class="se">\n</span><span class="s2">        for word, n in sorted(counts.items()):</span><span class="se">\n</span><span class="s2">            print(f</span><span class="se">\&quot;</span><span class="si">{word}</span><span class="s2">: </span><span class="si">{n}</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    elif args.command == </span><span class="se">\&quot;</span><span class="s2">reverse</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\n</span><span class="s2">        print(reverse_words(args.text))</span><span class="se">\n\n</span><span class="s2">    elif args.command == </span><span class="se">\&quot;</span><span class="s2">titlecase</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\n</span><span class="s2">        print(title_case_smart(args.text))</span><span class="se">\n\n\n</span><span class="s2">if __name__ == </span><span class="se">\&quot;</span><span class="s2">__main__</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\n</span><span class="s2">    main()</span><span class="se">\n</span><span class="s2">&quot;</span>
 
 <span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;src&quot;</span> <span class="o">/</span> <span class="s2">&quot;texttools&quot;</span> <span class="o">/</span> <span class="s2">&quot;cli.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">cli_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cli.py written.&quot;</span><span class="p">)</span>
@@ -737,9 +594,15 @@ sat:<span class="w"> </span><span class="m">1</span>
     <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Package reinstalled.&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+<span class="c1"># Ensure src/ stays on path</span>
+<span class="k">if</span> <span class="n">src_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">src_path</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Test the CLI by calling it programmatically</span>
-<span class="c1"># (In real use you&#39;d type: texttools count &quot;the cat sat on the mat&quot;)</span>
+<div class="highlight"><pre><span></span><code>cli.py written.
+Package reinstalled.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test the CLI programmatically</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;texttools.cli&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="s2">&quot;the cat sat on the mat&quot;</span><span class="p">],</span>
@@ -757,79 +620,45 @@ sat:<span class="w"> </span><span class="m">1</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;texttools titlecase &#39;the lord of the rings&#39;:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>texttools count &#39;the cat sat on the mat&#39;:
+cat: 1
+mat: 1
+on: 1
+sat: 1
+the: 2
+
+texttools titlecase &#39;the lord of the rings&#39;:
+The Lord of the Rings
+</code></pre></div>
 <blockquote>
-<p><strong>Note on <code>if __name__ == "__main__":</code></strong></p>
-<p>This guard in <code>cli.py</code> lets you also run the module directly with <code>python -m texttools.cli</code>. Entry points call <code>main()</code> directly — the guard is for manual invocation during development.</p>
+<p><strong>Note on <code>if __name__ == "__main__"</code>:</strong></p>
+<p>This guard lets you run the module directly with <code>python -m texttools.cli</code>.
+Entry points call <code>main()</code> directly — the guard is for manual invocation during development.</p>
 </blockquote>
 <hr />
 <h2 id="section-6-testing-the-installed-package">Section 6 — Testing the Installed Package</h2>
-<p>A critical point: <strong>tests should run against the installed package, not the local source files.</strong> This is exactly what the <code>src/</code> layout guarantees — when you run <code>pytest</code>, Python finds <code>texttools</code> via the installed editable link, not via the local <code>src/</code> folder directly.</p>
+<p>A critical point: <strong>tests should run against the installed package, not the local source files.</strong> This is exactly what the <code>src/</code> layout guarantees.</p>
 <h3 id="test-structure">Test Structure</h3>
 <div class="highlight"><pre><span></span><code>tests/
-└── test_core.py
++-- test_core.py
 </code></pre></div>
-<p>Note: <strong>no <code>__init__.py</code> in <code>tests/</code></strong>. pytest doesn't need it, and omitting it avoids import conflicts.</p>
+<p>Note: <strong>no <code>__init__.py</code> in <code>tests/</code></strong>. pytest does not need it, and omitting it avoids import conflicts.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write the test file</span>
 
-<span class="n">test_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">&quot;&quot;&quot;Tests for texttools.core&quot;&quot;&quot;</span>
-
-<span class="s1">import pytest</span>
-<span class="s1">from texttools import word_count, reverse_words, title_case_smart</span>
-
-
-<span class="s1">class TestWordCount:</span>
-<span class="s1">    def test_basic_count(self):</span>
-<span class="s1">        result = word_count(&quot;the cat sat on the mat&quot;)</span>
-<span class="s1">        assert result[&quot;the&quot;] == 2</span>
-<span class="s1">        assert result[&quot;cat&quot;] == 1</span>
-
-<span class="s1">    def test_case_insensitive(self):</span>
-<span class="s1">        result = word_count(&quot;Python python PYTHON&quot;)</span>
-<span class="s1">        assert result[&quot;python&quot;] == 3</span>
-
-<span class="s1">    def test_strips_punctuation(self):</span>
-<span class="s1">        result = word_count(&quot;hello, world!&quot;)</span>
-<span class="s1">        assert &quot;hello&quot; in result</span>
-<span class="s1">        assert &quot;world&quot; in result</span>
-
-<span class="s1">    def test_empty_string(self):</span>
-<span class="s1">        assert word_count(&quot;&quot;) == </span><span class="si">{}</span>
-
-
-<span class="s1">class TestReverseWords:</span>
-<span class="s1">    def test_basic_reverse(self):</span>
-<span class="s1">        assert reverse_words(&quot;Hello World&quot;) == &quot;World Hello&quot;</span>
-
-<span class="s1">    def test_single_word(self):</span>
-<span class="s1">        assert reverse_words(&quot;Python&quot;) == &quot;Python&quot;</span>
-
-<span class="s1">    def test_multiple_words(self):</span>
-<span class="s1">        assert reverse_words(&quot;one two three&quot;) == &quot;three two one&quot;</span>
-
-
-<span class="s1">class TestTitleCaseSmart:</span>
-<span class="s1">    def test_short_words_lowercase(self):</span>
-<span class="s1">        result = title_case_smart(&quot;the lord of the rings&quot;)</span>
-<span class="s1">        assert result == &quot;The Lord of the Rings&quot;</span>
-
-<span class="s1">    def test_first_word_always_capitalised(self):</span>
-<span class="s1">        result = title_case_smart(&quot;of mice and men&quot;)</span>
-<span class="s1">        assert result.startswith(&quot;Of&quot;)</span>
-
-<span class="s1">    def test_last_word_always_capitalised(self):</span>
-<span class="s1">        result = title_case_smart(&quot;the cat in the hat&quot;)</span>
-<span class="s1">        assert result.endswith(&quot;Hat&quot;)</span>
-
-<span class="s1">    def test_single_word(self):</span>
-<span class="s1">        assert title_case_smart(&quot;python&quot;) == &quot;Python&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="n">test_code</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\&quot;\&quot;\&quot;</span><span class="s2">Tests for texttools.core</span><span class="se">\&quot;\&quot;\&quot;\n\n</span><span class="s2">import pytest</span><span class="se">\n</span><span class="s2">from texttools import word_count, reverse_words, title_case_smart</span><span class="se">\n\n\n</span><span class="s2">class TestWordCount:</span><span class="se">\n</span><span class="s2">    def test_basic_count(self):</span><span class="se">\n</span><span class="s2">        result = word_count(</span><span class="se">\&quot;</span><span class="s2">the cat sat on the mat</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert result[</span><span class="se">\&quot;</span><span class="s2">the</span><span class="se">\&quot;</span><span class="s2">] == 2</span><span class="se">\n</span><span class="s2">        assert result[</span><span class="se">\&quot;</span><span class="s2">cat</span><span class="se">\&quot;</span><span class="s2">] == 1</span><span class="se">\n\n</span><span class="s2">    def test_case_insensitive(self):</span><span class="se">\n</span><span class="s2">        result = word_count(</span><span class="se">\&quot;</span><span class="s2">Python python PYTHON</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert result[</span><span class="se">\&quot;</span><span class="s2">python</span><span class="se">\&quot;</span><span class="s2">] == 3</span><span class="se">\n\n</span><span class="s2">    def test_strips_punctuation(self):</span><span class="se">\n</span><span class="s2">        result = word_count(</span><span class="se">\&quot;</span><span class="s2">hello, world!</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert </span><span class="se">\&quot;</span><span class="s2">hello</span><span class="se">\&quot;</span><span class="s2"> in result</span><span class="se">\n</span><span class="s2">        assert </span><span class="se">\&quot;</span><span class="s2">world</span><span class="se">\&quot;</span><span class="s2"> in result</span><span class="se">\n\n</span><span class="s2">    def test_empty_string(self):</span><span class="se">\n</span><span class="s2">        assert word_count(</span><span class="se">\&quot;\&quot;</span><span class="s2">) == </span><span class="si">{}</span><span class="se">\n\n\n</span><span class="s2">class TestReverseWords:</span><span class="se">\n</span><span class="s2">    def test_basic_reverse(self):</span><span class="se">\n</span><span class="s2">        assert reverse_words(</span><span class="se">\&quot;</span><span class="s2">Hello World</span><span class="se">\&quot;</span><span class="s2">) == </span><span class="se">\&quot;</span><span class="s2">World Hello</span><span class="se">\&quot;\n\n</span><span class="s2">    def test_single_word(self):</span><span class="se">\n</span><span class="s2">        assert reverse_words(</span><span class="se">\&quot;</span><span class="s2">Python</span><span class="se">\&quot;</span><span class="s2">) == </span><span class="se">\&quot;</span><span class="s2">Python</span><span class="se">\&quot;\n\n</span><span class="s2">    def test_multiple_words(self):</span><span class="se">\n</span><span class="s2">        assert reverse_words(</span><span class="se">\&quot;</span><span class="s2">one two three</span><span class="se">\&quot;</span><span class="s2">) == </span><span class="se">\&quot;</span><span class="s2">three two one</span><span class="se">\&quot;\n\n\n</span><span class="s2">class TestTitleCaseSmart:</span><span class="se">\n</span><span class="s2">    def test_short_words_lowercase(self):</span><span class="se">\n</span><span class="s2">        result = title_case_smart(</span><span class="se">\&quot;</span><span class="s2">the lord of the rings</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert result == </span><span class="se">\&quot;</span><span class="s2">The Lord of the Rings</span><span class="se">\&quot;\n\n</span><span class="s2">    def test_first_word_always_capitalised(self):</span><span class="se">\n</span><span class="s2">        result = title_case_smart(</span><span class="se">\&quot;</span><span class="s2">of mice and men</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert result.startswith(</span><span class="se">\&quot;</span><span class="s2">Of</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    def test_last_word_always_capitalised(self):</span><span class="se">\n</span><span class="s2">        result = title_case_smart(</span><span class="se">\&quot;</span><span class="s2">the cat in the hat</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n</span><span class="s2">        assert result.endswith(</span><span class="se">\&quot;</span><span class="s2">Hat</span><span class="se">\&quot;</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">    def test_single_word(self):</span><span class="se">\n</span><span class="s2">        assert title_case_smart(</span><span class="se">\&quot;</span><span class="s2">python</span><span class="se">\&quot;</span><span class="s2">) == </span><span class="se">\&quot;</span><span class="s2">Python</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
 
 <span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;tests&quot;</span> <span class="o">/</span> <span class="s2">&quot;test_core.py&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">test_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test_core.py written.&quot;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run the tests</span>
-<span class="c1"># pytest discovers all files matching test_*.py automatically</span>
+<div class="highlight"><pre><span></span><code>test_core.py written.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install pytest if needed</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;pytest&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">],</span>
+    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the tests</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pytest&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;tests&quot;</span><span class="p">),</span> <span class="s2">&quot;-v&quot;</span><span class="p">],</span>
@@ -841,9 +670,30 @@ sat:<span class="w"> </span><span class="m">1</span>
 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>[1m============================= test session starts ==============================[0m
+platform darwin -- Python 3.10.18, pytest-9.0.3, pluggy-1.6.0 -- /Users/aayush/micromamba/envs/stats/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/aayush/Documents/Kings/python-training/prg400/texttools_project
+configfile: pyproject.toml
+[1mcollecting ... [0mcollected 11 items
+
+texttools_project/tests/test_core.py::TestWordCount::test_basic_count [32mPASSED[0m[32m [  9%][0m
+texttools_project/tests/test_core.py::TestWordCount::test_case_insensitive [32mPASSED[0m[32m [ 18%][0m
+texttools_project/tests/test_core.py::TestWordCount::test_strips_punctuation [32mPASSED[0m[32m [ 27%][0m
+texttools_project/tests/test_core.py::TestWordCount::test_empty_string [32mPASSED[0m[32m [ 36%][0m
+texttools_project/tests/test_core.py::TestReverseWords::test_basic_reverse [32mPASSED[0m[32m [ 45%][0m
+texttools_project/tests/test_core.py::TestReverseWords::test_single_word [32mPASSED[0m[32m [ 54%][0m
+texttools_project/tests/test_core.py::TestReverseWords::test_multiple_words [32mPASSED[0m[32m [ 63%][0m
+texttools_project/tests/test_core.py::TestTitleCaseSmart::test_short_words_lowercase [32mPASSED[0m[32m [ 72%][0m
+texttools_project/tests/test_core.py::TestTitleCaseSmart::test_first_word_always_capitalised [32mPASSED[0m[32m [ 81%][0m
+texttools_project/tests/test_core.py::TestTitleCaseSmart::test_last_word_always_capitalised [32mPASSED[0m[32m [ 90%][0m
+texttools_project/tests/test_core.py::TestTitleCaseSmart::test_single_word [32mPASSED[0m[32m [100%][0m
+
+[32m============================== [32m[1m11 passed[0m[32m in 0.01s[0m[32m ==============================[0m
+</code></pre></div>
 <hr />
 <h2 id="section-7-building-a-distribution">Section 7 — Building a Distribution</h2>
-<p>When you're ready to share your package, you need to <strong>build</strong> it into a distributable format. There are two formats:</p>
+<p>When you are ready to share your package, build it into a distributable format:</p>
 <table>
 <thead>
 <tr>
@@ -869,8 +719,8 @@ sat:<span class="w"> </span><span class="m">1</span>
 <h3 id="the-build-tool">The <code>build</code> Tool</h3>
 <p><code>python -m build</code> reads your <code>pyproject.toml</code> and produces both formats in a <code>dist/</code> directory:</p>
 <div class="highlight"><pre><span></span><code>dist/
-├──<span class="w"> </span>texttools-0.1.0-py3-none-any.whl
-└──<span class="w"> </span>texttools-0.1.0.tar.gz
++--<span class="w"> </span>texttools-0.1.0-py3-none-any.whl
++--<span class="w"> </span>texttools-0.1.0.tar.gz
 </code></pre></div>
 <h3 id="wheel-filename-anatomy">Wheel Filename Anatomy</h3>
 <div class="highlight"><pre><span></span><code>texttools - 0.1.0 - py3 - none - any .whl
@@ -881,25 +731,52 @@ py3   = works with Python 3
 none  = no ABI dependency (pure Python)
 any   = works on any OS
 </code></pre></div>
-<p>A package that includes compiled C extensions would have a different ABI and platform tag.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Install the build tool if not already installed</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install the build tool if not already present</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;build&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">],</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
-<span class="c1"># Build the package — this creates the dist/ directory</span>
+<span class="c1"># Build the package</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;build&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">BASE</span><span class="p">)],</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">text</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">[</span><span class="o">-</span><span class="mi">1500</span><span class="p">:]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1500</span> <span class="k">else</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="o">-</span><span class="mi">1500</span><span class="p">:]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1500</span> <span class="k">else</span> <span class="n">output</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;STDERR:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">[</span><span class="o">-</span><span class="mi">1000</span><span class="p">:])</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Inspect what was produced</span>
+<div class="highlight"><pre><span></span><code>ttools.egg-info/top_level.txt
+reading manifest file &#39;src/texttools.egg-info/SOURCES.txt&#39;
+writing manifest file &#39;src/texttools.egg-info/SOURCES.txt&#39;
+installing to build/bdist.macosx-11.0-arm64/wheel
+running install
+running install_lib
+creating build/bdist.macosx-11.0-arm64/wheel
+creating build/bdist.macosx-11.0-arm64/wheel/texttools
+copying build/lib/texttools/__init__.py -&gt; build/bdist.macosx-11.0-arm64/wheel/./texttools
+copying build/lib/texttools/core.py -&gt; build/bdist.macosx-11.0-arm64/wheel/./texttools
+copying build/lib/texttools/cli.py -&gt; build/bdist.macosx-11.0-arm64/wheel/./texttools
+running install_egg_info
+Copying src/texttools.egg-info to build/bdist.macosx-11.0-arm64/wheel/./texttools-0.1.0-py3.10.egg-info
+running install_scripts
+creating build/bdist.macosx-11.0-arm64/wheel/texttools-0.1.0.dist-info/WHEEL
+creating &#39;/Users/aayush/Documents/Kings/python-training/prg400/texttools_project/dist/.tmp-ivcv_32v/texttools-0.1.0-py3-none-any.whl&#39; and adding &#39;build/bdist.macosx-11.0-arm64/wheel&#39; to it
+adding &#39;texttools/__init__.py&#39;
+adding &#39;texttools/cli.py&#39;
+adding &#39;texttools/core.py&#39;
+adding &#39;texttools-0.1.0.dist-info/METADATA&#39;
+adding &#39;texttools-0.1.0.dist-info/WHEEL&#39;
+adding &#39;texttools-0.1.0.dist-info/entry_points.txt&#39;
+adding &#39;texttools-0.1.0.dist-info/top_level.txt&#39;
+adding &#39;texttools-0.1.0.dist-info/RECORD&#39;
+removing build/bdist.macosx-11.0-arm64/wheel
+[1m[92mSuccessfully built [4mtexttools-0.1.0.tar.gz[0m[1m[92m and [4mtexttools-0.1.0-py3-none-any.whl[0m[1m[92m[0m
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 
 <span class="n">dist_dir</span> <span class="o">=</span> <span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;dist&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contents of dist/:&quot;</span><span class="p">)</span>
@@ -909,14 +786,26 @@ any   = works on any OS
 
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="c1"># Peek inside the wheel (it&#39;s just a zip file)</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
-
+<span class="c1"># Peek inside the wheel (it is just a zip file)</span>
 <span class="n">whl</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">dist_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.whl&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Contents of </span><span class="si">{</span><span class="n">whl</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
 <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">whl</span><span class="p">)</span> <span class="k">as</span> <span class="n">z</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">namelist</span><span class="p">()):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Contents of dist/:
+  texttools-0.1.0-py3-none-any.whl               3.4 KB
+  texttools-0.1.0.tar.gz                         3.1 KB
+
+Contents of texttools-0.1.0-py3-none-any.whl:
+  texttools-0.1.0.dist-info/METADATA
+  texttools-0.1.0.dist-info/RECORD
+  texttools-0.1.0.dist-info/WHEEL
+  texttools-0.1.0.dist-info/entry_points.txt
+  texttools-0.1.0.dist-info/top_level.txt
+  texttools/__init__.py
+  texttools/cli.py
+  texttools/core.py
 </code></pre></div>
 <hr />
 <h2 id="section-8-publishing-to-testpypi">Section 8 — Publishing to TestPyPI</h2>
@@ -929,29 +818,20 @@ any   = works on any OS
 <li>Install <code>twine</code>: <code>pip install twine</code></li>
 </ol>
 <h3 id="the-workflow">The Workflow</h3>
-<div class="highlight"><pre><span></span><code>Build          →   Validate        →   Upload
-python -m build    twine check        twine upload
+<div class="highlight"><pre><span></span><code>Build          -&gt;   Validate        -&gt;   Upload
+python -m build    twine check          twine upload
                    dist/*
 </code></pre></div>
 <h3 id="step-1-validate-before-uploading">Step 1 — Validate Before Uploading</h3>
-<p><code>twine check</code> verifies your package metadata is well-formed and the long description (README) will render correctly on PyPI.</p>
+<p><code>twine check</code> verifies your metadata is well-formed and the README renders correctly on PyPI.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install twine</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="s2">&quot;twine&quot;</span><span class="p">,</span> <span class="s2">&quot;--quiet&quot;</span><span class="p">],</span>
     <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
-<span class="c1"># Validate the distribution files</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;twine&quot;</span><span class="p">,</span> <span class="s2">&quot;check&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">dist_dir</span> <span class="o">/</span> <span class="s2">&quot;*&quot;</span><span class="p">)],</span>
-    <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">BASE</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="c1"># twine check needs glob expansion — use shell=True carefully here</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
-<span class="n">dist_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_dir</span> <span class="o">/</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">glob_module</span>
+<span class="n">dist_files</span> <span class="o">=</span> <span class="n">glob_module</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BASE</span> <span class="o">/</span> <span class="s2">&quot;dist&quot;</span> <span class="o">/</span> <span class="s2">&quot;*&quot;</span><span class="p">))</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;twine&quot;</span><span class="p">,</span> <span class="s2">&quot;check&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">dist_files</span><span class="p">,</span>
@@ -962,31 +842,29 @@ python -m build    twine check        twine upload
 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Checking texttools_project/dist/texttools-0.1.0-py3-none-any.whl: [32mPASSED[0m
+Checking texttools_project/dist/texttools-0.1.0.tar.gz: [32mPASSED[0m
+</code></pre></div>
 <h3 id="step-2-upload-to-testpypi">Step 2 — Upload to TestPyPI</h3>
-<p>The command below uploads to TestPyPI. <strong>This cell is intentionally not auto-executed</strong> — you need a real TestPyPI account and token to run it.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run this in your terminal (not in the notebook)</span>
+<p><strong>This is not auto-executed</strong> — you need a real TestPyPI account and token.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run in your terminal</span>
 twine<span class="w"> </span>upload<span class="w"> </span>--repository<span class="w"> </span>testpypi<span class="w"> </span>dist/*
 </code></pre></div>
 <p>When prompted:
-- Username: <code>__token__</code> (literally, with the underscores)
+- Username: <code>__token__</code> (literally)
 - Password: your API token (starts with <code>pypi-</code>)</p>
-<p>Or use a <code>.pypirc</code> config file to avoid typing credentials every time:</p>
+<p>Or use a <code>.pypirc</code> config file:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ~/.pypirc</span>
 <span class="k">[testpypi]</span>
 <span class="na">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">__token__</span>
 <span class="na">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">pypi-your-token-here</span>
 </code></pre></div>
 <h3 id="step-3-install-from-testpypi">Step 3 — Install From TestPyPI</h3>
-<p>Once uploaded, anyone can install your package from TestPyPI:</p>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>texttools
 </code></pre></div>
 <h3 id="step-4-publish-to-real-pypi">Step 4 — Publish to Real PyPI</h3>
-<p>When you're confident:</p>
 <div class="highlight"><pre><span></span><code>twine<span class="w"> </span>upload<span class="w"> </span>dist/*
-<span class="c1"># (uses pypi.org by default)</span>
-</code></pre></div>
-<p>Then:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>texttools
+pip<span class="w"> </span>install<span class="w"> </span>texttools
 </code></pre></div>
 <hr />
 <h2 id="section-9-versioning-best-practices">Section 9 — Versioning Best Practices</h2>
@@ -1008,54 +886,54 @@ MAJOR MINOR PATCH
 <tr>
 <td><strong>MAJOR</strong></td>
 <td>You break backwards compatibility</td>
-<td><code>1.0.0</code> → <code>2.0.0</code></td>
+<td><code>1.0.0</code> -&gt; <code>2.0.0</code></td>
 </tr>
 <tr>
 <td><strong>MINOR</strong></td>
 <td>You add functionality (backwards-compatible)</td>
-<td><code>1.0.0</code> → <code>1.1.0</code></td>
+<td><code>1.0.0</code> -&gt; <code>1.1.0</code></td>
 </tr>
 <tr>
 <td><strong>PATCH</strong></td>
 <td>You fix a bug (backwards-compatible)</td>
-<td><code>1.0.0</code> → <code>1.0.1</code></td>
+<td><code>1.0.0</code> -&gt; <code>1.0.1</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong><code>0.x.y</code></strong> versions (like <code>0.1.0</code>) signal that the API is not yet stable — anything may change.</p>
+<p><strong><code>0.x.y</code></strong> versions (like <code>0.1.0</code>) signal that the API is not yet stable.</p>
 <hr />
 <h3 id="the-single-source-of-truth-problem">The Single Source of Truth Problem</h3>
 <p>Version numbers appear in two places:</p>
 <ol>
-<li><code>pyproject.toml</code> → <code>version = "0.1.0"</code></li>
-<li><code>src/texttools/__init__.py</code> → <code>__version__ = "0.1.0"</code></li>
+<li><code>pyproject.toml</code> -&gt; <code>version = "0.1.0"</code></li>
+<li><code>src/texttools/__init__.py</code> -&gt; <code>__version__ = "0.1.0"</code></li>
 </ol>
-<p>If you update one and forget the other, they diverge. There are two clean solutions:</p>
-<p><strong>Option A — Read from <code>pyproject.toml</code> at runtime (Python 3.8+):</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Option A: importlib.metadata reads version from the installed package metadata</span>
-<span class="c1"># This means pyproject.toml is the ONLY place you define the version.</span>
+<p>If you update one and forget the other, they diverge. Two clean solutions:</p>
+<p><strong>Option A — Read from installed metadata at runtime (Python 3.8+):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Option A: importlib.metadata reads version from the installed package metadata.</span>
+<span class="c1"># pyproject.toml is the ONLY place you define the version.</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">__version__</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">&quot;texttools&quot;</span><span class="p">)</span>
+    <span class="n">pkg_version</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">&quot;texttools&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">PackageNotFoundError</span><span class="p">:</span>
-    <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>  <span class="c1"># package not installed</span>
+    <span class="n">pkg_version</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Version from metadata: </span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Version from metadata: </span><span class="si">{</span><span class="n">pkg_version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Option B — Keep <code>__version__</code> in <code>__init__.py</code> and read it in <code>pyproject.toml</code>:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># pyproject.toml</span>
-<span class="k">[project]</span>
+<div class="highlight"><pre><span></span><code>Version from metadata: 0.1.0
+</code></pre></div>
+<p><strong>Option B — Keep <code>__version__</code> in <code>__init__.py</code>, read it in <code>pyproject.toml</code>:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
 <span class="n">dynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
 
 <span class="k">[tool.setuptools.dynamic]</span>
 <span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">attr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;texttools.__version__&quot;</span><span class="p">}</span>
 </code></pre></div>
-<p>With this, <code>pyproject.toml</code> reads the version from your <code>__init__.py</code> — so there's only one place to change it.</p>
+<p>With this, <code>pyproject.toml</code> reads the version from your <code>__init__.py</code> — one place to change it.</p>
 <hr />
 <h3 id="bumping-versions">Bumping Versions</h3>
-<p>The process each time you release:</p>
 <div class="highlight"><pre><span></span><code>1. Update version in pyproject.toml (and __init__.py if applicable)
 2. git commit -m &quot;bump version to 0.2.0&quot;
 3. git tag v0.2.0
@@ -1063,11 +941,10 @@ MAJOR MINOR PATCH
 5. twine upload dist/*
 </code></pre></div>
 <blockquote>
-<p><strong>Important:</strong> PyPI does not allow re-uploading the same version. Once <code>0.1.0</code> is published, you must bump to <code>0.1.1</code> or higher for any further upload.</p>
+<p><strong>Important:</strong> PyPI does not allow re-uploading the same version.</p>
 </blockquote>
 <hr />
 <h2 id="section-10-full-package-checklist">Section 10 — Full Package Checklist</h2>
-<p>Before calling a package ready to publish, run through this checklist:</p>
 <div class="highlight"><pre><span></span><code>Structure
   [ ] src/&lt;package&gt;/ layout with __init__.py
   [ ] __version__ defined (or using importlib.metadata)
@@ -1095,9 +972,8 @@ Publishing
 </code></pre></div>
 <hr />
 <h2 id="challenge-build-your-own-package">Challenge — Build Your Own Package</h2>
-<p>Now it's your turn. Build a distributable package called <strong><code>numtools</code></strong> (or choose your own name) from scratch.</p>
+<p>Build a distributable package called <strong><code>numtools</code></strong> (or choose your own name) from scratch.</p>
 <h3 id="requirements">Requirements</h3>
-<p>Your package must:</p>
 <ol>
 <li>Use the <code>src/</code> layout</li>
 <li>Have a proper <code>pyproject.toml</code> with all required fields</li>
@@ -1107,7 +983,6 @@ Publishing
 <li>Pass <code>twine check</code> after building</li>
 </ol>
 <h3 id="suggested-function-ideas">Suggested Function Ideas</h3>
-<p>Pick a theme — numbers, files, dates, colours, anything you like:</p>
 <table>
 <thead>
 <tr>
@@ -1136,18 +1011,17 @@ Publishing
 </table>
 <h3 id="starter-structure">Starter Structure</h3>
 <div class="highlight"><pre><span></span><code>numtools/
-├── src/
-│   └── numtools/
-│       ├── __init__.py
-│       ├── core.py
-│       └── cli.py
-├── tests/
-│   └── test_core.py
-├── pyproject.toml
-└── README.md
++-- src/
+|   +-- numtools/
+|       +-- __init__.py
+|       +-- core.py
+|       +-- cli.py
++-- tests/
+|   +-- test_core.py
++-- pyproject.toml
++-- README.md
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Your workspace — build numtools here</span>
-<span class="c1"># Start by creating the directory structure:</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your workspace - build numtools here</span>
 
 <span class="n">challenge_base</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;numtools&quot;</span><span class="p">)</span>
 
@@ -1164,12 +1038,14 @@ Publishing
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Good luck!&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Good luck!
+</code></pre></div>
 <details>
-<summary>Hint — pyproject.toml skeleton</summary>
+<summary>Hint - pyproject.toml skeleton</summary>
 
 <div class="highlight"><pre><span></span><code><span class="k">[build-system]</span>
-<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools&gt;=68&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">]</span>
-<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.backends.legacy:build&quot;</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools&gt;=42&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
 
 <span class="k">[project]</span>
 <span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;numtools&quot;</span>
@@ -1191,7 +1067,7 @@ Publishing
 </details>
 
 <details>
-<summary>Hint — is_prime() implementation</summary>
+<summary>Hint - is_prime() implementation</summary>
 
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
