@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Deploymening Applications - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Deploymening Applications";
+        var mkdocs_page_input_path = "prg400/DeployingApplications.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PythonBindings/">Python Bindings (C/C++)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DistributablePackage/">Creating Distributable Packages</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Deploymening Applications</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-0-what-were-building">Section 0 — What We're Building</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-each-layer-does">What Each Layer Does</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-running-example-task-manager-api">The Running Example: Task Manager API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-rest-apis-http">Section 1 — REST APIs &amp; HTTP</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-an-api">What Is an API?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-rest">What Is REST?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#http-methods">HTTP Methods</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#http-status-codes">HTTP Status Codes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#anatomy-of-an-http-request-and-response">Anatomy of an HTTP Request and Response</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-browser-clients-consuming-apis">Section 2 — Browser Clients &amp; Consuming APIs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-a-client">What Is a Client?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-a-browser-consumes-an-api">How a Browser Consumes an API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-with-curl">Testing with curl</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#fastapis-built-in-client-swagger-ui">FastAPI's Built-in Client: Swagger UI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-fastapi-first-endpoint">Section 3 — FastAPI: First Endpoint</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-fastapi">What Is FastAPI?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#project-structure">Project Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#version-1-in-memory-task-list">Version 1: In-Memory Task List</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-the-application">Running the Application</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-with-curl_1">Testing with curl</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-fastapi-handles-validation">How FastAPI Handles Validation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-sqlite-database">Section 4 — SQLite Database</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-sqlite">What Is SQLite?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sqlalchemy">SQLAlchemy</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#updated-project-structure">Updated Project Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-with-the-database">Running with the Database</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inspecting-the-database-directly">Inspecting the Database Directly</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-concept-dependsget_db">Key Concept: Depends(get_db)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-docker">Section 5 — Docker</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#containers-vs-virtual-machines">Containers vs Virtual Machines</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-docker-works">How Docker Works</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#updated-project-structure_1">Updated Project Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#requirementstxt">requirements.txt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dockerfile">Dockerfile</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#docker-commands">Docker Commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-docker-compose">Section 6 — Docker Compose</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-docker-compose">What Is Docker Compose?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#docker-composeyml-version-1">docker-compose.yml — Version 1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#docker-compose-commands">Docker Compose Commands</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-nginx-as-reverse-proxy">Section 7 — Nginx as Reverse Proxy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-a-reverse-proxy">What Is a Reverse Proxy?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#updated-project-structure_2">Updated Project Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nginxconf">nginx.conf</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#docker-composeyml-version-2">docker-compose.yml — Version 2</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-through-nginx">Testing Through Nginx</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-putting-it-all-together">Section 8 — Putting It All Together</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#final-project-structure">Final Project Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#starting-the-full-stack-from-scratch">Starting the Full Stack From Scratch</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#request-trace-what-happens-when-you-call-curl-httplocalhosttasks">Request Trace: What Happens When You Call curl http://localhost/tasks</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#component-responsibilities-summary">Component Responsibilities Summary</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-dns-domain-names">Section 9 — DNS &amp; Domain Names</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-dns">What Is DNS?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-dns-resolution-works">How DNS Resolution Works</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#a-records">A Records</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#other-common-record-types">Other Common Record Types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dns-zone-file-what-it-looks-like">DNS Zone File (What It Looks Like)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pointing-a-domain-to-your-server-step-by-step">Pointing a Domain to Your Server: Step by Step</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-this-connects-to-our-stack">How This Connects to Our Stack</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-challenge">Section 10 — Challenge</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#further-reading">Further Reading</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Advanced Python</li>
+      <li class="breadcrumb-item active">Deploymening Applications</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="deploying-applications">Deploying Applications</h1>
+<blockquote>
+<p><em>"An application isn't useful until someone can use it."</em></p>
+</blockquote>
+<hr />
+<h3 id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this notebook, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> how HTTP and REST APIs work and how clients consume them</li>
+<li><strong>Build</strong> a REST API with FastAPI backed by a SQLite database</li>
+<li><strong>Containerise</strong> an application using Docker</li>
+<li><strong>Orchestrate</strong> multiple services using Docker Compose</li>
+<li><strong>Configure</strong> Nginx as a reverse proxy in front of a FastAPI application</li>
+<li><strong>Explain</strong> how DNS A records point a domain name to a server IP</li>
+</ol>
+<hr />
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Python 3.10+ installed</li>
+<li>Docker Desktop installed and running</li>
+<li>Basic terminal usage</li>
+<li>Familiarity with Python functions and classes</li>
+</ul>
+<p>Install Python dependencies before starting Section 3:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>fastapi<span class="w"> </span><span class="s1">&#39;uvicorn[standard]&#39;</span><span class="w"> </span>sqlalchemy
+</code></pre></div>
+<hr />
+<h2 id="section-0-what-were-building">Section 0 — What We're Building</h2>
+<p>By the end of this notebook, every request made by a browser or <code>curl</code> will travel through this stack:</p>
+<div class="highlight"><pre><span></span><code>Browser / curl
+      |
+      | HTTP  port 80
+      v
+  [ Nginx ]              &lt;-- reverse proxy, handles incoming connections
+      |
+      | HTTP  port 8000 (internal Docker network)
+      v
+  [ FastAPI / uvicorn ]  &lt;-- application server, runs your Python code
+      |
+      | SQL
+      v
+  [ SQLite ]             &lt;-- file-based database, persisted as a Docker volume
+</code></pre></div>
+<h3 id="what-each-layer-does">What Each Layer Does</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Tool</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reverse proxy</td>
+<td>Nginx</td>
+<td>Accepts public traffic, forwards to the app server</td>
+</tr>
+<tr>
+<td>Application server</td>
+<td>FastAPI + uvicorn</td>
+<td>Handles business logic, validates input, queries DB</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>SQLite</td>
+<td>Stores and retrieves data persistently</td>
+</tr>
+<tr>
+<td>Container runtime</td>
+<td>Docker</td>
+<td>Packages each service so it runs identically everywhere</td>
+</tr>
+<tr>
+<td>Orchestration</td>
+<td>Docker Compose</td>
+<td>Starts all containers with correct wiring in one command</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-running-example-task-manager-api">The Running Example: Task Manager API</h3>
+<p>We will build a REST API for managing tasks. Every section adds one layer to this same application until the full stack is running.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/tasks</code></td>
+<td>List all tasks</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/tasks</code></td>
+<td>Create a new task</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/tasks/{id}/complete</code></td>
+<td>Mark a task as completed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-1-rest-apis-http">Section 1 — REST APIs &amp; HTTP</h2>
+<h3 id="what-is-an-api">What Is an API?</h3>
+<p>An <strong>API</strong> (Application Programming Interface) is a defined way for one program to communicate with another. A <strong>web API</strong> uses the HTTP protocol — the same protocol your browser uses to load web pages — as the communication channel.</p>
+<p>When you open <code>https://weather.com</code>, your browser sends an HTTP request and receives an HTML page. When your Python code calls a weather API, it sends the same kind of HTTP request and receives JSON. The protocol is identical; only the response format differs.</p>
+<h3 id="what-is-rest">What Is REST?</h3>
+<p><strong>REST</strong> (Representational State Transfer) is a set of conventions for designing web APIs:</p>
+<ul>
+<li>Resources are identified by URLs (<code>/tasks</code>, <code>/tasks/42</code>)</li>
+<li>The HTTP <strong>method</strong> expresses what action to take</li>
+<li>Responses use standard <strong>status codes</strong> to communicate the outcome</li>
+<li>Data is exchanged as <strong>JSON</strong></li>
+</ul>
+<p>An API that follows these conventions is called <strong>RESTful</strong>.</p>
+<hr />
+<h3 id="http-methods">HTTP Methods</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Meaning</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td>Retrieve a resource</td>
+<td>List tasks, get one task</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td>Create a new resource</td>
+<td>Add a task</td>
+</tr>
+<tr>
+<td><code>PUT</code></td>
+<td>Replace a resource entirely</td>
+<td>Replace all task fields</td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td>Update part of a resource</td>
+<td>Mark a task complete</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td>Remove a resource</td>
+<td>Delete a task</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="http-status-codes">HTTP Status Codes</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>When it happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>200 OK</code></td>
+<td>Success</td>
+<td>GET returned data</td>
+</tr>
+<tr>
+<td><code>201 Created</code></td>
+<td>Resource created</td>
+<td>POST succeeded</td>
+</tr>
+<tr>
+<td><code>204 No Content</code></td>
+<td>Success, no response body</td>
+<td>DELETE succeeded</td>
+</tr>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>Client sent invalid data</td>
+<td>Missing required field</td>
+</tr>
+<tr>
+<td><code>404 Not Found</code></td>
+<td>Resource doesn't exist</td>
+<td>Task ID not in database</td>
+</tr>
+<tr>
+<td><code>422 Unprocessable Entity</code></td>
+<td>Validation failed</td>
+<td>Wrong data type in body</td>
+</tr>
+<tr>
+<td><code>500 Internal Server Error</code></td>
+<td>Server crashed</td>
+<td>Bug in your code</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Rule of thumb:</strong> 2xx = success, 4xx = the client's fault, 5xx = the server's fault.</p>
+</blockquote>
+<hr />
+<h3 id="anatomy-of-an-http-request-and-response">Anatomy of an HTTP Request and Response</h3>
+<div class="highlight"><pre><span></span><code>REQUEST
+--------
+POST /tasks HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+
+{&quot;title&quot;: &quot;Buy groceries&quot;}
+
+
+RESPONSE
+--------
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{&quot;id&quot;: 1, &quot;title&quot;: &quot;Buy groceries&quot;, &quot;completed&quot;: false, &quot;created_at&quot;: &quot;2026-04-16T10:00:00&quot;}
+</code></pre></div>
+<p>Every HTTP interaction follows this shape: <strong>method + URL + headers + optional body</strong> going out, <strong>status code + headers + optional body</strong> coming back.</p>
+<hr />
+<h2 id="section-2-browser-clients-consuming-apis">Section 2 — Browser Clients &amp; Consuming APIs</h2>
+<h3 id="what-is-a-client">What Is a Client?</h3>
+<p>A <strong>client</strong> is anything that sends HTTP requests to an API. The API doesn't know or care what type of client is calling it — it only sees an HTTP request.</p>
+<table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web browser (via JavaScript)</td>
+<td>Loads a web app; <code>fetch()</code> calls the API</td>
+</tr>
+<tr>
+<td><code>curl</code></td>
+<td>Terminal tool for testing APIs manually</td>
+</tr>
+<tr>
+<td>Postman</td>
+<td>GUI tool for building and testing requests</td>
+</tr>
+<tr>
+<td>Python <code>requests</code> / <code>httpx</code></td>
+<td>API calls from scripts and services</td>
+</tr>
+<tr>
+<td>Mobile app</td>
+<td>iOS/Android apps calling a backend</td>
+</tr>
+<tr>
+<td>Another server</td>
+<td>Microservices calling each other</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-a-browser-consumes-an-api">How a Browser Consumes an API</h3>
+<p>When a web page needs data, JavaScript uses the <code>fetch</code> API:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript running in the browser</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:8000/tasks&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">tasks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
+<span class="c1">// [{&quot;id&quot;: 1, &quot;title&quot;: &quot;Buy groceries&quot;, &quot;completed&quot;: false, ...}]</span>
+</code></pre></div>
+<p>The browser sends an HTTP GET to your FastAPI server and receives JSON. Your Python code never knows whether the caller is a browser, a mobile app, or <code>curl</code>.</p>
+<h3 id="testing-with-curl">Testing with <code>curl</code></h3>
+<p><code>curl</code> is the fastest way to test an API from the terminal:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># List all tasks</span>
+curl<span class="w"> </span>http://localhost:8000/tasks
+
+<span class="c1"># Create a new task</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Buy groceries&quot;}&#39;</span>
+
+<span class="c1"># Mark task 1 as completed</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>http://localhost:8000/tasks/1/complete
+</code></pre></div>
+<h3 id="fastapis-built-in-client-swagger-ui">FastAPI's Built-in Client: Swagger UI</h3>
+<p>FastAPI automatically generates interactive API documentation at <code>/docs</code>. You can send real HTTP requests directly from the browser — no <code>curl</code> or Postman required.</p>
+<p>Once you start the server in Section 3, visit:</p>
+<div class="highlight"><pre><span></span><code>http://localhost:8000/docs
+</code></pre></div>
+<hr />
+<h2 id="section-3-fastapi-first-endpoint">Section 3 — FastAPI: First Endpoint</h2>
+<h3 id="what-is-fastapi">What Is FastAPI?</h3>
+<p><strong>FastAPI</strong> is a modern Python web framework for building APIs. Key properties:</p>
+<ul>
+<li><strong>Automatic validation</strong> — uses Python type hints and Pydantic to validate all incoming data; returns a <code>422</code> with a clear message if the data is wrong</li>
+<li><strong>Auto-generated docs</strong> — Swagger UI at <code>/docs</code> with zero extra code</li>
+<li><strong>Dependency injection</strong> — clean way to share database sessions, auth, and other resources across routes</li>
+<li><strong>Fast</strong> — one of the fastest Python frameworks, powered by Starlette and uvicorn</li>
+</ul>
+<h3 id="project-structure">Project Structure</h3>
+<p>Create this directory structure:</p>
+<div class="highlight"><pre><span></span><code>taskapi/
+├── app/
+│   └── main.py
+└── requirements.txt
+</code></pre></div>
+<h3 id="version-1-in-memory-task-list">Version 1: In-Memory Task List</h3>
+<p>Copy the code below into <code>taskapi/app/main.py</code>. This version stores tasks in a Python list. There is no database yet — restart the server and all tasks disappear. Section 4 fixes this.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># taskapi/app/main.py  (version 1 — in-memory storage)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Task Manager API&#39;</span><span class="p">)</span>
+
+<span class="c1"># In-memory storage — replaced with SQLite in Section 4</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">_next_id</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">completed</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_tasks</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">tasks</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">TaskCreate</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">_next_id</span>
+    <span class="n">new_task</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">_next_id</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;completed&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_task</span><span class="p">)</span>
+    <span class="n">_next_id</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">new_task</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">task</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">:</span>
+            <span class="n">task</span><span class="p">[</span><span class="s1">&#39;completed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="n">task</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="running-the-application">Running the Application</h3>
+<p>From the <code>taskapi/</code> directory:</p>
+<div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
+</code></pre></div>
+<p><code>--reload</code> restarts the server automatically when you save a file. Visit:</p>
+<ul>
+<li><code>http://localhost:8000/tasks</code> — the raw JSON endpoint</li>
+<li><code>http://localhost:8000/docs</code> — Swagger UI (try the endpoints interactively)</li>
+</ul>
+<h3 id="testing-with-curl_1">Testing with curl</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create two tasks</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Buy groceries&quot;}&#39;</span>
+
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Write tests&quot;}&#39;</span>
+
+<span class="c1"># List all tasks</span>
+curl<span class="w"> </span>http://localhost:8000/tasks
+
+<span class="c1"># Complete task 1</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>http://localhost:8000/tasks/1/complete
+</code></pre></div>
+<h3 id="how-fastapi-handles-validation">How FastAPI Handles Validation</h3>
+<p>Send a bad request — omit the required <code>title</code> field:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+</code></pre></div>
+<p>FastAPI returns <code>422 Unprocessable Entity</code> with a detailed error — no extra validation code needed:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;loc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field required&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value_error.missing&quot;</span><span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> Restart the server and all tasks are gone — the list lives only in memory. Section 4 adds a real database.</p>
+</blockquote>
+<hr />
+<h2 id="section-4-sqlite-database">Section 4 — SQLite Database</h2>
+<h3 id="what-is-sqlite">What Is SQLite?</h3>
+<p><strong>SQLite</strong> is a file-based SQL database. The entire database is a single <code>.db</code> file — no separate server process, no configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>SQLite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage</td>
+<td>One file (<code>tasks.db</code>)</td>
+</tr>
+<tr>
+<td>Setup</td>
+<td>None — works out of the box</td>
+</tr>
+<tr>
+<td>Suitable for</td>
+<td>Development, small-to-medium production apps, embedded systems</td>
+</tr>
+<tr>
+<td>Not suitable for</td>
+<td>High-concurrency write-heavy workloads</td>
+</tr>
+</tbody>
+</table>
+<p>SQLite is the right choice for this course project and for most applications that do not need horizontal scaling.</p>
+<h3 id="sqlalchemy">SQLAlchemy</h3>
+<p><strong>SQLAlchemy</strong> is Python's most widely used ORM (Object-Relational Mapper). It lets you define database tables as Python classes and write queries in Python rather than raw SQL.</p>
+<div class="highlight"><pre><span></span><code>Python class  ──────────►  database table
+class Task        maps to    CREATE TABLE tasks (...)
+
+Python object ──────────►  database row
+task = Task(...)  maps to    INSERT INTO tasks ...
+</code></pre></div>
+<h3 id="updated-project-structure">Updated Project Structure</h3>
+<p>Add <code>database.py</code> alongside <code>main.py</code>:</p>
+<div class="highlight"><pre><span></span><code>taskapi/
+├── app/
+│   ├── main.py       &lt;-- updated (connects to database)
+│   └── database.py   &lt;-- new (engine, session, ORM model)
+└── requirements.txt
+</code></pre></div>
+<p>Copy <code>database.py</code> below into <code>taskapi/app/database.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># taskapi/app/database.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_engine</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">,</span> <span class="n">DateTime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.declarative</span><span class="w"> </span><span class="kn">import</span> <span class="n">declarative_base</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">sessionmaker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">,</span> <span class="s1">&#39;sqlite:///./tasks.db&#39;</span><span class="p">)</span>
+
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">,</span> <span class="n">connect_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;check_same_thread&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">SessionLocal</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">autoflush</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;tasks&#39;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">completed</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_db</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield a database session; close it when the request is done.&quot;&quot;&quot;</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">SessionLocal</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">db</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_tables</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create all tables if they do not already exist.&quot;&quot;&quot;</span>
+    <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+</code></pre></div>
+<p>Now replace <code>taskapi/app/main.py</code> with the version below. The three routes are identical — only the storage layer changes from a Python list to SQLAlchemy queries.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># taskapi/app/main.py  (version 2 — SQLite backend)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">get_db</span><span class="p">,</span> <span class="n">create_tables</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Task Manager API&#39;</span><span class="p">)</span>
+
+<span class="n">create_tables</span><span class="p">()</span>  <span class="c1"># creates tasks.db and the tasks table on first run</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">completed</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_task_to_dict</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">&#39;completed&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">completed</span><span class="p">,</span>
+        <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+    <span class="p">}</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_tasks</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_task_to_dict</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()]</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">TaskCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">db_task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_task</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_task</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_task_to_dict</span><span class="p">(</span><span class="n">db_task</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">completed</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_task_to_dict</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="running-with-the-database">Running with the Database</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>taskapi/
+uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
+</code></pre></div>
+<p><code>tasks.db</code> is created in the <code>taskapi/</code> directory the first time the app starts. Restart the server — your tasks are still there.</p>
+<h3 id="inspecting-the-database-directly">Inspecting the Database Directly</h3>
+<div class="highlight"><pre><span></span><code>sqlite3<span class="w"> </span>tasks.db
+
+sqlite&gt;<span class="w"> </span>.tables
+tasks
+
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>*<span class="w"> </span>FROM<span class="w"> </span>tasks<span class="p">;</span>
+<span class="m">1</span><span class="p">|</span>Buy<span class="w"> </span>groceries<span class="p">|</span><span class="m">0</span><span class="p">|</span><span class="m">2026</span>-04-16<span class="w"> </span><span class="m">10</span>:00:00.000000
+<span class="m">2</span><span class="p">|</span>Write<span class="w"> </span>tests<span class="p">|</span><span class="m">0</span><span class="p">|</span><span class="m">2026</span>-04-16<span class="w"> </span><span class="m">10</span>:01:00.000000
+
+sqlite&gt;<span class="w"> </span>.quit
+</code></pre></div>
+<h3 id="key-concept-dependsget_db">Key Concept: <code>Depends(get_db)</code></h3>
+<p><code>Depends(get_db)</code> is FastAPI's <strong>dependency injection</strong> system. For every incoming request:</p>
+<ol>
+<li>FastAPI calls <code>get_db()</code> to open a database session</li>
+<li>Passes the session to your route function as <code>db</code></li>
+<li>After the response is sent, runs the <code>finally</code> block in <code>get_db()</code> to close the session</li>
+</ol>
+<p>This happens automatically — your route function never manages the session lifecycle.</p>
+<hr />
+<h2 id="section-5-docker">Section 5 — Docker</h2>
+<h3 id="containers-vs-virtual-machines">Containers vs Virtual Machines</h3>
+<p>The classic deployment problem: <em>"It works on my machine."</em></p>
+<p>A virtual machine solves this by bundling a full OS. A container is lighter — it shares the host OS kernel but packages your app and all its dependencies into an isolated, reproducible unit.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Virtual Machine</th>
+<th>Container</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Includes</td>
+<td>Full OS + app</td>
+<td>App + dependencies only</td>
+</tr>
+<tr>
+<td>Startup</td>
+<td>Minutes</td>
+<td>Seconds</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Gigabytes</td>
+<td>Megabytes</td>
+</tr>
+<tr>
+<td>Isolation</td>
+<td>Separate kernel</td>
+<td>Process-level (shared kernel)</td>
+</tr>
+<tr>
+<td>Use case</td>
+<td>Running different operating systems</td>
+<td>Packaging and deploying apps</td>
+</tr>
+</tbody>
+</table>
+<h3 id="how-docker-works">How Docker Works</h3>
+<div class="highlight"><pre><span></span><code>Dockerfile           docker build          docker run
+(instructions)  ──────────────►  Image  ──────────────►  Container
+                               (snapshot)              (running instance)
+</code></pre></div>
+<ul>
+<li><strong>Dockerfile</strong> — instructions for building your image</li>
+<li><strong>Image</strong> — an immutable snapshot (like a ZIP file of your app and its environment)</li>
+<li><strong>Container</strong> — a running instance of an image</li>
+</ul>
+<h3 id="updated-project-structure_1">Updated Project Structure</h3>
+<p>Add <code>Dockerfile</code> and <code>requirements.txt</code> to the <code>taskapi/</code> root:</p>
+<div class="highlight"><pre><span></span><code>taskapi/
+├── app/
+│   ├── main.py
+│   └── database.py
+├── Dockerfile        &lt;-- new
+└── requirements.txt  &lt;-- new
+</code></pre></div>
+<h3 id="requirementstxt"><code>requirements.txt</code></h3>
+<p>Copy into <code>taskapi/requirements.txt</code>:</p>
+<div class="highlight"><pre><span></span><code>fastapi==0.111.0
+uvicorn[standard]==0.29.0
+sqlalchemy==2.0.30
+</code></pre></div>
+<h3 id="dockerfile"><code>Dockerfile</code></h3>
+<p>This uses a <strong>multi-stage build</strong>: the builder stage installs dependencies into a virtual environment; the runtime stage copies only what is needed, producing a lean final image with no build tools.</p>
+<p>Copy into <code>taskapi/Dockerfile</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c"># Stage 1: Builder — install dependencies</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+<span class="k">RUN</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+
+<span class="c"># Stage 2: Runtime — lean final image, no build tools</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">runtime</span>
+
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
+<span class="k">COPY</span><span class="w"> </span>app/<span class="w"> </span>./app/
+
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
+
+<span class="c"># Run as a non-root user — security best practice</span>
+<span class="k">RUN</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
+<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="docker-commands">Docker Commands</h3>
+<p>Run all commands from the <code>taskapi/</code> directory.</p>
+<p><strong>Build the image:</strong></p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>taskapi<span class="w"> </span>.
+</code></pre></div>
+<p><strong>Run a container from the image:</strong></p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>taskapi
+</code></pre></div>
+<p><code>-p 8000:8000</code> maps port 8000 on your machine to port 8000 inside the container.</p>
+<p>Visit <code>http://localhost:8000/tasks</code> — the app is now running inside a container.</p>
+<p><strong>Other useful Docker commands:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># List running containers</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># View container logs</span>
+docker<span class="w"> </span>logs<span class="w"> </span>&lt;container-id&gt;
+
+<span class="c1"># Open a shell inside a running container</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-id&gt;<span class="w"> </span>/bin/sh
+
+<span class="c1"># Stop a container</span>
+docker<span class="w"> </span>stop<span class="w"> </span>&lt;container-id&gt;
+
+<span class="c1"># List all images</span>
+docker<span class="w"> </span>images
+
+<span class="c1"># Remove an image</span>
+docker<span class="w"> </span>rmi<span class="w"> </span>taskapi
+</code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> The SQLite database is created inside the container's filesystem. When the container is stopped and removed, the data is lost. Section 6 solves this with a Docker volume.</p>
+</blockquote>
+<hr />
+<h2 id="section-6-docker-compose">Section 6 — Docker Compose</h2>
+<h3 id="what-is-docker-compose">What Is Docker Compose?</h3>
+<p>Docker Compose lets you define and run multiple containers together using a single YAML file. Instead of running a long <code>docker run</code> command with flags, you describe your services in <code>docker-compose.yml</code> and start everything with one command.</p>
+<div class="highlight"><pre><span></span><code>docker-compose.yml
+       |
+       v
+ docker compose up --build
+       |
+       ├── starts container: app  (your FastAPI service)
+       └── (more services added in Section 7)
+</code></pre></div>
+<h3 id="docker-composeyml-version-1"><code>docker-compose.yml</code> — Version 1</h3>
+<p>Add this file at <code>taskapi/docker-compose.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=sqlite:////app/data/tasks.db</span>
+</code></pre></div>
+<p><strong>What each field does:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build: .</code></td>
+<td>Build the image from the Dockerfile in the current directory</td>
+</tr>
+<tr>
+<td><code>ports</code></td>
+<td>Map host port 8000 to container port 8000</td>
+</tr>
+<tr>
+<td><code>volumes</code></td>
+<td>Mount <code>./data</code> on your machine to <code>/app/data</code> inside the container — the database file survives container restarts</td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>Set <code>DATABASE_URL</code> so the app writes <code>tasks.db</code> into the mounted volume</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>The four slashes in <code>sqlite:////app/data/tasks.db</code> are correct: <code>sqlite://</code> (scheme) + <code>//app/data/tasks.db</code> (absolute path).</p>
+</blockquote>
+<h3 id="docker-compose-commands">Docker Compose Commands</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build images and start all services (runs in foreground)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+
+<span class="c1"># Run in the background</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build<span class="w"> </span>-d
+
+<span class="c1"># View logs</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f
+
+<span class="c1"># Stop and remove containers</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down
+
+<span class="c1"># Stop and also remove named volumes</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+</code></pre></div>
+<p>Visit <code>http://localhost:8000/tasks</code> — same app, now with a persistent database.</p>
+<hr />
+<h2 id="section-7-nginx-as-reverse-proxy">Section 7 — Nginx as Reverse Proxy</h2>
+<h3 id="what-is-a-reverse-proxy">What Is a Reverse Proxy?</h3>
+<p>A <strong>reverse proxy</strong> is a server that sits in front of your application and forwards incoming requests to it.</p>
+<div class="highlight"><pre><span></span><code>Without Nginx:
+  Browser ──► FastAPI :8000
+
+With Nginx:
+  Browser ──► Nginx :80 ──► FastAPI :8000 (internal)
+</code></pre></div>
+<p>Why add this layer?</p>
+<table>
+<thead>
+<tr>
+<th>Benefit</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standard port</td>
+<td>Users connect on port 80 (HTTP) or 443 (HTTPS) instead of <code>:8000</code></td>
+</tr>
+<tr>
+<td>SSL termination</td>
+<td>Nginx handles HTTPS; your app only ever sees plain HTTP internally</td>
+</tr>
+<tr>
+<td>Static files</td>
+<td>Nginx serves static files (images, CSS) directly without hitting Python</td>
+</tr>
+<tr>
+<td>Load balancing</td>
+<td>Nginx can distribute traffic across multiple app instances</td>
+</tr>
+</tbody>
+</table>
+<p>For this course, we use Nginx purely as a reverse proxy on port 80.</p>
+<h3 id="updated-project-structure_2">Updated Project Structure</h3>
+<div class="highlight"><pre><span></span><code>taskapi/
+├── app/
+│   ├── main.py
+│   └── database.py
+├── nginx/
+│   └── nginx.conf    &lt;-- new
+├── Dockerfile
+├── docker-compose.yml  &lt;-- updated
+└── requirements.txt
+</code></pre></div>
+<h3 id="nginxconf"><code>nginx.conf</code></h3>
+<p>Copy into <code>taskapi/nginx/nginx.conf</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">taskapi</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">app</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kn">proxy_pass</span><span class="w">         </span><span class="s">http://taskapi</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">Host</span><span class="w">              </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Real-IP</span><span class="w">         </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Forwarded-For</span><span class="w">   </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Key parts explained:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Directive</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>upstream taskapi</code></td>
+<td>Names the group of app servers to proxy to. <code>app</code> is the Docker Compose service name — Docker's internal DNS resolves it to the container's IP.</td>
+</tr>
+<tr>
+<td><code>listen 80</code></td>
+<td>Accept connections on port 80</td>
+</tr>
+<tr>
+<td><code>proxy_pass http://taskapi</code></td>
+<td>Forward all requests to the upstream group</td>
+</tr>
+<tr>
+<td><code>proxy_set_header</code></td>
+<td>Pass the original client IP and host to the app so it can log them</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docker-composeyml-version-2"><code>docker-compose.yml</code> — Version 2</h3>
+<p>Replace <code>taskapi/docker-compose.yml</code> with this version, which adds the <code>nginx</code> service:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
+<span class="w">    </span><span class="nt">expose</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DATABASE_URL=sqlite:////app/data/tasks.db</span>
+
+<span class="w">  </span><span class="nt">nginx</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./nginx/nginx.conf:/etc/nginx/conf.d/default.conf</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+</code></pre></div>
+<p><strong>What changed from version 1:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Change</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ports</code> → <code>expose</code> on app</td>
+<td>The app is no longer directly reachable from outside; only Nginx talks to it</td>
+</tr>
+<tr>
+<td>Added <code>nginx</code> service</td>
+<td>Runs the official <code>nginx:alpine</code> image</td>
+</tr>
+<tr>
+<td><code>ports: 80:80</code> on nginx</td>
+<td>Only Nginx is exposed to the outside world</td>
+</tr>
+<tr>
+<td><code>depends_on: app</code></td>
+<td>Docker Compose starts <code>app</code> before starting <code>nginx</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="testing-through-nginx">Testing Through Nginx</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+
+<span class="c1"># Nginx is now on port 80 — no port number needed</span>
+curl<span class="w"> </span>http://localhost/tasks
+
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Test through Nginx&quot;}&#39;</span>
+</code></pre></div>
+<hr />
+<h2 id="section-8-putting-it-all-together">Section 8 — Putting It All Together</h2>
+<h3 id="final-project-structure">Final Project Structure</h3>
+<div class="highlight"><pre><span></span><code>taskapi/
+├── app/
+│   ├── main.py          # FastAPI routes, Pydantic models
+│   └── database.py      # SQLAlchemy engine, session, ORM model
+├── nginx/
+│   └── nginx.conf       # Reverse proxy config
+├── data/                # Created automatically; holds tasks.db
+├── Dockerfile           # Multi-stage build for the FastAPI app
+├── docker-compose.yml   # Orchestrates app + nginx
+└── requirements.txt     # Python dependencies
+</code></pre></div>
+<h3 id="starting-the-full-stack-from-scratch">Starting the Full Stack From Scratch</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>taskapi/
+
+<span class="c1"># Build images and start both services</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+</code></pre></div>
+<p>That's it. Docker Compose builds the FastAPI image, pulls the Nginx image, creates the network, mounts volumes, and starts both containers.</p>
+<h3 id="request-trace-what-happens-when-you-call-curl-httplocalhosttasks">Request Trace: What Happens When You Call <code>curl http://localhost/tasks</code></h3>
+<div class="highlight"><pre><span></span><code>1. curl sends:  GET /tasks HTTP/1.1  to  127.0.0.1:80
+
+2. Nginx receives the request on port 80
+   Reads nginx.conf: location / → proxy_pass http://taskapi
+   Forwards:  GET /tasks HTTP/1.1  to  app:8000  (Docker internal DNS)
+
+3. FastAPI (uvicorn) receives the request on port 8000
+   Matches route:  @app.get(&#39;/tasks&#39;)
+   Opens a SQLAlchemy session via Depends(get_db)
+   Queries:  SELECT * FROM tasks
+   Returns JSON response with status 200
+
+4. Nginx receives the JSON response from FastAPI
+   Forwards it back to curl unchanged
+
+5. curl prints the JSON
+</code></pre></div>
+<h3 id="component-responsibilities-summary">Component Responsibilities Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who accepts the public connection?</td>
+<td>Nginx</td>
+</tr>
+<tr>
+<td>Who runs the Python code?</td>
+<td>uvicorn (inside the FastAPI container)</td>
+</tr>
+<tr>
+<td>Who validates the request body?</td>
+<td>FastAPI + Pydantic</td>
+</tr>
+<tr>
+<td>Who talks to the database?</td>
+<td>SQLAlchemy (inside the FastAPI container)</td>
+</tr>
+<tr>
+<td>Who persists data across restarts?</td>
+<td>Docker volume mounted to <code>./data</code></td>
+</tr>
+<tr>
+<td>Who wires everything together?</td>
+<td>Docker Compose</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-9-dns-domain-names">Section 9 — DNS &amp; Domain Names</h2>
+<h3 id="what-is-dns">What Is DNS?</h3>
+<p>Every server on the internet has an <strong>IP address</strong> — a numeric identifier like <code>203.0.113.42</code>. DNS (Domain Name System) is the internet's naming system: it translates human-readable domain names like <code>tasks.example.com</code> into IP addresses that computers can connect to.</p>
+<p>Without DNS, you would need to type <code>http://203.0.113.42/tasks</code> instead of <code>http://tasks.example.com/tasks</code>.</p>
+<h3 id="how-dns-resolution-works">How DNS Resolution Works</h3>
+<p>When you type <code>tasks.example.com</code> into a browser, this happens:</p>
+<div class="highlight"><pre><span></span><code>Browser
+  |
+  | 1. Check browser cache (visited recently?)
+  v
+Operating System
+  |
+  | 2. Check OS cache / /etc/hosts
+  v
+Recursive Resolver  (provided by your ISP or 8.8.8.8)
+  |
+  | 3. Ask: who handles .com?
+  v
+Root Name Server
+  |
+  | 4. Returns: TLD server for .com
+  v
+TLD Name Server  (.com)
+  |
+  | 5. Returns: authoritative NS for example.com
+  v
+Authoritative Name Server  (your DNS provider)
+  |
+  | 6. Returns: tasks.example.com → 203.0.113.42
+  v
+Browser connects to 203.0.113.42:80
+</code></pre></div>
+<p>The result is <strong>cached</strong> at each level so this lookup only happens once (until the TTL expires).</p>
+<h3 id="a-records">A Records</h3>
+<p>An <strong>A record</strong> (Address record) maps a hostname to an IPv4 address. It is the most fundamental DNS record type.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Value</th>
+<th>TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><code>tasks.example.com</code></td>
+<td><code>203.0.113.42</code></td>
+<td><code>3600</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>www.example.com</code></td>
+<td><code>203.0.113.42</code></td>
+<td><code>3600</code></td>
+</tr>
+<tr>
+<td>A</td>
+<td><code>example.com</code></td>
+<td><code>203.0.113.42</code></td>
+<td><code>3600</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>TTL</strong> (Time To Live) is how long resolvers cache this record, in seconds. <code>3600</code> = 1 hour. Lower TTL means faster propagation of changes; higher TTL means fewer DNS lookups.</p>
+<h3 id="other-common-record-types">Other Common Record Types</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>A</code></td>
+<td>Maps hostname → IPv4 address</td>
+<td><code>tasks.example.com → 203.0.113.42</code></td>
+</tr>
+<tr>
+<td><code>AAAA</code></td>
+<td>Maps hostname → IPv6 address</td>
+<td><code>tasks.example.com → 2001:db8::1</code></td>
+</tr>
+<tr>
+<td><code>CNAME</code></td>
+<td>Alias — maps hostname → another hostname</td>
+<td><code>www.example.com → example.com</code></td>
+</tr>
+<tr>
+<td><code>MX</code></td>
+<td>Mail server for a domain</td>
+<td><code>example.com → mail.example.com</code></td>
+</tr>
+<tr>
+<td><code>TXT</code></td>
+<td>Arbitrary text (used for domain verification, SPF)</td>
+<td><code>"v=spf1 include:..."</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="dns-zone-file-what-it-looks-like">DNS Zone File (What It Looks Like)</h3>
+<p>A DNS zone file is the authoritative record for a domain. Most DNS providers hide this behind a GUI, but the underlying format looks like this:</p>
+<div class="highlight"><pre><span></span><code>; Zone file for example.com
+$TTL 3600
+
+@   IN  A     203.0.113.42      ; example.com → server IP
+www IN  A     203.0.113.42      ; www.example.com → server IP
+tasks IN A    203.0.113.42      ; tasks.example.com → server IP
+</code></pre></div>
+<h3 id="pointing-a-domain-to-your-server-step-by-step">Pointing a Domain to Your Server: Step by Step</h3>
+<ol>
+<li><strong>Buy a domain</strong> from a registrar (Namecheap, GoDaddy, Google Domains, etc.)</li>
+<li><strong>Find your server's IP address</strong> — this is the public IP of the machine running Docker</li>
+<li><strong>Log in to your DNS provider</strong> (often the same as your registrar, or Cloudflare)</li>
+<li><strong>Add an A record:</strong></li>
+<li>Name: <code>tasks</code> (or <code>@</code> for the root domain)</li>
+<li>Type: <code>A</code></li>
+<li>Value: <code>203.0.113.42</code> (your server's IP)</li>
+<li>TTL: <code>3600</code></li>
+<li><strong>Wait for propagation</strong> — changes typically take 1–30 minutes (up to 48 hours if old records were cached with high TTLs)</li>
+</ol>
+<h3 id="how-this-connects-to-our-stack">How This Connects to Our Stack</h3>
+<p>Once DNS is configured:</p>
+<div class="highlight"><pre><span></span><code>Browser types:   http://tasks.example.com
+                        |
+                        | DNS resolves tasks.example.com → 203.0.113.42
+                        v
+              Your server at 203.0.113.42
+                        |
+                        | port 80
+                        v
+                    [ Nginx ]          &lt;-- receives the request
+                        |
+                        v
+                    [ FastAPI ]        &lt;-- processes it
+                        |
+                        v
+                    [ SQLite ]         &lt;-- queries the database
+</code></pre></div>
+<p>Nginx is what listens on port 80. The moment DNS resolves your domain name to the server IP, real HTTP traffic starts flowing through the exact stack you built in this notebook.</p>
+<blockquote>
+<p><strong>HTTPS:</strong> For production, you would configure Nginx to also listen on port 443 and obtain an SSL certificate (e.g., via Let's Encrypt / Certbot). That adds TLS termination at the Nginx layer — the rest of the stack remains unchanged.</p>
+</blockquote>
+<hr />
+<h2 id="section-10-challenge">Section 10 — Challenge</h2>
+<p>Extend the Task Manager API with a <strong>delete endpoint</strong>.</p>
+<h3 id="requirements">Requirements</h3>
+<ol>
+<li>Add <code>DELETE /tasks/{id}</code> to <code>app/main.py</code></li>
+<li>Return <code>204 No Content</code> on success (no response body)</li>
+<li>Return <code>404 Not Found</code> if the task does not exist</li>
+<li>Rebuild the Docker image and bring the stack back up</li>
+<li>Verify with <code>curl</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a task</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/tasks<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Delete me&quot;}&#39;</span>
+
+<span class="c1"># Delete task 1</span>
+curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost/tasks/1
+
+<span class="c1"># Confirm it is gone</span>
+curl<span class="w"> </span>http://localhost/tasks
+</code></pre></div>
+<hr />
+<details>
+<summary>Solution</summary>
+
+Add this route to `app/main.py`:
+
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div>
+
+Rebuild and restart:
+
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
+</code></pre></div>
+
+</details>
+
+<hr />
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>REST / HTTP</strong></td>
+<td>Standard methods + status codes + JSON form the language of web APIs</td>
+</tr>
+<tr>
+<td><strong>FastAPI</strong></td>
+<td>Type hints + Pydantic give you validation and docs for free</td>
+</tr>
+<tr>
+<td><strong>SQLAlchemy</strong></td>
+<td>Maps Python classes to database tables; <code>Depends(get_db)</code> manages sessions</td>
+</tr>
+<tr>
+<td><strong>Docker</strong></td>
+<td>Packages your app and its environment into a portable, reproducible image</td>
+</tr>
+<tr>
+<td><strong>Docker Compose</strong></td>
+<td>One YAML file orchestrates multiple containers with correct wiring</td>
+</tr>
+<tr>
+<td><strong>Nginx</strong></td>
+<td>Sits in front of your app; handles port 80, connection management, and later SSL</td>
+</tr>
+<tr>
+<td><strong>DNS / A records</strong></td>
+<td>Maps a human domain name to your server's IP address</td>
+</tr>
+</tbody>
+</table>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li><a href="https://fastapi.tiangolo.com">FastAPI documentation</a></li>
+<li><a href="https://docs.sqlalchemy.org/en/20/tutorial/">SQLAlchemy ORM tutorial</a></li>
+<li><a href="https://docs.docker.com/get-started/">Docker getting started guide</a></li>
+<li><a href="https://nginx.org/en/docs/beginners_guide.html">Nginx reverse proxy guide</a></li>
+<li><a href="https://12factor.net">12-Factor App</a> — principles behind production-grade applications</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../DistributablePackage/" class="btn btn-neutral float-left" title="Creating Distributable Packages"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ProjectDescription/" class="btn btn-neutral float-right" title="Project Description (PRG400)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../DistributablePackage/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ProjectDescription/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
