@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Django Framework - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Django Framework";
+        var mkdocs_page_input_path = "prg400/Django.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PythonBindings/">Python Bindings (C/C++)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DistributablePackage/">Creating Distributable Packages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../FastAPI/">FastAPI</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Django Framework</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-0-what-were-building">Section 0 — What We're Building</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#final-endpoint-table">Final Endpoint Table</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#project-structure">Project Structure</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-setup-first-view">Section 1 — Setup &amp; First View</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#django-vs-fastapi">Django vs FastAPI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-project">Creating a Project</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#registering-the-app">Registering the App</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#running-the-development-server">Running the Development Server</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#your-first-view">Your First View</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-models-migrations">Section 2 — Models &amp; Migrations</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-a-django-model">What Is a Django Model?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#common-field-types">Common Field Types</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#relationships">Relationships</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-migration-workflow">The Migration Workflow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#inspecting-the-schema">Inspecting the Schema</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-django-orm">Section 3 — Django ORM</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-queryset">The QuerySet</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#crud-operations">CRUD Operations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lookups-filtering">Lookups (Filtering)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#select_related-and-prefetch_related">select_related and prefetch_related</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-views-url-patterns">Section 4 — Views &amp; URL Patterns</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#function-based-views-fbvs">Function-Based Views (FBVs)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#url-patterns">URL Patterns</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get_object_or_404">get_object_or_404</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#class-based-views-cbvs">Class-Based Views (CBVs)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-django-rest-framework-serializers">Section 5 — Django REST Framework: Serializers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#why-drf">Why DRF?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modelserializer">ModelSerializer</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#validation">Validation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#nested-serializers">Nested Serializers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-drf-views-routers">Section 6 — DRF Views &amp; Routers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#apiview">APIView</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#modelviewset-maximum-reuse">ModelViewSet — Maximum Reuse</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#drf-router">DRF Router</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-actions-with-action">Custom Actions with @action</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-authentication-permissions">Section 7 — Authentication &amp; Permissions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#drf-authentication-classes">DRF Authentication Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-token-authentication">Setting Up Token Authentication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#built-in-permission-classes">Built-in Permission Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-object-level-permission">Custom Object-Level Permission</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#user-registration-view">User Registration View</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-django-admin">Section 8 — Django Admin</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-the-admin">What Is the Admin?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-registration">Basic Registration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#customising-the-admin">Customising the Admin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#key-modeladmin-options">Key ModelAdmin Options</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-final-settingspy-urlspy">Section 9 — Final settings.py &amp; urls.py</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#blogplatformsettingspy-relevant-additions">blogplatform/settings.py (relevant additions)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#blogplatformurlspy-final">blogplatform/urls.py (final)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-with-curl">Testing with curl</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#further-reading">Further Reading</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DeployingApplications/">Deploying Applications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Advanced Python</li>
+      <li class="breadcrumb-item active">Django Framework</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="django">Django</h1>
+<blockquote>
+<p><em>"The web framework for perfectionists with deadlines."</em></p>
+</blockquote>
+<hr />
+<h3 id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this notebook, you will be able to:</p>
+<ol>
+<li><strong>Create</strong> a Django project and app from scratch</li>
+<li><strong>Define</strong> models and run database migrations</li>
+<li><strong>Query</strong> the database using the Django ORM</li>
+<li><strong>Write</strong> function-based and class-based views</li>
+<li><strong>Build</strong> a REST API using Django REST Framework serializers and ViewSets</li>
+<li><strong>Protect</strong> endpoints using authentication and permissions</li>
+<li><strong>Register</strong> models with the Django admin interface</li>
+</ol>
+<hr />
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Python 3.10+ installed</li>
+<li>Familiarity with Python classes, decorators, and HTTP basics</li>
+</ul>
+<p>Install dependencies before starting:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">django</span><span class="o">==</span><span class="m">5</span>.0.6<span class="w"> </span><span class="nv">djangorestframework</span><span class="o">==</span><span class="m">3</span>.15.2<span class="w"> </span>django-filter<span class="o">==</span><span class="m">24</span>.2
+</code></pre></div>
+<hr />
+<h2 id="section-0-what-were-building">Section 0 — What We're Building</h2>
+<p>We will build the <strong>Blog Platform</strong> — a web application with a REST API for managing blog posts, comments, and authors.</p>
+<div class="highlight"><pre><span></span><code>Browser / curl / Postman
+          |
+          | HTTP
+          v
+    [ Django + DRF ]       &lt;-- your Python code
+          |
+          | ORM
+          v
+       [ SQLite ]          &lt;-- db.sqlite3
+</code></pre></div>
+<h3 id="final-endpoint-table">Final Endpoint Table</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Auth</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/api/posts/</code></td>
+<td>None</td>
+<td>List all posts</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/posts/</code></td>
+<td>Token</td>
+<td>Create a post</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/posts/{id}/</code></td>
+<td>None</td>
+<td>Retrieve a post</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td><code>/api/posts/{id}/</code></td>
+<td>Token + Owner</td>
+<td>Update a post</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td><code>/api/posts/{id}/</code></td>
+<td>Token + Owner</td>
+<td>Delete a post</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/posts/{id}/comments/</code></td>
+<td>None</td>
+<td>List comments on a post</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/posts/{id}/comments/</code></td>
+<td>Token</td>
+<td>Add a comment</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/auth/register/</code></td>
+<td>None</td>
+<td>Register a user</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/auth/token/</code></td>
+<td>None</td>
+<td>Obtain auth token</td>
+</tr>
+</tbody>
+</table>
+<h3 id="project-structure">Project Structure</h3>
+<div class="highlight"><pre><span></span><code>blogplatform/
+├── manage.py
+├── blogplatform/          ← project config
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── blog/                  ← our app
+    ├── models.py
+    ├── serializers.py
+    ├── views.py
+    ├── urls.py
+    ├── permissions.py
+    └── admin.py
+</code></pre></div>
+<hr />
+<h2 id="section-1-setup-first-view">Section 1 — Setup &amp; First View</h2>
+<h3 id="django-vs-fastapi">Django vs FastAPI</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Django</th>
+<th>FastAPI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Philosophy</td>
+<td><strong>Batteries included</strong> — ORM, admin, auth, templates built in</td>
+<td>Minimal core, compose what you need</td>
+</tr>
+<tr>
+<td>Data validation</td>
+<td>Forms / DRF Serializers</td>
+<td>Pydantic models</td>
+</tr>
+<tr>
+<td>Auto docs</td>
+<td>None (DRF provides browsable API)</td>
+<td>Swagger UI + ReDoc</td>
+</tr>
+<tr>
+<td>Async support</td>
+<td>Partial (Django 4.1+)</td>
+<td>Native async/await</td>
+</tr>
+<tr>
+<td>Best for</td>
+<td>Full-stack web apps, content sites</td>
+<td>High-throughput APIs, microservices</td>
+</tr>
+</tbody>
+</table>
+<h3 id="creating-a-project">Creating a Project</h3>
+<div class="highlight"><pre><span></span><code>django-admin<span class="w"> </span>startproject<span class="w"> </span>blogplatform
+<span class="nb">cd</span><span class="w"> </span>blogplatform
+python<span class="w"> </span>manage.py<span class="w"> </span>startapp<span class="w"> </span>blog
+</code></pre></div>
+<p><code>startproject</code> generates the config package. <code>startapp</code> generates one <strong>app</strong> — a self-contained module with its own models, views, and URLs. A Django project is composed of one or more apps.</p>
+<h3 id="registering-the-app">Registering the App</h3>
+<p>Open <code>blogplatform/settings.py</code> and add the new app to <code>INSTALLED_APPS</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework&#39;</span><span class="p">,</span>          <span class="c1"># ← Django REST Framework</span>
+    <span class="s1">&#39;rest_framework.authtoken&#39;</span><span class="p">,</span> <span class="c1"># ← Token authentication</span>
+    <span class="s1">&#39;blog&#39;</span><span class="p">,</span>                    <span class="c1"># ← our app</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="running-the-development-server">Running the Development Server</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>migrate<span class="w">      </span><span class="c1"># apply built-in migrations (creates db.sqlite3)</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>runserver<span class="w">    </span><span class="c1"># starts dev server at http://127.0.0.1:8000</span>
+</code></pre></div>
+<h3 id="your-first-view">Your First View</h3>
+<p>A <strong>view</strong> is a Python function (or class) that receives an <code>HttpRequest</code> and returns an <code>HttpResponse</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonResponse</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">})</span>
+</code></pre></div>
+<p>Wire it to a URL:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py  (create this file)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;health/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">health</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blogplatform/urls.py  (include the app URLs)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;blog.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Visit <code>http://127.0.0.1:8000/api/health/</code> — Django returns <code>{"status": "ok", "version": "1.0.0"}</code>.</p>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>GET /api/ping/</code> view that returns <code>{"message": "pong", "timestamp": &lt;current UTC time as string&gt;}</code>. Import <code>datetime</code> from Python's standard library.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py  (Section 1 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonResponse</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">health</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">})</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py  (Section 1 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;health/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">health</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="section-2-models-migrations">Section 2 — Models &amp; Migrations</h2>
+<h3 id="what-is-a-django-model">What Is a Django Model?</h3>
+<p>A <strong>model</strong> is a Python class that maps to a database table. Each class attribute is a column. Django's ORM translates Python operations into SQL.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">body</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+</code></pre></div>
+<p>Django creates the table <code>blog_post</code> (app name + model name, lowercase).</p>
+<h3 id="common-field-types">Common Field Types</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Python type</th>
+<th>SQL type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CharField(max_length=N)</code></td>
+<td><code>str</code></td>
+<td>VARCHAR(N)</td>
+</tr>
+<tr>
+<td><code>TextField()</code></td>
+<td><code>str</code></td>
+<td>TEXT</td>
+</tr>
+<tr>
+<td><code>IntegerField()</code></td>
+<td><code>int</code></td>
+<td>INTEGER</td>
+</tr>
+<tr>
+<td><code>FloatField()</code></td>
+<td><code>float</code></td>
+<td>REAL</td>
+</tr>
+<tr>
+<td><code>BooleanField()</code></td>
+<td><code>bool</code></td>
+<td>BOOLEAN</td>
+</tr>
+<tr>
+<td><code>DateTimeField(auto_now_add=True)</code></td>
+<td><code>datetime</code></td>
+<td>DATETIME (set on create)</td>
+</tr>
+<tr>
+<td><code>DateTimeField(auto_now=True)</code></td>
+<td><code>datetime</code></td>
+<td>DATETIME (set on every save)</td>
+</tr>
+<tr>
+<td><code>ForeignKey(Model, on_delete=...)</code></td>
+<td>FK</td>
+<td>INTEGER + constraint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="relationships">Relationships</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Comment</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span>
+    <span class="c1"># CASCADE: deleting a Post also deletes all its Comments</span>
+    <span class="c1"># related_name: lets you do post.comments.all()</span>
+</code></pre></div>
+<h3 id="the-migration-workflow">The Migration Workflow</h3>
+<div class="highlight"><pre><span></span><code>Edit models.py
+      ↓
+python manage.py makemigrations   ← generates SQL instructions in blog/migrations/
+      ↓
+python manage.py migrate          ← executes the SQL against the database
+</code></pre></div>
+<p>Always run both commands together. Never edit migration files by hand.</p>
+<h3 id="inspecting-the-schema">Inspecting the Schema</h3>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>sqlmigrate<span class="w"> </span>blog<span class="w"> </span><span class="m">0001</span>
+<span class="c1"># prints the SQL that Django will execute — useful for learning</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>slug</code> field to <code>Post</code> (<code>SlugField(unique=True)</code>) and a <code>published</code> boolean field (default <code>False</code>). Run <code>makemigrations</code> and <code>migrate</code>. Confirm the columns appear with <code>sqlmigrate</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/models.py  (Section 2 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span>      <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">slug</span>       <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">SlugField</span><span class="p">(</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">body</span>       <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">published</span>  <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">author</span>     <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span>
+        <span class="n">User</span><span class="p">,</span>
+        <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span>
+        <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">updated_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-created_at&#39;</span><span class="p">]</span>   <span class="c1"># newest first by default</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Comment</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">post</span>       <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span>
+    <span class="n">author</span>     <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span>
+    <span class="n">body</span>       <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;Comment by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="si">}</span><span class="s1"> on &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+</code></pre></div>
+<hr />
+<h2 id="section-3-django-orm">Section 3 — Django ORM</h2>
+<h3 id="the-queryset">The QuerySet</h3>
+<p>Every ORM operation returns a <strong>QuerySet</strong> — a lazy, chainable list of model instances. The SQL is only executed when you iterate, slice, or call <code>list()</code> on it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Nothing hits the DB yet:</span>
+<span class="n">qs</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># DB query fires here:</span>
+<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">qs</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="crud-operations">CRUD Operations</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">blog.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+<span class="n">author</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>
+
+<span class="c1"># CREATE</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Hello Django&#39;</span><span class="p">,</span>
+    <span class="n">slug</span><span class="o">=</span><span class="s1">&#39;hello-django&#39;</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="s1">&#39;My first post.&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="n">author</span><span class="p">,</span>
+    <span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># READ — all</span>
+<span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+<span class="c1"># READ — filter</span>
+<span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">author__username</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span>   <span class="c1"># ← double-underscore traverses FK</span>
+
+<span class="c1"># READ — single record (raises DoesNotExist if missing)</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">slug</span><span class="o">=</span><span class="s1">&#39;hello-django&#39;</span><span class="p">)</span>
+
+<span class="c1"># UPDATE</span>
+<span class="n">post</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Hello Django (Updated)&#39;</span>
+<span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># Bulk UPDATE (no .save() needed)</span>
+<span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># DELETE</span>
+<span class="n">post</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="lookups-filtering">Lookups (Filtering)</h3>
+<table>
+<thead>
+<tr>
+<th>Lookup</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exact</code> (default)</td>
+<td><code>filter(title='Hello')</code></td>
+<td><code>title = 'Hello'</code></td>
+</tr>
+<tr>
+<td><code>icontains</code></td>
+<td><code>filter(title__icontains='django')</code></td>
+<td>case-insensitive LIKE</td>
+</tr>
+<tr>
+<td><code>gt / gte / lt / lte</code></td>
+<td><code>filter(id__gt=5)</code></td>
+<td>comparison operators</td>
+</tr>
+<tr>
+<td><code>in</code></td>
+<td><code>filter(id__in=[1, 2, 3])</code></td>
+<td><code>id IN (1,2,3)</code></td>
+</tr>
+<tr>
+<td><code>isnull</code></td>
+<td><code>filter(slug__isnull=True)</code></td>
+<td><code>IS NULL</code></td>
+</tr>
+<tr>
+<td>Related field</td>
+<td><code>filter(author__username='alice')</code></td>
+<td>JOIN on FK</td>
+</tr>
+</tbody>
+</table>
+<h3 id="select_related-and-prefetch_related"><code>select_related</code> and <code>prefetch_related</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># BAD — N+1 query problem: one query per post to fetch the author</span>
+<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># GOOD — single JOIN query</span>
+<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">username</span><span class="p">)</span>
+
+<span class="c1"># For many-to-many or reverse FK (e.g., all comments per post)</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Write a QuerySet that returns the 5 most recently created published posts whose title contains the word <code>"python"</code> (case-insensitive). Use method chaining on a single line.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run these in the Django shell:  python manage.py shell</span>
+<span class="c1">#</span>
+<span class="c1"># Section 3 — ORM examples</span>
+
+<span class="c1"># ── Setup ──────────────────────────────────────────────────────────────────</span>
+<span class="c1"># import django, os</span>
+<span class="c1"># os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;blogplatform.settings&#39;)</span>
+<span class="c1"># django.setup()</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">blog.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+
+<span class="c1"># Create a user (only needed once)</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;secret123&#39;</span><span class="p">)</span>
+
+<span class="c1"># CREATE</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Getting Started with Python&#39;</span><span class="p">,</span>
+    <span class="n">slug</span><span class="o">=</span><span class="s1">&#39;getting-started-python&#39;</span><span class="p">,</span>
+    <span class="n">body</span><span class="o">=</span><span class="s1">&#39;Python is a versatile language...&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="n">alice</span><span class="p">,</span>
+    <span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># READ</span>
+<span class="n">all_posts</span>    <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="n">pub_posts</span>    <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">alice_posts</span>  <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">author__username</span><span class="o">=</span><span class="s1">&#39;alice&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
+
+<span class="c1"># UPDATE</span>
+<span class="n">post</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Getting Started with Python (Revised)&#39;</span>
+<span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># Mini challenge answer ↓</span>
+<span class="n">recent_python</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">Post</span><span class="o">.</span><span class="n">objects</span>
+    <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title__icontains</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-created_at&#39;</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-4-views-url-patterns">Section 4 — Views &amp; URL Patterns</h2>
+<h3 id="function-based-views-fbvs">Function-Based Views (FBVs)</h3>
+<p>A function-based view handles one or more HTTP methods in a single function. Use <code>request.method</code> to branch.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.views.decorators.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_http_methods</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="nd">@require_http_methods</span><span class="p">([</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">post_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="url-patterns">URL Patterns</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;posts/&#39;</span><span class="p">,</span>       <span class="n">views</span><span class="o">.</span><span class="n">post_list</span><span class="p">),</span>   <span class="c1"># /api/posts/</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;posts/&lt;int:pk&gt;/&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">post_detail</span><span class="p">),</span>  <span class="c1"># /api/posts/42/</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>URL converters:</p>
+<table>
+<thead>
+<tr>
+<th>Converter</th>
+<th>Matches</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;int:pk&gt;</code></td>
+<td><code>0-9+</code></td>
+<td><code>/posts/42/</code> → <code>pk=42</code></td>
+</tr>
+<tr>
+<td><code>&lt;str:slug&gt;</code></td>
+<td>non-<code>/</code> chars</td>
+<td><code>/posts/hello-world/</code></td>
+</tr>
+<tr>
+<td><code>&lt;slug:slug&gt;</code></td>
+<td>letters, digits, <code>-</code>, <code>_</code></td>
+<td><code>/posts/hello-world/</code></td>
+</tr>
+<tr>
+<td><code>&lt;uuid:id&gt;</code></td>
+<td>UUID format</td>
+<td><code>/items/550e8400-.../</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="get_object_or_404">get_object_or_404</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_object_or_404</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">post_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>  <span class="c1"># returns 404 if not found</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">body</span><span class="p">})</span>
+</code></pre></div>
+<h3 id="class-based-views-cbvs">Class-Based Views (CBVs)</h3>
+<p>Django ships with generic CBVs that handle common patterns without boilerplate:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">View</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonResponse</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostDetailView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">})</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({},</span> <span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py</span>
+<span class="n">path</span><span class="p">(</span><span class="s1">&#39;posts/&lt;int:pk&gt;/&#39;</span><span class="p">,</span> <span class="n">PostDetailView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Write a <code>post_detail</code> FBV that handles <code>GET</code> (return the post as JSON), <code>PUT</code> (update <code>title</code> and <code>body</code> from request body), and <code>DELETE</code> (delete the post). Use <code>get_object_or_404</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py  (Section 4 checkpoint — plain Django views)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.views.decorators.http</span><span class="w"> </span><span class="kn">import</span> <span class="n">require_http_methods</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">post_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;author__username&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+            <span class="n">slug</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;slug&#39;</span><span class="p">],</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">],</span>
+            <span class="n">author</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">post_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">post</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Post</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="s1">&#39;slug&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">slug</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">body</span><span class="p">,</span>
+            <span class="s1">&#39;author&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+            <span class="s1">&#39;published&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">published</span><span class="p">,</span>
+        <span class="p">})</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;PUT&#39;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">body</span>  <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="n">post</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">})</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;DELETE&#39;</span><span class="p">:</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({},</span> <span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-5-django-rest-framework-serializers">Section 5 — Django REST Framework: Serializers</h2>
+<h3 id="why-drf">Why DRF?</h3>
+<p>Raw Django views work but require manual JSON parsing, validation, and serialisation. <strong>Django REST Framework (DRF)</strong> provides:</p>
+<ul>
+<li><strong>Serializers</strong> — declare fields once; get validation and serialisation for free</li>
+<li><strong>Generic views / ViewSets</strong> — CRUD with minimal code</li>
+<li><strong>Browsable API</strong> — interactive HTML interface at every endpoint</li>
+<li><strong>Authentication &amp; permissions</strong> — pluggable classes</li>
+</ul>
+<h3 id="modelserializer">ModelSerializer</h3>
+<p>A <code>ModelSerializer</code> auto-generates fields from a model. Compare with FastAPI's <code>response_model</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/serializers.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+        <span class="n">read_only_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>The <code>Meta</code> inner class maps the serializer to a model. <code>fields</code> lists which columns to include; <code>read_only_fields</code> cannot be set by the client.</p>
+<h3 id="validation">Validation</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PostSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_slug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Field-level validator.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39; &#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;Slug must not contain spaces.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Object-level validator (runs after all fields pass).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;published&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;A published post must have a body.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+</code></pre></div>
+<h3 id="nested-serializers">Nested Serializers</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CommentSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">author_username</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;author.username&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Comment</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;author_username&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+        <span class="n">read_only_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;author_username&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostDetailSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">CommentSerializer</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># inline nested objects</span>
+    <span class="n">author_username</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;author.username&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;author_username&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;comments&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>comment_count</code> field to <code>PostSerializer</code> that returns the number of comments on each post. Use <code>serializers.SerializerMethodField</code> and implement the <code>get_comment_count</code> method.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/serializers.py  (Section 5 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">author_username</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;author.username&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Comment</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;author_username&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+        <span class="n">read_only_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;author_username&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">author_username</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s1">&#39;author.username&#39;</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">comment_count</span>   <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">SerializerMethodField</span><span class="p">()</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;slug&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;author_username&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_count&#39;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">read_only_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">,</span> <span class="s1">&#39;author_username&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_count&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_comment_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_slug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39; &#39;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="s1">&#39;Slug must not contain spaces.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostDetailSerializer</span><span class="p">(</span><span class="n">PostSerializer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extends PostSerializer with full comment list for detail views.&quot;&quot;&quot;</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">CommentSerializer</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">(</span><span class="n">PostSerializer</span><span class="o">.</span><span class="n">Meta</span><span class="p">):</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">PostSerializer</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">fields</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;comments&#39;</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="section-6-drf-views-routers">Section 6 — DRF Views &amp; Routers</h2>
+<h3 id="apiview">APIView</h3>
+<p><code>APIView</code> is DRF's equivalent of Django's <code>View</code> — each HTTP method is a separate method on the class. DRF handles content negotiation and authentication automatically.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">status</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostListView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">posts</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">PostSerializer</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">PostSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">author</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="modelviewset-maximum-reuse">ModelViewSet — Maximum Reuse</h3>
+<p>A <strong>ViewSet</strong> groups all CRUD operations into one class. A <strong>ModelViewSet</strong> auto-implements <code>list</code>, <code>create</code>, <code>retrieve</code>, <code>update</code>, <code>partial_update</code>, and <code>destroy</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">viewsets</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span>            <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span>    <span class="o">=</span> <span class="n">PostSerializer</span>
+</code></pre></div>
+<h3 id="drf-router">DRF Router</h3>
+<p>Pair a ViewSet with a <code>DefaultRouter</code> to auto-generate all URL patterns:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.routers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultRouter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">DefaultRouter</span><span class="p">()</span>
+<span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">PostViewSet</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">router</span><span class="o">.</span><span class="n">urls</span>
+</code></pre></div>
+<p>This single <code>register</code> call generates:</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Method</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/posts/</code></td>
+<td>GET</td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>/api/posts/</code></td>
+<td>POST</td>
+<td><code>create</code></td>
+</tr>
+<tr>
+<td><code>/api/posts/{pk}/</code></td>
+<td>GET</td>
+<td><code>retrieve</code></td>
+</tr>
+<tr>
+<td><code>/api/posts/{pk}/</code></td>
+<td>PUT</td>
+<td><code>update</code></td>
+</tr>
+<tr>
+<td><code>/api/posts/{pk}/</code></td>
+<td>PATCH</td>
+<td><code>partial_update</code></td>
+</tr>
+<tr>
+<td><code>/api/posts/{pk}/</code></td>
+<td>DELETE</td>
+<td><code>destroy</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-actions-with-action">Custom Actions with <code>@action</code></h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">action</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span>         <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">PostSerializer</span>
+
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span> <span class="n">url_path</span><span class="o">=</span><span class="s1">&#39;publish&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;POST /api/posts/{pk}/publish/ — marks a post as published.&quot;&quot;&quot;</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">published</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;published&#39;</span><span class="p">})</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add an <code>@action</code> called <code>unpublish</code> (detail=True, methods=['post']) that sets <code>post.published = False</code>. Register both <code>/publish/</code> and <code>/unpublish/</code> on the same ViewSet.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py  (Section 6 checkpoint — DRF ViewSets)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">viewsets</span><span class="p">,</span> <span class="n">status</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">action</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostSerializer</span><span class="p">,</span> <span class="n">PostDetailSerializer</span><span class="p">,</span> <span class="n">CommentSerializer</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_serializer_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Use the detailed serializer (with comments) for single-object views</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;retrieve&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">PostDetailSerializer</span>
+        <span class="k">return</span> <span class="n">PostSerializer</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializer</span><span class="p">):</span>
+        <span class="c1"># Automatically set the author to the authenticated user</span>
+        <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">author</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span> <span class="n">url_path</span><span class="o">=</span><span class="s1">&#39;publish&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">published</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;published&#39;</span><span class="p">})</span>
+
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span> <span class="n">url_path</span><span class="o">=</span><span class="s1">&#39;unpublish&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unpublish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">published</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;unpublished&#39;</span><span class="p">})</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">CommentSerializer</span>
+    <span class="n">http_method_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Scope comments to the parent post</span>
+        <span class="k">return</span> <span class="n">Comment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">post_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;post_pk&#39;</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializer</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;post_pk&#39;</span><span class="p">])</span>
+        <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">author</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="n">post</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/urls.py  (Section 6 checkpoint — nested router)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.routers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultRouter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework_nested</span><span class="w"> </span><span class="kn">import</span> <span class="n">routers</span> <span class="k">as</span> <span class="n">nested_routers</span>  <span class="c1"># pip install drf-nested-routers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">DefaultRouter</span><span class="p">()</span>
+<span class="n">router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">PostViewSet</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+
+<span class="c1"># Nested: /api/posts/{post_pk}/comments/</span>
+<span class="n">posts_router</span> <span class="o">=</span> <span class="n">nested_routers</span><span class="o">.</span><span class="n">NestedDefaultRouter</span><span class="p">(</span><span class="n">router</span><span class="p">,</span> <span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="n">lookup</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<span class="n">posts_router</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">CommentViewSet</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="s1">&#39;post-comments&#39;</span><span class="p">)</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">router</span><span class="o">.</span><span class="n">urls</span> <span class="o">+</span> <span class="n">posts_router</span><span class="o">.</span><span class="n">urls</span>
+</code></pre></div>
+<hr />
+<h2 id="section-7-authentication-permissions">Section 7 — Authentication &amp; Permissions</h2>
+<h3 id="drf-authentication-classes">DRF Authentication Classes</h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>How the client authenticates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SessionAuthentication</code></td>
+<td>Django session cookie (browser)</td>
+</tr>
+<tr>
+<td><code>BasicAuthentication</code></td>
+<td>HTTP Basic — <strong>only for testing</strong></td>
+</tr>
+<tr>
+<td><code>TokenAuthentication</code></td>
+<td><code>Authorization: Token &lt;token&gt;</code> header</td>
+</tr>
+<tr>
+<td><code>JWTAuthentication</code> (via <code>djangorestframework-simplejwt</code>)</td>
+<td><code>Authorization: Bearer &lt;jwt&gt;</code> header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="setting-up-token-authentication">Setting Up Token Authentication</h3>
+<p>Add to <code>settings.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;DEFAULT_AUTHENTICATION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.authentication.TokenAuthentication&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;DEFAULT_PERMISSION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.permissions.IsAuthenticatedOrReadOnly&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Run <code>python manage.py migrate</code> to create the <code>authtoken_token</code> table.</p>
+<p>Expose the token endpoint in <code>blogplatform/urls.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">drf_auth_views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;blog.urls&#39;</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/token/&#39;</span><span class="p">,</span> <span class="n">drf_auth_views</span><span class="o">.</span><span class="n">obtain_auth_token</span><span class="p">),</span>  <span class="c1"># POST {username, password}</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="built-in-permission-classes">Built-in Permission Classes</h3>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AllowAny</code></td>
+<td>Everyone — authenticated or not</td>
+</tr>
+<tr>
+<td><code>IsAuthenticated</code></td>
+<td>Must have a valid token/session</td>
+</tr>
+<tr>
+<td><code>IsAuthenticatedOrReadOnly</code></td>
+<td>Unauthenticated users may only GET</td>
+</tr>
+<tr>
+<td><code>IsAdminUser</code></td>
+<td><code>request.user.is_staff</code> must be <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-object-level-permission">Custom Object-Level Permission</h3>
+<p>Only the post's author should be able to edit or delete it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/permissions.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">BasePermission</span><span class="p">,</span> <span class="n">SAFE_METHODS</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">IsOwnerOrReadOnly</span><span class="p">(</span><span class="n">BasePermission</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allow read to everyone; write only to the object&#39;s owner.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_object_permission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">in</span> <span class="n">SAFE_METHODS</span><span class="p">:</span>   <span class="c1"># GET, HEAD, OPTIONS</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">author</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+</code></pre></div>
+<p>Apply it to the ViewSet:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsAuthenticatedOrReadOnly</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsOwnerOrReadOnly</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticatedOrReadOnly</span><span class="p">,</span> <span class="n">IsOwnerOrReadOnly</span><span class="p">]</span>
+    <span class="o">...</span>
+</code></pre></div>
+<h3 id="user-registration-view">User Registration View</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegisterView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[]</span>   <span class="c1"># public endpoint</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username and password required&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username already taken&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="n">user</span>  <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">Token</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">key</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>DELETE /api/auth/token/</code> endpoint that deletes (revokes) the current user's token, forcing them to re-authenticate. The endpoint must require <code>IsAuthenticated</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/permissions.py  (Section 7 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">BasePermission</span><span class="p">,</span> <span class="n">SAFE_METHODS</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">IsOwnerOrReadOnly</span><span class="p">(</span><span class="n">BasePermission</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write access only to the object&#39;s owner; read access for everyone.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">has_object_permission</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">in</span> <span class="n">SAFE_METHODS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">author</span> <span class="o">==</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py  (Section 7 — auth views added)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsAuthenticated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegisterView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># public</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username and password required&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username already taken&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="n">user</span>  <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">Token</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">key</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RevokeTokenView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">auth_token</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/views.py  (Section 7 checkpoint — full file)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">viewsets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">action</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsAuthenticated</span><span class="p">,</span> <span class="n">IsAuthenticatedOrReadOnly</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIView</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Token</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.serializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">PostSerializer</span><span class="p">,</span> <span class="n">PostDetailSerializer</span><span class="p">,</span> <span class="n">CommentSerializer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.permissions</span><span class="w"> </span><span class="kn">import</span> <span class="n">IsOwnerOrReadOnly</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PostViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">queryset</span>           <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticatedOrReadOnly</span><span class="p">,</span> <span class="n">IsOwnerOrReadOnly</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_serializer_class</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;retrieve&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">PostDetailSerializer</span>
+        <span class="k">return</span> <span class="n">PostSerializer</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializer</span><span class="p">):</span>
+        <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">author</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span> <span class="n">url_path</span><span class="o">=</span><span class="s1">&#39;publish&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">published</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;published&#39;</span><span class="p">})</span>
+
+    <span class="nd">@action</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">],</span> <span class="n">url_path</span><span class="o">=</span><span class="s1">&#39;unpublish&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unpublish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">published</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">post</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;unpublished&#39;</span><span class="p">})</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
+    <span class="n">serializer_class</span>   <span class="o">=</span> <span class="n">CommentSerializer</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticatedOrReadOnly</span><span class="p">]</span>
+    <span class="n">http_method_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">,</span> <span class="s1">&#39;options&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Comment</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">post_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;post_pk&#39;</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">select_related</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">perform_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializer</span><span class="p">):</span>
+        <span class="n">post</span> <span class="o">=</span> <span class="n">Post</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;post_pk&#39;</span><span class="p">])</span>
+        <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">author</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="n">post</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RegisterView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username and password required&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;username already taken&#39;</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+        <span class="n">user</span>  <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">Token</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">token</span><span class="o">.</span><span class="n">key</span><span class="p">},</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RevokeTokenView</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">IsAuthenticated</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">auth_token</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-8-django-admin">Section 8 — Django Admin</h2>
+<h3 id="what-is-the-admin">What Is the Admin?</h3>
+<p>Django ships with a fully functional web-based admin interface at <code>/admin/</code>. It requires zero custom frontend code — just register your models.</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>createsuperuser<span class="w">   </span><span class="c1"># creates an admin user</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>runserver
+<span class="c1"># open http://127.0.0.1:8000/admin/</span>
+</code></pre></div>
+<h3 id="basic-registration">Basic Registration</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/admin.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+</code></pre></div>
+<p>This gives you list/add/edit/delete views for both models immediately.</p>
+<h3 id="customising-the-admin">Customising the Admin</h3>
+<p>Use <code>ModelAdmin</code> to control columns, filters, search, and inline editing:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">CommentInline</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
+    <span class="n">model</span>   <span class="o">=</span> <span class="n">Comment</span>
+    <span class="n">extra</span>   <span class="o">=</span> <span class="mi">0</span>        <span class="c1"># don&#39;t show blank rows by default</span>
+    <span class="n">readonly_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+
+
+<span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PostAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">list_filter</span>     <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">search_fields</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;author__username&#39;</span><span class="p">]</span>
+    <span class="n">prepopulated_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;slug&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,)}</span>   <span class="c1"># auto-fills slug from title</span>
+    <span class="n">inlines</span>         <span class="o">=</span> <span class="p">[</span><span class="n">CommentInline</span><span class="p">]</span>
+    <span class="n">actions</span>         <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;make_published&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_published</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+        <span class="n">queryset</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">make_published</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s1">&#39;Mark selected posts as published&#39;</span>
+</code></pre></div>
+<h3 id="key-modeladmin-options">Key <code>ModelAdmin</code> Options</h3>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_display</code></td>
+<td>Columns shown in the object list</td>
+</tr>
+<tr>
+<td><code>list_filter</code></td>
+<td>Sidebar filter panel</td>
+</tr>
+<tr>
+<td><code>search_fields</code></td>
+<td>Enables a search box (uses <code>LIKE</code> queries)</td>
+</tr>
+<tr>
+<td><code>ordering</code></td>
+<td>Default sort order</td>
+</tr>
+<tr>
+<td><code>prepopulated_fields</code></td>
+<td>Auto-fills one field from another</td>
+</tr>
+<tr>
+<td><code>inlines</code></td>
+<td>Embed related objects on the same page</td>
+</tr>
+<tr>
+<td><code>actions</code></td>
+<td>Bulk actions available from the list view</td>
+</tr>
+<tr>
+<td><code>readonly_fields</code></td>
+<td>Fields shown but not editable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🏋️ Mini Challenge:</strong> Register <code>Comment</code> with a <code>CommentAdmin</code> that shows <code>post</code>, <code>author</code>, and <code>created_at</code> in <code>list_display</code>, and allows filtering by <code>created_at</code>. Add a <code>search_fields</code> on <code>body</code> and <code>author__username</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># blog/admin.py  (Section 8 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Post</span><span class="p">,</span> <span class="n">Comment</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentInline</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">TabularInline</span><span class="p">):</span>
+    <span class="n">model</span>           <span class="o">=</span> <span class="n">Comment</span>
+    <span class="n">extra</span>           <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">readonly_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+
+
+<span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PostAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span>        <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">list_filter</span>         <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;published&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">search_fields</span>       <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;author__username&#39;</span><span class="p">]</span>
+    <span class="n">prepopulated_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;slug&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,)}</span>
+    <span class="n">inlines</span>             <span class="o">=</span> <span class="p">[</span><span class="n">CommentInline</span><span class="p">]</span>
+    <span class="n">actions</span>             <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;make_published&#39;</span><span class="p">]</span>
+
+    <span class="nd">@admin</span><span class="o">.</span><span class="n">action</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Mark selected posts as published&#39;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_published</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+        <span class="n">queryset</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="nd">@admin</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">list_filter</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;author__username&#39;</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="section-9-final-settingspy-urlspy">Section 9 — Final <code>settings.py</code> &amp; <code>urls.py</code></h2>
+<p>Bring all pieces together in the project config files.</p>
+<h3 id="blogplatformsettingspy-relevant-additions"><code>blogplatform/settings.py</code> (relevant additions)</h3>
+<div class="highlight"><pre><span></span><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># ... django defaults ...</span>
+    <span class="s1">&#39;rest_framework&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework.authtoken&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;blog&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;DEFAULT_AUTHENTICATION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.authentication.TokenAuthentication&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rest_framework.authentication.SessionAuthentication&#39;</span><span class="p">,</span>  <span class="c1"># browsable API login</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;DEFAULT_PERMISSION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.permissions.IsAuthenticatedOrReadOnly&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;DEFAULT_PAGINATION_CLASS&#39;</span><span class="p">:</span> <span class="s1">&#39;rest_framework.pagination.PageNumberPagination&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PAGE_SIZE&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="blogplatformurlspy-final"><code>blogplatform/urls.py</code> (final)</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">drf_auth_views</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">blog.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisterView</span><span class="p">,</span> <span class="n">RevokeTokenView</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span>               <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/&#39;</span><span class="p">,</span>                 <span class="n">include</span><span class="p">(</span><span class="s1">&#39;blog.urls&#39;</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/register/&#39;</span><span class="p">,</span>   <span class="n">RegisterView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/token/&#39;</span><span class="p">,</span>      <span class="n">drf_auth_views</span><span class="o">.</span><span class="n">obtain_auth_token</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/token/revoke/&#39;</span><span class="p">,</span> <span class="n">RevokeTokenView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api-auth/&#39;</span><span class="p">,</span>            <span class="n">include</span><span class="p">(</span><span class="s1">&#39;rest_framework.urls&#39;</span><span class="p">)),</span>  <span class="c1"># browsable API login</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="testing-with-curl">Testing with curl</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Register</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/api/auth/register/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;username&quot;: &quot;alice&quot;, &quot;password&quot;: &quot;secret123&quot;}&#39;</span>
+<span class="c1"># → {&quot;token&quot;: &quot;abc123...&quot;}</span>
+
+<span class="c1"># Create a post (authenticated)</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/api/posts/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Token abc123...&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Hello Django&quot;, &quot;slug&quot;: &quot;hello-django&quot;, &quot;body&quot;: &quot;My first post!&quot;}&#39;</span>
+
+<span class="c1"># List posts (unauthenticated)</span>
+curl<span class="w"> </span>http://127.0.0.1:8000/api/posts/
+
+<span class="c1"># Publish a post</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8000/api/posts/1/publish/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Authorization: Token abc123...&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blogplatform/settings.py  (Section 9 checkpoint — additions only)</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+    <span class="c1"># third-party</span>
+    <span class="s1">&#39;rest_framework&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework.authtoken&#39;</span><span class="p">,</span>
+    <span class="c1"># local</span>
+    <span class="s1">&#39;blog&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;DEFAULT_AUTHENTICATION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.authentication.TokenAuthentication&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rest_framework.authentication.SessionAuthentication&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;DEFAULT_PERMISSION_CLASSES&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;rest_framework.permissions.IsAuthenticatedOrReadOnly&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s1">&#39;DEFAULT_PAGINATION_CLASS&#39;</span><span class="p">:</span> <span class="s1">&#39;rest_framework.pagination.PageNumberPagination&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PAGE_SIZE&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># blogplatform/urls.py  (Section 9 checkpoint — final)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rest_framework.authtoken</span><span class="w"> </span><span class="kn">import</span> <span class="n">views</span> <span class="k">as</span> <span class="n">drf_auth_views</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">blog.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisterView</span><span class="p">,</span> <span class="n">RevokeTokenView</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span>                   <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/&#39;</span><span class="p">,</span>                     <span class="n">include</span><span class="p">(</span><span class="s1">&#39;blog.urls&#39;</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/register/&#39;</span><span class="p">,</span>       <span class="n">RegisterView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/token/&#39;</span><span class="p">,</span>          <span class="n">drf_auth_views</span><span class="o">.</span><span class="n">obtain_auth_token</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api/auth/token/revoke/&#39;</span><span class="p">,</span>   <span class="n">RevokeTokenView</span><span class="o">.</span><span class="n">as_view</span><span class="p">()),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;api-auth/&#39;</span><span class="p">,</span>                <span class="n">include</span><span class="p">(</span><span class="s1">&#39;rest_framework.urls&#39;</span><span class="p">)),</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Project vs App</strong></td>
+<td>A project is configuration; apps are reusable modules. One project, many apps.</td>
+</tr>
+<tr>
+<td><strong>Models</strong></td>
+<td>Classes that map to DB tables. Fields are columns. Django handles DDL via migrations.</td>
+</tr>
+<tr>
+<td><strong>Migrations</strong></td>
+<td><code>makemigrations</code> → generate SQL; <code>migrate</code> → execute SQL. Always run both.</td>
+</tr>
+<tr>
+<td><strong>ORM</strong></td>
+<td>Chainable QuerySets. Use <code>select_related</code> / <code>prefetch_related</code> to avoid N+1 queries.</td>
+</tr>
+<tr>
+<td><strong>Views</strong></td>
+<td>Functions or classes that receive <code>HttpRequest</code> and return <code>HttpResponse</code>.</td>
+</tr>
+<tr>
+<td><strong>DRF Serializers</strong></td>
+<td>Declare once — get validation, serialisation, and deserialization for free.</td>
+</tr>
+<tr>
+<td><strong>ModelViewSet</strong></td>
+<td>One class = full CRUD. Pair with <code>DefaultRouter</code> to auto-generate URL patterns.</td>
+</tr>
+<tr>
+<td><strong><code>@action</code></strong></td>
+<td>Attach extra endpoints to a ViewSet (<code>/publish/</code>, <code>/unpublish/</code>).</td>
+</tr>
+<tr>
+<td><strong>Permissions</strong></td>
+<td><code>IsAuthenticatedOrReadOnly</code> + custom <code>IsOwnerOrReadOnly</code> protects write operations.</td>
+</tr>
+<tr>
+<td><strong>Admin</strong></td>
+<td>Register models, customise with <code>ModelAdmin</code> — full CRUD UI for free.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li><a href="https://docs.djangoproject.com/">Django documentation</a></li>
+<li><a href="https://www.django-rest-framework.org/">Django REST Framework documentation</a></li>
+<li><a href="https://docs.djangoproject.com/en/stable/ref/models/querysets/">Django ORM cheatsheet</a></li>
+<li><a href="https://github.com/alanjds/drf-nested-routers">drf-nested-routers</a> — nested URL routing for related resources</li>
+<li><a href="https://django-rest-framework-simplejwt.readthedocs.io/">djangorestframework-simplejwt</a> — JWT authentication for DRF</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../FastAPI/" class="btn btn-neutral float-left" title="FastAPI"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../DeployingApplications/" class="btn btn-neutral float-right" title="Deploying Applications">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../FastAPI/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../DeployingApplications/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
