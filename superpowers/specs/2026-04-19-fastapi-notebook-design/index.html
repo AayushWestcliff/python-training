@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>FastAPI Teaching Notebook — Design Spec - Python Module</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "FastAPI Teaching Notebook \u2014 Design Spec";
+        var mkdocs_page_input_path = "superpowers/specs/2026-04-19-fastapi-notebook-design.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/PythonBindings/">Python Bindings (C/C++)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/DistributablePackage/">Creating Distributable Packages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/FastAPI/">FastAPI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/DeployingApplications/">Deploying Applications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">FastAPI Teaching Notebook — Design Spec</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="fastapi-teaching-notebook-design-spec">FastAPI Teaching Notebook — Design Spec</h1>
+<p><strong>Date:</strong> 2026-04-19<br />
+<strong>Course:</strong> PRG400 (Advanced Python)<br />
+<strong>Output file:</strong> <code>prg400/FastAPI.ipynb</code></p>
+<hr />
+<h2 id="goal">Goal</h2>
+<p>A standalone Jupyter notebook that teaches FastAPI from first principles up to JWT authentication, using a Travel System as the running domain. Students already know Pydantic, type hints, SQLAlchemy, and databases — those are prerequisites, not teaching targets.</p>
+<hr />
+<h2 id="approach">Approach</h2>
+<p><strong>Layered app with clear checkpoints (Option C):</strong> one <code>travelapi/</code> codebase grows section by section. Each major section opens with a checkpoint code block students can paste to catch up. Sections are self-contained enough to understand in isolation but tell a coherent story when read in order.</p>
+<hr />
+<h2 id="domain-entities">Domain Entities</h2>
+<table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Destination</code></td>
+<td><code>id</code>, <code>name</code>, <code>country</code>, <code>description</code>, <code>price_per_day</code></td>
+</tr>
+<tr>
+<td><code>Trip</code></td>
+<td><code>id</code>, <code>destination_id</code>, <code>start_date</code>, <code>end_date</code>, <code>spots_available</code></td>
+</tr>
+<tr>
+<td><code>Booking</code></td>
+<td><code>id</code>, <code>trip_id</code>, <code>user_id</code>, <code>status</code> (pending / confirmed / cancelled)</td>
+</tr>
+<tr>
+<td><code>User</code></td>
+<td><code>id</code>, <code>username</code>, <code>hashed_password</code>, <code>api_key</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-plan">Section Plan</h2>
+<h3 id="section-0-what-were-building">Section 0 — What We're Building</h3>
+<ul>
+<li>Overview of the Travel API and what students will have built by the end</li>
+<li>Stack diagram: client → FastAPI → SQLite</li>
+<li>Final endpoint table (all routes that will exist after Section 9)</li>
+<li>Prerequisites and <code>pip install</code> command</li>
+</ul>
+<h3 id="section-1-first-routes">Section 1 — First Routes</h3>
+<ul>
+<li><code>FastAPI()</code> app instantiation</li>
+<li><code>@app.get</code> decorator, returning a plain dict</li>
+<li>Running with <code>uvicorn app.main:app --reload</code></li>
+<li>Visiting <code>/docs</code> (Swagger UI) and <code>/redoc</code></li>
+<li><strong>Mini challenge:</strong> Add a <code>GET /health</code> route returning <code>{"status": "ok"}</code></li>
+</ul>
+<h3 id="section-2-path-query-parameters">Section 2 — Path &amp; Query Parameters</h3>
+<ul>
+<li>Path parameters: <code>GET /destinations/{destination_id}</code></li>
+<li>Query parameters: <code>GET /trips?country=France&amp;max_price=200</code></li>
+<li>Optional query params with <code>Optional[str] = None</code></li>
+<li>Type coercion (FastAPI converts string → int automatically)</li>
+<li><strong>Mini challenge:</strong> Add country filter to <code>GET /destinations</code></li>
+</ul>
+<h3 id="section-3-request-response-models">Section 3 — Request &amp; Response Models</h3>
+<ul>
+<li>Pydantic <code>BaseModel</code> for request body (<code>DestinationCreate</code>)</li>
+<li>Separate response model (<code>DestinationResponse</code>) — why they differ</li>
+<li><code>response_model</code> parameter on route decorator</li>
+<li>Field validation: <code>Field(min_length=1)</code>, <code>Field(gt=0)</code></li>
+<li>422 Unprocessable Entity walkthrough</li>
+<li><strong>Mini challenge:</strong> Add a <code>description</code> field with <code>min_length=10</code> validation</li>
+</ul>
+<h3 id="section-4-sqlalchemy-integration">Section 4 — SQLAlchemy Integration</h3>
+<ul>
+<li>SQLAlchemy models for all four entities</li>
+<li><code>get_db</code> dependency and <code>Depends(get_db)</code> pattern</li>
+<li>Full CRUD for <code>Destination</code>: GET all, GET one, POST, DELETE</li>
+<li>Checkpoint: complete <code>main.py</code> + <code>database.py</code> at start of section</li>
+<li><strong>Mini challenge:</strong> Add <code>GET /destinations/{id}</code> returning 404 if not found</li>
+</ul>
+<h3 id="section-5-routers">Section 5 — Routers</h3>
+<ul>
+<li>Why routers: keeps <code>main.py</code> from growing unmanageable</li>
+<li><code>APIRouter</code>, <code>prefix</code>, <code>tags</code></li>
+<li>Split into: <code>routers/destinations.py</code>, <code>routers/trips.py</code>, <code>routers/bookings.py</code></li>
+<li><code>app.include_router()</code> in <code>main.py</code></li>
+<li>Checkpoint: full project structure at start of section</li>
+<li><strong>Mini challenge:</strong> Create a <code>routers/reviews.py</code> with a single <code>GET /reviews</code> stub</li>
+</ul>
+<h3 id="section-6-middleware">Section 6 — Middleware</h3>
+<ul>
+<li>What middleware is and where it sits in the request lifecycle</li>
+<li><code>BaseHTTPMiddleware</code> — request logging (method, path, status, duration)</li>
+<li>CORS middleware (<code>CORSMiddleware</code>) — why browsers need it</li>
+<li>Adding a custom <code>X-Process-Time</code> response header</li>
+<li><strong>Mini challenge:</strong> Add an <code>X-Request-ID</code> header using <code>uuid4()</code></li>
+</ul>
+<h3 id="section-7-api-key-authentication">Section 7 — API Key Authentication</h3>
+<ul>
+<li><code>APIKeyHeader</code> from <code>fastapi.security</code></li>
+<li>Storing API keys on the <code>User</code> model</li>
+<li><code>Security()</code> dependency that validates the key against the database</li>
+<li>Protecting <code>POST /trips</code> and <code>POST /bookings</code> routes</li>
+<li>Returning <code>403 Forbidden</code> for invalid keys</li>
+<li><strong>Mini challenge:</strong> Protect all DELETE routes with the same API key dependency</li>
+</ul>
+<h3 id="section-8-jwt-authentication">Section 8 — JWT Authentication</h3>
+<ul>
+<li>Why JWT over API keys (stateless, expiry, scopes)</li>
+<li><code>python-jose</code> for token encoding/decoding</li>
+<li><code>passlib[bcrypt]</code> for password hashing</li>
+<li><code>POST /auth/register</code> — create user with hashed password</li>
+<li><code>POST /auth/token</code> — OAuth2 password flow, returns <code>access_token</code></li>
+<li><code>oauth2_scheme</code> + <code>get_current_user</code> dependency</li>
+<li>Protecting routes with <code>Depends(get_current_user)</code></li>
+<li>Token expiry (<code>exp</code> claim) and <code>401 Unauthorized</code> response</li>
+<li><strong>Mini challenge:</strong> Add token expiry check that returns a clear error message</li>
+</ul>
+<h3 id="section-9-final-challenge">Section 9 — Final Challenge</h3>
+<p>Build a complete <strong>Booking</strong> feature from scratch:
+1. <code>Booking</code> router with <code>POST /bookings</code>, <code>GET /bookings/me</code>, <code>PATCH /bookings/{id}/cancel</code>
+2. JWT-protected — only authenticated users can book or cancel
+3. Business rule: cannot book a trip with 0 <code>spots_available</code>
+4. Middleware logs every booking request
+5. Verify via Swagger UI at <code>/docs</code></p>
+<p>Solution provided in a collapsible <code>&lt;details&gt;</code> block.</p>
+<hr />
+<h2 id="file-structure">File Structure</h2>
+<div class="highlight"><pre><span></span><code>prg400/
+└── FastAPI.ipynb       ← the notebook
+
+travelapi/              ← referenced in notebook cells
+├── app/
+│   ├── main.py
+│   ├── database.py
+│   └── routers/
+│       ├── destinations.py
+│       ├── trips.py
+│       └── bookings.py
+└── requirements.txt
+</code></pre></div>
+<hr />
+<h2 id="style-conventions-matching-existing-prg400-notebooks">Style Conventions (matching existing PRG400 notebooks)</h2>
+<ul>
+<li>Opening quote in markdown italics</li>
+<li>Learning objectives as numbered list</li>
+<li>Section headers: <code>## Section N — Title</code></li>
+<li>Code cells contain runnable Python; markdown cells explain before/after</li>
+<li>Tables for comparisons and summaries</li>
+<li><code>bash</code> fenced blocks for terminal commands</li>
+<li>Closing summary table + further reading links</li>
+<li>Mini challenges in bold at end of each section</li>
+<li>Final challenge has hidden solution in <code>&lt;details&gt;</code> block</li>
+</ul>
+<hr />
+<h2 id="dependencies">Dependencies</h2>
+<div class="highlight"><pre><span></span><code>fastapi==0.111.0
+uvicorn[standard]==0.29.0
+sqlalchemy==2.0.30
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

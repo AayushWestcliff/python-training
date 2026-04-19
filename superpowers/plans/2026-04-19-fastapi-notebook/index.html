@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>FastAPI Teaching Notebook Implementation Plan - Python Module</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "FastAPI Teaching Notebook Implementation Plan";
+        var mkdocs_page_input_path = "superpowers/plans/2026-04-19-fastapi-notebook.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/PythonBindings/">Python Bindings (C/C++)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/DistributablePackage/">Creating Distributable Packages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/FastAPI/">FastAPI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/DeployingApplications/">Deploying Applications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../prg400/ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">FastAPI Teaching Notebook Implementation Plan</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="fastapi-teaching-notebook-implementation-plan">FastAPI Teaching Notebook Implementation Plan</h1>
+<blockquote>
+<p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code>- [ ]</code>) syntax for tracking.</p>
+</blockquote>
+<p><strong>Goal:</strong> Create <code>prg400/FastAPI.ipynb</code> — a progressive FastAPI teaching notebook for PRG400 using a Travel System domain, building from first routes through JWT authentication.</p>
+<p><strong>Architecture:</strong> Single Jupyter notebook with 10 sections (0–9). Each section adds one layer to the same <code>travelapi/</code> codebase. Markdown cells explain concepts before code cells. Sections end with a mini challenge. Section 9 is a final challenge with a hidden solution.</p>
+<p><strong>Tech Stack:</strong> FastAPI 0.111.0, uvicorn[standard], SQLAlchemy 2.0.30, python-jose[cryptography] 3.3.0, passlib[bcrypt] 1.7.4, Pydantic v2</p>
+<hr />
+<h2 id="file-map">File Map</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Created/Modified</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prg400/FastAPI.ipynb</code></td>
+<td>Create</td>
+<td>The notebook — all 10 sections</td>
+</tr>
+</tbody>
+</table>
+<p>The notebook references a <code>travelapi/</code> project directory that students build locally. No files are created in the repo beyond the notebook itself.</p>
+<hr />
+<h2 id="notebook-cell-convention">Notebook Cell Convention</h2>
+<ul>
+<li>Markdown cells: concept explanation, tables, bash blocks</li>
+<li>Code cells: complete, runnable Python — each section's checkpoint code stands alone</li>
+<li>Each section opens with a <code>---</code> horizontal rule and <code>## Section N — Title</code> heading</li>
+<li>Mini challenge in bold at the end of each section's last markdown cell</li>
+</ul>
+<hr />
+<h3 id="task-1-create-notebook-scaffold-section-0">Task 1: Create notebook scaffold + Section 0</h3>
+<p><strong>Files:</strong>
+- Create: <code>prg400/FastAPI.ipynb</code></p>
+<ul>
+<li>[ ] <strong>Step 1: Create the notebook file</strong></li>
+</ul>
+<p>Write <code>prg400/FastAPI.ipynb</code> with this exact JSON:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;nbformat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;nbformat_minor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;kernelspec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python 3&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python3&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;language_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.12.0&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;cells&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;cell_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s0-title&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;# FastAPI\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;&gt; *\&quot;The best API is the one you can understand in five minutes and extend in five more.\&quot;*\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;---\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;### Learning Objectives\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;By the end of this notebook, you will be able to:\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;1. **Build** a REST API with FastAPI from first principles\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;2. **Use** path parameters, query parameters, and Pydantic request/response models\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;3. **Persist** data with SQLAlchemy and FastAPI&#39;s dependency injection system\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;4. **Organise** routes into separate files using `APIRouter`\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;5. **Add** logging and CORS middleware to a FastAPI application\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;6. **Protect** routes with API key authentication\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;7. **Implement** JWT OAuth2 authentication with token expiry\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;---\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;### Prerequisites\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;- Python 3.10+ installed\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;- Familiarity with Pydantic models, type hints, and SQLAlchemy\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Install dependencies before starting:\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```bash\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;pip install fastapi==0.111.0 &#39;uvicorn[standard]==0.29.0&#39; sqlalchemy==2.0.30 &#39;python-jose[cryptography]==3.3.0&#39; &#39;passlib[bcrypt]==1.7.4&#39;\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;---\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;## Section 0 — What We&#39;re Building\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;We will build the **Travel API** — a REST API for browsing destinations, booking trips, and managing users.\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Client (curl / browser / Swagger UI)\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          | HTTP\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          v\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;    [ FastAPI + uvicorn ]    &lt;-- your Python code\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          | SQL\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;          v\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;       [ SQLite ]           &lt;-- travel.db\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;### Final Endpoint Table\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| Method | Path | Auth | Description |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;|---|---|---|---|\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| GET | `/destinations` | None | List all destinations |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| GET | `/destinations/{id}` | None | Get one destination |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| POST | `/destinations` | API Key | Create a destination |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| DELETE | `/destinations/{id}` | API Key | Delete a destination |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| GET | `/trips` | None | List all trips |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| GET | `/trips/{id}` | None | Get one trip |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| POST | `/trips` | API Key | Create a trip |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| POST | `/auth/register` | None | Register a user |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| POST | `/auth/token` | None | Get JWT token |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| POST | `/bookings` | JWT | Create a booking |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| GET | `/bookings/me` | JWT | My bookings |\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;| PATCH | `/bookings/{id}/cancel` | JWT | Cancel a booking |\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;### Project Structure\n\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;travelapi/\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;├── app/\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   ├── main.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   ├── database.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   ├── dependencies/\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   │   ├── auth.py        (API key)\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   │   └── jwt_auth.py    (JWT)\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│   └── routers/\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│       ├── destinations.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│       ├── trips.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│       ├── bookings.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;│       └── auth.py\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;└── requirements.txt\n&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;```&quot;</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 2: Verify the file is valid JSON</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import json; json.load(open(&#39;prg400/FastAPI.ipynb&#39;)); print(&#39;valid&#39;)&quot;</span>
+</code></pre></div>
+Expected output: <code>valid</code></p>
+<ul>
+<li>[ ] <strong>Step 3: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: scaffold FastAPI notebook with Section 0&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-2-section-1-first-routes">Task 2: Section 1 — First Routes</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 1 markdown cell</strong></li>
+</ul>
+<p>Use the NotebookEdit tool to insert a new markdown cell after <code>s0-title</code>:</p>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 1 — First Routes
+
+### What Is FastAPI?
+
+**FastAPI** is a modern Python web framework for building REST APIs. Key properties:
+
+- **Type hints drive everything** — route parameters, request bodies, and response shapes are all declared with Python types
+- **Automatic validation** — Pydantic validates every incoming request; invalid data returns `422` with a clear message
+- **Auto-generated docs** — Swagger UI at `/docs` and ReDoc at `/redoc` with zero extra code
+- **Fast** — one of the fastest Python frameworks, built on Starlette and uvicorn
+
+### Project Setup
+
+Create the project directory:
+
+```bash
+mkdir -p travelapi/app
+cd travelapi
+</code></pre></div>
+<p>Create <code>travelapi/requirements.txt</code>:</p>
+<div class="highlight"><pre><span></span><code>fastapi==0.111.0
+uvicorn[standard]==0.29.0
+sqlalchemy==2.0.30
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+</code></pre></div>
+<p>Copy <code>app/main.py</code> from the code cell below, then run:</p>
+<div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
+</code></pre></div>
+<p>Visit:
+- <code>http://localhost:8000/</code> — raw JSON response
+- <code>http://localhost:8000/docs</code> — Swagger UI (try the endpoints interactively)
+- <code>http://localhost:8000/redoc</code> — ReDoc documentation</p>
+<h3 id="how-a-route-works">How a Route Works</h3>
+<div class="highlight"><pre><span></span><code>@app.get(&quot;/destinations&quot;)      ← HTTP method + URL path
+def list_destinations():       ← Python function (sync or async)
+    return [...]               ← dict or list → FastAPI serialises to JSON
+</code></pre></div>
+<p>FastAPI maps the decorator to a URL. When a GET request arrives at <code>/destinations</code>, it calls <code>list_destinations()</code> and returns the result as JSON.</p>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>GET /health</code> route that returns <code>{"status": "ok", "version": "1.0.0"}</code>. Verify it appears in Swagger UI.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 1 code cell**
+
+```python
+# travelapi/app/main.py  (Section 1 checkpoint)
+
+from fastapi import FastAPI
+
+app = FastAPI(title=&quot;Travel API&quot;, description=&quot;A travel booking system&quot;, version=&quot;1.0.0&quot;)
+
+
+@app.get(&quot;/&quot;)
+def root():
+    return {&quot;message&quot;: &quot;Welcome to the Travel API&quot;}
+
+
+@app.get(&quot;/destinations&quot;)
+def list_destinations():
+    return [
+        {&quot;id&quot;: 1, &quot;name&quot;: &quot;Paris&quot;, &quot;country&quot;: &quot;France&quot;, &quot;price_per_day&quot;: 150},
+        {&quot;id&quot;: 2, &quot;name&quot;: &quot;Tokyo&quot;, &quot;country&quot;: &quot;Japan&quot;, &quot;price_per_day&quot;: 120},
+        {&quot;id&quot;: 3, &quot;name&quot;: &quot;Rome&quot;, &quot;country&quot;: &quot;Italy&quot;, &quot;price_per_day&quot;: 100},
+    ]
+
+
+@app.get(&quot;/trips&quot;)
+def list_trips():
+    return [
+        {&quot;id&quot;: 1, &quot;destination_id&quot;: 1, &quot;start_date&quot;: &quot;2026-06-01&quot;, &quot;end_date&quot;: &quot;2026-06-07&quot;, &quot;spots_available&quot;: 10},
+        {&quot;id&quot;: 2, &quot;destination_id&quot;: 2, &quot;start_date&quot;: &quot;2026-07-15&quot;, &quot;end_date&quot;: &quot;2026-07-22&quot;, &quot;spots_available&quot;: 5},
+    ]
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 1 (First Routes) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-3-section-2-path-query-parameters">Task 3: Section 2 — Path &amp; Query Parameters</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 2 markdown cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 2 — Path &amp; Query Parameters
+
+### Path Parameters
+
+A **path parameter** is a variable embedded in the URL. Declare it in the decorator string with `{name}` and add a matching argument to the function:
+
+```python
+@app.get(&quot;/destinations/{destination_id}&quot;)
+def get_destination(destination_id: int):
+    ...
+</code></pre></div>
+<p>FastAPI automatically converts the URL string <code>"1"</code> to the Python <code>int</code> <code>1</code>. If the client sends <code>"abc"</code>, FastAPI returns <code>422</code> before your function is called.</p>
+<h3 id="query-parameters">Query Parameters</h3>
+<p>A <strong>query parameter</strong> is anything after <code>?</code> in the URL: <code>GET /destinations?country=France&amp;max_price=200</code>.</p>
+<p>Declare them as function arguments with default values:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_destinations</span><span class="p">(</span><span class="n">country</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_price</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</code></pre></div>
+<ul>
+<li>If <code>country</code> is not in the URL, it is <code>None</code></li>
+<li>FastAPI distinguishes path params (in the path string) from query params (function args not in the path string) automatically</li>
+</ul>
+<h3 id="type-coercion-table">Type Coercion Table</h3>
+<table>
+<thead>
+<tr>
+<th>URL value</th>
+<th>Python type hint</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"42"</code></td>
+<td><code>int</code></td>
+<td><code>42</code></td>
+</tr>
+<tr>
+<td><code>"3.14"</code></td>
+<td><code>float</code></td>
+<td><code>3.14</code></td>
+</tr>
+<tr>
+<td><code>"true"</code></td>
+<td><code>bool</code></td>
+<td><code>True</code></td>
+</tr>
+<tr>
+<td><code>"abc"</code></td>
+<td><code>int</code></td>
+<td>422 Unprocessable Entity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>🏋️ Mini Challenge:</strong> Add an optional <code>min_price: float = None</code> query parameter to <code>GET /destinations</code> that filters out destinations cheaper than the given value. Test it at <code>/destinations?min_price=120</code>.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 2 code cell**
+
+```python
+# travelapi/app/main.py  (Section 2 checkpoint)
+
+from fastapi import FastAPI, HTTPException
+from typing import Optional
+
+app = FastAPI(title=&quot;Travel API&quot;, version=&quot;1.0.0&quot;)
+
+_destinations = [
+    {&quot;id&quot;: 1, &quot;name&quot;: &quot;Paris&quot;, &quot;country&quot;: &quot;France&quot;, &quot;price_per_day&quot;: 150.0},
+    {&quot;id&quot;: 2, &quot;name&quot;: &quot;Tokyo&quot;, &quot;country&quot;: &quot;Japan&quot;, &quot;price_per_day&quot;: 120.0},
+    {&quot;id&quot;: 3, &quot;name&quot;: &quot;Rome&quot;, &quot;country&quot;: &quot;Italy&quot;, &quot;price_per_day&quot;: 100.0},
+]
+
+
+@app.get(&quot;/destinations&quot;)
+def list_destinations(
+    country: Optional[str] = None,
+    max_price: Optional[float] = None,
+):
+    result = _destinations
+    if country:
+        result = [d for d in result if d[&quot;country&quot;].lower() == country.lower()]
+    if max_price is not None:
+        result = [d for d in result if d[&quot;price_per_day&quot;] &lt;= max_price]
+    return result
+
+
+@app.get(&quot;/destinations/{destination_id}&quot;)
+def get_destination(destination_id: int):
+    for dest in _destinations:
+        if dest[&quot;id&quot;] == destination_id:
+            return dest
+    raise HTTPException(status_code=404, detail=&quot;Destination not found&quot;)
+
+
+@app.get(&quot;/trips&quot;)
+def list_trips(destination_id: Optional[int] = None):
+    trips = [
+        {&quot;id&quot;: 1, &quot;destination_id&quot;: 1, &quot;start_date&quot;: &quot;2026-06-01&quot;, &quot;end_date&quot;: &quot;2026-06-07&quot;, &quot;spots_available&quot;: 10},
+        {&quot;id&quot;: 2, &quot;destination_id&quot;: 2, &quot;start_date&quot;: &quot;2026-07-15&quot;, &quot;end_date&quot;: &quot;2026-07-22&quot;, &quot;spots_available&quot;: 5},
+    ]
+    if destination_id is not None:
+        trips = [t for t in trips if t[&quot;destination_id&quot;] == destination_id]
+    return trips
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 2 (Path &amp; Query Params) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-4-section-3-request-response-models">Task 4: Section 3 — Request &amp; Response Models</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 3 markdown cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 3 — Request &amp; Response Models
+
+### Why Two Models?
+
+FastAPI uses Pydantic models to define:
+
+- **Request model** (`DestinationCreate`) — what the client sends. May include passwords, raw fields, things you never want to return.
+- **Response model** (`DestinationResponse`) — what the API returns. May include `id`, computed fields, things never sent by the client.
+
+Keeping them separate gives you control over each direction independently.
+
+### `response_model`
+
+Passing `response_model=DestinationResponse` to the decorator tells FastAPI to:
+1. Validate the return value against the model
+2. Strip any fields not declared in the response model (security benefit)
+3. Document the response shape in Swagger UI
+
+### Field Validation
+
+`Field()` from Pydantic adds constraints directly to the model:
+
+| Constraint | Meaning |
+|---|---|
+| `min_length=1` | String must not be empty |
+| `max_length=100` | String must not exceed 100 characters |
+| `gt=0` | Number must be greater than 0 |
+| `ge=0` | Number must be ≥ 0 |
+| `le=500` | Number must be ≤ 500 |
+
+Violating any constraint returns `422 Unprocessable Entity` with a field-level error message — no validation code needed in your route function.
+
+### Testing Validation
+
+```bash
+# Missing required field
+curl -X POST http://localhost:8000/destinations \
+  -H &#39;Content-Type: application/json&#39; \
+  -d &#39;{&quot;name&quot;: &quot;Berlin&quot;}&#39;
+# → 422: country, description, price_per_day are required
+
+# price_per_day = 0 (violates gt=0)
+curl -X POST http://localhost:8000/destinations \
+  -H &#39;Content-Type: application/json&#39; \
+  -d &#39;{&quot;name&quot;: &quot;Berlin&quot;, &quot;country&quot;: &quot;Germany&quot;, &quot;description&quot;: &quot;A vibrant European capital&quot;, &quot;price_per_day&quot;: 0}&#39;
+# → 422: price_per_day must be greater than 0
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>tags: list[str] = []</code> field to <code>DestinationCreate</code> and <code>DestinationResponse</code>. Add <code>Field(max_length=20)</code> to each tag. Test that <code>["beach", "culture"]</code> is accepted and <code>["a" * 21]</code> is rejected.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 3 code cell**
+
+```python
+# travelapi/app/main.py  (Section 3 checkpoint)
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+from typing import Optional
+
+app = FastAPI(title=&quot;Travel API&quot;, version=&quot;1.0.0&quot;)
+
+
+class DestinationCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    country: str = Field(min_length=1, max_length=100)
+    description: str = Field(min_length=10)
+    price_per_day: float = Field(gt=0)
+
+
+class DestinationResponse(BaseModel):
+    id: int
+    name: str
+    country: str
+    description: str
+    price_per_day: float
+
+
+class TripCreate(BaseModel):
+    destination_id: int
+    start_date: str = Field(pattern=r&quot;^\d{4}-\d{2}-\d{2}$&quot;)
+    end_date: str = Field(pattern=r&quot;^\d{4}-\d{2}-\d{2}$&quot;)
+    spots_available: int = Field(gt=0)
+
+
+class TripResponse(BaseModel):
+    id: int
+    destination_id: int
+    start_date: str
+    end_date: str
+    spots_available: int
+
+
+_destinations: list[dict] = []
+_trips: list[dict] = []
+_dest_id = 1
+_trip_id = 1
+
+
+@app.get(&quot;/destinations&quot;, response_model=list[DestinationResponse])
+def list_destinations(country: Optional[str] = None):
+    if country:
+        return [d for d in _destinations if d[&quot;country&quot;].lower() == country.lower()]
+    return _destinations
+
+
+@app.get(&quot;/destinations/{destination_id}&quot;, response_model=DestinationResponse)
+def get_destination(destination_id: int):
+    for dest in _destinations:
+        if dest[&quot;id&quot;] == destination_id:
+            return dest
+    raise HTTPException(status_code=404, detail=&quot;Destination not found&quot;)
+
+
+@app.post(&quot;/destinations&quot;, response_model=DestinationResponse, status_code=201)
+def create_destination(destination: DestinationCreate):
+    global _dest_id
+    record = {&quot;id&quot;: _dest_id, **destination.model_dump()}
+    _destinations.append(record)
+    _dest_id += 1
+    return record
+
+
+@app.get(&quot;/trips&quot;, response_model=list[TripResponse])
+def list_trips():
+    return _trips
+
+
+@app.post(&quot;/trips&quot;, response_model=TripResponse, status_code=201)
+def create_trip(trip: TripCreate):
+    global _trip_id
+    record = {&quot;id&quot;: _trip_id, **trip.model_dump()}
+    _trips.append(record)
+    _trip_id += 1
+    return record
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 3 (Request &amp; Response Models) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-5-section-4-sqlalchemy-integration">Task 5: Section 4 — SQLAlchemy Integration</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 4 markdown cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 4 — SQLAlchemy Integration
+
+### Why Move to a Database?
+
+The in-memory lists from Section 3 lose all data on server restart. SQLAlchemy maps Python classes to database tables and handles sessions automatically via FastAPI&#39;s dependency injection.
+
+### `Depends(get_db)` — How It Works
+
+```python
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db        # ← session handed to the route function
+    finally:
+        db.close()      # ← always runs after the response is sent
+
+@app.get(&quot;/destinations&quot;)
+def list_destinations(db: Session = Depends(get_db)):
+    ...
+</code></pre></div>
+<p>For every request FastAPI calls <code>get_db()</code>, passes the session as <code>db</code>, and closes it after the response — your route never manages the session lifecycle.</p>
+<h3 id="project-structure">Project Structure</h3>
+<p>Create two files:</p>
+<div class="highlight"><pre><span></span><code>travelapi/app/
+├── database.py    ← engine, session factory, ORM models, get_db
+└── main.py        ← FastAPI app, routes
+</code></pre></div>
+<p>Copy <code>database.py</code> from the first code cell and <code>main.py</code> from the second, then restart uvicorn.</p>
+<div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
+</code></pre></div>
+<h3 id="inspecting-the-database">Inspecting the Database</h3>
+<div class="highlight"><pre><span></span><code>sqlite3<span class="w"> </span>travel.db
+
+sqlite&gt;<span class="w"> </span>.tables
+bookings<span class="w">  </span>destinations<span class="w">  </span>trips<span class="w">  </span>users
+
+sqlite&gt;<span class="w"> </span>SELECT<span class="w"> </span>*<span class="w"> </span>FROM<span class="w"> </span>destinations<span class="p">;</span>
+<span class="m">1</span><span class="p">|</span>Paris<span class="p">|</span>France<span class="p">|</span>The<span class="w"> </span>city<span class="w"> </span>of<span class="w"> </span>light<span class="p">|</span><span class="m">150</span>.0
+
+sqlite&gt;<span class="w"> </span>.quit
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Add <code>GET /destinations/{id}</code> to <code>main.py</code> that returns <code>404</code> if the destination does not exist. Test with a valid ID and an invalid ID (e.g., <code>999</code>).
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 4 `database.py` code cell**
+
+```python
+# travelapi/app/database.py
+
+import os
+from datetime import datetime
+from sqlalchemy import (
+    create_engine, Column, Integer, String, Float, Boolean, DateTime, ForeignKey,
+)
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+
+DATABASE_URL = os.getenv(&quot;DATABASE_URL&quot;, &quot;sqlite:///./travel.db&quot;)
+
+engine = create_engine(DATABASE_URL, connect_args={&quot;check_same_thread&quot;: False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
+
+
+class Destination(Base):
+    __tablename__ = &quot;destinations&quot;
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    country = Column(String, nullable=False)
+    description = Column(String, nullable=False)
+    price_per_day = Column(Float, nullable=False)
+    trips = relationship(&quot;Trip&quot;, back_populates=&quot;destination&quot;)
+
+
+class Trip(Base):
+    __tablename__ = &quot;trips&quot;
+
+    id = Column(Integer, primary_key=True, index=True)
+    destination_id = Column(Integer, ForeignKey(&quot;destinations.id&quot;), nullable=False)
+    start_date = Column(String, nullable=False)
+    end_date = Column(String, nullable=False)
+    spots_available = Column(Integer, nullable=False)
+    destination = relationship(&quot;Destination&quot;, back_populates=&quot;trips&quot;)
+    bookings = relationship(&quot;Booking&quot;, back_populates=&quot;trip&quot;)
+
+
+class User(Base):
+    __tablename__ = &quot;users&quot;
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    api_key = Column(String, unique=True, nullable=True)
+    bookings = relationship(&quot;Booking&quot;, back_populates=&quot;user&quot;)
+
+
+class Booking(Base):
+    __tablename__ = &quot;bookings&quot;
+
+    id = Column(Integer, primary_key=True, index=True)
+    trip_id = Column(Integer, ForeignKey(&quot;trips.id&quot;), nullable=False)
+    user_id = Column(Integer, ForeignKey(&quot;users.id&quot;), nullable=False)
+    status = Column(String, default=&quot;pending&quot;)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    trip = relationship(&quot;Trip&quot;, back_populates=&quot;bookings&quot;)
+    user = relationship(&quot;User&quot;, back_populates=&quot;bookings&quot;)
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def create_tables():
+    Base.metadata.create_all(bind=engine)
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Append the Section 4 <code>main.py</code> code cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/main.py  (Section 4 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Destination</span><span class="p">,</span> <span class="n">Trip</span><span class="p">,</span> <span class="n">get_db</span><span class="p">,</span> <span class="n">create_tables</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Travel API&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
+<span class="n">create_tables</span><span class="p">()</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DestinationCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">country</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">price_per_day</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DestinationResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">country</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">price_per_day</span><span class="p">:</span> <span class="nb">float</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;from_attributes&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;from_attributes&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/destinations&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">DestinationResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_destinations</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Destination</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/destinations/</span><span class="si">{destination_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">DestinationResponse</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Destination</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Destination</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">destination_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dest</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Destination not found&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dest</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/destinations&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">DestinationResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_destination</span><span class="p">(</span><span class="n">destination</span><span class="p">:</span> <span class="n">DestinationCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">db_dest</span> <span class="o">=</span> <span class="n">Destination</span><span class="p">(</span><span class="o">**</span><span class="n">destination</span><span class="o">.</span><span class="n">model_dump</span><span class="p">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_dest</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_dest</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_dest</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/destinations/</span><span class="si">{destination_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Destination</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Destination</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">destination_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dest</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Destination not found&quot;</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/trips&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TripResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_trips</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trip</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/trips&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TripResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_trip</span><span class="p">(</span><span class="n">trip</span><span class="p">:</span> <span class="n">TripCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">db_trip</span> <span class="o">=</span> <span class="n">Trip</span><span class="p">(</span><span class="o">**</span><span class="n">trip</span><span class="o">.</span><span class="n">model_dump</span><span class="p">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_trip</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 4 (SQLAlchemy Integration) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-6-section-5-routers">Task 6: Section 5 — Routers</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 5 markdown cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 5 — Routers
+
+### The Problem With One Big `main.py`
+
+As the API grows, putting every route in `main.py` becomes hard to navigate. FastAPI&#39;s `APIRouter` lets you split routes into separate files — each with its own prefix and tags — and mount them all in `main.py`.
+
+### How `APIRouter` Works
+
+```python
+# routers/destinations.py
+from fastapi import APIRouter
+
+router = APIRouter(prefix=&quot;/destinations&quot;, tags=[&quot;Destinations&quot;])
+
+@router.get(&quot;/&quot;)        # matches GET /destinations
+def list_destinations():
+    ...
+
+@router.get(&quot;/{id}&quot;)    # matches GET /destinations/{id}
+def get_destination(id: int):
+    ...
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># main.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.routers</span><span class="w"> </span><span class="kn">import</span> <span class="n">destinations</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">destinations</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th><code>APIRouter</code> parameter</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prefix="/destinations"</code></td>
+<td>Prepends <code>/destinations</code> to all routes in this router</td>
+</tr>
+<tr>
+<td><code>tags=["Destinations"]</code></td>
+<td>Groups routes under this heading in Swagger UI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="updated-project-structure">Updated Project Structure</h3>
+<div class="highlight"><pre><span></span><code>travelapi/app/
+├── main.py
+├── database.py
+└── routers/
+    ├── __init__.py        (empty)
+    ├── destinations.py
+    ├── trips.py
+    └── bookings.py        (stub — completed in Section 9)
+</code></pre></div>
+<p>Create the four files from the code cells below, then restart uvicorn. All endpoints still work identically — only the file layout changed.</p>
+<p><strong>🏋️ Mini Challenge:</strong> Add a <code>routers/reviews.py</code> router with prefix <code>/reviews</code> and a single <code>GET /</code> route returning <code>{"reviews": []}</code>. Include it in <code>main.py</code>. Verify it appears in Swagger UI under a "Reviews" tag.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 5 code cell — `routers/destinations.py`**
+
+```python
+# travelapi/app/routers/destinations.py
+
+from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
+from app.database import Destination, get_db
+
+router = APIRouter(prefix=&quot;/destinations&quot;, tags=[&quot;Destinations&quot;])
+
+
+class DestinationCreate(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    country: str = Field(min_length=1, max_length=100)
+    description: str = Field(min_length=10)
+    price_per_day: float = Field(gt=0)
+
+
+class DestinationResponse(BaseModel):
+    id: int
+    name: str
+    country: str
+    description: str
+    price_per_day: float
+
+    model_config = {&quot;from_attributes&quot;: True}
+
+
+@router.get(&quot;/&quot;, response_model=list[DestinationResponse])
+def list_destinations(db: Session = Depends(get_db)):
+    return db.query(Destination).all()
+
+
+@router.get(&quot;/{destination_id}&quot;, response_model=DestinationResponse)
+def get_destination(destination_id: int, db: Session = Depends(get_db)):
+    dest = db.query(Destination).filter(Destination.id == destination_id).first()
+    if not dest:
+        raise HTTPException(status_code=404, detail=&quot;Destination not found&quot;)
+    return dest
+
+
+@router.post(&quot;/&quot;, response_model=DestinationResponse, status_code=201)
+def create_destination(destination: DestinationCreate, db: Session = Depends(get_db)):
+    db_dest = Destination(**destination.model_dump())
+    db.add(db_dest)
+    db.commit()
+    db.refresh(db_dest)
+    return db_dest
+
+
+@router.delete(&quot;/{destination_id}&quot;, status_code=204)
+def delete_destination(destination_id: int, db: Session = Depends(get_db)):
+    dest = db.query(Destination).filter(Destination.id == destination_id).first()
+    if not dest:
+        raise HTTPException(status_code=404, detail=&quot;Destination not found&quot;)
+    db.delete(dest)
+    db.commit()
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Append the Section 5 code cell — <code>routers/trips.py</code></strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/routers/trips.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trip</span><span class="p">,</span> <span class="n">get_db</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/trips&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Trips&quot;</span><span class="p">])</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;from_attributes&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TripResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_trips</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trip</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{trip_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TripResponse</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_trip</span><span class="p">(</span><span class="n">trip_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">trip</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trip</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Trip</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">trip_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">trip</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Trip not found&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trip</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TripResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_trip</span><span class="p">(</span><span class="n">trip</span><span class="p">:</span> <span class="n">TripCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">db_trip</span> <span class="o">=</span> <span class="n">Trip</span><span class="p">(</span><span class="o">**</span><span class="n">trip</span><span class="o">.</span><span class="n">model_dump</span><span class="p">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_trip</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Append the Section 5 code cell — <code>routers/bookings.py</code> stub + <code>main.py</code></strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/routers/bookings.py  (stub — completed in Section 9)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/bookings&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Bookings&quot;</span><span class="p">])</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_bookings</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">[]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/main.py  (Section 5 checkpoint)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_tables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.routers</span><span class="w"> </span><span class="kn">import</span> <span class="n">destinations</span><span class="p">,</span> <span class="n">trips</span><span class="p">,</span> <span class="n">bookings</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Travel API&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A travel booking system&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
+<span class="n">create_tables</span><span class="p">()</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">destinations</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">trips</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">bookings</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Root&quot;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">root</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Welcome to the Travel API&quot;</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 5 (Routers) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-7-section-6-middleware">Task 7: Section 6 — Middleware</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 6 markdown cell</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>---
+
+## Section 6 — Middleware
+
+### What Is Middleware?
+
+Middleware is code that runs **before** every request reaches a route function and **after** every response leaves it. It wraps the entire request/response cycle.
+</code></pre></div>
+Request  →  [Middleware 1]  →  [Middleware 2]  →  Route Function
+Response ←  [Middleware 1]  ←  [Middleware 2]  ←  Route Function
+<div class="highlight"><pre><span></span><code>Common uses: logging, CORS, authentication checks, rate limiting, adding response headers.
+
+### `BaseHTTPMiddleware`
+
+```python
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class LoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        # Code here runs BEFORE the route
+        response = await call_next(request)
+        # Code here runs AFTER the route
+        return response
+</code></pre></div></p>
+<p><code>call_next(request)</code> passes the request to the next middleware or route and returns the response.</p>
+<h3 id="cors-middleware">CORS Middleware</h3>
+<p>Browsers block JavaScript <code>fetch()</code> calls to a different origin unless the server explicitly allows it. FastAPI ships with <code>CORSMiddleware</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span>
+    <span class="n">CORSMiddleware</span><span class="p">,</span>
+    <span class="n">allow_origins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;http://localhost:3000&quot;</span><span class="p">],</span>  <span class="c1"># your frontend URL</span>
+    <span class="n">allow_methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+    <span class="n">allow_headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>For development, <code>allow_origins=["*"]</code> allows all origins. Never use <code>["*"]</code> in production.</p>
+<h3 id="middleware-order">Middleware Order</h3>
+<p>Middleware is applied <strong>last-added, first-executed</strong>. Add <code>LoggingMiddleware</code> after <code>CORSMiddleware</code> so logging sees the real request, not a preflight.</p>
+<p><strong>🏋️ Mini Challenge:</strong> Extend <code>LoggingMiddleware</code> to add an <code>X-Request-ID</code> header to every response using <code>str(uuid.uuid4())</code>. Verify the header appears in the curl response with <code>curl -I http://localhost:8000/destinations</code>.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 6 code cell**
+
+```python
+# travelapi/app/main.py  (Section 6 checkpoint)
+
+import time
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
+from app.database import create_tables
+from app.routers import destinations, trips, bookings
+
+
+class LoggingMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        start = time.time()
+        response = await call_next(request)
+        duration = time.time() - start
+        print(f&quot;{request.method} {request.url.path} → {response.status_code} ({duration:.3f}s)&quot;)
+        response.headers[&quot;X-Process-Time&quot;] = f&quot;{duration:.3f}&quot;
+        return response
+
+
+app = FastAPI(title=&quot;Travel API&quot;, description=&quot;A travel booking system&quot;, version=&quot;1.0.0&quot;)
+create_tables()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[&quot;*&quot;],
+    allow_methods=[&quot;*&quot;],
+    allow_headers=[&quot;*&quot;],
+)
+app.add_middleware(LoggingMiddleware)
+
+app.include_router(destinations.router)
+app.include_router(trips.router)
+app.include_router(bookings.router)
+
+
+@app.get(&quot;/&quot;, tags=[&quot;Root&quot;])
+def root():
+    return {&quot;message&quot;: &quot;Welcome to the Travel API&quot;}
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 6 (Middleware) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-8-section-7-api-key-authentication">Task 8: Section 7 — API Key Authentication</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 7 markdown cell</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>---
+
+## Section 7 — API Key Authentication
+
+### What Is API Key Auth?
+
+An **API key** is a secret token sent in a request header. The server validates it against its database before allowing access. Simple to implement, good for server-to-server communication.
+</code></pre></div>
+Client                        Server
+  |                              |
+  |  POST /trips                 |
+  |  X-API-Key: abc123  ──────►  |  Look up abc123 in users table
+  |                              |  Found → proceed
+  |  201 Created        ◄──────  |
+<div class="highlight"><pre><span></span><code>### `APIKeyHeader`
+
+```python
+from fastapi.security import APIKeyHeader
+
+api_key_header = APIKeyHeader(name=&quot;X-API-Key&quot;, auto_error=False)
+</code></pre></div></p>
+<p><code>auto_error=False</code> means FastAPI won't automatically reject requests without the header — your dependency function handles that, giving you control over the error message.</p>
+<h3 id="dependency-injection-for-auth">Dependency Injection for Auth</h3>
+<p>The <code>get_api_key</code> function is a FastAPI dependency. Add it to any route that needs protection:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_trip</span><span class="p">(</span>
+    <span class="n">trip</span><span class="p">:</span> <span class="n">TripCreate</span><span class="p">,</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
+    <span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_api_key</span><span class="p">),</span>   <span class="err">←</span> <span class="n">protects</span> <span class="n">the</span> <span class="n">route</span>
+<span class="p">):</span>
+</code></pre></div>
+<p>If <code>get_api_key</code> raises <code>HTTPException</code>, FastAPI returns that response immediately — the route function is never called.</p>
+<h3 id="how-to-get-an-api-key">How to Get an API Key</h3>
+<p>After registering (Section 8), the <code>/auth/register</code> endpoint returns an <code>api_key</code>. Send it in every protected request:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/trips<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;X-API-Key: your-api-key-here&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;destination_id&quot;: 1, &quot;start_date&quot;: &quot;2026-08-01&quot;, &quot;end_date&quot;: &quot;2026-08-07&quot;, &quot;spots_available&quot;: 20}&#39;</span>
+</code></pre></div>
+<p><strong>🏋️ Mini Challenge:</strong> Protect <code>DELETE /destinations/{id}</code> with <code>Depends(get_api_key)</code>. Try deleting without the header (expect <code>403</code>) and with a valid key (expect <code>204</code>).
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 7 code cell — `dependencies/auth.py`**
+
+```python
+# travelapi/app/dependencies/auth.py
+
+from fastapi import Security, HTTPException, Depends
+from fastapi.security import APIKeyHeader
+from sqlalchemy.orm import Session
+from app.database import User, get_db
+
+api_key_header = APIKeyHeader(name=&quot;X-API-Key&quot;, auto_error=False)
+
+
+def get_api_key(
+    api_key: str = Security(api_key_header),
+    db: Session = Depends(get_db),
+) -&gt; User:
+    if not api_key:
+        raise HTTPException(status_code=403, detail=&quot;API key required — include X-API-Key header&quot;)
+    user = db.query(User).filter(User.api_key == api_key).first()
+    if not user:
+        raise HTTPException(status_code=403, detail=&quot;Invalid API key&quot;)
+    return user
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Append the Section 7 code cell — updated <code>routers/trips.py</code> with auth</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/routers/trips.py  (Section 7 — POST protected by API key)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trip</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">get_db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.dependencies.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_api_key</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/trips&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Trips&quot;</span><span class="p">])</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;^\d</span><span class="si">{4}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">-\d</span><span class="si">{2}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">gt</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TripResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">destination_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">start_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">end_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">spots_available</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;from_attributes&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TripResponse</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_trips</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">return</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trip</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{trip_id}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TripResponse</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_trip</span><span class="p">(</span><span class="n">trip_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">trip</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Trip</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Trip</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">trip_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">trip</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Trip not found&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trip</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TripResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_trip</span><span class="p">(</span>
+    <span class="n">trip</span><span class="p">:</span> <span class="n">TripCreate</span><span class="p">,</span>
+    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
+    <span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_api_key</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="n">db_trip</span> <span class="o">=</span> <span class="n">Trip</span><span class="p">(</span><span class="o">**</span><span class="n">trip</span><span class="o">.</span><span class="n">model_dump</span><span class="p">())</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_trip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_trip</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 7 (API Key Auth) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-9-section-8-jwt-authentication">Task 9: Section 8 — JWT Authentication</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 8 markdown cell</strong></li>
+</ul>
+<p><div class="highlight"><pre><span></span><code>---
+
+## Section 8 — JWT Authentication
+
+### API Key vs JWT
+
+| | API Key | JWT |
+|---|---|---|
+| Storage | Database lookup per request | Stateless — server decodes the token |
+| Expiry | Must be manually revoked | Built-in `exp` claim |
+| Contents | Opaque string | Signed payload (username, roles, expiry) |
+| Use case | Server-to-server, simple auth | User-facing apps, standard auth |
+
+### JWT Structure
+
+A JWT has three base64url-encoded parts separated by `.`:
+</code></pre></div>
+eyJhbGciOiJIUzI1NiJ9          ← header  (algorithm)
+.eyJzdWIiOiJhbHBoYSJ9         ← payload (claims: sub, exp, ...)
+.SflKxwRJSMeKKF2QT4fwpMeJf36P ← signature (HMAC-SHA256 of header + payload)
+<div class="highlight"><pre><span></span><code>The server signs the token with a secret key. It can verify any token without a database lookup — just re-sign the header+payload and compare.
+
+### OAuth2 Password Flow
+</code></pre></div>
+1. Client sends username + password to POST /auth/token
+2. Server verifies credentials against the database
+3. Server returns {"access_token": "<jwt>", "token_type": "bearer"}
+4. Client sends the token in the Authorization header on subsequent requests:
+   Authorization: Bearer <jwt>
+5. Server decodes the token, extracts the username, loads the User
+<div class="highlight"><pre><span></span><code>### Token Expiry
+
+The `exp` claim in the payload is a Unix timestamp. When the token expires:
+- The server decodes successfully but finds `exp &lt; now`
+- Returns `401 Unauthorized` with `&quot;Token has expired — please log in again&quot;`
+
+### Testing the Flow
+
+```bash
+# 1. Register
+curl -X POST http://localhost:8000/auth/register \
+  -H &#39;Content-Type: application/json&#39; \
+  -d &#39;{&quot;username&quot;: &quot;alice&quot;, &quot;password&quot;: &quot;secret123&quot;}&#39;
+
+# 2. Get token
+curl -X POST http://localhost:8000/auth/token \
+  -d &#39;username=alice&amp;password=secret123&#39;
+# → {&quot;access_token&quot;: &quot;eyJ...&quot;, &quot;token_type&quot;: &quot;bearer&quot;}
+
+# 3. Use token (copy the access_token value)
+curl http://localhost:8000/bookings/me \
+  -H &#39;Authorization: Bearer eyJ...&#39;
+</code></pre></div></p>
+<p><strong>🏋️ Mini Challenge:</strong> Change <code>ACCESS_TOKEN_EXPIRE_MINUTES = 1</code> in <code>jwt_auth.py</code>, get a token, wait 70 seconds, then call a protected endpoint. Confirm you receive <code>401</code> with <code>"Token has expired — please log in again"</code>. Reset back to <code>30</code> when done.
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Append the Section 8 code cell — `dependencies/jwt_auth.py`**
+
+```python
+# travelapi/app/dependencies/jwt_auth.py
+
+import os
+from datetime import datetime, timedelta, timezone
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
+from app.database import User, get_db
+
+SECRET_KEY = os.getenv(&quot;SECRET_KEY&quot;, &quot;change-me-in-production-use-a-long-random-string&quot;)
+ALGORITHM = &quot;HS256&quot;
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+pwd_context = CryptContext(schemes=[&quot;bcrypt&quot;], deprecated=&quot;auto&quot;)
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=&quot;/auth/token&quot;)
+
+
+def hash_password(password: str) -&gt; str:
+    return pwd_context.hash(password)
+
+
+def verify_password(plain: str, hashed: str) -&gt; bool:
+    return pwd_context.verify(plain, hashed)
+
+
+def create_access_token(data: dict, expires_delta: timedelta = None) -&gt; str:
+    to_encode = data.copy()
+    expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    to_encode[&quot;exp&quot;] = expire
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+
+
+def get_current_user(
+    token: str = Depends(oauth2_scheme),
+    db: Session = Depends(get_db),
+) -&gt; User:
+    credentials_exc = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail=&quot;Could not validate credentials&quot;,
+        headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get(&quot;sub&quot;)
+        if username is None:
+            raise credentials_exc
+        exp = payload.get(&quot;exp&quot;)
+        if exp and datetime.now(timezone.utc).timestamp() &gt; exp:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=&quot;Token has expired — please log in again&quot;,
+                headers={&quot;WWW-Authenticate&quot;: &quot;Bearer&quot;},
+            )
+    except JWTError:
+        raise credentials_exc
+    user = db.query(User).filter(User.username == username).first()
+    if user is None:
+        raise credentials_exc
+    return user
+</code></pre></div></p>
+<ul>
+<li>[ ] <strong>Step 3: Append the Section 8 code cell — <code>routers/auth.py</code></strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/routers/auth.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">APIRouter</span><span class="p">,</span> <span class="n">HTTPException</span><span class="p">,</span> <span class="n">Depends</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">OAuth2PasswordRequestForm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">get_db</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.dependencies.jwt_auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">hash_password</span><span class="p">,</span> <span class="n">verify_password</span><span class="p">,</span> <span class="n">create_access_token</span>
+
+<span class="n">router</span> <span class="o">=</span> <span class="n">APIRouter</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;/auth&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Authentication&quot;</span><span class="p">])</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserCreate</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UserResponse</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="n">model_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;from_attributes&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Token</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">access_token</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">token_type</span><span class="p">:</span> <span class="nb">str</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/register&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">UserResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="n">user</span><span class="p">:</span> <span class="n">UserCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Username already taken&quot;</span><span class="p">)</span>
+    <span class="n">db_user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
+        <span class="n">username</span><span class="o">=</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+        <span class="n">hashed_password</span><span class="o">=</span><span class="n">hash_password</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">password</span><span class="p">),</span>
+        <span class="n">api_key</span><span class="o">=</span><span class="n">secrets</span><span class="o">.</span><span class="n">token_urlsafe</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_user</span><span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">db_user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">db_user</span>
+
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/token&quot;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">Token</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">(</span><span class="n">form_data</span><span class="p">:</span> <span class="n">OAuth2PasswordRequestForm</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(),</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">username</span> <span class="o">==</span> <span class="n">form_data</span><span class="o">.</span><span class="n">username</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">verify_password</span><span class="p">(</span><span class="n">form_data</span><span class="o">.</span><span class="n">password</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">hashed_password</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="mi">401</span><span class="p">,</span>
+            <span class="n">detail</span><span class="o">=</span><span class="s2">&quot;Incorrect username or password&quot;</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;WWW-Authenticate&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer&quot;</span><span class="p">},</span>
+        <span class="p">)</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">create_access_token</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;sub&quot;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;access_token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span> <span class="s2">&quot;token_type&quot;</span><span class="p">:</span> <span class="s2">&quot;bearer&quot;</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 4: Append the Section 8 code cell — final <code>main.py</code> with auth router</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># travelapi/app/main.py  (Section 8 checkpoint — final main.py)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.middleware.cors</span><span class="w"> </span><span class="kn">import</span> <span class="n">CORSMiddleware</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">starlette.middleware.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseHTTPMiddleware</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_tables</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.routers</span><span class="w"> </span><span class="kn">import</span> <span class="n">destinations</span><span class="p">,</span> <span class="n">trips</span><span class="p">,</span> <span class="n">bookings</span><span class="p">,</span> <span class="n">auth</span> <span class="k">as</span> <span class="n">auth_router</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LoggingMiddleware</span><span class="p">(</span><span class="n">BaseHTTPMiddleware</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span> <span class="n">call_next</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">call_next</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s2">&quot;X-Process-Time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Travel API&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A travel booking system&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1.0.0&quot;</span><span class="p">)</span>
+<span class="n">create_tables</span><span class="p">()</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span>
+    <span class="n">CORSMiddleware</span><span class="p">,</span>
+    <span class="n">allow_origins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+    <span class="n">allow_methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+    <span class="n">allow_headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_middleware</span><span class="p">(</span><span class="n">LoggingMiddleware</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">auth_router</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">destinations</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">trips</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include_router</span><span class="p">(</span><span class="n">bookings</span><span class="o">.</span><span class="n">router</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Root&quot;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">root</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Welcome to the Travel API&quot;</span><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>[ ] <strong>Step 5: Commit</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>prg400/FastAPI.ipynb
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add Section 8 (JWT Auth) to FastAPI notebook&quot;</span>
+</code></pre></div>
+<hr />
+<h3 id="task-10-section-9-final-challenge-summary">Task 10: Section 9 — Final Challenge + Summary</h3>
+<p><strong>Files:</strong>
+- Modify: <code>prg400/FastAPI.ipynb</code> (append cells)</p>
+<ul>
+<li>[ ] <strong>Step 1: Append the Section 9 markdown cell</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code>---
+
+## Section 9 — Final Challenge
+
+Build the complete **Bookings** feature by replacing the stub `routers/bookings.py` with a full implementation.
+
+### Requirements
+
+1. `POST /bookings` — JWT-protected. Creates a booking for the authenticated user.
+   - Return `404` if the trip does not exist
+   - Return `400` if `spots_available &lt;= 0`
+   - Decrement `spots_available` by 1 on success
+   - Return the booking with status `&quot;confirmed&quot;`
+
+2. `GET /bookings/me` — JWT-protected. Returns all bookings for the authenticated user.
+
+3. `PATCH /bookings/{id}/cancel` — JWT-protected. Cancels one of the user&#39;s bookings.
+   - Return `404` if the booking does not belong to the current user
+   - Return `400` if the booking is already cancelled
+   - Restore `spots_available` by 1 on success
+
+### Verify With Swagger UI
+
+Start the server and open `http://localhost:8000/docs`.
+
+1. Register a user via `POST /auth/register`
+2. Get a token via `POST /auth/token` — click **Authorize** in Swagger and paste the token
+3. Create a destination and a trip (use the API key from step 1)
+4. Create a booking — confirm `spots_available` decreased by 1
+5. Cancel the booking — confirm `spots_available` restored by 1
+6. Try cancelling the same booking again — confirm `400 Bad Request`
+
+&lt;details&gt;
+&lt;summary&gt;Solution&lt;/summary&gt;
+
+```python
+# travelapi/app/routers/bookings.py
+
+from fastapi import APIRouter, HTTPException, Depends
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+from app.database import Booking, Trip, User, get_db
+from app.dependencies.jwt_auth import get_current_user
+
+router = APIRouter(prefix=&quot;/bookings&quot;, tags=[&quot;Bookings&quot;])
+
+
+class BookingCreate(BaseModel):
+    trip_id: int
+
+
+class BookingResponse(BaseModel):
+    id: int
+    trip_id: int
+    user_id: int
+    status: str
+
+    model_config = {&quot;from_attributes&quot;: True}
+
+
+@router.post(&quot;/&quot;, response_model=BookingResponse, status_code=201)
+def create_booking(
+    booking: BookingCreate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    trip = db.query(Trip).filter(Trip.id == booking.trip_id).first()
+    if not trip:
+        raise HTTPException(status_code=404, detail=&quot;Trip not found&quot;)
+    if trip.spots_available &lt;= 0:
+        raise HTTPException(status_code=400, detail=&quot;No spots available for this trip&quot;)
+    db_booking = Booking(trip_id=booking.trip_id, user_id=current_user.id, status=&quot;confirmed&quot;)
+    trip.spots_available -= 1
+    db.add(db_booking)
+    db.commit()
+    db.refresh(db_booking)
+    return db_booking
+
+
+@router.get(&quot;/me&quot;, response_model=list[BookingResponse])
+def my_bookings(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    return db.query(Booking).filter(Booking.user_id == current_user.id).all()
+
+
+@router.patch(&quot;/{booking_id}/cancel&quot;, response_model=BookingResponse)
+def cancel_booking(
+    booking_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    booking = db.query(Booking).filter(
+        Booking.id == booking_id,
+        Booking.user_id == current_user.id,
+    ).first()
+    if not booking:
+        raise HTTPException(status_code=404, detail=&quot;Booking not found&quot;)
+    if booking.status == &quot;cancelled&quot;:
+        raise HTTPException(status_code=400, detail=&quot;Booking is already cancelled&quot;)
+    booking.status = &quot;cancelled&quot;
+    trip = db.query(Trip).filter(Trip.id == booking.trip_id).first()
+    if trip:
+        trip.spots_available += 1
+    db.commit()
+    db.refresh(booking)
+    return booking
+</code></pre></div>
+</details>
+<hr />
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First Routes</strong></td>
+<td><code>@app.get</code> / <code>@app.post</code> + return a dict → FastAPI serialises to JSON</td>
+</tr>
+<tr>
+<td><strong>Path &amp; Query Params</strong></td>
+<td>Declare in function signature; FastAPI coerces types automatically</td>
+</tr>
+<tr>
+<td><strong>Pydantic Models</strong></td>
+<td>Separate request/response models; <code>Field()</code> adds validation for free</td>
+</tr>
+<tr>
+<td><strong>SQLAlchemy + Depends</strong></td>
+<td><code>get_db()</code> dependency manages session lifecycle automatically</td>
+</tr>
+<tr>
+<td><strong>Routers</strong></td>
+<td><code>APIRouter</code> splits routes into focused files; <code>app.include_router()</code> mounts them</td>
+</tr>
+<tr>
+<td><strong>Middleware</strong></td>
+<td><code>BaseHTTPMiddleware</code> wraps every request; add CORS with <code>CORSMiddleware</code></td>
+</tr>
+<tr>
+<td><strong>API Key Auth</strong></td>
+<td><code>APIKeyHeader</code> + a dependency that validates the key against the database</td>
+</tr>
+<tr>
+<td><strong>JWT Auth</strong></td>
+<td>OAuth2 password flow; <code>python-jose</code> signs tokens; <code>passlib</code> hashes passwords</td>
+</tr>
+</tbody>
+</table>
+<h3 id="further-reading">Further Reading</h3>
+<ul>
+<li><a href="https://fastapi.tiangolo.com">FastAPI documentation</a></li>
+<li><a href="https://docs.pydantic.dev/latest/">Pydantic v2 documentation</a></li>
+<li><a href="https://python-jose.readthedocs.io">python-jose documentation</a></li>
+<li><a href="https://passlib.readthedocs.io">passlib documentation</a></li>
+<li><a href="https://oauth.net/2/">OAuth2 explained</a>
+<div class="highlight"><pre><span></span><code>- [ ] **Step 2: Commit**
+
+```bash
+git add prg400/FastAPI.ipynb
+git commit -m &quot;feat: add Section 9 (Final Challenge) and Summary to FastAPI notebook&quot;
+</code></pre></div></li>
+</ul>
+<hr />
+<h2 id="self-review-notes">Self-Review Notes</h2>
+<ul>
+<li><strong>Spec coverage:</strong> All 10 sections covered (0–9). API key auth (S7), JWT auth (S8), mini challenges in every section, final challenge with hidden solution in S9. ✓</li>
+<li><strong>Type consistency:</strong> <code>model_config = {"from_attributes": True}</code> added to all ORM-mapped response models in Sections 4–9. <code>model_dump()</code> used (Pydantic v2 API). ✓</li>
+<li><strong>Placeholder scan:</strong> No TBDs. All code cells contain complete, runnable Python. ✓</li>
+<li><strong>Dependency consistency:</strong> <code>get_api_key</code> defined in <code>dependencies/auth.py</code>, imported in <code>routers/trips.py</code> (S7). <code>get_current_user</code> defined in <code>dependencies/jwt_auth.py</code>, imported in <code>routers/bookings.py</code> (S9). ✓</li>
+<li><strong><code>dependencies/__init__.py</code>:</strong> Add an empty <code>__init__.py</code> in Task 8 Step 2 so <code>app.dependencies</code> is a package. Agent should create this when writing <code>dependencies/auth.py</code>.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
