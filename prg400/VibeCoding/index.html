@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Vibe Coding: Using AI Tools and Agents in Modern Python Development - Python Module</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Vibe Coding: Using AI Tools and Agents in Modern Python Development";
+        var mkdocs_page_input_path = "prg400/VibeCoding.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Python Module
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Python Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/Installation/">Installation Guide</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/1.Introduction/">Introduction to Python</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/2.DataTypes/">Data Types</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/3.ControlStructures/">Control Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/4.DataStructures/">Data Structures</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/5.Functions/">Functions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/6.FileHandling/">File Handling</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/7.OOP/">OOP</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/8.ErrorDebugging/">Errors and Exceptions</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../lectures/9.AdvancedConcepts/">Advanced Topics</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Advanced Python</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../EventDrivenProgramming/">Event Driven Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../asyncio/">Async Programming</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../PythonBindings/">Python Bindings (C/C++)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DistributablePackage/">Creating Distributable Packages</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../FastAPI/">FastAPI</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../Django/">Django Framework</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../DeployingApplications/">Deploying Applications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../ProjectDescription/">Project Description (PRG400)</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Python Module</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Vibe Coding: Using AI Tools and Agents in Modern Python Development</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="vibe-coding-using-ai-tools-and-agents-in-modern-python-development">Vibe Coding: Using AI Tools and Agents in Modern Python Development</h1>
+<blockquote>
+<p><em>"The best programmers are not those who know the most, but those who know how to find the best answers — and now AI is part of that toolkit."</em></p>
+</blockquote>
+<hr />
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this lecture, you will be able to:</p>
+<ol>
+<li><strong>Explain</strong> what "vibe coding" is and where the term comes from</li>
+<li><strong>Use</strong> AI coding assistants (GitHub Copilot, ChatGPT, Claude) effectively with targeted prompts</li>
+<li><strong>Evaluate</strong> AI-generated code critically — spotting bugs, security issues, and hallucinations</li>
+<li><strong>Scaffold</strong> FastAPI and Django projects faster using AI-assisted workflows</li>
+<li><strong>Generate</strong> Dockerfiles and docker-compose configurations with AI guidance</li>
+<li><strong>Understand</strong> what AI agents are and how they differ from simple autocomplete</li>
+<li><strong>Apply</strong> a responsible AI workflow: generate → review → refine → own</li>
+</ol>
+<hr />
+<h2 id="sections">Sections</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is Vibe Coding?</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The AI Developer Toolkit</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The Art of Prompting</td>
+</tr>
+<tr>
+<td>4</td>
+<td>AI-Assisted FastAPI Development</td>
+</tr>
+<tr>
+<td>5</td>
+<td>AI-Assisted Django Development</td>
+</tr>
+<tr>
+<td>6</td>
+<td>AI for Infrastructure: Docker &amp; Nginx</td>
+</tr>
+<tr>
+<td>7</td>
+<td>AI Agents in Development</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Pitfalls, Hallucinations &amp; Security</td>
+</tr>
+<tr>
+<td>9</td>
+<td>What AI Cannot Replace</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Best Practices &amp; Responsible Workflow</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-1-what-is-vibe-coding">Section 1 — What is Vibe Coding?</h2>
+<h3 id="the-terms-origin">The Term's Origin</h3>
+<p>The phrase <strong>"vibe coding"</strong> was coined by <strong>Andrej Karpathy</strong> (co-founder of OpenAI, former Tesla AI director) in February 2025. His tweet read:</p>
+<blockquote>
+<p><em>"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because LLMs are getting good enough."</em></p>
+</blockquote>
+<p>He described a workflow where developers:
+- Describe what they want in natural language
+- Let the AI generate the code
+- Accept suggestions without always reading them deeply
+- Iterate quickly through prompts rather than through manual edits</p>
+<hr />
+<h3 id="the-spectrum-of-ai-assisted-development">The Spectrum of AI-Assisted Development</h3>
+<div class="highlight"><pre><span></span><code>TRADITIONAL                                              PURE VIBE
+CODING                                                   CODING
+  |--------------------------------------------------------|
+  |                                                        |
+  Write every   Use AI for     Use AI for    Use AI for   Let AI write
+  line by hand  autocomplete   boilerplate   full drafts  everything
+                               and snippets  you review
+</code></pre></div>
+<p><strong>Most professional developers today operate in the middle</strong> — using AI to accelerate work while retaining full understanding and responsibility for the code.</p>
+<hr />
+<h3 id="why-this-matters-now">Why This Matters Now</h3>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td>GitHub Copilot beta — AI autocomplete arrives</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>ChatGPT released — conversational code generation</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>GPT-4, Claude 2 — near-human reasoning on code</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>Copilot Workspace, Cursor IDE — agentic coding tools</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>AI agents write, test, deploy code autonomously</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="class-discussion-3-minutes">💬 Class Discussion (3 minutes)</h3>
+<blockquote>
+<ul>
+<li>Have you used GitHub Copilot, ChatGPT, or Claude to help write code?</li>
+<li>What worked well? What didn't?</li>
+<li>Do you think AI will replace programmers? Why or why not?</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="section-2-the-ai-developer-toolkit">Section 2 — The AI Developer Toolkit</h2>
+<h3 id="major-ai-coding-tools-in-2025">Major AI Coding Tools in 2025</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Type</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Copilot</strong></td>
+<td>IDE plugin + agent</td>
+<td>In-editor autocomplete, PR review, workspace agents</td>
+</tr>
+<tr>
+<td><strong>Cursor</strong></td>
+<td>AI-native IDE</td>
+<td>Full codebase context, multi-file edits</td>
+</tr>
+<tr>
+<td><strong>Claude (Anthropic)</strong></td>
+<td>Chat + API</td>
+<td>Long code generation, architecture discussion</td>
+</tr>
+<tr>
+<td><strong>ChatGPT (OpenAI)</strong></td>
+<td>Chat + API</td>
+<td>Explanation, debugging, general coding tasks</td>
+</tr>
+<tr>
+<td><strong>Gemini Code Assist</strong></td>
+<td>IDE plugin</td>
+<td>Google Cloud / GCP-integrated development</td>
+</tr>
+<tr>
+<td><strong>Amazon Q</strong></td>
+<td>IDE plugin</td>
+<td>AWS-integrated development</td>
+</tr>
+<tr>
+<td><strong>Aider</strong></td>
+<td>CLI tool</td>
+<td>Terminal-based AI pair programming with git</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="how-these-tools-actually-work-high-level">How These Tools Actually Work (High Level)</h3>
+<div class="highlight"><pre><span></span><code>Your Prompt / Code Context
+         │
+         ▼
+  ┌─────────────────────────────────┐
+  │        Large Language Model      │
+  │   (Trained on billions of lines  │
+  │    of code from GitHub, docs,    │
+  │    Stack Overflow, papers...)    │
+  └─────────────────────────────────┘
+         │
+         ▼
+    Generated Tokens  →  Code Output
+</code></pre></div>
+<p><strong>Key concepts to understand:</strong></p>
+<ul>
+<li><strong>Context window</strong>: The amount of text the model can "see" at once (8K → 200K+ tokens)</li>
+<li><strong>Temperature</strong>: Controls randomness — lower = more deterministic code</li>
+<li><strong>Training cutoff</strong>: The model doesn't know about libraries released after its training date</li>
+<li><strong>Hallucination</strong>: The model confidently generates plausible-but-wrong code</li>
+</ul>
+<hr />
+<h3 id="github-copilot-in-vs-code-key-features">GitHub Copilot in VS Code — Key Features</h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────┐
+│  GitHub Copilot Features                                 │
+│                                                          │
+│  ① Inline Suggestions    — Tab to accept as you type    │
+│  ② Copilot Chat          — Ask questions about code     │
+│  ③ /explain              — Explain selected code        │
+│  ④ /fix                  — Fix a bug in selection       │
+│  ⑤ /tests                — Generate unit tests         │
+│  ⑥ /doc                  — Generate docstrings         │
+│  ⑦ Agent Mode            — Multi-step autonomous tasks │
+└─────────────────────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h2 id="section-3-the-art-of-prompting">Section 3 — The Art of Prompting</h2>
+<p>The quality of AI output is <strong>directly proportional to the quality of your prompt</strong>. This is the most important skill to develop.</p>
+<h3 id="the-anatomy-of-a-great-code-prompt">The Anatomy of a Great Code Prompt</h3>
+<div class="highlight"><pre><span></span><code>┌────────────────────────────────────────────────────────────────┐
+│  ROLE       — &quot;You are a senior Python backend developer&quot;       │
+│  CONTEXT    — &quot;I&#39;m building a FastAPI app with PostgreSQL&quot;      │
+│  TASK       — &quot;Create a user registration endpoint&quot;            │
+│  SPECIFICS  — &quot;Use Pydantic v2, hash passwords with bcrypt&quot;    │
+│  CONSTRAINTS— &quot;Follow RESTful conventions, add error handling&quot; │
+│  FORMAT     — &quot;Include type hints and docstrings&quot;              │
+└────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="bad-prompt-vs-good-prompt">Bad Prompt vs. Good Prompt</h3>
+<p><strong>❌ Weak prompt:</strong>
+<div class="highlight"><pre><span></span><code>make a login api
+</code></pre></div></p>
+<p><strong>✅ Strong prompt:</strong>
+<div class="highlight"><pre><span></span><code>You are a senior Python developer. I&#39;m building a FastAPI application.
+
+Create a POST /auth/login endpoint that:
+- Accepts email and password in the request body (use Pydantic v2 BaseModel)
+- Queries a SQLAlchemy User model (assume it has id, email, hashed_password fields)
+- Verifies the password using passlib bcrypt
+- Returns a JWT access token (use python-jose)
+- Raises HTTPException 401 if credentials are invalid
+- Includes type hints and a brief docstring
+
+Do not create the full app — just the router function and the Pydantic schemas.
+</code></pre></div></p>
+<hr />
+<h3 id="prompting-patterns-for-developers">Prompting Patterns for Developers</h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>When to Use</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Scaffolding</strong></td>
+<td>Starting a new project/module</td>
+<td>"Create a FastAPI project structure for a blog API"</td>
+</tr>
+<tr>
+<td><strong>Completion</strong></td>
+<td>Filling in a function body</td>
+<td>"Complete this function that parses CSV and returns a list of dicts"</td>
+</tr>
+<tr>
+<td><strong>Refactoring</strong></td>
+<td>Improving existing code</td>
+<td>"Refactor this to use async/await and add error handling"</td>
+</tr>
+<tr>
+<td><strong>Debugging</strong></td>
+<td>Finding bugs</td>
+<td>"This function raises KeyError on line 12. Here's the traceback: [...]"</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Writing tests</td>
+<td>"Write pytest tests for this endpoint covering happy path and 4xx errors"</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>Adding docs</td>
+<td>"Add OpenAPI descriptions and Pydantic field descriptions to this model"</td>
+</tr>
+<tr>
+<td><strong>Translation</strong></td>
+<td>Converting code</td>
+<td>"Convert this Django ORM query to raw SQLAlchemy 2.0"</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># LIVE DEMO: Simulating what AI tools produce</span>
+<span class="c1"># We&#39;ll look at a progression of prompts and the kind of output</span>
+<span class="c1"># a tool like GitHub Copilot or Claude would generate.</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="c1"># Prompt 1 (weak): &quot;make a function to validate email&quot;</span>
+<span class="c1"># Typical AI output — minimal, no edge cases:</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_email_weak</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">email</span>
+
+
+<span class="c1"># Prompt 2 (better): &quot;Write a Python function that validates an email address</span>
+<span class="c1"># using a regex. Return True if valid, False otherwise. Add type hints.&quot;</span>
+<span class="c1"># Typical AI output — more robust:</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate an email address using a regex pattern.&quot;&quot;&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$&#39;</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">))</span>
+
+
+<span class="c1"># Test it</span>
+<span class="n">test_emails</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;student@kings.edu.np&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;not-an-email&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;missing@domain&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;valid.user+tag@example.co.uk&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@nodomain.com&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Email Validation Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">test_emails</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;✓ Valid&quot;</span> <span class="k">if</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;✗ Invalid&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># CRITICAL THINKING EXERCISE</span>
+<span class="c1"># The AI also generated this password checker. Can you spot</span>
+<span class="c1"># what&#39;s wrong with it before running it?</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_password_strength</span><span class="p">(</span><span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    AI-generated function — review before trusting!</span>
+<span class="sd">    Returns &#39;weak&#39;, &#39;medium&#39;, or &#39;strong&#39; based on password rules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;!@#$%^&amp;*&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># BUG: The thresholds don&#39;t account for the max score being 4</span>
+    <span class="c1"># Also: printing the password is a security anti-pattern!</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Checking password: </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># ← NEVER DO THIS IN PRODUCTION</span>
+
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;weak&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>   <span class="c1"># ← &#39;medium&#39; catches score 2 and 3</span>
+        <span class="k">return</span> <span class="s2">&quot;medium&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;strong&quot;</span>
+
+
+<span class="c1"># Discussion: What are the problems?</span>
+<span class="c1"># 1. Logging the password to stdout (OWASP A09 - Security Logging failure)</span>
+<span class="c1"># 2. No protection against extremely short passwords (score=1 still passes &#39;medium&#39;)</span>
+<span class="c1"># 3. Only 8 chars minimum — modern standards recommend 12+</span>
+<span class="c1"># This is exactly the kind of code that requires human review!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Strength:&quot;</span><span class="p">,</span> <span class="n">check_password_strength</span><span class="p">(</span><span class="s2">&quot;Secret1!&quot;</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<h2 id="section-4-ai-assisted-fastapi-development">Section 4 — AI-Assisted FastAPI Development</h2>
+<h3 id="the-workflow-in-practice">The Workflow in Practice</h3>
+<div class="highlight"><pre><span></span><code>  You describe             AI generates            You review
+  what you want    ──►    the scaffold     ──►    and refine
+       │                                               │
+       │◄──────────── iterate until correct ───────────┘
+</code></pre></div>
+<h3 id="example-prompt-sent-to-an-ai">Example Prompt Sent to an AI</h3>
+<div class="highlight"><pre><span></span><code>Build a FastAPI application for a simple task manager with:
+
+- SQLite database using SQLAlchemy 2.0 (async not required)
+- A Task model with: id, title, description, completed (bool), created_at
+- CRUD endpoints: GET /tasks, POST /tasks, GET /tasks/{id},
+  PATCH /tasks/{id}, DELETE /tasks/{id}
+- Pydantic v2 request/response schemas
+- Proper 404 handling when a task doesn&#39;t exist
+- Keep everything in a single file for simplicity
+</code></pre></div>
+<h3 id="what-the-ai-generated-and-what-we-reviewed">What the AI Generated (and what we reviewed)</h3>
+<p>The following code is a <strong>reviewed and corrected</strong> version of AI output:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># AI-Generated + Human-Reviewed: Task Manager FastAPI App</span>
+<span class="c1"># This is the kind of scaffold an AI produces in ~10 seconds.</span>
+<span class="c1"># We walk through it to understand EVERY part.</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="c1"># NOTE: This cell shows the code structure. To actually run this,</span>
+<span class="c1"># you would save it as main.py and run: uvicorn main:app --reload</span>
+
+<span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># main.py — AI-assisted scaffold, human-reviewed</span>
+
+<span class="s1">from datetime import datetime</span>
+<span class="s1">from typing import Optional</span>
+
+<span class="s1">from fastapi import FastAPI, Depends, HTTPException</span>
+<span class="s1">from pydantic import BaseModel, Field</span>
+<span class="s1">from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime</span>
+<span class="s1">from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker</span>
+
+<span class="s1"># ── Database Setup ─────────────────────────────────────────────</span>
+<span class="s1">DATABASE_URL = &quot;sqlite:///./tasks.db&quot;</span>
+<span class="s1">engine = create_engine(DATABASE_URL, connect_args={&quot;check_same_thread&quot;: False})</span>
+<span class="s1">SessionLocal = sessionmaker(bind=engine)</span>
+
+<span class="s1">class Base(DeclarativeBase):</span>
+<span class="s1">    pass</span>
+
+<span class="s1">class Task(Base):</span>
+<span class="s1">    __tablename__ = &quot;tasks&quot;</span>
+<span class="s1">    id          = Column(Integer, primary_key=True, index=True)</span>
+<span class="s1">    title       = Column(String(200), nullable=False)</span>
+<span class="s1">    description = Column(String(1000), default=&quot;&quot;)</span>
+<span class="s1">    completed   = Column(Boolean, default=False)</span>
+<span class="s1">    created_at  = Column(DateTime, default=datetime.utcnow)</span>
+
+<span class="s1">Base.metadata.create_all(bind=engine)</span>
+
+<span class="s1"># ── Pydantic Schemas ───────────────────────────────────────────</span>
+<span class="s1">class TaskCreate(BaseModel):</span>
+<span class="s1">    title: str = Field(..., min_length=1, max_length=200)</span>
+<span class="s1">    description: str = Field(default=&quot;&quot;, max_length=1000)</span>
+
+<span class="s1">class TaskUpdate(BaseModel):</span>
+<span class="s1">    title: Optional[str] = Field(None, min_length=1, max_length=200)</span>
+<span class="s1">    description: Optional[str] = None</span>
+<span class="s1">    completed: Optional[bool] = None</span>
+
+<span class="s1">class TaskResponse(BaseModel):</span>
+<span class="s1">    id: int</span>
+<span class="s1">    title: str</span>
+<span class="s1">    description: str</span>
+<span class="s1">    completed: bool</span>
+<span class="s1">    created_at: datetime</span>
+
+<span class="s1">    model_config = {&quot;from_attributes&quot;: True}  # Pydantic v2</span>
+
+<span class="s1"># ── Dependency ─────────────────────────────────────────────────</span>
+<span class="s1">def get_db():</span>
+<span class="s1">    db = SessionLocal()</span>
+<span class="s1">    try:</span>
+<span class="s1">        yield db</span>
+<span class="s1">    finally:</span>
+<span class="s1">        db.close()</span>
+
+<span class="s1"># ── App &amp; Routes ───────────────────────────────────────────────</span>
+<span class="s1">app = FastAPI(title=&quot;Task Manager API&quot;, version=&quot;1.0.0&quot;)</span>
+
+<span class="s1">@app.get(&quot;/tasks&quot;, response_model=list[TaskResponse])</span>
+<span class="s1">def list_tasks(db: Session = Depends(get_db)):</span>
+<span class="s1">    &quot;&quot;&quot;Return all tasks.&quot;&quot;&quot;</span>
+<span class="s1">    return db.query(Task).all()</span>
+
+<span class="s1">@app.post(&quot;/tasks&quot;, response_model=TaskResponse, status_code=201)</span>
+<span class="s1">def create_task(payload: TaskCreate, db: Session = Depends(get_db)):</span>
+<span class="s1">    &quot;&quot;&quot;Create a new task.&quot;&quot;&quot;</span>
+<span class="s1">    task = Task(**payload.model_dump())</span>
+<span class="s1">    db.add(task)</span>
+<span class="s1">    db.commit()</span>
+<span class="s1">    db.refresh(task)</span>
+<span class="s1">    return task</span>
+
+<span class="s1">@app.get(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, response_model=TaskResponse)</span>
+<span class="s1">def get_task(task_id: int, db: Session = Depends(get_db)):</span>
+<span class="s1">    &quot;&quot;&quot;Fetch a single task by ID.&quot;&quot;&quot;</span>
+<span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
+<span class="s1">    if not task:</span>
+<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">    return task</span>
+
+<span class="s1">@app.patch(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, response_model=TaskResponse)</span>
+<span class="s1">def update_task(task_id: int, payload: TaskUpdate, db: Session = Depends(get_db)):</span>
+<span class="s1">    &quot;&quot;&quot;Partially update a task.&quot;&quot;&quot;</span>
+<span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
+<span class="s1">    if not task:</span>
+<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">    for field, value in payload.model_dump(exclude_unset=True).items():</span>
+<span class="s1">        setattr(task, field, value)</span>
+<span class="s1">    db.commit()</span>
+<span class="s1">    db.refresh(task)</span>
+<span class="s1">    return task</span>
+
+<span class="s1">@app.delete(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, status_code=204)</span>
+<span class="s1">def delete_task(task_id: int, db: Session = Depends(get_db)):</span>
+<span class="s1">    &quot;&quot;&quot;Delete a task.&quot;&quot;&quot;</span>
+<span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
+<span class="s1">    if not task:</span>
+<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">    db.delete(task)</span>
+<span class="s1">    db.commit()</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Manager API scaffold generated by AI.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character count:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Key patterns used (that YOU need to understand):&quot;</span><span class="p">)</span>
+<span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SQLAlchemy 2.0 DeclarativeBase (not the old declarative_base())&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pydantic v2 model_config = {&#39;from_attributes&#39;: True}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Dependency injection with Depends(get_db)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_dump(exclude_unset=True) for partial updates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HTTPException for consistent error responses&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;status_code=201 for POST, 204 for DELETE&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="what-the-ai-got-right-and-what-needed-fixing">What the AI Got Right — and What Needed Fixing</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>AI Output</th>
+<th>Human Fix Needed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLAlchemy setup</td>
+<td>Used modern <code>DeclarativeBase</code></td>
+<td>✅ Correct</td>
+</tr>
+<tr>
+<td>Pydantic schemas</td>
+<td>Used <code>model_config</code> (v2 style)</td>
+<td>✅ Correct</td>
+</tr>
+<tr>
+<td>PATCH endpoint</td>
+<td>Used <code>exclude_unset=True</code></td>
+<td>✅ Correct</td>
+</tr>
+<tr>
+<td><code>check_same_thread</code></td>
+<td>Added for SQLite</td>
+<td>✅ Correct</td>
+</tr>
+<tr>
+<td>Field validation</td>
+<td>Added <code>min_length</code>, <code>max_length</code></td>
+<td>✅ AI did it</td>
+</tr>
+<tr>
+<td><code>datetime.utcnow</code></td>
+<td>Used (deprecated in Python 3.12+)</td>
+<td>⚠️ Should use <code>datetime.now(timezone.utc)</code></td>
+</tr>
+<tr>
+<td>No auth layer</td>
+<td>No authentication</td>
+<td>⚠️ Fine for demo, not for production</td>
+</tr>
+<tr>
+<td>No pagination</td>
+<td>Returns all tasks</td>
+<td>⚠️ Would need <code>skip</code>/<code>limit</code> at scale</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lesson:</strong> AI gets 80-90% right. Your job is to spot the remaining 10-20%.</p>
+<hr />
+<h3 id="exercise-prompt-and-review-10-minutes">✍️ Exercise: Prompt-and-Review (10 minutes)</h3>
+<p>Using your AI tool of choice (GitHub Copilot Chat / ChatGPT / Claude), send this prompt and review the output:</p>
+<div class="highlight"><pre><span></span><code>Add a GET /tasks/search endpoint to the Task Manager API above.
+It should accept a query parameter `q` and return tasks where
+the title contains the search string (case-insensitive).
+Use SQLAlchemy&#39;s ilike() for the filter.
+</code></pre></div>
+<p>Check:
+1. Does it use <code>ilike()</code> correctly?
+2. Does it handle the case where <code>q</code> is empty?
+3. Is the route registered before <code>/tasks/{task_id}</code> to avoid conflict?</p>
+<hr />
+<h2 id="section-5-ai-assisted-django-development">Section 5 — AI-Assisted Django Development</h2>
+<h3 id="when-to-use-django-vs-fastapi">When to Use Django vs FastAPI</h3>
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th>Django</th>
+<th>FastAPI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full-stack web app</td>
+<td>✅ Best choice</td>
+<td>❌ Not designed for it</td>
+</tr>
+<tr>
+<td>Admin panel needed</td>
+<td>✅ Built-in</td>
+<td>❌ Must build manually</td>
+</tr>
+<tr>
+<td>High-performance async API</td>
+<td>⚠️ Possible but heavier</td>
+<td>✅ Built for this</td>
+</tr>
+<tr>
+<td>Rapid prototyping with DB</td>
+<td>✅ Migrations + ORM</td>
+<td>✅ Also good</td>
+</tr>
+<tr>
+<td>Built-in auth system</td>
+<td>✅ Complete</td>
+<td>❌ Must add yourself</td>
+</tr>
+<tr>
+<td>API documentation</td>
+<td>⚠️ Needs DRF + drf-spectacular</td>
+<td>✅ Automatic with Swagger UI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="ai-assisted-django-generating-models">AI-Assisted Django: Generating Models</h3>
+<p><strong>Prompt sent to AI:</strong></p>
+<div class="highlight"><pre><span></span><code>Create Django models for a blog platform with:
+- User profile (extends Django&#39;s built-in User with bio and avatar_url)
+- Post model (title, content, author FK to User, published_at, is_published, slug)
+- Tag model (name, slug) with ManyToMany to Post
+- Comment model (post FK, author FK, body, created_at)
+
+Use __str__ methods, Meta classes with ordering, and include
+a custom manager on Post that returns only published posts.
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># AI-Generated Django Models — Blog Platform</span>
+<span class="c1"># Display the generated code and annotate the key decisions</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="n">django_models_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># models.py — AI-generated, human-reviewed</span>
+
+<span class="s1">from django.db import models</span>
+<span class="s1">from django.contrib.auth.models import User</span>
+<span class="s1">from django.utils.text import slugify</span>
+<span class="s1">from django.utils import timezone</span>
+
+
+<span class="s1">class UserProfile(models.Model):</span>
+<span class="s1">    user       = models.OneToOneField(User, on_delete=models.CASCADE, related_name=&quot;profile&quot;)</span>
+<span class="s1">    bio        = models.TextField(blank=True)</span>
+<span class="s1">    avatar_url = models.URLField(blank=True)</span>
+
+<span class="s1">    def __str__(self):</span>
+<span class="s1">        return f&quot;Profile of </span><span class="si">{self.user.username}</span><span class="s1">&quot;</span>
+
+
+<span class="s1">class Tag(models.Model):</span>
+<span class="s1">    name = models.CharField(max_length=50, unique=True)</span>
+<span class="s1">    slug = models.SlugField(max_length=50, unique=True)</span>
+
+<span class="s1">    def save(self, *args, **kwargs):</span>
+<span class="s1">        if not self.slug:</span>
+<span class="s1">            self.slug = slugify(self.name)</span>
+<span class="s1">        super().save(*args, **kwargs)</span>
+
+<span class="s1">    def __str__(self):</span>
+<span class="s1">        return self.name</span>
+
+<span class="s1">    class Meta:</span>
+<span class="s1">        ordering = [&quot;name&quot;]</span>
+
+
+<span class="s1">class PublishedManager(models.Manager):</span>
+<span class="s1">    &quot;&quot;&quot;Custom manager that returns only published posts.&quot;&quot;&quot;</span>
+<span class="s1">    def get_queryset(self):</span>
+<span class="s1">        return super().get_queryset().filter(is_published=True)</span>
+
+
+<span class="s1">class Post(models.Model):</span>
+<span class="s1">    title        = models.CharField(max_length=300)</span>
+<span class="s1">    slug         = models.SlugField(max_length=300, unique=True)</span>
+<span class="s1">    content      = models.TextField()</span>
+<span class="s1">    author       = models.ForeignKey(User, on_delete=models.CASCADE, related_name=&quot;posts&quot;)</span>
+<span class="s1">    tags         = models.ManyToManyField(Tag, blank=True, related_name=&quot;posts&quot;)</span>
+<span class="s1">    is_published = models.BooleanField(default=False)</span>
+<span class="s1">    published_at = models.DateTimeField(null=True, blank=True)</span>
+<span class="s1">    created_at   = models.DateTimeField(auto_now_add=True)</span>
+<span class="s1">    updated_at   = models.DateTimeField(auto_now=True)</span>
+
+<span class="s1">    objects   = models.Manager()        # default manager</span>
+<span class="s1">    published = PublishedManager()      # custom manager</span>
+
+<span class="s1">    def save(self, *args, **kwargs):</span>
+<span class="s1">        if not self.slug:</span>
+<span class="s1">            self.slug = slugify(self.title)</span>
+<span class="s1">        if self.is_published and not self.published_at:</span>
+<span class="s1">            self.published_at = timezone.now()</span>
+<span class="s1">        super().save(*args, **kwargs)</span>
+
+<span class="s1">    def __str__(self):</span>
+<span class="s1">        return self.title</span>
+
+<span class="s1">    class Meta:</span>
+<span class="s1">        ordering = [&quot;-published_at&quot;]</span>
+
+
+<span class="s1">class Comment(models.Model):</span>
+<span class="s1">    post       = models.ForeignKey(Post, on_delete=models.CASCADE, related_name=&quot;comments&quot;)</span>
+<span class="s1">    author     = models.ForeignKey(User, on_delete=models.CASCADE, related_name=&quot;comments&quot;)</span>
+<span class="s1">    body       = models.TextField()</span>
+<span class="s1">    created_at = models.DateTimeField(auto_now_add=True)</span>
+
+<span class="s1">    def __str__(self):</span>
+<span class="s1">        return f&quot;Comment by </span><span class="si">{self.author.username}</span><span class="s1"> on </span><span class="si">{self.post.title}</span><span class="s1">&quot;</span>
+
+<span class="s1">    class Meta:</span>
+<span class="s1">        ordering = [&quot;created_at&quot;]</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Django models generated by AI&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">review_points</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;✅ AI got right&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Used OneToOneField (not ForeignKey) for UserProfile&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Custom manager correctly overrides get_queryset()&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;auto_now_add vs auto_now used correctly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ManyToManyField with blank=True (not null=True)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;on_delete=CASCADE on all ForeignKeys&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Auto-sets published_at when first published&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;⚠️ Things to discuss&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Slug auto-generation: what happens with duplicate titles?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;No max_length on TextField fields (fine, but intentional?)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;No signal to auto-create UserProfile on User creation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;published_at ordering may show unpublished posts oddly&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">review_points</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="ai-generated-django-admin-configuration">AI-Generated Django Admin Configuration</h3>
+<p>One of the most powerful AI-assisted tasks is configuring Django Admin. It's repetitive, boilerplate-heavy, and AI excels at it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># Prompt: &quot;Generate Django admin.py for the blog models above.</span>
+<span class="c1">#          Include list_display, search_fields, list_filter,</span>
+<span class="c1">#          prepopulated_fields for slugs, and inline for comments.&quot;</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="n">admin_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># admin.py — AI-generated in ~3 seconds</span>
+
+<span class="s1">from django.contrib import admin</span>
+<span class="s1">from .models import UserProfile, Post, Tag, Comment</span>
+
+
+<span class="s1">@admin.register(UserProfile)</span>
+<span class="s1">class UserProfileAdmin(admin.ModelAdmin):</span>
+<span class="s1">    list_display = (&quot;user&quot;, &quot;bio&quot;)</span>
+<span class="s1">    search_fields = (&quot;user__username&quot;, &quot;user__email&quot;)</span>
+
+
+<span class="s1">@admin.register(Tag)</span>
+<span class="s1">class TagAdmin(admin.ModelAdmin):</span>
+<span class="s1">    list_display = (&quot;name&quot;, &quot;slug&quot;)</span>
+<span class="s1">    prepopulated_fields = {&quot;slug&quot;: (&quot;name&quot;,)}</span>
+
+
+<span class="s1">class CommentInline(admin.TabularInline):</span>
+<span class="s1">    model = Comment</span>
+<span class="s1">    extra = 0</span>
+<span class="s1">    readonly_fields = (&quot;author&quot;, &quot;created_at&quot;)</span>
+
+
+<span class="s1">@admin.register(Post)</span>
+<span class="s1">class PostAdmin(admin.ModelAdmin):</span>
+<span class="s1">    list_display  = (&quot;title&quot;, &quot;author&quot;, &quot;is_published&quot;, &quot;published_at&quot;, &quot;created_at&quot;)</span>
+<span class="s1">    list_filter   = (&quot;is_published&quot;, &quot;tags&quot;, &quot;created_at&quot;)</span>
+<span class="s1">    search_fields = (&quot;title&quot;, &quot;content&quot;, &quot;author__username&quot;)</span>
+<span class="s1">    prepopulated_fields = {&quot;slug&quot;: (&quot;title&quot;,)}</span>
+<span class="s1">    filter_horizontal   = (&quot;tags&quot;,)</span>
+<span class="s1">    inlines = [CommentInline]</span>
+<span class="s1">    date_hierarchy = &quot;created_at&quot;</span>
+
+
+<span class="s1">@admin.register(Comment)</span>
+<span class="s1">class CommentAdmin(admin.ModelAdmin):</span>
+<span class="s1">    list_display  = (&quot;author&quot;, &quot;post&quot;, &quot;created_at&quot;)</span>
+<span class="s1">    search_fields = (&quot;author__username&quot;, &quot;body&quot;)</span>
+<span class="s1">    list_filter   = (&quot;created_at&quot;,)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Django admin.py — AI-generated output&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time to generate manually: ~15-20 minutes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time with AI:              ~30 seconds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This is the productivity multiplier.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The AI knows Django admin&#39;s API better than most developers.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">But YOU need to know what it means to verify it!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-6-ai-for-infrastructure-docker-nginx">Section 6 — AI for Infrastructure: Docker &amp; Nginx</h2>
+<h3 id="infrastructure-as-code-ais-comfort-zone">Infrastructure as Code — AI's Comfort Zone</h3>
+<p>Docker configurations are:
+- Pattern-heavy (same structure for every app type)
+- Easy to forget details (exposed ports, volume mounts, healthchecks)
+- Time-consuming to look up from scratch</p>
+<p>This makes them a <strong>perfect target for AI generation</strong>.</p>
+<hr />
+<h3 id="prompt-for-full-stack-docker-setup">Prompt for Full Stack Docker Setup</h3>
+<div class="highlight"><pre><span></span><code>Generate a production-ready docker-compose.yml for a Django application with:
+- Django app running with gunicorn (web service)
+- PostgreSQL 16 database (db service)
+- Nginx as reverse proxy (nginx service)
+- Redis for caching (redis service)
+
+Requirements:
+- Use named volumes for postgres data and static files
+- Django reads DB config from environment variables
+- Nginx serves static files directly and proxies /api/ to gunicorn
+- Include a healthcheck for the database
+- Use a .env file for secrets (do not hardcode passwords)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># AI-Generated Docker Compose — Reviewed &amp; Annotated</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="n">docker_compose</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># docker-compose.yml — AI-generated, production-ready pattern</span>
+
+<span class="s1">version: &quot;3.9&quot;</span>
+
+<span class="s1">services:</span>
+
+<span class="s1">  db:</span>
+<span class="s1">    image: postgres:16-alpine</span>
+<span class="s1">    volumes:</span>
+<span class="s1">      - postgres_data:/var/lib/postgresql/data</span>
+<span class="s1">    environment:</span>
+<span class="s1">      POSTGRES_DB:       $</span><span class="si">{POSTGRES_DB}</span>
+<span class="s1">      POSTGRES_USER:     $</span><span class="si">{POSTGRES_USER}</span>
+<span class="s1">      POSTGRES_PASSWORD: $</span><span class="si">{POSTGRES_PASSWORD}</span>
+<span class="s1">    healthcheck:</span>
+<span class="s1">      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U $</span><span class="si">{POSTGRES_USER}</span><span class="s1"> -d $</span><span class="si">{POSTGRES_DB}</span><span class="s1">&quot;]</span>
+<span class="s1">      interval: 10s</span>
+<span class="s1">      timeout: 5s</span>
+<span class="s1">      retries: 5</span>
+<span class="s1">    restart: unless-stopped</span>
+
+<span class="s1">  redis:</span>
+<span class="s1">    image: redis:7-alpine</span>
+<span class="s1">    restart: unless-stopped</span>
+
+<span class="s1">  web:</span>
+<span class="s1">    build: .</span>
+<span class="s1">    command: gunicorn blogplatform.wsgi:application --bind 0.0.0.0:8000 --workers 3</span>
+<span class="s1">    volumes:</span>
+<span class="s1">      - static_files:/app/staticfiles</span>
+<span class="s1">    environment:</span>
+<span class="s1">      DATABASE_URL:  postgresql://$</span><span class="si">{POSTGRES_USER}</span><span class="s1">:$</span><span class="si">{POSTGRES_PASSWORD}</span><span class="s1">@db/$</span><span class="si">{POSTGRES_DB}</span>
+<span class="s1">      REDIS_URL:     redis://redis:6379/0</span>
+<span class="s1">      SECRET_KEY:    $</span><span class="si">{DJANGO_SECRET_KEY}</span>
+<span class="s1">      DEBUG:         &quot;False&quot;</span>
+<span class="s1">      ALLOWED_HOSTS: $</span><span class="si">{ALLOWED_HOSTS}</span>
+<span class="s1">    depends_on:</span>
+<span class="s1">      db:</span>
+<span class="s1">        condition: service_healthy</span>
+<span class="s1">      redis:</span>
+<span class="s1">        condition: service_started</span>
+<span class="s1">    restart: unless-stopped</span>
+
+<span class="s1">  nginx:</span>
+<span class="s1">    image: nginx:1.25-alpine</span>
+<span class="s1">    ports:</span>
+<span class="s1">      - &quot;80:80&quot;</span>
+<span class="s1">      - &quot;443:443&quot;</span>
+<span class="s1">    volumes:</span>
+<span class="s1">      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro</span>
+<span class="s1">      - static_files:/app/staticfiles:ro</span>
+<span class="s1">    depends_on:</span>
+<span class="s1">      - web</span>
+<span class="s1">    restart: unless-stopped</span>
+
+<span class="s1">volumes:</span>
+<span class="s1">  postgres_data:</span>
+<span class="s1">  static_files:</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">nginx_conf</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># nginx/nginx.conf — AI-generated Nginx config</span>
+
+<span class="s1">upstream django {</span>
+<span class="s1">    server web:8000;</span>
+<span class="s1">}</span>
+
+<span class="s1">server {</span>
+<span class="s1">    listen 80;</span>
+<span class="s1">    server_name _;</span>
+
+<span class="s1">    # Serve static files directly</span>
+<span class="s1">    location /static/ {</span>
+<span class="s1">        alias /app/staticfiles/;</span>
+<span class="s1">        expires 30d;</span>
+<span class="s1">        add_header Cache-Control &quot;public, immutable&quot;;</span>
+<span class="s1">    }</span>
+
+<span class="s1">    # Proxy everything else to Django</span>
+<span class="s1">    location / {</span>
+<span class="s1">        proxy_pass         http://django;</span>
+<span class="s1">        proxy_set_header   Host              $host;</span>
+<span class="s1">        proxy_set_header   X-Real-IP         $remote_addr;</span>
+<span class="s1">        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;</span>
+<span class="s1">        proxy_set_header   X-Forwarded-Proto $scheme;</span>
+<span class="s1">    }</span>
+<span class="s1">}</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">dockerfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># Dockerfile — AI-generated multi-stage build</span>
+
+<span class="s1">FROM python:3.12-slim AS builder</span>
+<span class="s1">WORKDIR /app</span>
+<span class="s1">COPY requirements.txt .</span>
+<span class="s1">RUN pip install --no-cache-dir --user -r requirements.txt</span>
+
+<span class="s1">FROM python:3.12-slim</span>
+<span class="s1">WORKDIR /app</span>
+<span class="s1">COPY --from=builder /root/.local /root/.local</span>
+<span class="s1">COPY . .</span>
+<span class="s1">ENV PATH=/root/.local/bin:$PATH</span>
+<span class="s1">RUN python manage.py collectstatic --no-input</span>
+<span class="s1">EXPOSE 8000</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">files</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;docker-compose.yml&quot;</span><span class="p">:</span> <span class="n">docker_compose</span><span class="p">,</span>
+    <span class="s2">&quot;nginx/nginx.conf&quot;</span><span class="p">:</span> <span class="n">nginx_conf</span><span class="p">,</span>
+    <span class="s2">&quot;Dockerfile&quot;</span><span class="p">:</span> <span class="n">dockerfile</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Infrastructure files generated by AI:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">filename</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s2"> lines)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Key decisions AI made correctly:&quot;</span><span class="p">)</span>
+<span class="n">decisions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;postgres:16-alpine (not latest — pinned version)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;healthcheck with condition: service_healthy (not just depends_on)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Secrets via environment variables, not hardcoded&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Named volumes (not bind mounts) for production data&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Multi-stage Dockerfile (builder → final) reduces image size&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;X-Forwarded-For headers set in Nginx for Django ALLOWED_HOSTS&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Static files served by Nginx, not gunicorn&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">decisions</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">What AI missed (always check):&quot;</span><span class="p">)</span>
+<span class="n">missed</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;HTTPS/TLS configuration (needs certbot or cert volume)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Django migration command on startup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Rate limiting in Nginx&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Log rotation configuration&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missed</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ⚠️  </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-7-ai-agents-in-development">Section 7 — AI Agents in Development</h2>
+<h3 id="from-autocomplete-to-agents">From Autocomplete to Agents</h3>
+<p>There's an important spectrum to understand:</p>
+<div class="highlight"><pre><span></span><code>AUTOCOMPLETE          CHAT            AGENT
+     │                 │               │
+  Single line     Multi-turn       Multi-step
+  suggestion      conversation     autonomous
+                                   task execution
+     │                 │               │
+&quot;completes       &quot;answers your    &quot;reads files,
+  your code&quot;      question&quot;        writes code,
+                                   runs tests,
+                                   fixes errors&quot;
+</code></pre></div>
+<hr />
+<h3 id="what-makes-something-an-agent">What Makes Something an "Agent"?</h3>
+<p>An <strong>AI agent</strong> is a system that:</p>
+<ol>
+<li><strong>Perceives</strong> its environment (reads files, browses docs, runs commands)</li>
+<li><strong>Reasons</strong> about what to do next (LLM decides the next step)</li>
+<li><strong>Acts</strong> using tools (writes files, runs code, calls APIs)</li>
+<li><strong>Observes</strong> the result and <strong>iterates</strong> (reads error output, tries again)</li>
+</ol>
+<div class="highlight"><pre><span></span><code>       Goal: &quot;Add pagination to the FastAPI endpoint&quot;
+              │
+              ▼
+    ┌─────────────────────────────┐
+    │   LLM (the &quot;brain&quot;)         │
+    └─────────────────────────────┘
+              │  decides to use tools:
+     ┌────────┼────────┬──────────┐
+     ▼        ▼        ▼          ▼
+ read_file  write_    run_       search_
+            file      tests      docs
+     │        │        │          │
+     └────────┴────────┴──────────┘
+              │  results feed back
+              ▼
+    ┌─────────────────────────────┐
+    │   LLM decides next step     │
+    └─────────────────────────────┘
+              │
+              ▼
+           Done! (or iterate)
+</code></pre></div>
+<hr />
+<h3 id="real-ai-agent-tools-for-developers">Real AI Agent Tools for Developers</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What It Does</th>
+<th>Agent Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GitHub Copilot Agent Mode</strong></td>
+<td>Works across your whole VS Code workspace</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Cursor Composer</strong></td>
+<td>Multi-file editing agent</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Aider</strong></td>
+<td>CLI agent that reads/writes files and commits to git</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Devin</strong></td>
+<td>Fully autonomous software engineer</td>
+<td>Experimental</td>
+</tr>
+<tr>
+<td><strong>LangChain/LangGraph</strong></td>
+<td>Build your own agents in Python</td>
+<td>Framework</td>
+</tr>
+<tr>
+<td><strong>CrewAI</strong></td>
+<td>Multi-agent orchestration framework</td>
+<td>Framework</td>
+</tr>
+<tr>
+<td><strong>AutoGen (Microsoft)</strong></td>
+<td>Multi-agent conversation framework</td>
+<td>Framework</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># DEMO: Building a simple AI agent loop from scratch</span>
+<span class="c1"># This illustrates HOW agents work under the hood.</span>
+<span class="c1"># (Uses no external AI library — pure Python simulation)</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+
+
+<span class="c1"># ── Tool definitions (functions the &quot;agent&quot; can call) ──────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_file_tool</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated file reader.&quot;&quot;&quot;</span>
+    <span class="n">mock_files</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;main.py&quot;</span><span class="p">:</span> <span class="s2">&quot;from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">app = FastAPI()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;requirements.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;fastapi==0.111.0</span><span class="se">\n</span><span class="s2">uvicorn==0.29.0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">mock_files</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;ERROR: File &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">write_file_tool</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated file writer.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;SUCCESS: Wrote </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_tests_tool</span><span class="p">(</span><span class="n">test_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated test runner.&quot;&quot;&quot;</span>
+    <span class="c1"># In reality, this would call subprocess.run([&quot;pytest&quot;, test_path])</span>
+    <span class="k">return</span> <span class="s2">&quot;PASSED: 3 tests passed in 0.42s&quot;</span>
+
+
+<span class="c1"># ── Agent loop (simplified) ────────────────────────────────────</span>
+<span class="n">TOOLS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;read_file&quot;</span><span class="p">:</span> <span class="n">read_file_tool</span><span class="p">,</span>
+    <span class="s2">&quot;write_file&quot;</span><span class="p">:</span> <span class="n">write_file_tool</span><span class="p">,</span>
+    <span class="s2">&quot;run_tests&quot;</span><span class="p">:</span> <span class="n">run_tests_tool</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">simulate_agent</span><span class="p">(</span><span class="n">goal</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">planned_steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulates an agent loop.</span>
+<span class="sd">    In production, each step would be decided by the LLM</span>
+<span class="sd">    based on the previous tool output.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🤖 AGENT GOAL: </span><span class="si">{</span><span class="n">goal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">step_num</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">planned_steps</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">tool_name</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">]</span>
+        <span class="n">reason</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;reason&quot;</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step </span><span class="si">{</span><span class="n">step_num</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Reason: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Args:   </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="n">TOOLS</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">TOOLS</span><span class="p">[</span><span class="n">tool_name</span><span class="p">](</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: ERROR — unknown tool &#39;</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Agent completed task&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Simulated agent execution plan (in reality, the LLM decides each step)</span>
+<span class="n">simulate_agent</span><span class="p">(</span>
+    <span class="n">goal</span><span class="o">=</span><span class="s2">&quot;Add a health check endpoint to the FastAPI app&quot;</span><span class="p">,</span>
+    <span class="n">planned_steps</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;read_file&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;main.py&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Read existing code to understand current structure&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;write_file&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;main.py&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">&quot;from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;app = FastAPI()</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;@app.get(&#39;/health&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;def health_check():</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot;    return {&#39;status&#39;: &#39;ok&#39;}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Write updated main.py with health endpoint added&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;run_tests&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;test_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test_main.py&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Verify nothing is broken after the change&quot;</span>
+        <span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-8-pitfalls-hallucinations-security">Section 8 — Pitfalls, Hallucinations &amp; Security</h2>
+<h3 id="the-5-biggest-risks-of-vibe-coding">The 5 Biggest Risks of Vibe Coding</h3>
+<div class="highlight"><pre><span></span><code> ┌─────────────────────────────────────────────────────────────┐
+ │  RISK 1: HALLUCINATIONS                                      │
+ │  AI invents functions, parameters, and libraries that don&#39;t  │
+ │  exist. It sounds confident. It is wrong.                    │
+ ├─────────────────────────────────────────────────────────────┤
+ │  RISK 2: OUTDATED CODE                                       │
+ │  AI training has a cutoff. It may generate Pydantic v1 code  │
+ │  when you&#39;re using v2, or deprecated Django patterns.        │
+ ├─────────────────────────────────────────────────────────────┤
+ │  RISK 3: SECURITY VULNERABILITIES                            │
+ │  AI may generate code with SQL injection, hardcoded secrets, │
+ │  or missing authentication guards.                           │
+ ├─────────────────────────────────────────────────────────────┤
+ │  RISK 4: SKILL ATROPHY                                       │
+ │  Accepting AI output without understanding it prevents you   │
+ │  from growing. You become dependent on the tool.             │
+ ├─────────────────────────────────────────────────────────────┤
+ │  RISK 5: LICENSING / IP ISSUES                               │
+ │  AI may reproduce copyrighted code from training data.       │
+ │  Know your organization&#39;s AI use policy.                     │
+ └─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h3 id="hallucination-examples">Hallucination Examples</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># SPOT THE HALLUCINATIONS</span>
+<span class="c1"># Each of these snippets contains an AI hallucination.</span>
+<span class="c1"># Can you find what&#39;s wrong before running the code?</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HALLUCINATION EXAMPLES — Spot the Bug&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># ── Example 1: Non-existent FastAPI parameter ──────────────────</span>
+<span class="n">example_1</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># AI generated this. What&#39;s wrong?</span>
+<span class="s1">from fastapi import FastAPI</span>
+<span class="s1">app = FastAPI()</span>
+
+<span class="s1">@app.get(&quot;/items&quot;)</span>
+<span class="s1">async def get_items(limit: int = Query(default=10, max_value=100)):</span>
+<span class="s1">    ...  # Bug: FastAPI&#39;s Query uses `le=` not `max_value=`</span>
+<span class="s1">         # Correct: Query(default=10, le=100)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># ── Example 2: Invented Django ORM method ─────────────────────</span>
+<span class="n">example_2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># AI generated this. What&#39;s wrong?</span>
+<span class="s1"># &quot;Use the .recent() manager method to get the latest 5 posts.&quot;</span>
+
+<span class="s1">posts = Post.objects.recent(5)  # Bug: .recent() does not exist!</span>
+<span class="s1">                                 # Correct: Post.objects.order_by(&#39;-created_at&#39;)[:5]</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># ── Example 3: Invented Pydantic feature ──────────────────────</span>
+<span class="n">example_3</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># AI generated this Pydantic v2 code. What&#39;s wrong?</span>
+<span class="s1">from pydantic import BaseModel</span>
+
+<span class="s1">class User(BaseModel):</span>
+<span class="s1">    name: str</span>
+<span class="s1">    age: int</span>
+
+<span class="s1">    @validator(&quot;age&quot;)      # Bug: @validator is Pydantic v1!</span>
+<span class="s1">    def age_must_be_positive(cls, v):</span>
+<span class="s1">        ...                # Correct v2: use @field_validator</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="c1"># ── Example 4: Security hallucination ─────────────────────────</span>
+<span class="n">example_4</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># AI said: &quot;Here&#39;s how to hash a password securely&quot;</span>
+<span class="s1">import hashlib</span>
+
+<span class="s1">def hash_password(password: str) -&gt; str:</span>
+<span class="s1">    return hashlib.md5(password.encode()).hexdigest()  # WRONG!</span>
+<span class="s1">    # MD5 is cryptographically broken.</span>
+<span class="s1">    # Never use MD5 or SHA1 for passwords.</span>
+<span class="s1">    # Correct: use bcrypt, argon2, or scrypt.</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;FastAPI — wrong Query parameter name&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value= doesn&#39;t exist → use le=&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Django ORM — invented method&quot;</span><span class="p">,</span> <span class="s2">&quot;.recent() doesn&#39;t exist → use .order_by()&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Pydantic v2 — wrong decorator&quot;</span><span class="p">,</span> <span class="s2">&quot;@validator is v1 → use @field_validator&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Security — broken hash function&quot;</span><span class="p">,</span> <span class="s2">&quot;MD5 is broken for passwords → use bcrypt&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hallucination Summary:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">fix</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Fix: </span><span class="si">{</span><span class="n">fix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># OWASP TOP 10 ISSUES IN AI-GENERATED CODE</span>
+<span class="c1"># Demonstrating common security pitfalls</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Common OWASP Issues in AI-Generated Python Code&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="n">security_issues</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A01 - Broken Access Control&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;@app.delete(&#39;/users/</span><span class="si">{user_id}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">def delete_user(user_id: int, db=Depends(get_db)):</span><span class="se">\n</span><span class="s2">    # No check if current user == user_id or is admin!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Always verify current_user.id == user_id or current_user.is_admin&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A02 - Cryptographic Failures&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;token = base64.b64encode(user.id.encode()).decode()  # NOT a token!&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Use python-jose with JWT or a dedicated secrets library&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A03 - Injection&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;cursor.execute(f</span><span class="se">\&quot;</span><span class="s2">SELECT * FROM users WHERE name = &#39;</span><span class="si">{name}</span><span class="s2">&#39;</span><span class="se">\&quot;</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Use parameterized queries: cursor.execute(&#39;...WHERE name = </span><span class="si">%s</span><span class="s2">&#39;, (name,))&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A05 - Security Misconfiguration&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;SECRET_KEY = &#39;dev-secret-key-12345&#39;  # Hardcoded in settings.py&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;SECRET_KEY = os.environ[&#39;DJANGO_SECRET_KEY&#39;]  # From env vars&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A09 - Security Logging&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;print(f&#39;Login attempt: </span><span class="si">{username}</span><span class="s2"> / </span><span class="si">{password}</span><span class="s2">&#39;)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Never log passwords. Log: &#39;Login attempt for user </span><span class="si">{username}</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">security_issues</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠️  </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;owasp&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   AI Generated: </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;ai_code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ Fix:       </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;fix&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-9-what-ai-cannot-replace">Section 9 — What AI Cannot Replace</h2>
+<h3 id="the-human-edge">The Human Edge</h3>
+<p>Despite rapid improvements, AI coding assistants consistently struggle with:</p>
+<div class="highlight"><pre><span></span><code>┌───────────────────────────────────────────────────────────┐
+│                                                           │
+│  🧠 PROBLEM UNDERSTANDING                                 │
+│     AI doesn&#39;t know what your business actually needs.    │
+│     It optimizes for the prompt, not the real problem.    │
+│                                                           │
+│  🏗️  SYSTEM ARCHITECTURE                                  │
+│     Choosing between microservices vs monolith,           │
+│     event-driven vs request-response, requires            │
+│     domain knowledge and long-term thinking.              │
+│                                                           │
+│  🔍 DEBUGGING COMPLEX SYSTEMS                             │
+│     Race conditions, distributed tracing, memory leaks,   │
+│     and intermittent failures require human intuition.    │
+│                                                           │
+│  🤝 COMMUNICATION &amp; REQUIREMENTS                          │
+│     Translating fuzzy stakeholder needs into precise      │
+│     technical specifications is deeply human.             │
+│                                                           │
+│  ⚖️  ETHICAL &amp; PRODUCT JUDGMENT                           │
+│     &quot;Should we build this feature?&quot;                       │
+│     &quot;Is this data usage appropriate?&quot;                     │
+│     AI cannot answer these questions responsibly.         │
+│                                                           │
+│  🔐 SECURITY REVIEW                                       │
+│     Threat modeling, penetration testing, and             │
+│     understanding business risk require deep expertise.   │
+│                                                           │
+└───────────────────────────────────────────────────────────┘
+</code></pre></div>
+<hr />
+<h3 id="the-fundamentals-amplify-ais-value">The Fundamentals Amplify AI's Value</h3>
+<table>
+<thead>
+<tr>
+<th>Programmer Type</th>
+<th>AI Value Gained</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Strong fundamentals</strong></td>
+<td>Very high — AI accelerates expert intuition</td>
+<td>Low — can spot mistakes</td>
+</tr>
+<tr>
+<td><strong>Intermediate skills</strong></td>
+<td>High — fills knowledge gaps quickly</td>
+<td>Medium — may miss subtle issues</td>
+</tr>
+<tr>
+<td><strong>Beginner (weak fundamentals)</strong></td>
+<td>Low — can't evaluate correctness</td>
+<td>High — blind trust in wrong code</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>The paradox of vibe coding</strong>: AI is most valuable to those who need it least, and most dangerous to those who need it most.</p>
+</blockquote>
+<hr />
+<h3 id="class-discussion-5-minutes">💬 Class Discussion (5 minutes)</h3>
+<blockquote>
+<ol>
+<li>Think of a project you've worked on. Which parts would AI have helped most? Which parts would have been dangerous to delegate?</li>
+<li>If AI can write code, what should computer science education focus on?</li>
+<li>How do you verify that AI-generated code is correct?</li>
+</ol>
+</blockquote>
+<hr />
+<h2 id="section-10-best-practices-responsible-workflow">Section 10 — Best Practices &amp; Responsible Workflow</h2>
+<h3 id="the-professional-ai-assisted-development-workflow">The Professional AI-Assisted Development Workflow</h3>
+<div class="highlight"><pre><span></span><code>         YOU define the goal
+         and break it into tasks
+                  │
+                  ▼
+         ┌────────────────┐
+    ┌────►   GENERATE     │  ← Write clear, specific prompt
+    │    └────────────────┘
+    │             │
+    │             ▼
+    │    ┌────────────────┐
+    │    │    REVIEW      │  ← Read every line. Understand it.
+    │    └────────────────┘
+    │             │
+    │             ▼
+    │    ┌────────────────┐
+    │    │    REFINE      │  ← Edit, fix, improve
+    │    └────────────────┘
+    │             │
+    │             ▼
+    │    ┌────────────────┐
+    └────┤   TEST         │  ← Write tests, run them
+         └────────────────┘
+                  │
+                  ▼
+             OWN IT ✅
+         (You are responsible
+          for this code now)
+</code></pre></div>
+<hr />
+<h3 id="the-golden-rules">The Golden Rules</h3>
+<ol>
+<li>
+<p><strong>Never accept code you don't understand.</strong> If you can't explain what a function does line by line, keep asking the AI to explain until you can.</p>
+</li>
+<li>
+<p><strong>Always run the code.</strong> AI-generated code may look correct and fail silently. Test with real inputs.</p>
+</li>
+<li>
+<p><strong>Security-review everything.</strong> Especially: authentication, database queries, input validation, and secret handling.</p>
+</li>
+<li>
+<p><strong>Pin your library versions.</strong> AI may generate for a different version than you're using.</p>
+</li>
+<li>
+<p><strong>Iterate with feedback.</strong> Paste error messages back to the AI. The best prompts often include the actual error.</p>
+</li>
+<li>
+<p><strong>Use AI for what it's best at.</strong> Boilerplate, documentation, test generation, refactoring — not system design.</p>
+</li>
+<li>
+<p><strong>Keep building your fundamentals.</strong> The more you know, the more effective your AI collaboration becomes.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># DEMO: Effective AI-assisted debugging workflow</span>
+<span class="c1"># This simulates the feedback loop developers use with AI</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Debugging Workflow with AI Assistance&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="c1"># Step 1: You encounter a bug</span>
+<span class="n">buggy_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">def calculate_discount(price: float, discount_pct: float) -&gt; float:</span>
+<span class="s2">    return price - (price * discount_pct)  # Bug: discount_pct is 0-100 not 0-1</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Step 2: You run it and see unexpected output</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount_buggy</span><span class="p">(</span><span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">discount_pct</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">-</span> <span class="p">(</span><span class="n">price</span> <span class="o">*</span> <span class="n">discount_pct</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 1: Observe unexpected behaviour&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">calculate_discount_buggy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># Expecting $80, passing 20%</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Price: $100, Discount: 20%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Expected: $80.00&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Got:      $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  ← WRONG! (treated 20 as 2000%!)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Good prompt to AI (include context + error)</span>
+<span class="n">prompt_to_ai</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">My Python function returns wrong results. Here&#39;s the code:</span>
+
+<span class="s1">    def calculate_discount(price: float, discount_pct: float) -&gt; float:</span>
+<span class="s1">        return price - (price * discount_pct)</span>
+
+<span class="s1">When I call calculate_discount(100, 20), I expect $80.00 (20</span><span class="si">% o</span><span class="s1">ff).</span>
+<span class="s1">But I get -1900.0.</span>
+
+<span class="s1">What&#39;s wrong and how do I fix it?</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 2: Craft a precise prompt to AI&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Good prompt includes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The actual code&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The inputs used&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The expected output&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The actual output received&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 4: AI explains and provides fix</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 3: AI Response (simulated)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The bug: discount_pct should be divided by 100 if passed as&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a percentage (0-100) rather than a fraction (0.0-1.0).&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 5: Apply and verify the fix</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount_fixed</span><span class="p">(</span><span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">discount_pct</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate price after discount. discount_pct is 0-100 (e.g., 20 = 20%).&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">discount_pct</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;discount_pct must be between 0 and 100, got </span><span class="si">{</span><span class="n">discount_pct</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">discount_pct</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 4: Apply and verify the fix&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">200.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">99.99</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">89.991</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">all_pass</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">for</span> <span class="n">price</span><span class="p">,</span> <span class="n">pct</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_discount_fixed</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span>
+    <span class="n">passed</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">passed</span> <span class="k">else</span> <span class="s2">&quot;❌&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> discount(</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%) = $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (expected $</span><span class="si">{</span><span class="n">expected</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">passed</span><span class="p">:</span>
+        <span class="n">all_pass</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All tests passed: </span><span class="si">{</span><span class="n">all_pass</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># FINAL EXERCISE: Prompt Engineering Challenge</span>
+<span class="c1"># Write prompts for each of the following tasks.</span>
+<span class="c1"># Share your best prompt with the class.</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prompt Engineering Challenge&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For each task below, write a prompt you would send to&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GitHub Copilot Chat or Claude to get the best result.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">challenges</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Django REST Framework viewset&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">&quot;Create a DRF ViewSet for the Post model from our blog app. &quot;</span>
+            <span class="s2">&quot;It should support list, retrieve, create, update, destroy. &quot;</span>
+            <span class="s2">&quot;Only authenticated users can create/update/delete.&quot;</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: DRF version, permission classes, serializer requirements&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;FastAPI middleware for request timing&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">&quot;Add middleware to the FastAPI app that logs the HTTP method, &quot;</span>
+            <span class="s2">&quot;path, status code, and response time for every request.&quot;</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: use Python&#39;s logging module, not print(); async middleware&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Docker multi-stage build for FastAPI&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">&quot;Write a Dockerfile that uses a multi-stage build to produce &quot;</span>
+            <span class="s2">&quot;a minimal FastAPI production image under 200MB.&quot;</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: python:3.12-slim, pip install --user, copy from builder&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Pytest fixtures for FastAPI&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">&quot;Write pytest fixtures for testing the Task Manager API. &quot;</span>
+            <span class="s2">&quot;Use an in-memory SQLite database that resets between tests.&quot;</span>
+        <span class="p">),</span>
+        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: TestClient, override_dependency for get_db, scope=&#39;function&#39;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">challenge</span> <span class="ow">in</span> <span class="n">challenges</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Challenge </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Task: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hint: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;hint&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Your prompt:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="lecture-summary">Lecture Summary</h2>
+<h3 id="what-we-covered">What We Covered</h3>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Key Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vibe Coding</td>
+<td>It's a spectrum. Professionals use AI as a collaborator, not a replacement.</td>
+</tr>
+<tr>
+<td>AI Toolkit</td>
+<td>Copilot, Cursor, Claude, Aider — each has a role. Know your tools.</td>
+</tr>
+<tr>
+<td>Prompting</td>
+<td>Specificity is everything. Context + constraints = better output.</td>
+</tr>
+<tr>
+<td>FastAPI</td>
+<td>AI scaffolds 80-90% correctly. You identify and fix the rest.</td>
+</tr>
+<tr>
+<td>Django</td>
+<td>AI excels at models, admin, migrations. Business logic needs you.</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>Infrastructure config is pattern-heavy — AI's comfort zone.</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>Agents combine LLMs with tools for multi-step autonomous tasks.</td>
+</tr>
+<tr>
+<td>Pitfalls</td>
+<td>Hallucinations, outdated code, security flaws. Always review.</td>
+</tr>
+<tr>
+<td>Human Edge</td>
+<td>Architecture, debugging, ethics, and communication remain human.</td>
+</tr>
+<tr>
+<td>Workflow</td>
+<td>Generate → Review → Refine → Test → Own. Never skip review.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="the-mindset">The Mindset</h3>
+<blockquote>
+<p><strong>AI is a junior developer who is very fast, never sleeps, knows every framework's docs, but sometimes confidently makes things up and has no idea what your business needs.</strong></p>
+<p><strong>Your job is to be the senior developer who reviews, guides, corrects, and takes responsibility.</strong></p>
+</blockquote>
+<hr />
+<h3 id="recommended-resources">Recommended Resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GitHub Copilot Docs</td>
+<td>https://docs.github.com/en/copilot</td>
+</tr>
+<tr>
+<td>Andrej Karpathy on vibe coding</td>
+<td>https://x.com/karpathy</td>
+</tr>
+<tr>
+<td>Aider (CLI AI coding)</td>
+<td>https://aider.chat</td>
+</tr>
+<tr>
+<td>LangChain Docs</td>
+<td>https://python.langchain.com</td>
+</tr>
+<tr>
+<td>OWASP Top 10</td>
+<td>https://owasp.org/www-project-top-ten/</td>
+</tr>
+<tr>
+<td>Prompt Engineering Guide</td>
+<td>https://www.promptingguide.ai</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="assignment-preview">Assignment Preview</h3>
+<blockquote>
+<p>Using AI assistance, build a <strong>REST API</strong> for a topic of your choice using <strong>FastAPI</strong> or <strong>Django REST Framework</strong>.</p>
+<p>Requirements:
+- At least 3 models with relationships
+- Full CRUD for at least one resource
+- JWT authentication
+- A <code>Dockerfile</code> and <code>docker-compose.yml</code> that runs the app
+- A <code>PROMPTS.md</code> file documenting the prompts you used and what changes you made to the AI output</p>
+<p><strong>The <code>PROMPTS.md</code> file is the most important deliverable</strong> — it shows you reviewed, understood, and improved the AI's work.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
+<span class="c1"># End of Lecture — Quick Self-Assessment</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────</span>
+
+<span class="n">quiz</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the most important thing to do with AI-generated code?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;Read and understand every line before using it.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is a hallucination in the context of AI coding tools?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;When AI confidently generates code that uses non-existent functions or APIs.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;Name two things that make a prompt more effective.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;Specific context (framework, version, constraints) and a clear task definition.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the difference between an AI autocomplete and an AI agent?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;An agent can take multi-step actions using tools (read files, run tests, write code) autonomously.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;Why are developers with strong fundamentals more effective at using AI?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;They can evaluate AI output, spot mistakes, and guide the AI toward correct solutions.&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-Assessment Questions&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Think through each answer before revealing it.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quiz</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  → </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Great work today. Keep building. Keep thinking critically.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best AI-assisted developers are the best developers.&quot;</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
