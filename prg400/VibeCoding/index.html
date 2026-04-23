@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Vibe Coding: Using AI Tools and Agents in Modern Python Development - Python Module</title>
+    <title>Vibe Coding - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Vibe Coding: Using AI Tools and Agents in Modern Python Development";
+        var mkdocs_page_name = "Vibe Coding";
         var mkdocs_page_input_path = "prg400/VibeCoding.md";
         var mkdocs_page_url = null;
       </script>
@@ -65,7 +65,7 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Advanced Python</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../OOP/">Object Oriented Programming</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
@@ -84,6 +84,126 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../DeployingApplications/">Deploying Applications</a>
                   </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Vibe Coding</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sections">Sections</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-what-is-vibe-coding">Section 1 — What is Vibe Coding?</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-terms-origin">The Term's Origin</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-spectrum-of-ai-assisted-development">The Spectrum of AI-Assisted Development</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-this-matters-now">Why This Matters Now</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#class-discussion-3-minutes">💬 Class Discussion (3 minutes)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-the-ai-developer-toolkit">Section 2 — The AI Developer Toolkit</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#major-ai-coding-tools-in-2025">Major AI Coding Tools in 2025</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#how-these-tools-actually-work-high-level">How These Tools Actually Work (High Level)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#github-copilot-in-vs-code-key-features">GitHub Copilot in VS Code — Key Features</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-the-art-of-prompting">Section 3 — The Art of Prompting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-anatomy-of-a-great-code-prompt">The Anatomy of a Great Code Prompt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-prompt-vs-good-prompt">Bad Prompt vs. Good Prompt</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#prompting-patterns-for-developers">Prompting Patterns for Developers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-ai-assisted-fastapi-development">Section 4 — AI-Assisted FastAPI Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-workflow-in-practice">The Workflow in Practice</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-prompt-sent-to-an-ai">Example Prompt Sent to an AI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-the-ai-generated-and-what-we-reviewed">What the AI Generated (and what we reviewed)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-the-ai-got-right-and-what-needed-fixing">What the AI Got Right — and What Needed Fixing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-prompt-and-review-10-minutes">✍️ Exercise: Prompt-and-Review (10 minutes)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-ai-assisted-django-development">Section 5 — AI-Assisted Django Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#when-to-use-django-vs-fastapi">When to Use Django vs FastAPI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ai-assisted-django-generating-models">AI-Assisted Django: Generating Models</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ai-generated-django-admin-configuration">AI-Generated Django Admin Configuration</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-ai-for-infrastructure-docker-nginx">Section 6 — AI for Infrastructure: Docker &amp; Nginx</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#infrastructure-as-code-ais-comfort-zone">Infrastructure as Code — AI's Comfort Zone</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#prompt-for-full-stack-docker-setup">Prompt for Full Stack Docker Setup</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-ai-agents-in-development">Section 7 — AI Agents in Development</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#from-autocomplete-to-agents">From Autocomplete to Agents</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-makes-something-an-agent">What Makes Something an "Agent"?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#real-ai-agent-tools-for-developers">Real AI Agent Tools for Developers</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-pitfalls-hallucinations-security">Section 8 — Pitfalls, Hallucinations &amp; Security</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-5-biggest-risks-of-vibe-coding">The 5 Biggest Risks of Vibe Coding</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#hallucination-examples">Hallucination Examples</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-what-ai-cannot-replace">Section 9 — What AI Cannot Replace</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-human-edge">The Human Edge</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-fundamentals-amplify-ais-value">The Fundamentals Amplify AI's Value</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#class-discussion-5-minutes">💬 Class Discussion (5 minutes)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-best-practices-responsible-workflow">Section 10 — Best Practices &amp; Responsible Workflow</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-professional-ai-assisted-development-workflow">The Professional AI-Assisted Development Workflow</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-golden-rules">The Golden Rules</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#lecture-summary">Lecture Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-we-covered">What We Covered</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-mindset">The Mindset</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#recommended-resources">Recommended Resources</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#assignment-preview">Assignment Preview</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
                   <li class="toctree-l1"><a class="reference internal" href="../ProjectDescription/">Project Description (PRG400)</a>
                   </li>
               </ul>
@@ -101,7 +221,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Vibe Coding: Using AI Tools and Agents in Modern Python Development</li>
+          <li class="breadcrumb-item">Advanced Python</li>
+      <li class="breadcrumb-item active">Vibe Coding</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -1846,6 +1967,10 @@ Requirements:
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../DeployingApplications/" class="btn btn-neutral float-left" title="Deploying Applications"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ProjectDescription/" class="btn btn-neutral float-right" title="Project Description (PRG400)">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -1868,6 +1993,10 @@ Requirements:
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../DeployingApplications/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ProjectDescription/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
