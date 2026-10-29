@@ -70,53 +70,75 @@
                   </li>
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">Design Patterns (SOLID)</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use-this-notebook">How to Use This Notebook</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-five-principles-at-a-glance">The Five Principles at a Glance</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#1-single-responsibility-principle-srp">1. Single Responsibility Principle (SRP)</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bad-example-violating-srp">❌ Bad Example - Violating SRP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-example-one-class-three-jobs">Bad Example: One Class, Three Jobs</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#good-example-following-srp">✅ Good Example - Following SRP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#good-example-split-by-responsibility">Good Example: Split by Responsibility</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#2-openclosed-principle-ocp">2. Open/Closed Principle (OCP)</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bad-example-violating-ocp">❌ Bad Example - Violating OCP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-example-a-growing-ifelif-chain">Bad Example: A Growing if/elif Chain</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#good-example-following-ocp">✅ Good Example - Following OCP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#good-example-one-class-per-discount">Good Example: One Class per Discount</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#3-liskov-substitution-principle-lsp">3. Liskov Substitution Principle (LSP)</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bad-example-violating-lsp">❌ Bad Example - Violating LSP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-example-square-inherits-from-rectangle">Bad Example: Square Inherits from Rectangle</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#good-example-following-lsp">✅ Good Example - Following LSP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#good-example-a-shared-shape-base-class">Good Example: A Shared Shape Base Class</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#4-interface-segregation-principle-isp">4. Interface Segregation Principle (ISP)</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bad-example-violating-isp">❌ Bad Example - Violating ISP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-example-one-big-worker-interface">Bad Example: One Big Worker Interface</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#good-example-following-isp">✅ Good Example - Following ISP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#good-example-small-focused-interfaces">Good Example: Small, Focused Interfaces</a>
     </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#5-dependency-inversion-principle-dip">5. Dependency Inversion Principle (DIP)</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bad-example-violating-dip">❌ Bad Example - Violating DIP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#bad-example-userservice-creates-its-own-dependencies">Bad Example: UserService Creates Its Own Dependencies</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#good-example-following-dip">✅ Good Example - Following DIP</a>
+    <li class="toctree-l3"><a class="reference internal" href="#good-example-depend-on-abstractions">Good Example: Depend on Abstractions</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#testing-with-dip-mock-implementations">Testing with DIP - Mock Implementations</a>
+    <li class="toctree-l3"><a class="reference internal" href="#testing-with-mock-implementations">Testing with Mock Implementations</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#real-world-example-order-processing-system">Real-World Example: Order Processing System</a>
+    <li class="toctree-l2"><a class="reference internal" href="#6-putting-it-together-order-processing-system">6. Putting It Together: Order Processing System</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a>
+    <li class="toctree-l2"><a class="reference internal" href="#7-practice-exercises">7. Practice Exercises</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#key-takeaways">Key Takeaways</a>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-srp-split-the-invoice">Exercise 1 (SRP): Split the Invoice</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-ocp-add-new-discounts-without-editing-old-code">Exercise 2 (OCP): Add New Discounts Without Editing Old Code</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-3-lsp-isp-birds-that-cant-fly">Exercise 3 (LSP + ISP): Birds That Can't Fly</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-4-dip-a-testable-weather-reporter">Exercise 4 (DIP): A Testable Weather Reporter</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#summary-cheat-sheet">Summary &amp; Cheat Sheet</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tips-for-real-projects">Tips for Real Projects</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's Next</a>
     </li>
         </ul>
     </li>
@@ -166,50 +188,74 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="solid-principles-in-python">SOLID Principles in Python</h1>
-<p>SOLID is an acronym representing five fundamental design principles of object-oriented programming and design. These principles help developers create more maintainable, understandable, and flexible software.</p>
+<p>SOLID is a set of five design rules for object-oriented code. In this notebook we take each rule, look at a small piece of code that breaks it, fix it, and then use all five together in an order-processing example.</p>
+<h3 id="learning-objectives">Learning Objectives</h3>
+<p>By the end of this notebook you will be able to:</p>
+<ol>
+<li>Explain each of the five SOLID principles in your own words</li>
+<li>Spot code that breaks a principle (the "code smell")</li>
+<li>Refactor that code using small classes, abstract base classes and dependency injection</li>
+<li>Write fake (mock) objects to test a class without a real database or email server</li>
+<li>Combine the principles in a small but realistic design</li>
+</ol>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>The <strong>OOP Foundations</strong> notebook (classes, inheritance, composition, dataclasses)</li>
+<li>Python 3.10 or newer</li>
+<li>Basic idea of an abstract class (<code>from abc import ABC, abstractmethod</code>). We'll recap it as we go.</li>
+</ul>
+<h3 id="how-to-use-this-notebook">How to Use This Notebook</h3>
+<ul>
+<li>Run the cells <strong>from top to bottom</strong>. Some later cells reuse classes defined earlier.</li>
+<li>Every principle has a <strong>bad example</strong> and a <strong>good example</strong>. Run both and compare the output before reading the explanation.</li>
+<li>The <strong>Practice Exercises</strong> at the end are for you. Write your answer first, then open <em>Show solution</em> to compare.</li>
+<li>Each section ends with a <strong>Quick recap</strong>. Read only the recaps when revising before an exam.</li>
+</ul>
+<h3 id="the-five-principles-at-a-glance">The Five Principles at a Glance</h3>
 <table>
 <thead>
 <tr>
 <th>Letter</th>
 <th>Principle</th>
-<th>Description</th>
+<th>In one line</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>S</strong></td>
 <td>Single Responsibility</td>
-<td>A class should have only one reason to change</td>
+<td>A class should have only one reason to change.</td>
 </tr>
 <tr>
 <td><strong>O</strong></td>
 <td>Open/Closed</td>
-<td>Open for extension, closed for modification</td>
+<td>Add new behaviour by adding code, not by editing working code.</td>
 </tr>
 <tr>
 <td><strong>L</strong></td>
 <td>Liskov Substitution</td>
-<td>Subtypes must be substitutable for their base types</td>
+<td>A subclass must work anywhere its parent class works.</td>
 </tr>
 <tr>
 <td><strong>I</strong></td>
 <td>Interface Segregation</td>
-<td>Many specific interfaces are better than one general interface</td>
+<td>Many small interfaces beat one big one.</td>
 </tr>
 <tr>
 <td><strong>D</strong></td>
 <td>Dependency Inversion</td>
-<td>Depend on abstractions, not concretions</td>
+<td>Depend on abstractions, not on concrete classes.</td>
 </tr>
 </tbody>
 </table>
+<p>Don't try to memorise the table yet. It will make much more sense after you've seen the examples.</p>
 <hr />
 <h2 id="1-single-responsibility-principle-srp">1. Single Responsibility Principle (SRP)</h2>
 <blockquote>
-<p><strong>"A class should have only one reason to change."</strong></p>
+<p><em>"A class should have only one reason to change."</em></p>
 </blockquote>
-<p>Each class should focus on doing one thing well. This makes the code easier to understand, test, and maintain.</p>
-<h3 id="bad-example-violating-srp">❌ Bad Example - Violating SRP</h3>
+<p>A good way to test this: ask <strong>who</strong> might ask you to change the class. If the answer is "HR, the database team <em>and</em> the managers", the class is doing too many jobs.</p>
+<h3 id="bad-example-one-class-three-jobs">Bad Example: One Class, Three Jobs</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># BAD: This class has multiple responsibilities</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -217,37 +263,44 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="n">salary</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Calculate monthly pay - HR responsibility"""</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate monthly pay - HR responsibility&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">salary</span> <span class="o">/</span> <span class="mi">12</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">save_to_database</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">"""Save employee to database - Database responsibility"""</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> to database..."</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save employee to database - Database responsibility&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> to database...&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Generate employee report - Reporting responsibility"""</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Employee Report: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Annual Salary: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate employee report - Reporting responsibility&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Employee Report: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Annual Salary: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="c1"># Usage</span>
-<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">"John Doe"</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">calculate_pay</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">generate_report</span><span class="p">())</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>5000.0
 Employee Report: John Doe, Annual Salary: $60000
 </code></pre></div>
-<h3 id="good-example-following-srp">✅ Good Example - Following SRP</h3>
+<p>This works, but look at who would ask us to edit <code>Employee</code>:</p>
+<ul>
+<li>HR changes how pay is calculated, so we edit <code>calculate_pay</code>.</li>
+<li>We move from one database to another, so we edit <code>save_to_database</code>.</li>
+<li>The manager wants a new report layout, so we edit <code>generate_report</code>.</li>
+</ul>
+<p>Three different reasons to change one class. Every edit risks breaking the other two jobs.</p>
+<h3 id="good-example-split-by-responsibility">Good Example: Split by Responsibility</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># GOOD: Each class has a single responsibility</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Only responsible for employee data"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Only responsible for employee data&quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">salary</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="n">salary</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PayrollCalculator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Responsible for pay calculations"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for pay calculations&quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_monthly_pay</span><span class="p">(</span><span class="n">employee</span><span class="p">:</span> <span class="n">Employee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">employee</span><span class="o">.</span><span class="n">salary</span> <span class="o">/</span> <span class="mi">12</span>
@@ -258,29 +311,29 @@ Employee Report: John Doe, Annual Salary: $60000
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">EmployeeRepository</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Responsible for database operations"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for database operations&quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employee</span><span class="p">:</span> <span class="n">Employee</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saving </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> to database..."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> to database...&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">find_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Employee</span><span class="p">:</span>
-        <span class="c1"># Database lookup logic here</span>
-        <span class="k">pass</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Employee</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Database lookup logic would go here</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">EmployeeReportGenerator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Responsible for generating reports"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for generating reports&quot;&quot;&quot;</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_summary</span><span class="p">(</span><span class="n">employee</span><span class="p">:</span> <span class="n">Employee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Employee Report: </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Annual Salary: $</span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Employee Report: </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Annual Salary: $</span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">generate_detailed_report</span><span class="p">(</span><span class="n">employee</span><span class="p">:</span> <span class="n">Employee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">monthly</span> <span class="o">=</span> <span class="n">PayrollCalculator</span><span class="o">.</span><span class="n">calculate_monthly_pay</span><span class="p">(</span><span class="n">employee</span><span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Detailed Report</span><span class="se">\n</span><span class="s2">Name: </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Annual: $</span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="se">\n</span><span class="s2">Monthly: $</span><span class="si">{</span><span class="n">monthly</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Detailed Report</span><span class="se">\n</span><span class="s2">Name: </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">Annual: $</span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">salary</span><span class="si">}</span><span class="se">\n</span><span class="s2">Monthly: $</span><span class="si">{</span><span class="n">monthly</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
 <span class="c1"># Usage</span>
-<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">"John Doe"</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">PayrollCalculator</span><span class="o">.</span><span class="n">calculate_monthly_pay</span><span class="p">(</span><span class="n">emp</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">EmployeeReportGenerator</span><span class="o">.</span><span class="n">generate_detailed_report</span><span class="p">(</span><span class="n">emp</span><span class="p">))</span>
 </code></pre></div>
@@ -290,40 +343,57 @@ Name: John Doe
 Annual: $60000
 Monthly: $5000.00
 </code></pre></div>
+<p>Now each class has one job:</p>
+<ul>
+<li><code>Employee</code> just holds the data.</li>
+<li><code>PayrollCalculator</code> knows the pay rules.</li>
+<li><code>EmployeeRepository</code> talks to the database.</li>
+<li><code>EmployeeReportGenerator</code> builds reports.</li>
+</ul>
+<p>If the report layout changes, we only touch <code>EmployeeReportGenerator</code>. Payroll can't break by accident.</p>
+<p>SRP does <strong>not</strong> mean "one method per class". <code>PayrollCalculator</code> has two methods, and that's fine, because both are about pay.</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>SRP: a class should have one reason to change, i.e. one job.</li>
+<li>Ask <em>who</em> would request a change. Several different people means several responsibilities.</li>
+<li>Fix it by moving each job into its own small class.</li>
+<li>One responsibility can still mean several related methods.</li>
+</ul>
 <hr />
 <h2 id="2-openclosed-principle-ocp">2. Open/Closed Principle (OCP)</h2>
 <blockquote>
-<p><strong>"Software entities should be open for extension, but closed for modification."</strong></p>
+<p><em>"Software entities should be open for extension, but closed for modification."</em></p>
 </blockquote>
-<p>You should be able to add new functionality without changing existing code. This is typically achieved through inheritance or composition.</p>
-<h3 id="bad-example-violating-ocp">❌ Bad Example - Violating OCP</h3>
+<p>In plain words: when a new requirement arrives, you should be able to <strong>add</strong> a new class instead of <strong>editing</strong> code that already works and is already tested.</p>
+<h3 id="bad-example-a-growing-ifelif-chain">Bad Example: A Growing <code>if/elif</code> Chain</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># BAD: Adding new discount types requires modifying this class</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DiscountCalculator</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">"regular"</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="mf">0.1</span>
-        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">"premium"</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;premium&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="mf">0.2</span>
-        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">"vip"</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;vip&quot;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="mf">0.3</span>
         <span class="c1"># Every new customer type requires modifying this method!</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
 
 <span class="n">calc</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Regular discount: $</span><span class="si">{</span><span class="n">calc</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s1">'regular'</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"VIP discount: $</span><span class="si">{</span><span class="n">calc</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s1">'vip'</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regular discount: $</span><span class="si">{</span><span class="n">calc</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s1">&#39;regular&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VIP discount: $</span><span class="si">{</span><span class="n">calc</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s1">&#39;vip&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Regular discount: $10.0
 VIP discount: $30.0
 </code></pre></div>
-<h3 id="good-example-following-ocp">✅ Good Example - Following OCP</h3>
+<p>Every new customer type (student, staff, festival offer...) means opening <code>calculate_discount</code> and adding another <code>elif</code>. The method keeps growing, and each edit can break the cases that already worked.</p>
+<h3 id="good-example-one-class-per-discount">Good Example: One Class per Discount</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="c1"># GOOD: Open for extension (new discount strategies), closed for modification</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">DiscountStrategy</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Abstract base class for discount strategies"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for discount strategies&quot;&quot;&quot;</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">pass</span>
@@ -354,7 +424,7 @@ VIP discount: $30.0
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">DiscountCalculator</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Calculator that works with any discount strategy"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator that works with any discount strategy&quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">DiscountStrategy</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">strategy</span>
 
@@ -367,25 +437,39 @@ VIP discount: $30.0
 <span class="n">amount</span> <span class="o">=</span> <span class="mi">100</span>
 
 <span class="n">regular_calc</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">(</span><span class="n">RegularDiscount</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Regular: $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">regular_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regular: $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">regular_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">vip_calc</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">(</span><span class="n">VIPDiscount</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"VIP: $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">vip_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VIP: $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">vip_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">seasonal_calc</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">(</span><span class="n">SeasonalDiscount</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Seasonal (25%): $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">seasonal_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Seasonal (25%): $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> -&gt; $</span><span class="si">{</span><span class="n">seasonal_calc</span><span class="o">.</span><span class="n">apply_discount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Regular: $100 -&gt; $90.0
 VIP: $100 -&gt; $70.0
 Seasonal (25%): $100 -&gt; $75.0
 </code></pre></div>
+<p>What just happened:</p>
+<ul>
+<li><code>DiscountStrategy</code> is an <strong>abstract base class</strong>. It says "every discount must have a <code>calculate</code> method" but doesn't say how.</li>
+<li>Each discount type is its own small class.</li>
+<li><code>DiscountCalculator</code> only knows about <code>DiscountStrategy</code>. It has no idea which discount it was given.</li>
+</ul>
+<p>We added <code>SeasonalDiscount</code> <strong>without touching</strong> <code>DiscountCalculator</code>. That is the Open/Closed principle in action. (This shape is also called the <em>Strategy pattern</em>; you'll meet it again in the Design Patterns notebook.)</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>OCP: extend behaviour by adding new code, not by editing working code.</li>
+<li>A long <code>if/elif</code> on a "type" string is the classic warning sign.</li>
+<li>Fix it with an abstract base class and one subclass per variation.</li>
+<li>The class that <em>uses</em> the strategies never needs to change when a new one is added.</li>
+</ul>
 <hr />
 <h2 id="3-liskov-substitution-principle-lsp">3. Liskov Substitution Principle (LSP)</h2>
 <blockquote>
-<p><strong>"Objects of a superclass should be replaceable with objects of its subclasses without breaking the application."</strong></p>
+<p><em>"Objects of a superclass should be replaceable with objects of its subclasses without breaking the application."</em></p>
 </blockquote>
-<p>If class B is a subclass of class A, then we should be able to replace A with B without disrupting the behavior of our program.</p>
-<h3 id="bad-example-violating-lsp">❌ Bad Example - Violating LSP</h3>
+<p>If <code>B</code> inherits from <code>A</code>, any code written for an <code>A</code> must still work when you hand it a <code>B</code>. Same methods, same behaviour that the caller expects, no surprises.</p>
+<h3 id="bad-example-square-inherits-from-rectangle">Bad Example: Square Inherits from Rectangle</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># BAD: Square violates the expected behavior of Rectangle</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
@@ -433,7 +517,7 @@ Seasonal (25%): $100 -&gt; $75.0
     <span class="n">shape</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">shape</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="c1"># We expect area to be 50 for any Rectangle</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected area: 50, Actual area: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected area: 50, Actual area: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># This works correctly</span>
 <span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -446,8 +530,12 @@ Seasonal (25%): $100 -&gt; $75.0
 <div class="highlight"><pre><span></span><code>Expected area: 50, Actual area: 50
 Expected area: 50, Actual area: 100
 </code></pre></div>
-<h3 id="good-example-following-lsp">✅ Good Example - Following LSP</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<p>What just happened: <code>print_area</code> sets the width to 5 and the height to 10 and expects an area of 50. That's a fair expectation for any rectangle.</p>
+<p>But <code>Square</code> overrides the setters so that changing one side changes both. Setting the height to 10 also sets the width to 10, so we get 100.</p>
+<p>In maths a square <em>is</em> a rectangle. In code, it doesn't <strong>behave</strong> like our <code>Rectangle</code> (whose sides can change independently), so it shouldn't inherit from it.</p>
+<h3 id="good-example-a-shared-shape-base-class">Good Example: A Shared <code>Shape</code> Base Class</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="c1"># GOOD: Use a common abstraction that both shapes can properly implement</span>
 
@@ -489,17 +577,15 @@ Expected area: 50, Actual area: 100
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
         <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
         <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">print_shape_info</span><span class="p">(</span><span class="n">shape</span><span class="p">:</span> <span class="n">Shape</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Works correctly with any Shape subclass"""</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Area: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Perimeter: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Works correctly with any Shape subclass&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Perimeter: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># All shapes work correctly - LSP is satisfied</span>
@@ -510,23 +596,32 @@ Expected area: 50, Actual area: 100
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">print_shape_info</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Rectangle: Area: 50.00, Perimeter: 30.00
 Square: Area: 49.00, Perimeter: 28.00
 Circle: Area: 78.54, Perimeter: 31.42
 </code></pre></div>
+<p>Now <code>Rectangle</code>, <code>Square</code> and <code>Circle</code> are siblings. They all promise the same thing (<code>area()</code> and <code>perimeter()</code>), and they all keep that promise. <code>print_shape_info</code> works for every one of them with no special cases.</p>
+<p>A useful test for LSP: if you ever write <code>if isinstance(shape, Square): ...</code> to work around a subclass, the design probably breaks LSP.</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>LSP: a subclass must work anywhere its parent works, with no surprises.</li>
+<li>"Is-a" in real life doesn't automatically mean "is-a" in code. Check the <em>behaviour</em>.</li>
+<li>Warning signs: overridden methods that change the meaning, or <code>isinstance</code> checks to handle one subclass.</li>
+<li>Fix it by inheriting from a common, more general base class instead.</li>
+</ul>
 <hr />
 <h2 id="4-interface-segregation-principle-isp">4. Interface Segregation Principle (ISP)</h2>
 <blockquote>
-<p><strong>"Clients should not be forced to depend on interfaces they do not use."</strong></p>
+<p><em>"Clients should not be forced to depend on interfaces they do not use."</em></p>
 </blockquote>
-<p>Instead of one large interface, it's better to have many smaller, more specific interfaces. Classes should only implement the methods they need.</p>
-<h3 id="bad-example-violating-isp">❌ Bad Example - Violating ISP</h3>
+<p>Python has no <code>interface</code> keyword. An abstract base class full of <code>@abstractmethod</code>s plays that role. ISP says: keep those small and focused, so a class only signs up for the methods it can really provide.</p>
+<h3 id="bad-example-one-big-worker-interface">Bad Example: One Big <code>Worker</code> Interface</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
-<span class="c1"># BAD: One large interface that forces classes to implement methods they don't need</span>
+<span class="c1"># BAD: One large interface that forces classes to implement methods they don&#39;t need</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Worker</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -551,39 +646,39 @@ Circle: Area: 78.54, Perimeter: 31.42
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Developer</span><span class="p">(</span><span class="n">Worker</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is working"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is working&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is eating"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is eating&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is sleeping"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is sleeping&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is coding"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is coding&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">manage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Developers don't manage! But forced to implement this</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Developers don't manage!"</span><span class="p">)</span>
+        <span class="c1"># Developers don&#39;t manage! But forced to implement this</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Developers don&#39;t manage!&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Robot</span><span class="p">(</span><span class="n">Worker</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Robot is working"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is working&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Robots don't eat! But forced to implement this</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Robots don't eat!"</span><span class="p">)</span>
+        <span class="c1"># Robots don&#39;t eat! But forced to implement this</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Robots don&#39;t eat!&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Robots don't sleep!</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Robots don't sleep!"</span><span class="p">)</span>
+        <span class="c1"># Robots don&#39;t sleep!</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Robots don&#39;t sleep!&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Robot is coding"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is coding&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">manage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Robots don't manage!"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Robots don&#39;t manage!&quot;</span><span class="p">)</span>
 
 
 <span class="n">dev</span> <span class="o">=</span> <span class="n">Developer</span><span class="p">()</span>
@@ -591,7 +686,8 @@ Circle: Area: 78.54, Perimeter: 31.42
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Developer is coding
 </code></pre></div>
-<h3 id="good-example-following-isp">✅ Good Example - Following ISP</h3>
+<p><code>Robot</code> has to write <code>eat()</code> and <code>sleep()</code> just to satisfy the abstract class, so it raises <code>NotImplementedError</code>. Any code that loops over workers and calls <code>worker.eat()</code> will crash on a robot. A method that only raises is a strong sign the interface is too big.</p>
+<h3 id="good-example-small-focused-interfaces">Good Example: Small, Focused Interfaces</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="c1"># GOOD: Small, specific interfaces</span>
@@ -629,40 +725,40 @@ Circle: Area: 78.54, Perimeter: 31.42
 <span class="c1"># Developer implements only what it needs</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Developer</span><span class="p">(</span><span class="n">Workable</span><span class="p">,</span> <span class="n">Eatable</span><span class="p">,</span> <span class="n">Sleepable</span><span class="p">,</span> <span class="n">Codeable</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is working"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is working&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is eating"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is eating&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is sleeping"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is sleeping&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Developer is coding"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Developer is coding&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Manager implements only what it needs</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Manager</span><span class="p">(</span><span class="n">Workable</span><span class="p">,</span> <span class="n">Eatable</span><span class="p">,</span> <span class="n">Sleepable</span><span class="p">,</span> <span class="n">Manageable</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Manager is working"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manager is working&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Manager is eating"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manager is eating&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">sleep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Manager is sleeping"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manager is sleeping&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">manage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Manager is managing the team"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Manager is managing the team&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Robot only implements what robots can do</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Robot</span><span class="p">(</span><span class="n">Workable</span><span class="p">,</span> <span class="n">Codeable</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Robot is working"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is working&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Robot is coding"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Robot is coding&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Usage</span>
@@ -679,31 +775,43 @@ Developer is coding
 Robot is working
 Robot is coding
 </code></pre></div>
+<p>Each class now picks only the interfaces it needs through multiple inheritance. <code>Robot</code> is <code>Workable</code> and <code>Codeable</code>, nothing more. Code that needs something that can eat should ask for an <code>Eatable</code>, and a robot simply won't be one.</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>ISP: don't force a class to implement methods it can't use.</li>
+<li>A method whose only job is <code>raise NotImplementedError</code> is a red flag.</li>
+<li>Split one big abstract class into several small ones.</li>
+<li>A class can inherit from several small interfaces at once.</li>
+</ul>
 <hr />
 <h2 id="5-dependency-inversion-principle-dip">5. Dependency Inversion Principle (DIP)</h2>
 <blockquote>
-<p><strong>"High-level modules should not depend on low-level modules. Both should depend on abstractions."</strong></p>
-<p><strong>"Abstractions should not depend on details. Details should depend on abstractions."</strong></p>
+<p><em>"High-level modules should not depend on low-level modules. Both should depend on abstractions."</em></p>
+<p><em>"Abstractions should not depend on details. Details should depend on abstractions."</em></p>
 </blockquote>
-<p>This principle promotes loose coupling between classes by introducing abstractions (interfaces) between them.</p>
-<h3 id="bad-example-violating-dip">❌ Bad Example - Violating DIP</h3>
+<ul>
+<li><strong>High-level</strong> code is your business logic, e.g. "create a user and welcome them".</li>
+<li><strong>Low-level</strong> code is the details, e.g. "talk to MySQL", "send an email".</li>
+</ul>
+<p>DIP says the business logic shouldn't be glued to one particular database or email service.</p>
+<h3 id="bad-example-userservice-creates-its-own-dependencies">Bad Example: <code>UserService</code> Creates Its Own Dependencies</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># BAD: High-level module directly depends on low-level modules</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MySQLDatabase</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Connecting to MySQL..."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connecting to MySQL...&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MySQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MySQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">EmailService</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">send_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sending email to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending email to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">UserService</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""High-level module directly depends on concrete implementations"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;High-level module directly depends on concrete implementations&quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Tightly coupled to specific implementations</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">MySQLDatabase</span><span class="p">()</span>
@@ -711,19 +819,21 @@ Robot is coding
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">"INSERT INTO users VALUES ('</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">', '</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">')"</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">email_service</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Welcome, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO users VALUES (&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email_service</span><span class="o">.</span><span class="n">send_email</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Welcome, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Hard to test, hard to switch databases or email providers</span>
 <span class="n">service</span> <span class="o">=</span> <span class="n">UserService</span><span class="p">()</span>
-<span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span> <span class="s2">"john@example.com"</span><span class="p">)</span>
+<span class="n">service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;john@example.com&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Connecting to MySQL...
-MySQL executing: INSERT INTO users VALUES ('John', 'john@example.com')
+MySQL executing: INSERT INTO users VALUES (&#39;John&#39;, &#39;john@example.com&#39;)
 Sending email to john@example.com: Welcome, John!
 </code></pre></div>
-<h3 id="good-example-following-dip">✅ Good Example - Following DIP</h3>
+<p><code>UserService</code> builds a <code>MySQLDatabase</code> and an <code>EmailService</code> inside <code>__init__</code>. To switch to PostgreSQL or SMS, we'd have to edit <code>UserService</code>. Worse, we can't test it without a real MySQL server and a real mail server.</p>
+<p>(Side note: we build SQL with an f-string here only to keep the demo short. Real code must use parameterised queries to avoid SQL injection.)</p>
+<h3 id="good-example-depend-on-abstractions">Good Example: Depend on Abstractions</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="c1"># GOOD: Depend on abstractions</span>
@@ -748,33 +858,33 @@ Sending email to john@example.com: Welcome, John!
 <span class="c1"># Concrete implementations</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">MySQLDatabase</span><span class="p">(</span><span class="n">Database</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Connecting to MySQL..."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connecting to MySQL...&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MySQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MySQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PostgreSQLDatabase</span><span class="p">(</span><span class="n">Database</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Connecting to PostgreSQL..."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connecting to PostgreSQL...&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"PostgreSQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PostgreSQL executing: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">EmailNotification</span><span class="p">(</span><span class="n">NotificationService</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Email to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">SMSNotification</span><span class="p">(</span><span class="n">NotificationService</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"SMS to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SMS to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PushNotification</span><span class="p">(</span><span class="n">NotificationService</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Push notification to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Push notification to </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># High-level module depends on abstractions</span>
@@ -785,30 +895,37 @@ Sending email to john@example.com: Welcome, John!
 
     <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">contact</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">"INSERT INTO users VALUES ('</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">', '</span><span class="si">{</span><span class="n">contact</span><span class="si">}</span><span class="s2">')"</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notifier</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">contact</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Welcome, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO users VALUES (&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, &#39;</span><span class="si">{</span><span class="n">contact</span><span class="si">}</span><span class="s2">&#39;)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notifier</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">contact</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Welcome, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Easy to switch implementations!</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Using MySQL + Email:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using MySQL + Email:&quot;</span><span class="p">)</span>
 <span class="n">service1</span> <span class="o">=</span> <span class="n">UserService</span><span class="p">(</span><span class="n">MySQLDatabase</span><span class="p">(),</span> <span class="n">EmailNotification</span><span class="p">())</span>
-<span class="n">service1</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">"John"</span><span class="p">,</span> <span class="s2">"john@example.com"</span><span class="p">)</span>
+<span class="n">service1</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="s2">&quot;john@example.com&quot;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Using PostgreSQL + SMS:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using PostgreSQL + SMS:&quot;</span><span class="p">)</span>
 <span class="n">service2</span> <span class="o">=</span> <span class="n">UserService</span><span class="p">(</span><span class="n">PostgreSQLDatabase</span><span class="p">(),</span> <span class="n">SMSNotification</span><span class="p">())</span>
-<span class="n">service2</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">"Jane"</span><span class="p">,</span> <span class="s2">"+1234567890"</span><span class="p">)</span>
+<span class="n">service2</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span> <span class="s2">&quot;+1234567890&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Using MySQL + Email:
 Connecting to MySQL...
-MySQL executing: INSERT INTO users VALUES ('John', 'john@example.com')
+MySQL executing: INSERT INTO users VALUES (&#39;John&#39;, &#39;john@example.com&#39;)
 Email to john@example.com: Welcome, John!
 
 Using PostgreSQL + SMS:
 Connecting to PostgreSQL...
-PostgreSQL executing: INSERT INTO users VALUES ('Jane', '+1234567890')
+PostgreSQL executing: INSERT INTO users VALUES (&#39;Jane&#39;, &#39;+1234567890&#39;)
 SMS to +1234567890: Welcome, Jane!
 </code></pre></div>
-<h3 id="testing-with-dip-mock-implementations">Testing with DIP - Mock Implementations</h3>
+<p>What just happened:</p>
+<ul>
+<li><code>Database</code> and <code>NotificationService</code> are abstractions (abstract base classes).</li>
+<li><code>UserService</code> asks for them in <code>__init__</code> instead of creating them. Passing dependencies in like this is called <strong>dependency injection</strong>.</li>
+<li>The caller decides which concrete classes to use. Swapping MySQL + email for PostgreSQL + SMS needed <strong>zero</strong> changes to <code>UserService</code>.</li>
+</ul>
+<h3 id="testing-with-mock-implementations">Testing with Mock Implementations</h3>
+<p>The biggest everyday benefit of DIP is testing. We can hand <code>UserService</code> fake objects that just record what happened.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># DIP makes testing easy with mock implementations</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MockDatabase</span><span class="p">(</span><span class="n">Database</span><span class="p">):</span>
@@ -816,11 +933,11 @@ SMS to +1234567890: Welcome, Jane!
         <span class="bp">self</span><span class="o">.</span><span class="n">queries</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Mock DB connected"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mock DB connected&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mock DB recorded query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mock DB recorded query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">MockNotification</span><span class="p">(</span><span class="n">NotificationService</span><span class="p">):</span>
@@ -829,35 +946,73 @@ SMS to +1234567890: Welcome, Jane!
 
     <span class="k">def</span><span class="w"> </span><span class="nf">send</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sent_messages</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">to</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mock notification recorded: </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mock notification recorded: </span><span class="si">{</span><span class="n">to</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Testing with mocks</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Testing UserService:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing UserService:&quot;</span><span class="p">)</span>
 <span class="n">mock_db</span> <span class="o">=</span> <span class="n">MockDatabase</span><span class="p">()</span>
 <span class="n">mock_notifier</span> <span class="o">=</span> <span class="n">MockNotification</span><span class="p">()</span>
 
 <span class="n">test_service</span> <span class="o">=</span> <span class="n">UserService</span><span class="p">(</span><span class="n">mock_db</span><span class="p">,</span> <span class="n">mock_notifier</span><span class="p">)</span>
-<span class="n">test_service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">"TestUser"</span><span class="p">,</span> <span class="s2">"test@test.com"</span><span class="p">)</span>
+<span class="n">test_service</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="s2">&quot;TestUser&quot;</span><span class="p">,</span> <span class="s2">&quot;test@test.com&quot;</span><span class="p">)</span>
 
 <span class="c1"># Verify behavior</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Queries executed: </span><span class="si">{</span><span class="n">mock_db</span><span class="o">.</span><span class="n">queries</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Notifications sent: </span><span class="si">{</span><span class="n">mock_notifier</span><span class="o">.</span><span class="n">sent_messages</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Queries executed: </span><span class="si">{</span><span class="n">mock_db</span><span class="o">.</span><span class="n">queries</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Notifications sent: </span><span class="si">{</span><span class="n">mock_notifier</span><span class="o">.</span><span class="n">sent_messages</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Testing UserService:
 Mock DB connected
-Mock DB recorded query: INSERT INTO users VALUES ('TestUser', 'test@test.com')
+Mock DB recorded query: INSERT INTO users VALUES (&#39;TestUser&#39;, &#39;test@test.com&#39;)
 Mock notification recorded: test@test.com -&gt; Welcome, TestUser!
 
-Queries executed: ["INSERT INTO users VALUES ('TestUser', 'test@test.com')"]
-Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
+Queries executed: [&quot;INSERT INTO users VALUES (&#39;TestUser&#39;, &#39;test@test.com&#39;)&quot;]
+Notifications sent: [(&#39;test@test.com&#39;, &#39;Welcome, TestUser!&#39;)]
 </code></pre></div>
+<p>No database, no emails, but we still checked that <code>create_user</code> ran the right query and sent the right message. This is exactly how unit tests for real applications are written (Python's <code>unittest.mock</code> makes it even shorter).</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>DIP: business logic should depend on abstractions, not on specific databases or services.</li>
+<li>Pass dependencies in through <code>__init__</code> (dependency injection) instead of creating them inside.</li>
+<li>Swapping an implementation then needs no change to the high-level class.</li>
+<li>Fake/mock implementations make testing easy.</li>
+</ul>
 <hr />
-<h2 id="real-world-example-order-processing-system">Real-World Example: Order Processing System</h2>
-<p>Let's combine all SOLID principles in a practical example.</p>
+<h2 id="6-putting-it-together-order-processing-system">6. Putting It Together: Order Processing System</h2>
+<p>Now let's use all five principles in one small system. As you read each cell, look for the principle named in its first comment:</p>
+<table>
+<thead>
+<tr>
+<th>Cell</th>
+<th>Principle on show</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data classes</td>
+<td><strong>SRP</strong>: each class just holds one kind of data</td>
+</tr>
+<tr>
+<td>Interfaces</td>
+<td><strong>ISP</strong>: one small abstract class per job</td>
+</tr>
+<tr>
+<td>Concrete implementations</td>
+<td><strong>OCP</strong>: add new payment or discount types without editing old ones</td>
+</tr>
+<tr>
+<td><code>OrderService</code></td>
+<td><strong>DIP</strong>: depends only on the abstractions</td>
+</tr>
+<tr>
+<td>Any implementation can replace another</td>
+<td><strong>LSP</strong></td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 
@@ -884,7 +1039,7 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">OrderItem</span><span class="p">]</span>
     <span class="n">customer_email</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">created_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -933,13 +1088,13 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CreditCardProcessor</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processing $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> via Credit Card"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> via Credit Card&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">PayPalProcessor</span><span class="p">(</span><span class="n">PaymentProcessor</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processing $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> via PayPal"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> via PayPal&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span>
 
 
@@ -975,7 +1130,7 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
 
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="n">Order</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_orders</span><span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">order</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Order </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> saved to memory"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Order </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> saved to memory&quot;</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">find_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Order</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_orders</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">order_id</span><span class="p">)</span>
@@ -983,12 +1138,12 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
 
 <span class="k">class</span><span class="w"> </span><span class="nc">EmailNotifier</span><span class="p">(</span><span class="n">Notifier</span><span class="p">):</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recipient</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Email sent to </span><span class="si">{</span><span class="n">recipient</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Email sent to </span><span class="si">{</span><span class="n">recipient</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># === Order Service (Dependency Inversion - depends on abstractions) ===</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">OrderService</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""High-level module that orchestrates order processing"""</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;High-level module that orchestrates order processing&quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1005,10 +1160,10 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
         <span class="bp">self</span><span class="o">.</span><span class="n">notifier</span> <span class="o">=</span> <span class="n">notifier</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="n">Order</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Process an order: calculate totals, payment, save, notify"""</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="s1">'='</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processing Order: </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'='</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process an order: calculate totals, payment, save, notify&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing Order: </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Calculate totals</span>
         <span class="n">subtotal</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">subtotal</span>
@@ -1017,37 +1172,38 @@ Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
         <span class="n">tax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_calculator</span><span class="o">.</span><span class="n">calculate_tax</span><span class="p">(</span><span class="n">after_discount</span><span class="p">)</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">after_discount</span> <span class="o">+</span> <span class="n">tax</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Subtotal: $</span><span class="si">{</span><span class="n">subtotal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Discount: -$</span><span class="si">{</span><span class="n">discount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tax: +$</span><span class="si">{</span><span class="n">tax</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Subtotal: $</span><span class="si">{</span><span class="n">subtotal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Discount: -$</span><span class="si">{</span><span class="n">discount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tax: +$</span><span class="si">{</span><span class="n">tax</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="c1"># Process payment</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_processor</span><span class="o">.</span><span class="n">process_payment</span><span class="p">(</span><span class="n">total</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">notifier</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span>
                 <span class="n">order</span><span class="o">.</span><span class="n">customer_email</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Your order </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> has been confirmed! Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span>
+                <span class="sa">f</span><span class="s2">&quot;Your order </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> has been confirmed! Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
 </code></pre></div>
+<p>Notice that <code>OrderService</code> never mentions credit cards, PayPal, percentages or e-mail. It only talks to the five abstractions. Let's give it some real parts and run an order.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># === Putting it all together ===</span>
 
 <span class="c1"># Create products</span>
-<span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"P001"</span><span class="p">,</span> <span class="s2">"Laptop"</span><span class="p">,</span> <span class="mf">999.99</span><span class="p">)</span>
-<span class="n">mouse</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"P002"</span><span class="p">,</span> <span class="s2">"Mouse"</span><span class="p">,</span> <span class="mf">49.99</span><span class="p">)</span>
-<span class="n">keyboard</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">"P003"</span><span class="p">,</span> <span class="s2">"Keyboard"</span><span class="p">,</span> <span class="mf">79.99</span><span class="p">)</span>
+<span class="n">laptop</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">&quot;P001&quot;</span><span class="p">,</span> <span class="s2">&quot;Laptop&quot;</span><span class="p">,</span> <span class="mf">999.99</span><span class="p">)</span>
+<span class="n">mouse</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">&quot;P002&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="mf">49.99</span><span class="p">)</span>
+<span class="n">keyboard</span> <span class="o">=</span> <span class="n">Product</span><span class="p">(</span><span class="s2">&quot;P003&quot;</span><span class="p">,</span> <span class="s2">&quot;Keyboard&quot;</span><span class="p">,</span> <span class="mf">79.99</span><span class="p">)</span>
 
 <span class="c1"># Create order</span>
 <span class="n">order</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span>
-    <span class="nb">id</span><span class="o">=</span><span class="s2">"ORD-001"</span><span class="p">,</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;ORD-001&quot;</span><span class="p">,</span>
     <span class="n">items</span><span class="o">=</span><span class="p">[</span>
         <span class="n">OrderItem</span><span class="p">(</span><span class="n">laptop</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="n">OrderItem</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
         <span class="n">OrderItem</span><span class="p">(</span><span class="n">keyboard</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="p">],</span>
-    <span class="n">customer_email</span><span class="o">=</span><span class="s2">"customer@example.com"</span>
+    <span class="n">customer_email</span><span class="o">=</span><span class="s2">&quot;customer@example.com&quot;</span>
 <span class="p">)</span>
 
 <span class="c1"># Create service with specific implementations</span>
@@ -1079,16 +1235,24 @@ Email sent to customer@example.com: Your order ORD-001 has been confirmed! Total
 
 True
 </code></pre></div>
+<p>What just happened, step by step:</p>
+<ol>
+<li>Subtotal: 999.99 + 2 × 49.99 + 79.99 = <strong>1179.96</strong></li>
+<li>10% discount: <strong>118.00</strong>, leaving 1061.96</li>
+<li>13% tax on that: <strong>138.06</strong></li>
+<li>Total: <strong>1200.02</strong>, charged to the credit card, saved, and the customer is emailed.</li>
+</ol>
+<p>Now the same <code>OrderService</code> class with a completely different set of parts:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Easy to swap implementations!</span>
 <span class="c1"># Process same type of order with different configurations</span>
 
 <span class="n">bulk_order</span> <span class="o">=</span> <span class="n">Order</span><span class="p">(</span>
-    <span class="nb">id</span><span class="o">=</span><span class="s2">"ORD-002"</span><span class="p">,</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;ORD-002&quot;</span><span class="p">,</span>
     <span class="n">items</span><span class="o">=</span><span class="p">[</span>
         <span class="n">OrderItem</span><span class="p">(</span><span class="n">mouse</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
         <span class="n">OrderItem</span><span class="p">(</span><span class="n">keyboard</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
     <span class="p">],</span>
-    <span class="n">customer_email</span><span class="o">=</span><span class="s2">"bulk@example.com"</span>
+    <span class="n">customer_email</span><span class="o">=</span><span class="s2">&quot;bulk@example.com&quot;</span>
 <span class="p">)</span>
 
 <span class="c1"># Different service configuration - PayPal + Bulk discount</span>
@@ -1119,52 +1283,279 @@ Email sent to bulk@example.com: Your order ORD-002 has been confirmed! Total: $5
 
 True
 </code></pre></div>
+<p>This order has 10 items, so <code>BulkDiscount</code> gives 15% off. We switched payment method, discount rule and tax rate without changing a single line of <code>OrderService</code>.</p>
+<p><strong>Quick recap</strong></p>
+<ul>
+<li>Real designs use all five principles together; they support each other.</li>
+<li>Small classes (SRP) behind small interfaces (ISP) are easy to extend (OCP) and swap (LSP).</li>
+<li>The high-level <code>OrderService</code> depends only on abstractions (DIP), so it's easy to configure and test.</li>
+</ul>
 <hr />
-<h2 id="summary">Summary</h2>
+<h2 id="7-practice-exercises">7. Practice Exercises</h2>
+<p>Four short exercises, one or two principles each. Write your code in the cell, uncomment the tests, and run it. Only then open the solution.</p>
+<h3 id="exercise-1-srp-split-the-invoice">Exercise 1 (SRP): Split the Invoice</h3>
+<p>The class below calculates a total <strong>and</strong> formats text. Split it into:</p>
+<ul>
+<li><code>Invoice</code>: holds <code>customer</code> and <code>items</code> (a list of <code>(name, price)</code> tuples) and has a <code>total()</code> method</li>
+<li><code>InvoiceFormatter</code>: has a <code>format(invoice)</code> method returning <code>"Invoice for &lt;customer&gt;: Rs &lt;total&gt;"</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">InvoiceEverything</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer</span> <span class="o">=</span> <span class="n">customer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">price</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Invoice for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">customer</span><span class="si">}</span><span class="s2">: Rs </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">total</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 1: Your code here</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Invoice</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]):</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InvoiceFormatter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invoice</span><span class="p">:</span> <span class="n">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="c1"># TODO</span>
+        <span class="k">pass</span>
+
+<span class="c1"># Test your code (uncomment to run):</span>
+<span class="c1"># inv = Invoice(&quot;Asha&quot;, [(&quot;Pen&quot;, 20), (&quot;Book&quot;, 150)])</span>
+<span class="c1"># assert inv.total() == 170</span>
+<span class="c1"># assert InvoiceFormatter().format(inv) == &quot;Invoice for Asha: Rs 170&quot;</span>
+<span class="c1"># assert not hasattr(inv, &quot;format&quot;)</span>
+<span class="c1"># print(&quot;Exercise 1 passed!&quot;)</span>
+</code></pre></div>
+<details>
+<summary>Show solution</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Invoice</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customer</span> <span class="o">=</span> <span class="n">customer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">price</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">InvoiceFormatter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invoice</span><span class="p">:</span> <span class="n">Invoice</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Invoice for </span><span class="si">{</span><span class="n">invoice</span><span class="o">.</span><span class="n">customer</span><span class="si">}</span><span class="s2">: Rs </span><span class="si">{</span><span class="n">invoice</span><span class="o">.</span><span class="n">total</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+</code></pre></div>
+</details>
+<h3 id="exercise-2-ocp-add-new-discounts-without-editing-old-code">Exercise 2 (OCP): Add New Discounts Without Editing Old Code</h3>
+<p>Using the <code>DiscountStrategy</code> base class from Section 2, add two <strong>new</strong> classes. Don't change any existing class.</p>
+<ul>
+<li><code>StudentDiscount</code>: 15% off</li>
+<li><code>FlatDiscount(amount)</code>: a fixed amount off, but never more than the bill itself</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 2: Your code here</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StudentDiscount</span><span class="p">(</span><span class="n">DiscountStrategy</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlatDiscount</span><span class="p">(</span><span class="n">DiscountStrategy</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Test your code (uncomment to run):</span>
+<span class="c1"># assert StudentDiscount().calculate(200) == 30</span>
+<span class="c1"># assert FlatDiscount(50).calculate(200) == 50</span>
+<span class="c1"># assert FlatDiscount(50).calculate(30) == 30</span>
+<span class="c1"># print(&quot;Exercise 2 passed!&quot;)</span>
+</code></pre></div>
+<details>
+<summary>Show solution</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">StudentDiscount</span><span class="p">(</span><span class="n">DiscountStrategy</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="mf">0.15</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlatDiscount</span><span class="p">(</span><span class="n">DiscountStrategy</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h3 id="exercise-3-lsp-isp-birds-that-cant-fly">Exercise 3 (LSP + ISP): Birds That Can't Fly</h3>
+<p>A common mistake is a <code>Bird</code> class with a <code>fly()</code> method, and then a <code>Penguin</code> whose <code>fly()</code> raises an error. Fix the design:</p>
+<ul>
+<li><code>Bird</code> (base class) has <code>eat()</code> returning <code>"&lt;name&gt; is eating"</code></li>
+<li><code>FlyingBird(Bird)</code> adds <code>fly()</code> returning <code>"&lt;name&gt; is flying"</code></li>
+<li><code>Sparrow</code> is a <code>FlyingBird</code>; <code>Penguin</code> is a plain <code>Bird</code> with a <code>swim()</code> method returning <code>"&lt;name&gt; is swimming"</code></li>
+</ul>
+<p>Each bird gets its name through <code>__init__</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 3: Your code here</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Bird</span><span class="p">:</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlyingBird</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Sparrow</span><span class="p">(</span><span class="n">FlyingBird</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Penguin</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Test your code (uncomment to run):</span>
+<span class="c1"># birds = [Sparrow(&quot;Jack&quot;), Penguin(&quot;Pingu&quot;)]</span>
+<span class="c1"># assert [b.eat() for b in birds] == [&quot;Jack is eating&quot;, &quot;Pingu is eating&quot;]</span>
+<span class="c1"># assert Sparrow(&quot;Jack&quot;).fly() == &quot;Jack is flying&quot;</span>
+<span class="c1"># assert Penguin(&quot;Pingu&quot;).swim() == &quot;Pingu is swimming&quot;</span>
+<span class="c1"># assert not hasattr(Penguin(&quot;Pingu&quot;), &quot;fly&quot;)</span>
+<span class="c1"># print(&quot;Exercise 3 passed!&quot;)</span>
+</code></pre></div>
+<details>
+<summary>Show solution</summary>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Bird</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">eat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is eating&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FlyingBird</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is flying&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Sparrow</span><span class="p">(</span><span class="n">FlyingBird</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Penguin</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">swim</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is swimming&quot;</span>
+</code></pre></div>
+</details>
+<h3 id="exercise-4-dip-a-testable-weather-reporter">Exercise 4 (DIP): A Testable Weather Reporter</h3>
+<p><code>WeatherReporter</code> should not call a real weather API directly. Instead:</p>
+<ul>
+<li>Write an abstract class <code>TemperatureSource</code> with an abstract method <code>read_celsius()</code></li>
+<li>Write <code>WeatherReporter</code>, which receives a <code>TemperatureSource</code> in <code>__init__</code> and has <code>report()</code> returning <code>"It is &lt;temp&gt;°C"</code></li>
+<li>Write <code>FakeSource(value)</code>, a <code>TemperatureSource</code> that always returns <code>value</code>, so we can test without the internet</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 4: Your code here</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TemperatureSource</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">WeatherReporter</span><span class="p">:</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FakeSource</span><span class="p">(</span><span class="n">TemperatureSource</span><span class="p">):</span>
+    <span class="c1"># TODO</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Test your code (uncomment to run):</span>
+<span class="c1"># assert WeatherReporter(FakeSource(25)).report() == &quot;It is 25°C&quot;</span>
+<span class="c1"># assert WeatherReporter(FakeSource(-3)).report() == &quot;It is -3°C&quot;</span>
+<span class="c1"># print(&quot;Exercise 4 passed!&quot;)</span>
+</code></pre></div>
+<details>
+<summary>Show solution</summary>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TemperatureSource</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_celsius</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">WeatherReporter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">TemperatureSource</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;It is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">read_celsius</span><span class="p">()</span><span class="si">}</span><span class="s2">°C&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">FakeSource</span><span class="p">(</span><span class="n">TemperatureSource</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_celsius</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+</code></pre></div>
+</details>
+<hr />
+<h2 id="summary-cheat-sheet">Summary &amp; Cheat Sheet</h2>
 <table>
 <thead>
 <tr>
 <th>Principle</th>
-<th>Key Idea</th>
-<th>Benefit</th>
+<th>Remember this</th>
+<th>Warning sign</th>
+<th>Usual fix</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>SRP</strong></td>
-<td>One class, one responsibility</td>
-<td>Easier testing and maintenance</td>
+<td>One class, one job</td>
+<td>Many unrelated reasons to edit a class</td>
+<td>Split it into smaller classes</td>
 </tr>
 <tr>
 <td><strong>OCP</strong></td>
-<td>Extend without modifying</td>
-<td>Reduces risk of breaking existing code</td>
+<td>Add code, don't edit working code</td>
+<td>A long <code>if/elif</code> on a type name</td>
+<td>Abstract base class + one subclass per case</td>
 </tr>
 <tr>
 <td><strong>LSP</strong></td>
-<td>Subclasses are substitutable</td>
-<td>Reliable polymorphism</td>
+<td>Subclasses must keep the parent's promises</td>
+<td>Overrides that change meaning, <code>isinstance</code> workarounds</td>
+<td>Inherit from a more general base class</td>
 </tr>
 <tr>
 <td><strong>ISP</strong></td>
-<td>Small, specific interfaces</td>
-<td>No forced implementations</td>
+<td>Small, focused interfaces</td>
+<td>Methods that only <code>raise NotImplementedError</code></td>
+<td>Split the big interface</td>
 </tr>
 <tr>
 <td><strong>DIP</strong></td>
 <td>Depend on abstractions</td>
-<td>Loose coupling, easy testing</td>
+<td>Classes creating their own database/email objects</td>
+<td>Pass dependencies in through <code>__init__</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="key-takeaways">Key Takeaways</h3>
+<h3 id="tips-for-real-projects">Tips for Real Projects</h3>
 <ol>
-<li><strong>Start simple</strong> - Don't over-engineer. Apply SOLID when complexity grows.</li>
-<li><strong>Use abstractions</strong> - Python's <code>ABC</code> module helps define interfaces.</li>
-<li><strong>Dependency Injection</strong> - Pass dependencies instead of creating them inside classes.</li>
-<li><strong>Composition over inheritance</strong> - Often leads to more flexible code.</li>
-<li><strong>Test-Driven Development</strong> - SOLID principles naturally emerge when writing testable code.</li>
+<li><strong>Start simple.</strong> Don't add abstractions "just in case". Apply SOLID when the code starts to hurt.</li>
+<li><strong>Use <code>ABC</code></strong> to describe what a class must be able to do.</li>
+<li><strong>Inject dependencies</strong> instead of creating them inside the class.</li>
+<li><strong>Prefer composition over inheritance.</strong> It's usually more flexible.</li>
+<li><strong>Write tests.</strong> Code that is easy to test usually follows SOLID already.</li>
 </ol>
+<h3 id="whats-next">What's Next</h3>
+<p>The <strong>Design Patterns</strong> notebook shows ready-made solutions (Strategy, Factory, Observer and more) that are built directly on these principles. You've already used the Strategy pattern in Section 2.</p>
               
             </div>
           </div><footer>

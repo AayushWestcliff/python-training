@@ -147,7 +147,7 @@
 <li>Can store mixed data types.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># Creating a list</span>
-<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">]</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Indexing, Slicing &amp; Negative Indexing:</strong></p>
@@ -160,19 +160,19 @@
 </code></pre></div>
 <p><strong>➤ Looping Through Lists &amp; Conditions:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">fruit</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"b"</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2"> starts with 'b'"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fruit</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2"> starts with &#39;b&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Useful List Methods:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Adding items</span>
-<span class="n">fruits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"orange"</span><span class="p">)</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
-<span class="n">fruits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"mango"</span><span class="p">)</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;mango&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
 <span class="c1"># Removing items</span>
-<span class="n">fruits</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"banana"</span><span class="p">)</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;banana&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
 
 <span class="c1"># Sorting</span>
@@ -182,42 +182,42 @@
 <p><strong>➤ More List Methods &amp; Operations:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># More list methods</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original list:"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
 <span class="c1"># Count occurrences</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Count of 1:"</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count of 1:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 
 <span class="c1"># Find index</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Index of 4:"</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index of 4:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 
 <span class="c1"># Extend (vs append)</span>
 <span class="n">numbers</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>  <span class="c1"># Adds multiple items</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After extend:"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After extend:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
 <span class="c1"># Reverse</span>
 <span class="n">numbers</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After reverse:"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After reverse:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
 
 <span class="c1"># Clear</span>
 <span class="n">temp_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">temp_list</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After clear:"</span><span class="p">,</span> <span class="n">temp_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After clear:&quot;</span><span class="p">,</span> <span class="n">temp_list</span><span class="p">)</span>
 
 <span class="c1"># Copy (shallow vs deep)</span>
 <span class="n">original</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">4</span><span class="p">]</span>
 <span class="n">shallow_copy</span> <span class="o">=</span> <span class="n">original</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">deep_copy</span> <span class="o">=</span> <span class="n">original</span><span class="p">[:]</span>  <span class="c1"># Simple way for lists</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original:"</span><span class="p">,</span> <span class="n">original</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Shallow copy:"</span><span class="p">,</span> <span class="n">shallow_copy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original:&quot;</span><span class="p">,</span> <span class="n">original</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shallow copy:&quot;</span><span class="p">,</span> <span class="n">shallow_copy</span><span class="p">)</span>
 
 <span class="c1"># List concatenation and repetition</span>
 <span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">combined</span> <span class="o">=</span> <span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Combined:"</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combined:&quot;</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
 
 <span class="n">repeated</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Repeated:"</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repeated:&quot;</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ List Comprehension with Conditions:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create list of squares for even numbers from 0 to 10</span>
@@ -227,31 +227,31 @@
 <p><strong>➤ Nested Lists (2D Lists):</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Creating a 2D list (matrix)</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Matrix:"</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span>
 
 <span class="c1"># Accessing elements</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Element at [1][2]:"</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at [1][2]:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
 
 <span class="c1"># Iterating through 2D list</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"All elements:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All elements:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>  <span class="c1"># New line after each row</span>
 
 <span class="c1"># Using enumerate for indices</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"With indices:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;With indices:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># List comprehension for 2D</span>
 <span class="n">flattened</span> <span class="o">=</span> <span class="p">[</span><span class="n">element</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Flattened:"</span><span class="p">,</span> <span class="n">flattened</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flattened:&quot;</span><span class="p">,</span> <span class="n">flattened</span><span class="p">)</span>
 
 <span class="c1"># Creating a 2D list with comprehension</span>
 <span class="n">multiplication_table</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Multiplication table:"</span><span class="p">,</span> <span class="n">multiplication_table</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiplication table:&quot;</span><span class="p">,</span> <span class="n">multiplication_table</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="2-tuples">2. Tuples</h2>
 <p><strong>Tuples:</strong>
@@ -279,46 +279,46 @@
 <p><strong>➤ More Tuple Operations:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Tuple methods</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original tuple:"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Count of 2:"</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Index of 3:"</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original tuple:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Count of 2:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index of 3:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 
 <span class="c1"># Tuple concatenation</span>
 <span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">combined</span> <span class="o">=</span> <span class="n">tuple1</span> <span class="o">+</span> <span class="n">tuple2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Combined tuple:"</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Combined tuple:&quot;</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
 
 <span class="c1"># Tuple repetition</span>
 <span class="n">repeated</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">5</span>  <span class="c1"># Note the comma for single element tuple</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Repeated tuple:"</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Repeated tuple:&quot;</span><span class="p">,</span> <span class="n">repeated</span><span class="p">)</span>
 
 <span class="c1"># Single element tuple (important!)</span>
 <span class="n">single</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">,)</span>  <span class="c1"># Comma is required</span>
 <span class="n">not_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># This is just an integer</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Single element tuple:"</span><span class="p">,</span> <span class="n">single</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">single</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Not a tuple:"</span><span class="p">,</span> <span class="n">not_tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">not_tuple</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single element tuple:&quot;</span><span class="p">,</span> <span class="n">single</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">single</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not a tuple:&quot;</span><span class="p">,</span> <span class="n">not_tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">not_tuple</span><span class="p">))</span>
 
 <span class="c1"># Nested tuples</span>
 <span class="n">nested</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Nested tuple:"</span><span class="p">,</span> <span class="n">nested</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Access nested element:"</span><span class="p">,</span> <span class="n">nested</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nested tuple:&quot;</span><span class="p">,</span> <span class="n">nested</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access nested element:&quot;</span><span class="p">,</span> <span class="n">nested</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="c1"># Named tuples (from collections module)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
 <span class="c1"># Define a named tuple</span>
-<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Point'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">])</span>
-<span class="n">Student</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">'Student'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">,</span> <span class="s1">'grade'</span><span class="p">])</span>
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">])</span>
+<span class="n">Student</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Student&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">])</span>
 
 <span class="c1"># Create instances</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'A'</span><span class="p">)</span>
+<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Point:"</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Access by name:"</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Student:"</span><span class="p">,</span> <span class="n">student</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Student name:"</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Point:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access by name:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student:&quot;</span><span class="p">,</span> <span class="n">student</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Student name:&quot;</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ List vs Tuple:</strong></p>
 <ul>
@@ -346,7 +346,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">new_list</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Tuple Unpacking:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">person</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">"Engineer"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">person</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Engineer&quot;</span><span class="p">)</span>
 <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">profession</span> <span class="o">=</span> <span class="n">person</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">profession</span><span class="p">)</span>
 </code></pre></div>
@@ -358,69 +358,69 @@
 </ul>
 <p><strong>➤ Basic Set Operations:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Creating sets</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">}</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">}</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
 <span class="c1"># Adding, Removing, Discarding</span>
-<span class="n">colors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">"yellow"</span><span class="p">)</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;yellow&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
-<span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"green"</span><span class="p">)</span>  <span class="c1"># Raises error if not present</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>  <span class="c1"># Raises error if not present</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 
-<span class="n">colors</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="s2">"purple"</span><span class="p">)</span>  <span class="c1"># No error if not present</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>  <span class="c1"># No error if not present</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ More Set Operations &amp; Methods:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Set from list (removes duplicates)</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">unique_numbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original list:"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Unique set:"</span><span class="p">,</span> <span class="n">unique_numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique set:&quot;</span><span class="p">,</span> <span class="n">unique_numbers</span><span class="p">)</span>
 
 <span class="c1"># Set methods</span>
 <span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
 <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Set1:"</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Set2:"</span><span class="p">,</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set1:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set2:&quot;</span><span class="p">,</span> <span class="n">set2</span><span class="p">)</span>
 
 <span class="c1"># Union (all elements)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Union (|):"</span><span class="p">,</span> <span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Union method:"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union (|):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
 <span class="c1"># Intersection (common elements)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Intersection (&amp;):"</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Intersection method:"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection (&amp;):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
 <span class="c1"># Difference (elements in set1 but not in set2)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Difference (-):"</span><span class="p">,</span> <span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Difference method:"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference (-):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
 <span class="c1"># Symmetric difference (elements in either set, but not both)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Symmetric difference (^):"</span><span class="p">,</span> <span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Symmetric difference method:"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Symmetric difference (^):&quot;</span><span class="p">,</span> <span class="n">set1</span> <span class="o">^</span> <span class="n">set2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Symmetric difference method:&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">))</span>
 
 <span class="c1"># Subset and superset checks</span>
 <span class="n">small_set</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Is {1, 2} subset of set1?"</span><span class="p">,</span> <span class="n">small_set</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Is set1 superset of {1, 2}?"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">small_set</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is {1, 2} subset of set1?&quot;</span><span class="p">,</span> <span class="n">small_set</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is set1 superset of {1, 2}?&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">small_set</span><span class="p">))</span>
 
 <span class="c1"># Disjoint sets (no common elements)</span>
 <span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Are set1 and set3 disjoint?"</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are set1 and set3 disjoint?&quot;</span><span class="p">,</span> <span class="n">set1</span><span class="o">.</span><span class="n">isdisjoint</span><span class="p">(</span><span class="n">set3</span><span class="p">))</span>
 
 <span class="c1"># Set comprehension</span>
 <span class="n">even_squares</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Even squares:"</span><span class="p">,</span> <span class="n">even_squares</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Even squares:&quot;</span><span class="p">,</span> <span class="n">even_squares</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Set Operations:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
 <span class="n">b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Union:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Intersection:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Difference:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">|</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Frozenset vs Set:</strong></p>
 <ul>
@@ -441,16 +441,16 @@
 <li>Keys must be unique.</li>
 </ul>
 <p><strong>➤ Creating &amp; Accessing:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">"grade"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;grade&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
 </code></pre></div>
 <p><strong>➤ Useful Dictionary Methods:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get with default</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"age"</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"major"</span><span class="p">,</span> <span class="s2">"Not specified"</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="s2">&quot;Not specified&quot;</span><span class="p">))</span>
 
 <span class="c1"># Update</span>
-<span class="n">student</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"grade"</span><span class="p">:</span> <span class="s2">"A+"</span><span class="p">,</span> <span class="s2">"major"</span><span class="p">:</span> <span class="s2">"CS"</span><span class="p">})</span>
+<span class="n">student</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;grade&quot;</span><span class="p">:</span> <span class="s2">&quot;A+&quot;</span><span class="p">,</span> <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="s2">&quot;CS&quot;</span><span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
 <span class="c1"># Keys, Values</span>
@@ -458,58 +458,58 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
 <span class="c1"># Pop</span>
-<span class="n">student</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"age"</span><span class="p">)</span>
+<span class="n">student</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ More Dictionary Methods &amp; Operations:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Dictionary from lists</span>
-<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">]</span>
-<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'London'</span><span class="p">]</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">]</span>
 <span class="n">person</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Dictionary from lists:"</span><span class="p">,</span> <span class="n">person</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dictionary from lists:&quot;</span><span class="p">,</span> <span class="n">person</span><span class="p">)</span>
 
 <span class="c1"># Dictionary methods</span>
-<span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'apples'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">'bananas'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">'cherries'</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original inventory:"</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
+<span class="n">inventory</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;apples&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">&#39;bananas&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;cherries&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original inventory:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
 <span class="c1"># Items, keys, values iteration</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Items:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Items:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Key-value pairs:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key-value pairs:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">inventory</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Popitem (removes and returns last item)</span>
 <span class="n">last_item</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">popitem</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Popped item:"</span><span class="p">,</span> <span class="n">last_item</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After popitem:"</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Popped item:&quot;</span><span class="p">,</span> <span class="n">last_item</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After popitem:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
 <span class="c1"># Setdefault (get or set default value)</span>
-<span class="n">inventory</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">'oranges'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After setdefault:"</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
+<span class="n">inventory</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;oranges&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After setdefault:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span>
 
 <span class="c1"># Dictionary merging (Python 3.9+)</span>
-<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
 <span class="c1"># merged = dict1 | dict2  # Python 3.9+</span>
 <span class="n">merged</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">dict1</span><span class="p">,</span> <span class="o">**</span><span class="n">dict2</span><span class="p">}</span>  <span class="c1"># Works in older versions</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Merged dictionary:"</span><span class="p">,</span> <span class="n">merged</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merged dictionary:&quot;</span><span class="p">,</span> <span class="n">merged</span><span class="p">)</span>
 
 <span class="c1"># Dictionary with default values</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">dd</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>  <span class="c1"># Default value is 0</span>
-<span class="n">dd</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">dd</span><span class="p">[</span><span class="s1">'b'</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Default dict:"</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dd</span><span class="p">))</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">dd</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default dict:&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dd</span><span class="p">))</span>
 
 <span class="c1"># Counter (specialized dictionary)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">"hello world"</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span>
 <span class="n">char_count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Character count:"</span><span class="p">,</span> <span class="n">char_count</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Most common:"</span><span class="p">,</span> <span class="n">char_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character count:&quot;</span><span class="p">,</span> <span class="n">char_count</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most common:&quot;</span><span class="p">,</span> <span class="n">char_count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </code></pre></div>
 <p><strong>➤ Dictionary Comprehension:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Squares of numbers</span>
@@ -523,11 +523,11 @@
 <p><strong>➤ Nested Dictionaries:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Student with nested details</span>
 <span class="n">student</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span>
-    <span class="s2">"subjects"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"Math"</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">"Science"</span><span class="p">:</span> <span class="mi">95</span><span class="p">}</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subjects&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Math&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;Science&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">"subjects"</span><span class="p">][</span><span class="s2">"Math"</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s2">&quot;subjects&quot;</span><span class="p">][</span><span class="s2">&quot;Math&quot;</span><span class="p">])</span>
 </code></pre></div>
 <h3 id="quick-recap">🎯 Quick Recap</h3>
 <p>✅ Lists → Ordered, mutable  </p>
@@ -542,45 +542,45 @@
 
 <span class="c1"># Create a deque</span>
 <span class="n">dq</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original deque:"</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original deque:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
 <span class="c1"># Add to both ends</span>
 <span class="n">dq</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After adding to both ends:"</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After adding to both ends:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
 <span class="c1"># Remove from both ends</span>
 <span class="n">left_item</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
 <span class="n">right_item</span> <span class="o">=</span> <span class="n">dq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Removed </span><span class="si">{</span><span class="n">left_item</span><span class="si">}</span><span class="s2"> from left, </span><span class="si">{</span><span class="n">right_item</span><span class="si">}</span><span class="s2"> from right"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After removal:"</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed </span><span class="si">{</span><span class="n">left_item</span><span class="si">}</span><span class="s2"> from left, </span><span class="si">{</span><span class="n">right_item</span><span class="si">}</span><span class="s2"> from right&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After removal:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
 <span class="c1"># Rotate</span>
 <span class="n">dq</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Rotate right by 2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After rotating right by 2:"</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After rotating right by 2:&quot;</span><span class="p">,</span> <span class="n">dq</span><span class="p">)</span>
 
 <span class="c1"># OrderedDict (remembers insertion order)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-<span class="n">od</span><span class="p">[</span><span class="s1">'first'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">od</span><span class="p">[</span><span class="s1">'second'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">od</span><span class="p">[</span><span class="s1">'third'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"OrderedDict:"</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;second&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">od</span><span class="p">[</span><span class="s1">&#39;third&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OrderedDict:&quot;</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
 
 <span class="c1"># Move to end</span>
-<span class="n">od</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">'first'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"After moving 'first' to end:"</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
+<span class="n">od</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After moving &#39;first&#39; to end:&quot;</span><span class="p">,</span> <span class="n">od</span><span class="p">)</span>
 
 <span class="c1"># ChainMap (combines multiple dictionaries)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChainMap</span>
-<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
-<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
-<span class="n">dict3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'e'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">dict3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
 
 <span class="n">chain</span> <span class="o">=</span> <span class="n">ChainMap</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">,</span> <span class="n">dict3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"ChainMap:"</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Value of 'a':"</span><span class="p">,</span> <span class="n">chain</span><span class="p">[</span><span class="s1">'a'</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"All keys:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ChainMap:&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value of &#39;a&#39;:&quot;</span><span class="p">,</span> <span class="n">chain</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All keys:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
 </code></pre></div>
 <h2 id="6-performance-when-to-use-each-structure">6. Performance &amp; When to Use Each Structure</h2>
 <p><strong>Time Complexity Comparison:</strong></p>
@@ -640,96 +640,96 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># Practical examples of when to use each structure</span>
 
 <span class="c1"># Example 1: Shopping cart (List - ordered, allows duplicates)</span>
-<span class="n">shopping_cart</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Shopping cart:"</span><span class="p">,</span> <span class="n">shopping_cart</span><span class="p">)</span>
+<span class="n">shopping_cart</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;banana&#39;</span><span class="p">,</span> <span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shopping cart:&quot;</span><span class="p">,</span> <span class="n">shopping_cart</span><span class="p">)</span>
 
 <span class="c1"># Example 2: GPS coordinates (Tuple - immutable, fixed structure)</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s1">'New York'</span><span class="p">,</span> <span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'London'</span><span class="p">,</span> <span class="mf">51.5074</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1278</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">'Tokyo'</span><span class="p">,</span> <span class="mf">35.6762</span><span class="p">,</span> <span class="mf">139.6503</span><span class="p">)</span>
+    <span class="p">(</span><span class="s1">&#39;New York&#39;</span><span class="p">,</span> <span class="mf">40.7128</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.0060</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="mf">51.5074</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1278</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;Tokyo&#39;</span><span class="p">,</span> <span class="mf">35.6762</span><span class="p">,</span> <span class="mf">139.6503</span><span class="p">)</span>
 <span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Locations:"</span><span class="p">,</span> <span class="n">locations</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Locations:&quot;</span><span class="p">,</span> <span class="n">locations</span><span class="p">)</span>
 
 <span class="c1"># Example 3: Unique visitors (Set - no duplicates)</span>
-<span class="n">unique_visitors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'user1'</span><span class="p">,</span> <span class="s1">'user2'</span><span class="p">,</span> <span class="s1">'user1'</span><span class="p">,</span> <span class="s1">'user3'</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Unique visitors:"</span><span class="p">,</span> <span class="n">unique_visitors</span><span class="p">)</span>
+<span class="n">unique_visitors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="s1">&#39;user2&#39;</span><span class="p">,</span> <span class="s1">&#39;user1&#39;</span><span class="p">,</span> <span class="s1">&#39;user3&#39;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unique visitors:&quot;</span><span class="p">,</span> <span class="n">unique_visitors</span><span class="p">)</span>
 
 <span class="c1"># Example 4: User profiles (Dictionary - key-value mapping)</span>
 <span class="n">user_profiles</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'user1'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Alice'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
-    <span class="s1">'user2'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
-    <span class="s1">'user3'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Charlie'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">:</span> <span class="mi">35</span><span class="p">}</span>
+    <span class="s1">&#39;user1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="s1">&#39;user2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="s1">&#39;user3&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Charlie&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="mi">35</span><span class="p">}</span>
 <span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"User profiles:"</span><span class="p">,</span> <span class="n">user_profiles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User profiles:&quot;</span><span class="p">,</span> <span class="n">user_profiles</span><span class="p">)</span>
 
 <span class="c1"># Memory usage comparison</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">list_data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">tuple_data</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">set_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
-<span class="n">dict_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">'b'</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">'c'</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">'d'</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">'e'</span><span class="p">}</span>
+<span class="n">dict_data</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s1">&#39;e&#39;</span><span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"List memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tuple memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Set memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">set_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Dict memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">dict_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tuple memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">set_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dict memory: </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">dict_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="7-converting-between-data-structures">7. Converting Between Data Structures</h2>
 <p><strong>Converting between different data structures is often necessary:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Converting between data structures</span>
 <span class="n">original_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original list:"</span><span class="p">,</span> <span class="n">original_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original list:&quot;</span><span class="p">,</span> <span class="n">original_list</span><span class="p">)</span>
 
 <span class="c1"># List to other structures</span>
 <span class="n">list_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>
 <span class="n">list_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">original_list</span><span class="p">)</span>  <span class="c1"># Removes duplicates</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"List to tuple:"</span><span class="p">,</span> <span class="n">list_to_tuple</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"List to set:"</span><span class="p">,</span> <span class="n">list_to_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List to tuple:&quot;</span><span class="p">,</span> <span class="n">list_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List to set:&quot;</span><span class="p">,</span> <span class="n">list_to_set</span><span class="p">)</span>
 
 <span class="c1"># Tuple to other structures</span>
 <span class="n">tuple_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">list_to_tuple</span><span class="p">)</span>
 <span class="n">tuple_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">list_to_tuple</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Tuple to list:"</span><span class="p">,</span> <span class="n">tuple_to_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Tuple to set:"</span><span class="p">,</span> <span class="n">tuple_to_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple to list:&quot;</span><span class="p">,</span> <span class="n">tuple_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple to set:&quot;</span><span class="p">,</span> <span class="n">tuple_to_set</span><span class="p">)</span>
 
 <span class="c1"># Set to other structures</span>
 <span class="n">set_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">list_to_set</span><span class="p">)</span>
 <span class="n">set_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_to_set</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Set to list:"</span><span class="p">,</span> <span class="n">set_to_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Set to tuple:"</span><span class="p">,</span> <span class="n">set_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set to list:&quot;</span><span class="p">,</span> <span class="n">set_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set to tuple:&quot;</span><span class="p">,</span> <span class="n">set_to_tuple</span><span class="p">)</span>
 
 <span class="c1"># Dictionary conversions</span>
-<span class="n">sample_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Original dict:"</span><span class="p">,</span> <span class="n">sample_dict</span><span class="p">)</span>
+<span class="n">sample_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original dict:&quot;</span><span class="p">,</span> <span class="n">sample_dict</span><span class="p">)</span>
 
 <span class="c1"># Dictionary to lists/tuples/sets</span>
 <span class="n">dict_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">dict_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 <span class="n">dict_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sample_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Dict keys:"</span><span class="p">,</span> <span class="n">dict_keys</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Dict values:"</span><span class="p">,</span> <span class="n">dict_values</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Dict items:"</span><span class="p">,</span> <span class="n">dict_items</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict keys:&quot;</span><span class="p">,</span> <span class="n">dict_keys</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict values:&quot;</span><span class="p">,</span> <span class="n">dict_values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dict items:&quot;</span><span class="p">,</span> <span class="n">dict_items</span><span class="p">)</span>
 
 <span class="c1"># Lists to dictionary</span>
-<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">,</span> <span class="s1">'city'</span><span class="p">]</span>
-<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'Boston'</span><span class="p">]</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;Boston&#39;</span><span class="p">]</span>
 <span class="n">list_to_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Lists to dict:"</span><span class="p">,</span> <span class="n">list_to_dict</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lists to dict:&quot;</span><span class="p">,</span> <span class="n">list_to_dict</span><span class="p">)</span>
 
 <span class="c1"># List of tuples to dictionary</span>
-<span class="n">tuple_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'x'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">'y'</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">'z'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">tuple_list</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
 <span class="n">tuples_to_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">tuple_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Tuples to dict:"</span><span class="p">,</span> <span class="n">tuples_to_dict</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuples to dict:&quot;</span><span class="p">,</span> <span class="n">tuples_to_dict</span><span class="p">)</span>
 
 <span class="c1"># String to other structures</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s2">"hello"</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
 <span class="n">string_to_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="n">string_to_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="n">string_to_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>  <span class="c1"># Removes duplicate characters</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"String to list:"</span><span class="p">,</span> <span class="n">string_to_list</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"String to tuple:"</span><span class="p">,</span> <span class="n">string_to_tuple</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"String to set:"</span><span class="p">,</span> <span class="n">string_to_set</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to list:&quot;</span><span class="p">,</span> <span class="n">string_to_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to tuple:&quot;</span><span class="p">,</span> <span class="n">string_to_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String to set:&quot;</span><span class="p">,</span> <span class="n">string_to_set</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="practice-exercises">📝 Practice Exercises</h3>
 <p><strong>Basic Exercises:</strong></p>
