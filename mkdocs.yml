@@ -17,6 +17,15 @@ nav:
   - Advanced Python:
     - Object Oriented Programming: prg400/OOP.md
     - Design Patterns (SOLID): prg400/SOLID_Principles.md
+    - Event Driven Programming: prg400/EventDrivenProgramming.md
+    - Async Programming: prg400/asyncio.md
+    - Python Bindings (C/C++): prg400/PythonBindings.md
+    - Creating Distributable Packages: prg400/DistributablePackage.md
+    - FastAPI: prg400/FastAPI.md
+    - Django Framework: prg400/Django.md
+    - Deploying Applications: prg400/DeployingApplications.md
+    - Vibe Coding: prg400/VibeCoding.md
+    - Project Description (PRG400): prg400/ProjectDescription.md
 
 theme:
   # name: material
