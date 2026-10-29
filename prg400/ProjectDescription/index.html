@@ -430,7 +430,7 @@ class<span class="w"> </span>NotificationService:
 ├── requirements.txt
 ├── pyproject.toml               # Linting, formatting, test config
 ├── alembic.ini
-└── README.md                    # Your project&#39;s own README
+└── README.md                    # Your project's own README
 </code></pre></div>
 <hr />
 <h2 id="dockerfile-requirements">Dockerfile Requirements</h2>
@@ -442,7 +442,7 @@ WORKDIR<span class="w"> </span>/app
 
 <span class="c1"># Install dependencies into a virtual environment</span>
 RUN<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
-ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 
 COPY<span class="w"> </span>requirements.txt<span class="w"> </span>.
 RUN<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
@@ -457,17 +457,17 @@ WORKDIR<span class="w"> </span>/app
 COPY<span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
 COPY<span class="w"> </span>./app<span class="w"> </span>./app
 
-ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 ENV<span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
 ENV<span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
 
 <span class="c1"># Run as non-root user (security best practice)</span>
-RUN<span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
+RUN<span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">""</span><span class="w"> </span>appuser
 USER<span class="w"> </span>appuser
 
 EXPOSE<span class="w"> </span><span class="m">8000</span>
 
-CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;uvicorn&quot;</span>,<span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span>,<span class="w"> </span><span class="s2">&quot;--host&quot;</span>,<span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span>,<span class="w"> </span><span class="s2">&quot;--port&quot;</span>,<span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="o">]</span>
+CMD<span class="w"> </span><span class="o">[</span><span class="s2">"uvicorn"</span>,<span class="w"> </span><span class="s2">"app.main:app"</span>,<span class="w"> </span><span class="s2">"--host"</span>,<span class="w"> </span><span class="s2">"0.0.0.0"</span>,<span class="w"> </span><span class="s2">"--port"</span>,<span class="w"> </span><span class="s2">"8000"</span><span class="o">]</span>
 </code></pre></div>
 <p>Your <code>docker-compose.yml</code> must define at minimum: - An <code>app</code> service (your web application) - A <code>db</code> service (PostgreSQL) - Proper use of <code>environment</code>, <code>depends_on</code>, <code>volumes</code>, and <code>healthcheck</code></p>
 <hr />
@@ -477,14 +477,14 @@ CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;uvicor
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseSettings</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Settings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
-    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;My App&quot;</span>
+    <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"My App"</span>
     <span class="n">database_url</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">secret_key</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">debug</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
-        <span class="n">env_file</span> <span class="o">=</span> <span class="s2">&quot;.env&quot;</span>
+        <span class="n">env_file</span> <span class="o">=</span> <span class="s2">".env"</span>
 
 <span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">()</span>
 </code></pre></div>
