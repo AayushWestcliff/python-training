@@ -152,21 +152,21 @@
 <span class="n">age</span> <span class="o">=</span> <span class="mi">20</span>
 
 <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"You are eligible to vote."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are eligible to vote.&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"You are not eligible to vote."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are not eligible to vote.&quot;</span><span class="p">)</span>
 
 <span class="c1"># if-elif-else</span>
 <span class="n">marks</span> <span class="o">=</span> <span class="mi">85</span>
 
 <span class="k">if</span> <span class="n">marks</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grade: A+"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade: A+&quot;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">marks</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grade: A"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade: A&quot;</span><span class="p">)</span>
 <span class="k">elif</span> <span class="n">marks</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grade: B"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade: B&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Grade: C"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade: C&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Nested Conditionals &amp; Ternary Operator:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Nested conditionals</span>
@@ -175,26 +175,26 @@
 
 <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">has_license</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"You can drive!"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can drive!&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"You need a license to drive."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You need a license to drive.&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"You're too young to drive."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You&#39;re too young to drive.&quot;</span><span class="p">)</span>
 
 <span class="c1"># Ternary operator (conditional expression)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="s2">"Pass"</span> <span class="k">if</span> <span class="n">marks</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="k">else</span> <span class="s2">"Fail"</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Pass&quot;</span> <span class="k">if</span> <span class="n">marks</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="k">else</span> <span class="s2">&quot;Fail&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Multiple conditions with logical operators</span>
 <span class="n">temperature</span> <span class="o">=</span> <span class="mi">25</span>
-<span class="n">weather</span> <span class="o">=</span> <span class="s2">"sunny"</span>
+<span class="n">weather</span> <span class="o">=</span> <span class="s2">&quot;sunny&quot;</span>
 
-<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="ow">and</span> <span class="n">weather</span> <span class="o">==</span> <span class="s2">"sunny"</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Perfect weather for outdoor activities!"</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="ow">or</span> <span class="n">weather</span> <span class="o">==</span> <span class="s2">"cloudy"</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Good weather for a walk."</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="ow">and</span> <span class="n">weather</span> <span class="o">==</span> <span class="s2">&quot;sunny&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Perfect weather for outdoor activities!&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="ow">or</span> <span class="n">weather</span> <span class="o">==</span> <span class="s2">&quot;cloudy&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Good weather for a walk.&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Stay indoors!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stay indoors!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="2-loops">2. Loops</h2>
 <p><strong>Python supports two main types of loops:</strong>
@@ -209,39 +209,39 @@
 </code></pre></div>
 <p><strong>Understanding range() and enumerate():</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Different ways to use range()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"range(5):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;range(5):&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"range(2, 8):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;range(2, 8):&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"range(0, 10, 2):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;range(0, 10, 2):&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"range(10, 0, -2):"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;range(10, 0, -2):&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
 <span class="c1"># Using enumerate() to get index and value</span>
-<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Using enumerate():"</span><span class="p">)</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using enumerate():&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruits</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Starting enumerate from a different number</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Enumerate starting from 1:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Enumerate starting from 1:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">fruit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Loop over a list - For loop example</span>
-<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">]</span>
+<span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
 </code></pre></div>
@@ -256,10 +256,10 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># While-else loop</span>
 <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">while</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Count: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Count: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Loop completed successfully!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loop completed successfully!&quot;</span><span class="p">)</span>
 
 <span class="c1"># Infinite loop prevention with safety counter</span>
 <span class="n">safety_counter</span> <span class="o">=</span> <span class="mi">0</span>
@@ -269,13 +269,13 @@
     <span class="n">safety_counter</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="c1"># Your loop logic here</span>
     <span class="k">if</span> <span class="n">safety_counter</span> <span class="o">&gt;=</span> <span class="n">MAX_ITERATIONS</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Safety break: Maximum iterations reached"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Safety break: Maximum iterations reached&quot;</span><span class="p">)</span>
         <span class="k">break</span>
     <span class="c1"># Simulating some condition that would normally break the loop</span>
     <span class="k">if</span> <span class="n">safety_counter</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Normal break condition met"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal break condition met&quot;</span><span class="p">)</span>
         <span class="k">break</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Iteration </span><span class="si">{</span><span class="n">safety_counter</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iteration </span><span class="si">{</span><span class="n">safety_counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Common infinite loop mistake (commented to prevent actual infinite loop)</span>
 <span class="c1"># x = 10</span>
@@ -292,47 +292,47 @@
 </code></pre></div>
 <h2 id="3-looping-over-tuples-strings-dictionaries">3. Looping Over Tuples, Strings, &amp; Dictionaries</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Tuple</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
 <span class="c1"># String</span>
-<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s2">"Python"</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="s2">&quot;Python&quot;</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
 
 <span class="c1"># Dictionary</span>
-<span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"age"</span><span class="p">:</span> <span class="mi">21</span><span class="p">}</span>
+<span class="n">student</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">student</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Advanced Looping Techniques:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Using zip() to iterate over multiple sequences</span>
-<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Charlie"</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">]</span>
 <span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">]</span>
-<span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"New York"</span><span class="p">,</span> <span class="s2">"London"</span><span class="p">,</span> <span class="s2">"Tokyo"</span><span class="p">]</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;New York&quot;</span><span class="p">,</span> <span class="s2">&quot;London&quot;</span><span class="p">,</span> <span class="s2">&quot;Tokyo&quot;</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Using zip():"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Using zip():&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">city</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ages</span><span class="p">,</span> <span class="n">cities</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old and lives in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old and lives in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Using reversed() to iterate backwards</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Using reversed():"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">([</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">]):</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using reversed():&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">([</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
 
 <span class="c1"># List comprehensions (brief introduction)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">List comprehensions:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">List comprehensions:&quot;</span><span class="p">)</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Squares: </span><span class="si">{</span><span class="n">squares</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Squares: </span><span class="si">{</span><span class="n">squares</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">even_squares</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Even squares: </span><span class="si">{</span><span class="n">even_squares</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Even squares: </span><span class="si">{</span><span class="n">even_squares</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Nested list comprehension</span>
 <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
 <span class="n">flat_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Flattened matrix: </span><span class="si">{</span><span class="n">flat_list</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flattened matrix: </span><span class="si">{</span><span class="n">flat_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="4-special-loops-forelse">4. Special Loops: for/else</h2>
 <h4 id="the-else-block-after-a-for-loop-executes-if-the-loop-completes-normally-no-break">The <code>else</code> block after a <code>for</code> loop executes if the loop completes normally (no <code>break</code>).</h4>
@@ -340,63 +340,63 @@
 <span class="n">num</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is not prime."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is not prime.&quot;</span><span class="p">)</span>
         <span class="k">break</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is prime."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2"> is prime.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="5-nested-loops-and-flow-control">5. Nested Loops and Flow Control</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Nested loop for multiplication table</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"---"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="6-special-statements-pass-continue-break">6. Special Statements: pass, continue, break</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># pass - placeholder</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">pass</span>  <span class="c1"># Does nothing, placeholder for future code</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
 <span class="c1"># continue - skip current iteration</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">continue</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
 <span class="c1"># break - exit loop</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">break</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Error Handling in Loops:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Handling errors in loops</span>
-<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"1"</span><span class="p">,</span> <span class="s2">"2"</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">,</span> <span class="s2">"4"</span><span class="p">,</span> <span class="s2">"5"</span><span class="p">]</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Processing numbers with error handling:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Processing numbers with error handling:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">num_str</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_str</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number: </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">, Square: </span><span class="si">{</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number: </span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s2">, Square: </span><span class="si">{</span><span class="n">num</span><span class="o">**</span><span class="mi">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">num_str</span><span class="si">}</span><span class="s2">' is not a valid number, skipping..."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">num_str</span><span class="si">}</span><span class="s2">&#39; is not a valid number, skipping...&quot;</span><span class="p">)</span>
 
 <span class="c1"># Using flags to control loop behavior</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Using flags:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Using flags:&quot;</span><span class="p">)</span>
 <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">target</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">num</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">!&quot;</span><span class="p">)</span>
         <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">break</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> not found in the list"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> not found in the list&quot;</span><span class="p">)</span>
 
 <span class="c1"># Breaking out of nested loops using functions</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">find_in_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
@@ -409,77 +409,77 @@
 <span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">find_in_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Found at position: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found at position: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Not found"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Not found&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="7-resolving-real-world-problems">7. Resolving Real-World Problems</h2>
 <p><strong>Let's solve a simple real-world problem using control structures.</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Simple password validation</span>
-<span class="n">correct_password</span> <span class="o">=</span> <span class="s2">"python123"</span>
+<span class="n">correct_password</span> <span class="o">=</span> <span class="s2">&quot;python123&quot;</span>
 <span class="n">attempts</span> <span class="o">=</span> <span class="mi">3</span>
 
 <span class="k">while</span> <span class="n">attempts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">pwd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"Enter password: "</span><span class="p">)</span>
+    <span class="n">pwd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter password: &quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">pwd</span> <span class="o">==</span> <span class="n">correct_password</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Access granted!"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access granted!&quot;</span><span class="p">)</span>
         <span class="k">break</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Incorrect password. Try again."</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Incorrect password. Try again.&quot;</span><span class="p">)</span>
         <span class="n">attempts</span> <span class="o">-=</span> <span class="mi">1</span>
 
 <span class="k">if</span> <span class="n">attempts</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"Access denied. Too many failed attempts."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Access denied. Too many failed attempts.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="8-matchcase-statement-python-310">8. Match/Case Statement (Python 3.10+)</h2>
 <p><strong>The <code>match/case</code> statement is Python's version of switch-case from other languages.</strong></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Basic match/case example</span>
-<span class="n">day</span> <span class="o">=</span> <span class="s2">"Monday"</span>
+<span class="n">day</span> <span class="o">=</span> <span class="s2">&quot;Monday&quot;</span>
 
 <span class="k">match</span> <span class="n">day</span><span class="p">:</span>
-    <span class="k">case</span> <span class="s2">"Monday"</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Start of the work week!"</span><span class="p">)</span>
-    <span class="k">case</span> <span class="s2">"Tuesday"</span> <span class="o">|</span> <span class="s2">"Wednesday"</span> <span class="o">|</span> <span class="s2">"Thursday"</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Midweek days"</span><span class="p">)</span>
-    <span class="k">case</span> <span class="s2">"Friday"</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"TGIF!"</span><span class="p">)</span>
-    <span class="k">case</span> <span class="s2">"Saturday"</span> <span class="o">|</span> <span class="s2">"Sunday"</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Weekend!"</span><span class="p">)</span>
+    <span class="k">case</span> <span class="s2">&quot;Monday&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Start of the work week!&quot;</span><span class="p">)</span>
+    <span class="k">case</span> <span class="s2">&quot;Tuesday&quot;</span> <span class="o">|</span> <span class="s2">&quot;Wednesday&quot;</span> <span class="o">|</span> <span class="s2">&quot;Thursday&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Midweek days&quot;</span><span class="p">)</span>
+    <span class="k">case</span> <span class="s2">&quot;Friday&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TGIF!&quot;</span><span class="p">)</span>
+    <span class="k">case</span> <span class="s2">&quot;Saturday&quot;</span> <span class="o">|</span> <span class="s2">&quot;Sunday&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weekend!&quot;</span><span class="p">)</span>
     <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Invalid day"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid day&quot;</span><span class="p">)</span>
 
 <span class="c1"># Match with conditions</span>
 <span class="n">score</span> <span class="o">=</span> <span class="mi">85</span>
 
 <span class="k">match</span> <span class="n">score</span><span class="p">:</span>
     <span class="k">case</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-        <span class="n">grade</span> <span class="o">=</span> <span class="s2">"A"</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
     <span class="k">case</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-        <span class="n">grade</span> <span class="o">=</span> <span class="s2">"B"</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>
     <span class="k">case</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-        <span class="n">grade</span> <span class="o">=</span> <span class="s2">"C"</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
     <span class="k">case</span> <span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-        <span class="n">grade</span> <span class="o">=</span> <span class="s2">"D"</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;D&quot;</span>
     <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-        <span class="n">grade</span> <span class="o">=</span> <span class="s2">"F"</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="s2">&quot;F&quot;</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">, Grade: </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">, Grade: </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Match with data structures</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="k">match</span> <span class="n">data</span><span class="p">:</span>
-        <span class="k">case</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)}:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">"Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span>
-        <span class="k">case</span> <span class="p">{</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"product"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s2">"price"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">price</span><span class="p">)}:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">"Product: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Price: $</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">"</span>
+        <span class="k">case</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)}:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
+        <span class="k">case</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">price</span><span class="p">)}:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Product: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Price: $</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">"List with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> items"</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;List with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> items&quot;</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">"Unknown data format"</span>
+            <span class="k">return</span> <span class="s2">&quot;Unknown data format&quot;</span>
 
 <span class="c1"># Test the function</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_data</span><span class="p">({</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">}))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">process_data</span><span class="p">({</span><span class="s2">"type"</span><span class="p">:</span> <span class="s2">"product"</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Laptop"</span><span class="p">,</span> <span class="s2">"price"</span><span class="p">:</span> <span class="mf">999.99</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">process_data</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">process_data</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;product&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Laptop&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="mf">999.99</span><span class="p">}))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">process_data</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
 </code></pre></div>
 <p><strong>🛠️ AI Tool:</strong> Google Colab - Gemini Or Github Copilot</p>
