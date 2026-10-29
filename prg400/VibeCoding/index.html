@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Vibe Coding - Python</title>
+    <title>Vibe Coding - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -214,7 +214,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -306,11 +306,7 @@
 <blockquote>
 <p><em>"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because LLMs are getting good enough."</em></p>
 </blockquote>
-<p>He described a workflow where developers:
-- Describe what they want in natural language
-- Let the AI generate the code
-- Accept suggestions without always reading them deeply
-- Iterate quickly through prompts rather than through manual edits</p>
+<p>He described a workflow where developers: - Describe what they want in natural language - Let the AI generate the code - Accept suggestions without always reading them deeply - Iterate quickly through prompts rather than through manual edits</p>
 <hr />
 <h3 id="the-spectrum-of-ai-assisted-development">The Spectrum of AI-Assisted Development</h3>
 <div class="highlight"><pre><span></span><code>TRADITIONAL                                              PURE VIBE
@@ -453,20 +449,20 @@ CODING                                                   CODING
 <p>The quality of AI output is <strong>directly proportional to the quality of your prompt</strong>. This is the most important skill to develop.</p>
 <h3 id="the-anatomy-of-a-great-code-prompt">The Anatomy of a Great Code Prompt</h3>
 <div class="highlight"><pre><span></span><code>┌────────────────────────────────────────────────────────────────┐
-│  ROLE       — &quot;You are a senior Python backend developer&quot;       │
-│  CONTEXT    — &quot;I&#39;m building a FastAPI app with PostgreSQL&quot;      │
-│  TASK       — &quot;Create a user registration endpoint&quot;            │
-│  SPECIFICS  — &quot;Use Pydantic v2, hash passwords with bcrypt&quot;    │
-│  CONSTRAINTS— &quot;Follow RESTful conventions, add error handling&quot; │
-│  FORMAT     — &quot;Include type hints and docstrings&quot;              │
+│  ROLE       — "You are a senior Python backend developer"       │
+│  CONTEXT    — "I'm building a FastAPI app with PostgreSQL"      │
+│  TASK       — "Create a user registration endpoint"            │
+│  SPECIFICS  — "Use Pydantic v2, hash passwords with bcrypt"    │
+│  CONSTRAINTS— "Follow RESTful conventions, add error handling" │
+│  FORMAT     — "Include type hints and docstrings"              │
 └────────────────────────────────────────────────────────────────┘
 </code></pre></div>
 <h3 id="bad-prompt-vs-good-prompt">Bad Prompt vs. Good Prompt</h3>
-<p><strong>❌ Weak prompt:</strong>
+<p><strong>❌ Weak prompt:</strong></p>
 <div class="highlight"><pre><span></span><code>make a login api
-</code></pre></div></p>
-<p><strong>✅ Strong prompt:</strong>
-<div class="highlight"><pre><span></span><code>You are a senior Python developer. I&#39;m building a FastAPI application.
+</code></pre></div>
+<p><strong>✅ Strong prompt:</strong></p>
+<div class="highlight"><pre><span></span><code>You are a senior Python developer. I'm building a FastAPI application.
 
 Create a POST /auth/login endpoint that:
 - Accepts email and password in the request body (use Pydantic v2 BaseModel)
@@ -477,7 +473,7 @@ Create a POST /auth/login endpoint that:
 - Includes type hints and a brief docstring
 
 Do not create the full app — just the router function and the Pydantic schemas.
-</code></pre></div></p>
+</code></pre></div>
 <hr />
 <h3 id="prompting-patterns-for-developers">Prompting Patterns for Developers</h3>
 <table>
@@ -528,55 +524,55 @@ Do not create the full app — just the router function and the Pydantic schemas
 </table>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
 <span class="c1"># LIVE DEMO: Simulating what AI tools produce</span>
-<span class="c1"># We&#39;ll look at a progression of prompts and the kind of output</span>
+<span class="c1"># We'll look at a progression of prompts and the kind of output</span>
 <span class="c1"># a tool like GitHub Copilot or Claude would generate.</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="c1"># Prompt 1 (weak): &quot;make a function to validate email&quot;</span>
+<span class="c1"># Prompt 1 (weak): "make a function to validate email"</span>
 <span class="c1"># Typical AI output — minimal, no edge cases:</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_email_weak</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;@&quot;</span> <span class="ow">in</span> <span class="n">email</span>
+    <span class="k">return</span> <span class="s2">"@"</span> <span class="ow">in</span> <span class="n">email</span>
 
 
-<span class="c1"># Prompt 2 (better): &quot;Write a Python function that validates an email address</span>
-<span class="c1"># using a regex. Return True if valid, False otherwise. Add type hints.&quot;</span>
+<span class="c1"># Prompt 2 (better): "Write a Python function that validates an email address</span>
+<span class="c1"># using a regex. Return True if valid, False otherwise. Add type hints."</span>
 <span class="c1"># Typical AI output — more robust:</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate an email address using a regex pattern.&quot;&quot;&quot;</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$&#39;</span>
+<span class="w">    </span><span class="sd">"""Validate an email address using a regex pattern."""</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">))</span>
 
 
 <span class="c1"># Test it</span>
 <span class="n">test_emails</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;student@kings.edu.np&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;not-an-email&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;missing@domain&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;valid.user+tag@example.co.uk&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@nodomain.com&quot;</span><span class="p">,</span>
+    <span class="s2">"student@kings.edu.np"</span><span class="p">,</span>
+    <span class="s2">"not-an-email"</span><span class="p">,</span>
+    <span class="s2">"missing@domain"</span><span class="p">,</span>
+    <span class="s2">"valid.user+tag@example.co.uk"</span><span class="p">,</span>
+    <span class="s2">"@nodomain.com"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Email Validation Results:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Email Validation Results:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">email</span> <span class="ow">in</span> <span class="n">test_emails</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;✓ Valid&quot;</span> <span class="k">if</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;✗ Invalid&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">"✓ Valid"</span> <span class="k">if</span> <span class="n">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"✗ Invalid"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
 <span class="c1"># CRITICAL THINKING EXERCISE</span>
 <span class="c1"># The AI also generated this password checker. Can you spot</span>
-<span class="c1"># what&#39;s wrong with it before running it?</span>
+<span class="c1"># what's wrong with it before running it?</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">check_password_strength</span><span class="p">(</span><span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    AI-generated function — review before trusting!</span>
-<span class="sd">    Returns &#39;weak&#39;, &#39;medium&#39;, or &#39;strong&#39; based on password rules.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Returns 'weak', 'medium', or 'strong' based on password rules.</span>
+<span class="sd">    """</span>
     <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">:</span>
@@ -585,28 +581,28 @@ Do not create the full app — just the router function and the Pydantic schemas
         <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
         <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;!@#$%^&amp;*&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span> <span class="ow">in</span> <span class="s2">"!@#$%^&amp;*"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">):</span>
         <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="c1"># BUG: The thresholds don&#39;t account for the max score being 4</span>
+    <span class="c1"># BUG: The thresholds don't account for the max score being 4</span>
     <span class="c1"># Also: printing the password is a security anti-pattern!</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Checking password: </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># ← NEVER DO THIS IN PRODUCTION</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Checking password: </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># ← NEVER DO THIS IN PRODUCTION</span>
 
     <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;weak&quot;</span>
-    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>   <span class="c1"># ← &#39;medium&#39; catches score 2 and 3</span>
-        <span class="k">return</span> <span class="s2">&quot;medium&quot;</span>
+        <span class="k">return</span> <span class="s2">"weak"</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>   <span class="c1"># ← 'medium' catches score 2 and 3</span>
+        <span class="k">return</span> <span class="s2">"medium"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;strong&quot;</span>
+        <span class="k">return</span> <span class="s2">"strong"</span>
 
 
 <span class="c1"># Discussion: What are the problems?</span>
 <span class="c1"># 1. Logging the password to stdout (OWASP A09 - Security Logging failure)</span>
-<span class="c1"># 2. No protection against extremely short passwords (score=1 still passes &#39;medium&#39;)</span>
+<span class="c1"># 2. No protection against extremely short passwords (score=1 still passes 'medium')</span>
 <span class="c1"># 3. Only 8 chars minimum — modern standards recommend 12+</span>
 <span class="c1"># This is exactly the kind of code that requires human review!</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Strength:&quot;</span><span class="p">,</span> <span class="n">check_password_strength</span><span class="p">(</span><span class="s2">&quot;Secret1!&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Strength:"</span><span class="p">,</span> <span class="n">check_password_strength</span><span class="p">(</span><span class="s2">"Secret1!"</span><span class="p">))</span>
 </code></pre></div>
 <hr />
 <h2 id="section-4-ai-assisted-fastapi-development">Section 4 — AI-Assisted FastAPI Development</h2>
@@ -624,7 +620,7 @@ Do not create the full app — just the router function and the Pydantic schemas
 - CRUD endpoints: GET /tasks, POST /tasks, GET /tasks/{id},
   PATCH /tasks/{id}, DELETE /tasks/{id}
 - Pydantic v2 request/response schemas
-- Proper 404 handling when a task doesn&#39;t exist
+- Proper 404 handling when a task doesn't exist
 - Keep everything in a single file for simplicity
 </code></pre></div>
 <h3 id="what-the-ai-generated-and-what-we-reviewed">What the AI Generated (and what we reviewed)</h3>
@@ -638,7 +634,7 @@ Do not create the full app — just the router function and the Pydantic schemas
 <span class="c1"># NOTE: This cell shows the code structure. To actually run this,</span>
 <span class="c1"># you would save it as main.py and run: uvicorn main:app --reload</span>
 
-<span class="n">code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">code</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># main.py — AI-assisted scaffold, human-reviewed</span>
 
 <span class="s1">from datetime import datetime</span>
@@ -650,18 +646,18 @@ Do not create the full app — just the router function and the Pydantic schemas
 <span class="s1">from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker</span>
 
 <span class="s1"># ── Database Setup ─────────────────────────────────────────────</span>
-<span class="s1">DATABASE_URL = &quot;sqlite:///./tasks.db&quot;</span>
-<span class="s1">engine = create_engine(DATABASE_URL, connect_args={&quot;check_same_thread&quot;: False})</span>
+<span class="s1">DATABASE_URL = "sqlite:///./tasks.db"</span>
+<span class="s1">engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})</span>
 <span class="s1">SessionLocal = sessionmaker(bind=engine)</span>
 
 <span class="s1">class Base(DeclarativeBase):</span>
 <span class="s1">    pass</span>
 
 <span class="s1">class Task(Base):</span>
-<span class="s1">    __tablename__ = &quot;tasks&quot;</span>
+<span class="s1">    __tablename__ = "tasks"</span>
 <span class="s1">    id          = Column(Integer, primary_key=True, index=True)</span>
 <span class="s1">    title       = Column(String(200), nullable=False)</span>
-<span class="s1">    description = Column(String(1000), default=&quot;&quot;)</span>
+<span class="s1">    description = Column(String(1000), default="")</span>
 <span class="s1">    completed   = Column(Boolean, default=False)</span>
 <span class="s1">    created_at  = Column(DateTime, default=datetime.utcnow)</span>
 
@@ -670,7 +666,7 @@ Do not create the full app — just the router function and the Pydantic schemas
 <span class="s1"># ── Pydantic Schemas ───────────────────────────────────────────</span>
 <span class="s1">class TaskCreate(BaseModel):</span>
 <span class="s1">    title: str = Field(..., min_length=1, max_length=200)</span>
-<span class="s1">    description: str = Field(default=&quot;&quot;, max_length=1000)</span>
+<span class="s1">    description: str = Field(default="", max_length=1000)</span>
 
 <span class="s1">class TaskUpdate(BaseModel):</span>
 <span class="s1">    title: Optional[str] = Field(None, min_length=1, max_length=200)</span>
@@ -684,7 +680,7 @@ Do not create the full app — just the router function and the Pydantic schemas
 <span class="s1">    completed: bool</span>
 <span class="s1">    created_at: datetime</span>
 
-<span class="s1">    model_config = {&quot;from_attributes&quot;: True}  # Pydantic v2</span>
+<span class="s1">    model_config = {"from_attributes": True}  # Pydantic v2</span>
 
 <span class="s1"># ── Dependency ─────────────────────────────────────────────────</span>
 <span class="s1">def get_db():</span>
@@ -695,65 +691,65 @@ Do not create the full app — just the router function and the Pydantic schemas
 <span class="s1">        db.close()</span>
 
 <span class="s1"># ── App &amp; Routes ───────────────────────────────────────────────</span>
-<span class="s1">app = FastAPI(title=&quot;Task Manager API&quot;, version=&quot;1.0.0&quot;)</span>
+<span class="s1">app = FastAPI(title="Task Manager API", version="1.0.0")</span>
 
-<span class="s1">@app.get(&quot;/tasks&quot;, response_model=list[TaskResponse])</span>
+<span class="s1">@app.get("/tasks", response_model=list[TaskResponse])</span>
 <span class="s1">def list_tasks(db: Session = Depends(get_db)):</span>
-<span class="s1">    &quot;&quot;&quot;Return all tasks.&quot;&quot;&quot;</span>
+<span class="s1">    """Return all tasks."""</span>
 <span class="s1">    return db.query(Task).all()</span>
 
-<span class="s1">@app.post(&quot;/tasks&quot;, response_model=TaskResponse, status_code=201)</span>
+<span class="s1">@app.post("/tasks", response_model=TaskResponse, status_code=201)</span>
 <span class="s1">def create_task(payload: TaskCreate, db: Session = Depends(get_db)):</span>
-<span class="s1">    &quot;&quot;&quot;Create a new task.&quot;&quot;&quot;</span>
+<span class="s1">    """Create a new task."""</span>
 <span class="s1">    task = Task(**payload.model_dump())</span>
 <span class="s1">    db.add(task)</span>
 <span class="s1">    db.commit()</span>
 <span class="s1">    db.refresh(task)</span>
 <span class="s1">    return task</span>
 
-<span class="s1">@app.get(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, response_model=TaskResponse)</span>
+<span class="s1">@app.get("/tasks/</span><span class="si">{task_id}</span><span class="s1">", response_model=TaskResponse)</span>
 <span class="s1">def get_task(task_id: int, db: Session = Depends(get_db)):</span>
-<span class="s1">    &quot;&quot;&quot;Fetch a single task by ID.&quot;&quot;&quot;</span>
+<span class="s1">    """Fetch a single task by ID."""</span>
 <span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
 <span class="s1">    if not task:</span>
-<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">        raise HTTPException(status_code=404, detail="Task not found")</span>
 <span class="s1">    return task</span>
 
-<span class="s1">@app.patch(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, response_model=TaskResponse)</span>
+<span class="s1">@app.patch("/tasks/</span><span class="si">{task_id}</span><span class="s1">", response_model=TaskResponse)</span>
 <span class="s1">def update_task(task_id: int, payload: TaskUpdate, db: Session = Depends(get_db)):</span>
-<span class="s1">    &quot;&quot;&quot;Partially update a task.&quot;&quot;&quot;</span>
+<span class="s1">    """Partially update a task."""</span>
 <span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
 <span class="s1">    if not task:</span>
-<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">        raise HTTPException(status_code=404, detail="Task not found")</span>
 <span class="s1">    for field, value in payload.model_dump(exclude_unset=True).items():</span>
 <span class="s1">        setattr(task, field, value)</span>
 <span class="s1">    db.commit()</span>
 <span class="s1">    db.refresh(task)</span>
 <span class="s1">    return task</span>
 
-<span class="s1">@app.delete(&quot;/tasks/</span><span class="si">{task_id}</span><span class="s1">&quot;, status_code=204)</span>
+<span class="s1">@app.delete("/tasks/</span><span class="si">{task_id}</span><span class="s1">", status_code=204)</span>
 <span class="s1">def delete_task(task_id: int, db: Session = Depends(get_db)):</span>
-<span class="s1">    &quot;&quot;&quot;Delete a task.&quot;&quot;&quot;</span>
+<span class="s1">    """Delete a task."""</span>
 <span class="s1">    task = db.query(Task).filter(Task.id == task_id).first()</span>
 <span class="s1">    if not task:</span>
-<span class="s1">        raise HTTPException(status_code=404, detail=&quot;Task not found&quot;)</span>
+<span class="s1">        raise HTTPException(status_code=404, detail="Task not found")</span>
 <span class="s1">    db.delete(task)</span>
 <span class="s1">    db.commit()</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task Manager API scaffold generated by AI.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Character count:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Key patterns used (that YOU need to understand):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Task Manager API scaffold generated by AI."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Character count:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">code</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Key patterns used (that YOU need to understand):"</span><span class="p">)</span>
 <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;SQLAlchemy 2.0 DeclarativeBase (not the old declarative_base())&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Pydantic v2 model_config = {&#39;from_attributes&#39;: True}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Dependency injection with Depends(get_db)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;model_dump(exclude_unset=True) for partial updates&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;HTTPException for consistent error responses&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status_code=201 for POST, 204 for DELETE&quot;</span><span class="p">,</span>
+    <span class="s2">"SQLAlchemy 2.0 DeclarativeBase (not the old declarative_base())"</span><span class="p">,</span>
+    <span class="s2">"Pydantic v2 model_config = {'from_attributes': True}"</span><span class="p">,</span>
+    <span class="s2">"Dependency injection with Depends(get_db)"</span><span class="p">,</span>
+    <span class="s2">"model_dump(exclude_unset=True) for partial updates"</span><span class="p">,</span>
+    <span class="s2">"HTTPException for consistent error responses"</span><span class="p">,</span>
+    <span class="s2">"status_code=201 for POST, 204 for DELETE"</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">patterns</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="what-the-ai-got-right-and-what-needed-fixing">What the AI Got Right — and What Needed Fixing</h3>
 <table>
@@ -814,12 +810,9 @@ Do not create the full app — just the router function and the Pydantic schemas
 <div class="highlight"><pre><span></span><code>Add a GET /tasks/search endpoint to the Task Manager API above.
 It should accept a query parameter `q` and return tasks where
 the title contains the search string (case-insensitive).
-Use SQLAlchemy&#39;s ilike() for the filter.
+Use SQLAlchemy's ilike() for the filter.
 </code></pre></div>
-<p>Check:
-1. Does it use <code>ilike()</code> correctly?
-2. Does it handle the case where <code>q</code> is empty?
-3. Is the route registered before <code>/tasks/{task_id}</code> to avoid conflict?</p>
+<p>Check: 1. Does it use <code>ilike()</code> correctly? 2. Does it handle the case where <code>q</code> is empty? 3. Is the route registered before <code>/tasks/{task_id}</code> to avoid conflict?</p>
 <hr />
 <h2 id="section-5-ai-assisted-django-development">Section 5 — AI-Assisted Django Development</h2>
 <h3 id="when-to-use-django-vs-fastapi">When to Use Django vs FastAPI</h3>
@@ -868,7 +861,7 @@ Use SQLAlchemy&#39;s ilike() for the filter.
 <h3 id="ai-assisted-django-generating-models">AI-Assisted Django: Generating Models</h3>
 <p><strong>Prompt sent to AI:</strong></p>
 <div class="highlight"><pre><span></span><code>Create Django models for a blog platform with:
-- User profile (extends Django&#39;s built-in User with bio and avatar_url)
+- User profile (extends Django's built-in User with bio and avatar_url)
 - Post model (title, content, author FK to User, published_at, is_published, slug)
 - Tag model (name, slug) with ManyToMany to Post
 - Comment model (post FK, author FK, body, created_at)
@@ -881,7 +874,7 @@ a custom manager on Post that returns only published posts.
 <span class="c1"># Display the generated code and annotate the key decisions</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="n">django_models_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">django_models_code</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># models.py — AI-generated, human-reviewed</span>
 
 <span class="s1">from django.db import models</span>
@@ -891,12 +884,12 @@ a custom manager on Post that returns only published posts.
 
 
 <span class="s1">class UserProfile(models.Model):</span>
-<span class="s1">    user       = models.OneToOneField(User, on_delete=models.CASCADE, related_name=&quot;profile&quot;)</span>
+<span class="s1">    user       = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")</span>
 <span class="s1">    bio        = models.TextField(blank=True)</span>
 <span class="s1">    avatar_url = models.URLField(blank=True)</span>
 
 <span class="s1">    def __str__(self):</span>
-<span class="s1">        return f&quot;Profile of </span><span class="si">{self.user.username}</span><span class="s1">&quot;</span>
+<span class="s1">        return f"Profile of </span><span class="si">{self.user.username}</span><span class="s1">"</span>
 
 
 <span class="s1">class Tag(models.Model):</span>
@@ -912,11 +905,11 @@ a custom manager on Post that returns only published posts.
 <span class="s1">        return self.name</span>
 
 <span class="s1">    class Meta:</span>
-<span class="s1">        ordering = [&quot;name&quot;]</span>
+<span class="s1">        ordering = ["name"]</span>
 
 
 <span class="s1">class PublishedManager(models.Manager):</span>
-<span class="s1">    &quot;&quot;&quot;Custom manager that returns only published posts.&quot;&quot;&quot;</span>
+<span class="s1">    """Custom manager that returns only published posts."""</span>
 <span class="s1">    def get_queryset(self):</span>
 <span class="s1">        return super().get_queryset().filter(is_published=True)</span>
 
@@ -925,8 +918,8 @@ a custom manager on Post that returns only published posts.
 <span class="s1">    title        = models.CharField(max_length=300)</span>
 <span class="s1">    slug         = models.SlugField(max_length=300, unique=True)</span>
 <span class="s1">    content      = models.TextField()</span>
-<span class="s1">    author       = models.ForeignKey(User, on_delete=models.CASCADE, related_name=&quot;posts&quot;)</span>
-<span class="s1">    tags         = models.ManyToManyField(Tag, blank=True, related_name=&quot;posts&quot;)</span>
+<span class="s1">    author       = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")</span>
+<span class="s1">    tags         = models.ManyToManyField(Tag, blank=True, related_name="posts")</span>
 <span class="s1">    is_published = models.BooleanField(default=False)</span>
 <span class="s1">    published_at = models.DateTimeField(null=True, blank=True)</span>
 <span class="s1">    created_at   = models.DateTimeField(auto_now_add=True)</span>
@@ -946,56 +939,56 @@ a custom manager on Post that returns only published posts.
 <span class="s1">        return self.title</span>
 
 <span class="s1">    class Meta:</span>
-<span class="s1">        ordering = [&quot;-published_at&quot;]</span>
+<span class="s1">        ordering = ["-published_at"]</span>
 
 
 <span class="s1">class Comment(models.Model):</span>
-<span class="s1">    post       = models.ForeignKey(Post, on_delete=models.CASCADE, related_name=&quot;comments&quot;)</span>
-<span class="s1">    author     = models.ForeignKey(User, on_delete=models.CASCADE, related_name=&quot;comments&quot;)</span>
+<span class="s1">    post       = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")</span>
+<span class="s1">    author     = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")</span>
 <span class="s1">    body       = models.TextField()</span>
 <span class="s1">    created_at = models.DateTimeField(auto_now_add=True)</span>
 
 <span class="s1">    def __str__(self):</span>
-<span class="s1">        return f&quot;Comment by </span><span class="si">{self.author.username}</span><span class="s1"> on </span><span class="si">{self.post.title}</span><span class="s1">&quot;</span>
+<span class="s1">        return f"Comment by </span><span class="si">{self.author.username}</span><span class="s1"> on </span><span class="si">{self.post.title}</span><span class="s1">"</span>
 
 <span class="s1">    class Meta:</span>
-<span class="s1">        ordering = [&quot;created_at&quot;]</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        ordering = ["created_at"]</span>
+<span class="s1">'''</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Django models generated by AI&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Django models generated by AI"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
 
 <span class="n">review_points</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;✅ AI got right&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Used OneToOneField (not ForeignKey) for UserProfile&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Custom manager correctly overrides get_queryset()&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;auto_now_add vs auto_now used correctly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ManyToManyField with blank=True (not null=True)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;on_delete=CASCADE on all ForeignKeys&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Auto-sets published_at when first published&quot;</span><span class="p">,</span>
+    <span class="s2">"✅ AI got right"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Used OneToOneField (not ForeignKey) for UserProfile"</span><span class="p">,</span>
+        <span class="s2">"Custom manager correctly overrides get_queryset()"</span><span class="p">,</span>
+        <span class="s2">"auto_now_add vs auto_now used correctly"</span><span class="p">,</span>
+        <span class="s2">"ManyToManyField with blank=True (not null=True)"</span><span class="p">,</span>
+        <span class="s2">"on_delete=CASCADE on all ForeignKeys"</span><span class="p">,</span>
+        <span class="s2">"Auto-sets published_at when first published"</span><span class="p">,</span>
     <span class="p">],</span>
-    <span class="s2">&quot;⚠️ Things to discuss&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Slug auto-generation: what happens with duplicate titles?&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;No max_length on TextField fields (fine, but intentional?)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;No signal to auto-create UserProfile on User creation&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;published_at ordering may show unpublished posts oddly&quot;</span><span class="p">,</span>
+    <span class="s2">"⚠️ Things to discuss"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Slug auto-generation: what happens with duplicate titles?"</span><span class="p">,</span>
+        <span class="s2">"No max_length on TextField fields (fine, but intentional?)"</span><span class="p">,</span>
+        <span class="s2">"No signal to auto-create UserProfile on User creation"</span><span class="p">,</span>
+        <span class="s2">"published_at ordering may show unpublished posts oddly"</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">}</span>
 
 <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">points</span> <span class="ow">in</span> <span class="n">review_points</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">:"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">points</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  • </span><span class="si">{</span><span class="n">point</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="ai-generated-django-admin-configuration">AI-Generated Django Admin Configuration</h3>
 <p>One of the most powerful AI-assisted tasks is configuring Django Admin. It's repetitive, boilerplate-heavy, and AI excels at it:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
-<span class="c1"># Prompt: &quot;Generate Django admin.py for the blog models above.</span>
+<span class="c1"># Prompt: "Generate Django admin.py for the blog models above.</span>
 <span class="c1">#          Include list_display, search_fields, list_filter,</span>
-<span class="c1">#          prepopulated_fields for slugs, and inline for comments.&quot;</span>
+<span class="c1">#          prepopulated_fields for slugs, and inline for comments."</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="n">admin_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">admin_code</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># admin.py — AI-generated in ~3 seconds</span>
 
 <span class="s1">from django.contrib import admin</span>
@@ -1004,55 +997,52 @@ a custom manager on Post that returns only published posts.
 
 <span class="s1">@admin.register(UserProfile)</span>
 <span class="s1">class UserProfileAdmin(admin.ModelAdmin):</span>
-<span class="s1">    list_display = (&quot;user&quot;, &quot;bio&quot;)</span>
-<span class="s1">    search_fields = (&quot;user__username&quot;, &quot;user__email&quot;)</span>
+<span class="s1">    list_display = ("user", "bio")</span>
+<span class="s1">    search_fields = ("user__username", "user__email")</span>
 
 
 <span class="s1">@admin.register(Tag)</span>
 <span class="s1">class TagAdmin(admin.ModelAdmin):</span>
-<span class="s1">    list_display = (&quot;name&quot;, &quot;slug&quot;)</span>
-<span class="s1">    prepopulated_fields = {&quot;slug&quot;: (&quot;name&quot;,)}</span>
+<span class="s1">    list_display = ("name", "slug")</span>
+<span class="s1">    prepopulated_fields = {"slug": ("name",)}</span>
 
 
 <span class="s1">class CommentInline(admin.TabularInline):</span>
 <span class="s1">    model = Comment</span>
 <span class="s1">    extra = 0</span>
-<span class="s1">    readonly_fields = (&quot;author&quot;, &quot;created_at&quot;)</span>
+<span class="s1">    readonly_fields = ("author", "created_at")</span>
 
 
 <span class="s1">@admin.register(Post)</span>
 <span class="s1">class PostAdmin(admin.ModelAdmin):</span>
-<span class="s1">    list_display  = (&quot;title&quot;, &quot;author&quot;, &quot;is_published&quot;, &quot;published_at&quot;, &quot;created_at&quot;)</span>
-<span class="s1">    list_filter   = (&quot;is_published&quot;, &quot;tags&quot;, &quot;created_at&quot;)</span>
-<span class="s1">    search_fields = (&quot;title&quot;, &quot;content&quot;, &quot;author__username&quot;)</span>
-<span class="s1">    prepopulated_fields = {&quot;slug&quot;: (&quot;title&quot;,)}</span>
-<span class="s1">    filter_horizontal   = (&quot;tags&quot;,)</span>
+<span class="s1">    list_display  = ("title", "author", "is_published", "published_at", "created_at")</span>
+<span class="s1">    list_filter   = ("is_published", "tags", "created_at")</span>
+<span class="s1">    search_fields = ("title", "content", "author__username")</span>
+<span class="s1">    prepopulated_fields = {"slug": ("title",)}</span>
+<span class="s1">    filter_horizontal   = ("tags",)</span>
 <span class="s1">    inlines = [CommentInline]</span>
-<span class="s1">    date_hierarchy = &quot;created_at&quot;</span>
+<span class="s1">    date_hierarchy = "created_at"</span>
 
 
 <span class="s1">@admin.register(Comment)</span>
 <span class="s1">class CommentAdmin(admin.ModelAdmin):</span>
-<span class="s1">    list_display  = (&quot;author&quot;, &quot;post&quot;, &quot;created_at&quot;)</span>
-<span class="s1">    search_fields = (&quot;author__username&quot;, &quot;body&quot;)</span>
-<span class="s1">    list_filter   = (&quot;created_at&quot;,)</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    list_display  = ("author", "post", "created_at")</span>
+<span class="s1">    search_fields = ("author__username", "body")</span>
+<span class="s1">    list_filter   = ("created_at",)</span>
+<span class="s1">'''</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Django admin.py — AI-generated output&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time to generate manually: ~15-20 minutes&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time with AI:              ~30 seconds&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">This is the productivity multiplier.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The AI knows Django admin&#39;s API better than most developers.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">But YOU need to know what it means to verify it!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Django admin.py — AI-generated output"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Time to generate manually: ~15-20 minutes"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Time with AI:              ~30 seconds"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">This is the productivity multiplier."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The AI knows Django admin's API better than most developers."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">But YOU need to know what it means to verify it!"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="section-6-ai-for-infrastructure-docker-nginx">Section 6 — AI for Infrastructure: Docker &amp; Nginx</h2>
 <h3 id="infrastructure-as-code-ais-comfort-zone">Infrastructure as Code — AI's Comfort Zone</h3>
-<p>Docker configurations are:
-- Pattern-heavy (same structure for every app type)
-- Easy to forget details (exposed ports, volume mounts, healthchecks)
-- Time-consuming to look up from scratch</p>
+<p>Docker configurations are: - Pattern-heavy (same structure for every app type) - Easy to forget details (exposed ports, volume mounts, healthchecks) - Time-consuming to look up from scratch</p>
 <p>This makes them a <strong>perfect target for AI generation</strong>.</p>
 <hr />
 <h3 id="prompt-for-full-stack-docker-setup">Prompt for Full Stack Docker Setup</h3>
@@ -1073,10 +1063,10 @@ Requirements:
 <span class="c1"># AI-Generated Docker Compose — Reviewed &amp; Annotated</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="n">docker_compose</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">docker_compose</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># docker-compose.yml — AI-generated, production-ready pattern</span>
 
-<span class="s1">version: &quot;3.9&quot;</span>
+<span class="s1">version: "3.9"</span>
 
 <span class="s1">services:</span>
 
@@ -1089,7 +1079,7 @@ Requirements:
 <span class="s1">      POSTGRES_USER:     $</span><span class="si">{POSTGRES_USER}</span>
 <span class="s1">      POSTGRES_PASSWORD: $</span><span class="si">{POSTGRES_PASSWORD}</span>
 <span class="s1">    healthcheck:</span>
-<span class="s1">      test: [&quot;CMD-SHELL&quot;, &quot;pg_isready -U $</span><span class="si">{POSTGRES_USER}</span><span class="s1"> -d $</span><span class="si">{POSTGRES_DB}</span><span class="s1">&quot;]</span>
+<span class="s1">      test: ["CMD-SHELL", "pg_isready -U $</span><span class="si">{POSTGRES_USER}</span><span class="s1"> -d $</span><span class="si">{POSTGRES_DB}</span><span class="s1">"]</span>
 <span class="s1">      interval: 10s</span>
 <span class="s1">      timeout: 5s</span>
 <span class="s1">      retries: 5</span>
@@ -1108,7 +1098,7 @@ Requirements:
 <span class="s1">      DATABASE_URL:  postgresql://$</span><span class="si">{POSTGRES_USER}</span><span class="s1">:$</span><span class="si">{POSTGRES_PASSWORD}</span><span class="s1">@db/$</span><span class="si">{POSTGRES_DB}</span>
 <span class="s1">      REDIS_URL:     redis://redis:6379/0</span>
 <span class="s1">      SECRET_KEY:    $</span><span class="si">{DJANGO_SECRET_KEY}</span>
-<span class="s1">      DEBUG:         &quot;False&quot;</span>
+<span class="s1">      DEBUG:         "False"</span>
 <span class="s1">      ALLOWED_HOSTS: $</span><span class="si">{ALLOWED_HOSTS}</span>
 <span class="s1">    depends_on:</span>
 <span class="s1">      db:</span>
@@ -1120,8 +1110,8 @@ Requirements:
 <span class="s1">  nginx:</span>
 <span class="s1">    image: nginx:1.25-alpine</span>
 <span class="s1">    ports:</span>
-<span class="s1">      - &quot;80:80&quot;</span>
-<span class="s1">      - &quot;443:443&quot;</span>
+<span class="s1">      - "80:80"</span>
+<span class="s1">      - "443:443"</span>
 <span class="s1">    volumes:</span>
 <span class="s1">      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro</span>
 <span class="s1">      - static_files:/app/staticfiles:ro</span>
@@ -1132,9 +1122,9 @@ Requirements:
 <span class="s1">volumes:</span>
 <span class="s1">  postgres_data:</span>
 <span class="s1">  static_files:</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
-<span class="n">nginx_conf</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">nginx_conf</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># nginx/nginx.conf — AI-generated Nginx config</span>
 
 <span class="s1">upstream django {</span>
@@ -1149,7 +1139,7 @@ Requirements:
 <span class="s1">    location /static/ {</span>
 <span class="s1">        alias /app/staticfiles/;</span>
 <span class="s1">        expires 30d;</span>
-<span class="s1">        add_header Cache-Control &quot;public, immutable&quot;;</span>
+<span class="s1">        add_header Cache-Control "public, immutable";</span>
 <span class="s1">    }</span>
 
 <span class="s1">    # Proxy everything else to Django</span>
@@ -1161,9 +1151,9 @@ Requirements:
 <span class="s1">        proxy_set_header   X-Forwarded-Proto $scheme;</span>
 <span class="s1">    }</span>
 <span class="s1">}</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
-<span class="n">dockerfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="n">dockerfile</span> <span class="o">=</span> <span class="s1">'''</span>
 <span class="s1"># Dockerfile — AI-generated multi-stage build</span>
 
 <span class="s1">FROM python:3.12-slim AS builder</span>
@@ -1178,42 +1168,42 @@ Requirements:
 <span class="s1">ENV PATH=/root/.local/bin:$PATH</span>
 <span class="s1">RUN python manage.py collectstatic --no-input</span>
 <span class="s1">EXPOSE 8000</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 <span class="n">files</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;docker-compose.yml&quot;</span><span class="p">:</span> <span class="n">docker_compose</span><span class="p">,</span>
-    <span class="s2">&quot;nginx/nginx.conf&quot;</span><span class="p">:</span> <span class="n">nginx_conf</span><span class="p">,</span>
-    <span class="s2">&quot;Dockerfile&quot;</span><span class="p">:</span> <span class="n">dockerfile</span><span class="p">,</span>
+    <span class="s2">"docker-compose.yml"</span><span class="p">:</span> <span class="n">docker_compose</span><span class="p">,</span>
+    <span class="s2">"nginx/nginx.conf"</span><span class="p">:</span> <span class="n">nginx_conf</span><span class="p">,</span>
+    <span class="s2">"Dockerfile"</span><span class="p">:</span> <span class="n">dockerfile</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Infrastructure files generated by AI:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Infrastructure files generated by AI:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">filename</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s2"> lines)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">filename</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">lines</span><span class="si">}</span><span class="s2"> lines)"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Key decisions AI made correctly:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Key decisions AI made correctly:"</span><span class="p">)</span>
 <span class="n">decisions</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;postgres:16-alpine (not latest — pinned version)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;healthcheck with condition: service_healthy (not just depends_on)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Secrets via environment variables, not hardcoded&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Named volumes (not bind mounts) for production data&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Multi-stage Dockerfile (builder → final) reduces image size&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;X-Forwarded-For headers set in Nginx for Django ALLOWED_HOSTS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Static files served by Nginx, not gunicorn&quot;</span><span class="p">,</span>
+    <span class="s2">"postgres:16-alpine (not latest — pinned version)"</span><span class="p">,</span>
+    <span class="s2">"healthcheck with condition: service_healthy (not just depends_on)"</span><span class="p">,</span>
+    <span class="s2">"Secrets via environment variables, not hardcoded"</span><span class="p">,</span>
+    <span class="s2">"Named volumes (not bind mounts) for production data"</span><span class="p">,</span>
+    <span class="s2">"Multi-stage Dockerfile (builder → final) reduces image size"</span><span class="p">,</span>
+    <span class="s2">"X-Forwarded-For headers set in Nginx for Django ALLOWED_HOSTS"</span><span class="p">,</span>
+    <span class="s2">"Static files served by Nginx, not gunicorn"</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">decisions</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  ✅ </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">What AI missed (always check):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">What AI missed (always check):"</span><span class="p">)</span>
 <span class="n">missed</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;HTTPS/TLS configuration (needs certbot or cert volume)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Django migration command on startup&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Rate limiting in Nginx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Log rotation configuration&quot;</span><span class="p">,</span>
+    <span class="s2">"HTTPS/TLS configuration (needs certbot or cert volume)"</span><span class="p">,</span>
+    <span class="s2">"Django migration command on startup"</span><span class="p">,</span>
+    <span class="s2">"Rate limiting in Nginx"</span><span class="p">,</span>
+    <span class="s2">"Log rotation configuration"</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missed</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ⚠️  </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  ⚠️  </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="section-7-ai-agents-in-development">Section 7 — AI Agents in Development</h2>
@@ -1225,10 +1215,10 @@ Requirements:
   suggestion      conversation     autonomous
                                    task execution
      │                 │               │
-&quot;completes       &quot;answers your    &quot;reads files,
-  your code&quot;      question&quot;        writes code,
+"completes       "answers your    "reads files,
+  your code"      question"        writes code,
                                    runs tests,
-                                   fixes errors&quot;
+                                   fixes errors"
 </code></pre></div>
 <hr />
 <h3 id="what-makes-something-an-agent">What Makes Something an "Agent"?</h3>
@@ -1239,11 +1229,11 @@ Requirements:
 <li><strong>Acts</strong> using tools (writes files, runs code, calls APIs)</li>
 <li><strong>Observes</strong> the result and <strong>iterates</strong> (reads error output, tries again)</li>
 </ol>
-<div class="highlight"><pre><span></span><code>       Goal: &quot;Add pagination to the FastAPI endpoint&quot;
+<div class="highlight"><pre><span></span><code>       Goal: "Add pagination to the FastAPI endpoint"
               │
               ▼
     ┌─────────────────────────────┐
-    │   LLM (the &quot;brain&quot;)         │
+    │   LLM (the "brain")         │
     └─────────────────────────────┘
               │  decides to use tools:
      ┌────────┼────────┬──────────┐
@@ -1319,90 +1309,90 @@ Requirements:
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 
 
-<span class="c1"># ── Tool definitions (functions the &quot;agent&quot; can call) ──────────</span>
+<span class="c1"># ── Tool definitions (functions the "agent" can call) ──────────</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_file_tool</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated file reader.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Simulated file reader."""</span>
     <span class="n">mock_files</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;main.py&quot;</span><span class="p">:</span> <span class="s2">&quot;from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">app = FastAPI()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;requirements.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;fastapi==0.111.0</span><span class="se">\n</span><span class="s2">uvicorn==0.29.0</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">"main.py"</span><span class="p">:</span> <span class="s2">"from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">app = FastAPI()</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"requirements.txt"</span><span class="p">:</span> <span class="s2">"fastapi==0.111.0</span><span class="se">\n</span><span class="s2">uvicorn==0.29.0</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="n">mock_files</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;ERROR: File &#39;</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mock_files</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"ERROR: File '</span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">' not found"</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">write_file_tool</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated file writer.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;SUCCESS: Wrote </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="sd">"""Simulated file writer."""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"SUCCESS: Wrote </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes to </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">run_tests_tool</span><span class="p">(</span><span class="n">test_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulated test runner.&quot;&quot;&quot;</span>
-    <span class="c1"># In reality, this would call subprocess.run([&quot;pytest&quot;, test_path])</span>
-    <span class="k">return</span> <span class="s2">&quot;PASSED: 3 tests passed in 0.42s&quot;</span>
+<span class="w">    </span><span class="sd">"""Simulated test runner."""</span>
+    <span class="c1"># In reality, this would call subprocess.run(["pytest", test_path])</span>
+    <span class="k">return</span> <span class="s2">"PASSED: 3 tests passed in 0.42s"</span>
 
 
 <span class="c1"># ── Agent loop (simplified) ────────────────────────────────────</span>
 <span class="n">TOOLS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;read_file&quot;</span><span class="p">:</span> <span class="n">read_file_tool</span><span class="p">,</span>
-    <span class="s2">&quot;write_file&quot;</span><span class="p">:</span> <span class="n">write_file_tool</span><span class="p">,</span>
-    <span class="s2">&quot;run_tests&quot;</span><span class="p">:</span> <span class="n">run_tests_tool</span><span class="p">,</span>
+    <span class="s2">"read_file"</span><span class="p">:</span> <span class="n">read_file_tool</span><span class="p">,</span>
+    <span class="s2">"write_file"</span><span class="p">:</span> <span class="n">write_file_tool</span><span class="p">,</span>
+    <span class="s2">"run_tests"</span><span class="p">:</span> <span class="n">run_tests_tool</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">simulate_agent</span><span class="p">(</span><span class="n">goal</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">planned_steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Simulates an agent loop.</span>
 <span class="sd">    In production, each step would be decided by the LLM</span>
 <span class="sd">    based on the previous tool output.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🤖 AGENT GOAL: </span><span class="si">{</span><span class="n">goal</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"🤖 AGENT GOAL: </span><span class="si">{</span><span class="n">goal</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">step_num</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">planned_steps</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="n">tool_name</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;tool&quot;</span><span class="p">]</span>
-        <span class="n">args</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">]</span>
-        <span class="n">reason</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">&quot;reason&quot;</span><span class="p">]</span>
+        <span class="n">tool_name</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">"tool"</span><span class="p">]</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">"args"</span><span class="p">]</span>
+        <span class="n">reason</span> <span class="o">=</span> <span class="n">step</span><span class="p">[</span><span class="s2">"reason"</span><span class="p">]</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step </span><span class="si">{</span><span class="n">step_num</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Reason: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Args:   </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Step </span><span class="si">{</span><span class="n">step_num</span><span class="si">}</span><span class="s2">: [</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Reason: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Args:   </span><span class="si">{</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="n">TOOLS</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">TOOLS</span><span class="p">[</span><span class="n">tool_name</span><span class="p">](</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Result: ERROR — unknown tool &#39;</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Result: ERROR — unknown tool '</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Agent completed task&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"✅ Agent completed task"</span><span class="p">)</span>
 
 
 <span class="c1"># Simulated agent execution plan (in reality, the LLM decides each step)</span>
 <span class="n">simulate_agent</span><span class="p">(</span>
-    <span class="n">goal</span><span class="o">=</span><span class="s2">&quot;Add a health check endpoint to the FastAPI app&quot;</span><span class="p">,</span>
+    <span class="n">goal</span><span class="o">=</span><span class="s2">"Add a health check endpoint to the FastAPI app"</span><span class="p">,</span>
     <span class="n">planned_steps</span><span class="o">=</span><span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;read_file&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;main.py&quot;</span><span class="p">},</span>
-            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Read existing code to understand current structure&quot;</span>
+            <span class="s2">"tool"</span><span class="p">:</span> <span class="s2">"read_file"</span><span class="p">,</span>
+            <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"path"</span><span class="p">:</span> <span class="s2">"main.py"</span><span class="p">},</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"Read existing code to understand current structure"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;write_file&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;main.py&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">(</span>
-                    <span class="s2">&quot;from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="s2">&quot;app = FastAPI()</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-                    <span class="s2">&quot;@app.get(&#39;/health&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="s2">&quot;def health_check():</span><span class="se">\n</span><span class="s2">&quot;</span>
-                    <span class="s2">&quot;    return {&#39;status&#39;: &#39;ok&#39;}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">"tool"</span><span class="p">:</span> <span class="s2">"write_file"</span><span class="p">,</span>
+            <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"main.py"</span><span class="p">,</span>
+                <span class="s2">"content"</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">"from fastapi import FastAPI</span><span class="se">\n</span><span class="s2">"</span>
+                    <span class="s2">"app = FastAPI()</span><span class="se">\n\n</span><span class="s2">"</span>
+                    <span class="s2">"@app.get('/health')</span><span class="se">\n</span><span class="s2">"</span>
+                    <span class="s2">"def health_check():</span><span class="se">\n</span><span class="s2">"</span>
+                    <span class="s2">"    return {'status': 'ok'}</span><span class="se">\n</span><span class="s2">"</span>
                 <span class="p">)</span>
             <span class="p">},</span>
-            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Write updated main.py with health endpoint added&quot;</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"Write updated main.py with health endpoint added"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;run_tests&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;test_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test_main.py&quot;</span><span class="p">},</span>
-            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Verify nothing is broken after the change&quot;</span>
+            <span class="s2">"tool"</span><span class="p">:</span> <span class="s2">"run_tests"</span><span class="p">,</span>
+            <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"test_path"</span><span class="p">:</span> <span class="s2">"test_main.py"</span><span class="p">},</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"Verify nothing is broken after the change"</span>
         <span class="p">},</span>
     <span class="p">]</span>
 <span class="p">)</span>
@@ -1412,12 +1402,12 @@ Requirements:
 <h3 id="the-5-biggest-risks-of-vibe-coding">The 5 Biggest Risks of Vibe Coding</h3>
 <div class="highlight"><pre><span></span><code> ┌─────────────────────────────────────────────────────────────┐
  │  RISK 1: HALLUCINATIONS                                      │
- │  AI invents functions, parameters, and libraries that don&#39;t  │
+ │  AI invents functions, parameters, and libraries that don't  │
  │  exist. It sounds confident. It is wrong.                    │
  ├─────────────────────────────────────────────────────────────┤
  │  RISK 2: OUTDATED CODE                                       │
  │  AI training has a cutoff. It may generate Pydantic v1 code  │
- │  when you&#39;re using v2, or deprecated Django patterns.        │
+ │  when you're using v2, or deprecated Django patterns.        │
  ├─────────────────────────────────────────────────────────────┤
  │  RISK 3: SECURITY VULNERABILITIES                            │
  │  AI may generate code with SQL injection, hardcoded secrets, │
@@ -1429,7 +1419,7 @@ Requirements:
  ├─────────────────────────────────────────────────────────────┤
  │  RISK 5: LICENSING / IP ISSUES                               │
  │  AI may reproduce copyrighted code from training data.       │
- │  Know your organization&#39;s AI use policy.                     │
+ │  Know your organization's AI use policy.                     │
  └─────────────────────────────────────────────────────────────┘
 </code></pre></div>
 <hr />
@@ -1437,51 +1427,51 @@ Requirements:
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
 <span class="c1"># SPOT THE HALLUCINATIONS</span>
 <span class="c1"># Each of these snippets contains an AI hallucination.</span>
-<span class="c1"># Can you find what&#39;s wrong before running the code?</span>
+<span class="c1"># Can you find what's wrong before running the code?</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HALLUCINATION EXAMPLES — Spot the Bug&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"HALLUCINATION EXAMPLES — Spot the Bug"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
 <span class="c1"># ── Example 1: Non-existent FastAPI parameter ──────────────────</span>
-<span class="n">example_1</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1"># AI generated this. What&#39;s wrong?</span>
+<span class="n">example_1</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1"># AI generated this. What's wrong?</span>
 <span class="s1">from fastapi import FastAPI</span>
 <span class="s1">app = FastAPI()</span>
 
-<span class="s1">@app.get(&quot;/items&quot;)</span>
+<span class="s1">@app.get("/items")</span>
 <span class="s1">async def get_items(limit: int = Query(default=10, max_value=100)):</span>
-<span class="s1">    ...  # Bug: FastAPI&#39;s Query uses `le=` not `max_value=`</span>
+<span class="s1">    ...  # Bug: FastAPI's Query uses `le=` not `max_value=`</span>
 <span class="s1">         # Correct: Query(default=10, le=100)</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 <span class="c1"># ── Example 2: Invented Django ORM method ─────────────────────</span>
-<span class="n">example_2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1"># AI generated this. What&#39;s wrong?</span>
-<span class="s1"># &quot;Use the .recent() manager method to get the latest 5 posts.&quot;</span>
+<span class="n">example_2</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1"># AI generated this. What's wrong?</span>
+<span class="s1"># "Use the .recent() manager method to get the latest 5 posts."</span>
 
 <span class="s1">posts = Post.objects.recent(5)  # Bug: .recent() does not exist!</span>
-<span class="s1">                                 # Correct: Post.objects.order_by(&#39;-created_at&#39;)[:5]</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                                 # Correct: Post.objects.order_by('-created_at')[:5]</span>
+<span class="s1">'''</span>
 
 <span class="c1"># ── Example 3: Invented Pydantic feature ──────────────────────</span>
-<span class="n">example_3</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1"># AI generated this Pydantic v2 code. What&#39;s wrong?</span>
+<span class="n">example_3</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1"># AI generated this Pydantic v2 code. What's wrong?</span>
 <span class="s1">from pydantic import BaseModel</span>
 
 <span class="s1">class User(BaseModel):</span>
 <span class="s1">    name: str</span>
 <span class="s1">    age: int</span>
 
-<span class="s1">    @validator(&quot;age&quot;)      # Bug: @validator is Pydantic v1!</span>
+<span class="s1">    @validator("age")      # Bug: @validator is Pydantic v1!</span>
 <span class="s1">    def age_must_be_positive(cls, v):</span>
 <span class="s1">        ...                # Correct v2: use @field_validator</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 <span class="c1"># ── Example 4: Security hallucination ─────────────────────────</span>
-<span class="n">example_4</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1"># AI said: &quot;Here&#39;s how to hash a password securely&quot;</span>
+<span class="n">example_4</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1"># AI said: "Here's how to hash a password securely"</span>
 <span class="s1">import hashlib</span>
 
 <span class="s1">def hash_password(password: str) -&gt; str:</span>
@@ -1489,20 +1479,20 @@ Requirements:
 <span class="s1">    # MD5 is cryptographically broken.</span>
 <span class="s1">    # Never use MD5 or SHA1 for passwords.</span>
 <span class="s1">    # Correct: use bcrypt, argon2, or scrypt.</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;FastAPI — wrong Query parameter name&quot;</span><span class="p">,</span> <span class="s2">&quot;max_value= doesn&#39;t exist → use le=&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Django ORM — invented method&quot;</span><span class="p">,</span> <span class="s2">&quot;.recent() doesn&#39;t exist → use .order_by()&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Pydantic v2 — wrong decorator&quot;</span><span class="p">,</span> <span class="s2">&quot;@validator is v1 → use @field_validator&quot;</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Security — broken hash function&quot;</span><span class="p">,</span> <span class="s2">&quot;MD5 is broken for passwords → use bcrypt&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"FastAPI — wrong Query parameter name"</span><span class="p">,</span> <span class="s2">"max_value= doesn't exist → use le="</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Django ORM — invented method"</span><span class="p">,</span> <span class="s2">".recent() doesn't exist → use .order_by()"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Pydantic v2 — wrong decorator"</span><span class="p">,</span> <span class="s2">"@validator is v1 → use @field_validator"</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Security — broken hash function"</span><span class="p">,</span> <span class="s2">"MD5 is broken for passwords → use bcrypt"</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Hallucination Summary:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Hallucination Summary:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="n">fix</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">examples</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     Fix: </span><span class="si">{</span><span class="n">fix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"     Fix: </span><span class="si">{</span><span class="n">fix</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
@@ -1510,41 +1500,41 @@ Requirements:
 <span class="c1"># Demonstrating common security pitfalls</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Common OWASP Issues in AI-Generated Python Code&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Common OWASP Issues in AI-Generated Python Code"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
 <span class="n">security_issues</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A01 - Broken Access Control&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;@app.delete(&#39;/users/</span><span class="si">{user_id}</span><span class="s2">&#39;)</span><span class="se">\n</span><span class="s2">def delete_user(user_id: int, db=Depends(get_db)):</span><span class="se">\n</span><span class="s2">    # No check if current user == user_id or is admin!&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Always verify current_user.id == user_id or current_user.is_admin&quot;</span><span class="p">,</span>
+        <span class="s2">"owasp"</span><span class="p">:</span> <span class="s2">"A01 - Broken Access Control"</span><span class="p">,</span>
+        <span class="s2">"ai_code"</span><span class="p">:</span> <span class="s2">"@app.delete('/users/</span><span class="si">{user_id}</span><span class="s2">')</span><span class="se">\n</span><span class="s2">def delete_user(user_id: int, db=Depends(get_db)):</span><span class="se">\n</span><span class="s2">    # No check if current user == user_id or is admin!"</span><span class="p">,</span>
+        <span class="s2">"fix"</span><span class="p">:</span> <span class="s2">"Always verify current_user.id == user_id or current_user.is_admin"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A02 - Cryptographic Failures&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;token = base64.b64encode(user.id.encode()).decode()  # NOT a token!&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Use python-jose with JWT or a dedicated secrets library&quot;</span><span class="p">,</span>
+        <span class="s2">"owasp"</span><span class="p">:</span> <span class="s2">"A02 - Cryptographic Failures"</span><span class="p">,</span>
+        <span class="s2">"ai_code"</span><span class="p">:</span> <span class="s2">"token = base64.b64encode(user.id.encode()).decode()  # NOT a token!"</span><span class="p">,</span>
+        <span class="s2">"fix"</span><span class="p">:</span> <span class="s2">"Use python-jose with JWT or a dedicated secrets library"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A03 - Injection&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;cursor.execute(f</span><span class="se">\&quot;</span><span class="s2">SELECT * FROM users WHERE name = &#39;</span><span class="si">{name}</span><span class="s2">&#39;</span><span class="se">\&quot;</span><span class="s2">)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Use parameterized queries: cursor.execute(&#39;...WHERE name = </span><span class="si">%s</span><span class="s2">&#39;, (name,))&quot;</span><span class="p">,</span>
+        <span class="s2">"owasp"</span><span class="p">:</span> <span class="s2">"A03 - Injection"</span><span class="p">,</span>
+        <span class="s2">"ai_code"</span><span class="p">:</span> <span class="s2">"cursor.execute(f</span><span class="se">\"</span><span class="s2">SELECT * FROM users WHERE name = '</span><span class="si">{name}</span><span class="s2">'</span><span class="se">\"</span><span class="s2">)"</span><span class="p">,</span>
+        <span class="s2">"fix"</span><span class="p">:</span> <span class="s2">"Use parameterized queries: cursor.execute('...WHERE name = </span><span class="si">%s</span><span class="s2">', (name,))"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A05 - Security Misconfiguration&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;SECRET_KEY = &#39;dev-secret-key-12345&#39;  # Hardcoded in settings.py&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;SECRET_KEY = os.environ[&#39;DJANGO_SECRET_KEY&#39;]  # From env vars&quot;</span><span class="p">,</span>
+        <span class="s2">"owasp"</span><span class="p">:</span> <span class="s2">"A05 - Security Misconfiguration"</span><span class="p">,</span>
+        <span class="s2">"ai_code"</span><span class="p">:</span> <span class="s2">"SECRET_KEY = 'dev-secret-key-12345'  # Hardcoded in settings.py"</span><span class="p">,</span>
+        <span class="s2">"fix"</span><span class="p">:</span> <span class="s2">"SECRET_KEY = os.environ['DJANGO_SECRET_KEY']  # From env vars"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;owasp&quot;</span><span class="p">:</span> <span class="s2">&quot;A09 - Security Logging&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ai_code&quot;</span><span class="p">:</span> <span class="s2">&quot;print(f&#39;Login attempt: </span><span class="si">{username}</span><span class="s2"> / </span><span class="si">{password}</span><span class="s2">&#39;)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="s2">&quot;Never log passwords. Log: &#39;Login attempt for user </span><span class="si">{username}</span><span class="s2">&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">"owasp"</span><span class="p">:</span> <span class="s2">"A09 - Security Logging"</span><span class="p">,</span>
+        <span class="s2">"ai_code"</span><span class="p">:</span> <span class="s2">"print(f'Login attempt: </span><span class="si">{username}</span><span class="s2"> / </span><span class="si">{password}</span><span class="s2">')"</span><span class="p">,</span>
+        <span class="s2">"fix"</span><span class="p">:</span> <span class="s2">"Never log passwords. Log: 'Login attempt for user </span><span class="si">{username}</span><span class="s2">'"</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">security_issues</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">⚠️  </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;owasp&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   AI Generated: </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;ai_code&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ✅ Fix:       </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;fix&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">⚠️  </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">'owasp'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   AI Generated: </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">'ai_code'</span><span class="p">]</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"   ✅ Fix:       </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">'fix'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="section-9-what-ai-cannot-replace">Section 9 — What AI Cannot Replace</h2>
@@ -1553,7 +1543,7 @@ Requirements:
 <div class="highlight"><pre><span></span><code>┌───────────────────────────────────────────────────────────┐
 │                                                           │
 │  🧠 PROBLEM UNDERSTANDING                                 │
-│     AI doesn&#39;t know what your business actually needs.    │
+│     AI doesn't know what your business actually needs.    │
 │     It optimizes for the prompt, not the real problem.    │
 │                                                           │
 │  🏗️  SYSTEM ARCHITECTURE                                  │
@@ -1570,8 +1560,8 @@ Requirements:
 │     technical specifications is deeply human.             │
 │                                                           │
 │  ⚖️  ETHICAL &amp; PRODUCT JUDGMENT                           │
-│     &quot;Should we build this feature?&quot;                       │
-│     &quot;Is this data usage appropriate?&quot;                     │
+│     "Should we build this feature?"                       │
+│     "Is this data usage appropriate?"                     │
 │     AI cannot answer these questions responsibly.         │
 │                                                           │
 │  🔐 SECURITY REVIEW                                       │
@@ -1681,28 +1671,28 @@ Requirements:
 <span class="c1"># This simulates the feedback loop developers use with AI</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Debugging Workflow with AI Assistance&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Debugging Workflow with AI Assistance"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
 <span class="c1"># Step 1: You encounter a bug</span>
-<span class="n">buggy_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">buggy_code</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">def calculate_discount(price: float, discount_pct: float) -&gt; float:</span>
 <span class="s2">    return price - (price * discount_pct)  # Bug: discount_pct is 0-100 not 0-1</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 <span class="c1"># Step 2: You run it and see unexpected output</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount_buggy</span><span class="p">(</span><span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">discount_pct</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">price</span> <span class="o">-</span> <span class="p">(</span><span class="n">price</span> <span class="o">*</span> <span class="n">discount_pct</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 1: Observe unexpected behaviour&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Step 1: Observe unexpected behaviour"</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_discount_buggy</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># Expecting $80, passing 20%</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Price: $100, Discount: 20%&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Expected: $80.00&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Got:      $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  ← WRONG! (treated 20 as 2000%!)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Price: $100, Discount: 20%"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Expected: $80.00"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Got:      $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  ← WRONG! (treated 20 as 2000%!)"</span><span class="p">)</span>
 
 <span class="c1"># Step 3: Good prompt to AI (include context + error)</span>
-<span class="n">prompt_to_ai</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">My Python function returns wrong results. Here&#39;s the code:</span>
+<span class="n">prompt_to_ai</span> <span class="o">=</span> <span class="s1">'''</span>
+<span class="s1">My Python function returns wrong results. Here's the code:</span>
 
 <span class="s1">    def calculate_discount(price: float, discount_pct: float) -&gt; float:</span>
 <span class="s1">        return price - (price * discount_pct)</span>
@@ -1710,32 +1700,32 @@ Requirements:
 <span class="s1">When I call calculate_discount(100, 20), I expect $80.00 (20</span><span class="si">% o</span><span class="s1">ff).</span>
 <span class="s1">But I get -1900.0.</span>
 
-<span class="s1">What&#39;s wrong and how do I fix it?</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">What's wrong and how do I fix it?</span>
+<span class="s1">'''</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 2: Craft a precise prompt to AI&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Good prompt includes:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The actual code&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The inputs used&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The expected output&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ✅ The actual output received&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Step 2: Craft a precise prompt to AI"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Good prompt includes:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  ✅ The actual code"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  ✅ The inputs used"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  ✅ The expected output"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"  ✅ The actual output received"</span><span class="p">)</span>
 
 <span class="c1"># Step 4: AI explains and provides fix</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 3: AI Response (simulated)&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The bug: discount_pct should be divided by 100 if passed as&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a percentage (0-100) rather than a fraction (0.0-1.0).&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Step 3: AI Response (simulated)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The bug: discount_pct should be divided by 100 if passed as"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a percentage (0-100) rather than a fraction (0.0-1.0)."</span><span class="p">)</span>
 
 <span class="c1"># Step 5: Apply and verify the fix</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount_fixed</span><span class="p">(</span><span class="n">price</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">discount_pct</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate price after discount. discount_pct is 0-100 (e.g., 20 = 20%).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Calculate price after discount. discount_pct is 0-100 (e.g., 20 = 20%)."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">discount_pct</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;discount_pct must be between 0 and 100, got </span><span class="si">{</span><span class="n">discount_pct</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"discount_pct must be between 0 and 100, got </span><span class="si">{</span><span class="n">discount_pct</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">price</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">discount_pct</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Step 4: Apply and verify the fix&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Step 4: Apply and verify the fix"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">),</span>
     <span class="p">(</span><span class="mf">200.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">),</span>
@@ -1746,12 +1736,12 @@ Requirements:
 <span class="k">for</span> <span class="n">price</span><span class="p">,</span> <span class="n">pct</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_discount_fixed</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">pct</span><span class="p">)</span>
     <span class="n">passed</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span>
-    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✅&quot;</span> <span class="k">if</span> <span class="n">passed</span> <span class="k">else</span> <span class="s2">&quot;❌&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> discount(</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%) = $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (expected $</span><span class="si">{</span><span class="n">expected</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">"✅"</span> <span class="k">if</span> <span class="n">passed</span> <span class="k">else</span> <span class="s2">"❌"</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> discount(</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pct</span><span class="si">}</span><span class="s2">%) = $</span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (expected $</span><span class="si">{</span><span class="n">expected</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">passed</span><span class="p">:</span>
         <span class="n">all_pass</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All tests passed: </span><span class="si">{</span><span class="n">all_pass</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">All tests passed: </span><span class="si">{</span><span class="n">all_pass</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
 <span class="c1"># FINAL EXERCISE: Prompt Engineering Challenge</span>
@@ -1759,60 +1749,60 @@ Requirements:
 <span class="c1"># Share your best prompt with the class.</span>
 <span class="c1"># ──────────────────────────────────────────────────────────────</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prompt Engineering Challenge&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prompt Engineering Challenge"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;For each task below, write a prompt you would send to&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GitHub Copilot Chat or Claude to get the best result.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"For each task below, write a prompt you would send to"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"GitHub Copilot Chat or Claude to get the best result."</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
 <span class="n">challenges</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Django REST Framework viewset&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="s2">&quot;Create a DRF ViewSet for the Post model from our blog app. &quot;</span>
-            <span class="s2">&quot;It should support list, retrieve, create, update, destroy. &quot;</span>
-            <span class="s2">&quot;Only authenticated users can create/update/delete.&quot;</span>
+        <span class="s2">"num"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Django REST Framework viewset"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">"Create a DRF ViewSet for the Post model from our blog app. "</span>
+            <span class="s2">"It should support list, retrieve, create, update, destroy. "</span>
+            <span class="s2">"Only authenticated users can create/update/delete."</span>
         <span class="p">),</span>
-        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: DRF version, permission classes, serializer requirements&quot;</span><span class="p">,</span>
+        <span class="s2">"hint"</span><span class="p">:</span> <span class="s2">"Mention: DRF version, permission classes, serializer requirements"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;FastAPI middleware for request timing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="s2">&quot;Add middleware to the FastAPI app that logs the HTTP method, &quot;</span>
-            <span class="s2">&quot;path, status code, and response time for every request.&quot;</span>
+        <span class="s2">"num"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"FastAPI middleware for request timing"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">"Add middleware to the FastAPI app that logs the HTTP method, "</span>
+            <span class="s2">"path, status code, and response time for every request."</span>
         <span class="p">),</span>
-        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: use Python&#39;s logging module, not print(); async middleware&quot;</span><span class="p">,</span>
+        <span class="s2">"hint"</span><span class="p">:</span> <span class="s2">"Mention: use Python's logging module, not print(); async middleware"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Docker multi-stage build for FastAPI&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="s2">&quot;Write a Dockerfile that uses a multi-stage build to produce &quot;</span>
-            <span class="s2">&quot;a minimal FastAPI production image under 200MB.&quot;</span>
+        <span class="s2">"num"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Docker multi-stage build for FastAPI"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">"Write a Dockerfile that uses a multi-stage build to produce "</span>
+            <span class="s2">"a minimal FastAPI production image under 200MB."</span>
         <span class="p">),</span>
-        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: python:3.12-slim, pip install --user, copy from builder&quot;</span><span class="p">,</span>
+        <span class="s2">"hint"</span><span class="p">:</span> <span class="s2">"Mention: python:3.12-slim, pip install --user, copy from builder"</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="s2">&quot;Pytest fixtures for FastAPI&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">(</span>
-            <span class="s2">&quot;Write pytest fixtures for testing the Task Manager API. &quot;</span>
-            <span class="s2">&quot;Use an in-memory SQLite database that resets between tests.&quot;</span>
+        <span class="s2">"num"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"Pytest fixtures for FastAPI"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="p">(</span>
+            <span class="s2">"Write pytest fixtures for testing the Task Manager API. "</span>
+            <span class="s2">"Use an in-memory SQLite database that resets between tests."</span>
         <span class="p">),</span>
-        <span class="s2">&quot;hint&quot;</span><span class="p">:</span> <span class="s2">&quot;Mention: TestClient, override_dependency for get_db, scope=&#39;function&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">"hint"</span><span class="p">:</span> <span class="s2">"Mention: TestClient, override_dependency for get_db, scope='function'"</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">challenge</span> <span class="ow">in</span> <span class="n">challenges</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Challenge </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;num&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;task&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Task: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Hint: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">&#39;hint&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Challenge </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">'num'</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">'task'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Task: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">'description'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Hint: </span><span class="si">{</span><span class="n">challenge</span><span class="p">[</span><span class="s1">'hint'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Your prompt:&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Your prompt:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  "</span> <span class="o">+</span> <span class="s2">"_"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">()</span>
 </code></pre></div>
@@ -1915,12 +1905,7 @@ Requirements:
 <h3 id="assignment-preview">Assignment Preview</h3>
 <blockquote>
 <p>Using AI assistance, build a <strong>REST API</strong> for a topic of your choice using <strong>FastAPI</strong> or <strong>Django REST Framework</strong>.</p>
-<p>Requirements:
-- At least 3 models with relationships
-- Full CRUD for at least one resource
-- JWT authentication
-- A <code>Dockerfile</code> and <code>docker-compose.yml</code> that runs the app
-- A <code>PROMPTS.md</code> file documenting the prompts you used and what changes you made to the AI output</p>
+<p>Requirements: - At least 3 models with relationships - Full CRUD for at least one resource - JWT authentication - A <code>Dockerfile</code> and <code>docker-compose.yml</code> that runs the app - A <code>PROMPTS.md</code> file documenting the prompts you used and what changes you made to the AI output</p>
 <p><strong>The <code>PROMPTS.md</code> file is the most important deliverable</strong> — it shows you reviewed, understood, and improved the AI's work.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>
@@ -1929,40 +1914,40 @@ Requirements:
 
 <span class="n">quiz</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the most important thing to do with AI-generated code?&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;Read and understand every line before using it.&quot;</span><span class="p">,</span>
+        <span class="s2">"q"</span><span class="p">:</span> <span class="s2">"What is the most important thing to do with AI-generated code?"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="s2">"Read and understand every line before using it."</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is a hallucination in the context of AI coding tools?&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;When AI confidently generates code that uses non-existent functions or APIs.&quot;</span><span class="p">,</span>
+        <span class="s2">"q"</span><span class="p">:</span> <span class="s2">"What is a hallucination in the context of AI coding tools?"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="s2">"When AI confidently generates code that uses non-existent functions or APIs."</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;Name two things that make a prompt more effective.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;Specific context (framework, version, constraints) and a clear task definition.&quot;</span><span class="p">,</span>
+        <span class="s2">"q"</span><span class="p">:</span> <span class="s2">"Name two things that make a prompt more effective."</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="s2">"Specific context (framework, version, constraints) and a clear task definition."</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the difference between an AI autocomplete and an AI agent?&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;An agent can take multi-step actions using tools (read files, run tests, write code) autonomously.&quot;</span><span class="p">,</span>
+        <span class="s2">"q"</span><span class="p">:</span> <span class="s2">"What is the difference between an AI autocomplete and an AI agent?"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="s2">"An agent can take multi-step actions using tools (read files, run tests, write code) autonomously."</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="s2">&quot;Why are developers with strong fundamentals more effective at using AI?&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;They can evaluate AI output, spot mistakes, and guide the AI toward correct solutions.&quot;</span><span class="p">,</span>
+        <span class="s2">"q"</span><span class="p">:</span> <span class="s2">"Why are developers with strong fundamentals more effective at using AI?"</span><span class="p">,</span>
+        <span class="s2">"a"</span><span class="p">:</span> <span class="s2">"They can evaluate AI output, spot mistakes, and guide the AI toward correct solutions."</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Self-Assessment Questions&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Think through each answer before revealing it.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Self-Assessment Questions"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Think through each answer before revealing it."</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quiz</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;q&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  → </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Q</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'q'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  → </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">'a'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Great work today. Keep building. Keep thinking critically.&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The best AI-assisted developers are the best developers.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Great work today. Keep building. Keep thinking critically."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The best AI-assisted developers are the best developers."</span><span class="p">)</span>
 </code></pre></div>
               
             </div>

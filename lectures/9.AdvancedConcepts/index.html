@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Advanced Topics - Python</title>
+    <title>Advanced Topics - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -69,7 +69,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#3-list-comprehensions">3. List Comprehensions</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-working-with-args-and-kwargs">4. Working with args and *kwargs</a>
+    <li class="toctree-l2"><a class="reference internal" href="#4-working-with-args-and-kwargs">4. Working with *args and **kwargs</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#quick-recap">🎯 Quick Recap</a>
     </li>
@@ -112,7 +112,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -196,7 +196,7 @@
 <span class="n">evens</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">evens</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="4-working-with-args-and-kwargs">4. Working with <em>args and </em>*kwargs</h2>
+<h2 id="4-working-with-args-and-kwargs">4. Working with *args and **kwargs</h2>
 <ul>
 <li>
 <p><code>*args</code>: Allows variable number of positional arguments.</p>
@@ -208,7 +208,7 @@
 <p><strong>➤ Example with *args:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">numbers</span><span class="p">):</span>
     <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Sum:"</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 
 <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -216,9 +216,9 @@
 <p><strong>➤ Example with **kwargs:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">student_info</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">student_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="n">student_info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">grade</span><span class="o">=</span><span class="s2">"A"</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Using map() Function:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
@@ -249,7 +249,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">total_sum</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>➤ Using enumerate():</strong></p>
-<div class="highlight"><pre><span></span><code><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">fruit</span><span class="p">)</span>
 </code></pre></div>
@@ -277,7 +277,7 @@
 <p>List comprehensions: Compact way to build lists  </p>
 </li>
 <li>
-<p><em>args, </em>*kwargs: Flexible argument handling  </p>
+<p>*args, **kwargs: Flexible argument handling  </p>
 </li>
 </ul>
 <h3 id="practice-exercises"><strong>📝 Practice Exercises</strong></h3>

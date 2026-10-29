@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Introduction to Python - Python</title>
+    <title>Introduction to Python - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -110,7 +110,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -229,7 +229,7 @@
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1"># Simple Python code in Colab</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat."</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Step 1: Write code. Step 2: Debug. Step 3: Cry. Repeat.
 </code></pre></div>
@@ -245,44 +245,44 @@
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># Printing a message</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I thought Python was a snake... why am I coding?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"I thought Python was a snake... why am I coding?"</span><span class="p">)</span>
 
 <span class="c1"># Indentation defines code blocks</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x is greater than 5&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"x is greater than 5"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>I thought Python was a snake... why am I coding?
 x is greater than 5
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Variables and Data Types</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Chirag&quot;</span>        <span class="c1"># String</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">"Chirag"</span>        <span class="c1"># String</span>
 <span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>               <span class="c1"># Integer</span>
 <span class="n">height</span> <span class="o">=</span> <span class="mf">5.6</span>           <span class="c1"># Float</span>
 <span class="n">is_student</span> <span class="o">=</span> <span class="kc">True</span>      <span class="c1"># Boolean</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Age: </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">, Height: </span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">, Student: </span><span class="si">{</span><span class="n">is_student</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Name: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">, Age: </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">, Height: </span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">, Student: </span><span class="si">{</span><span class="n">is_student</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Comments in Python</span>
 <span class="c1"># This is a single-line comment</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">This is a multi-line comment</span>
 <span class="sd">or docstring</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
-<span class="c1"># Python&#39;s dynamic typing</span>
+<span class="c1"># Python's dynamic typing</span>
 <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>        <span class="c1"># x is an integer</span>
-<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>   <span class="c1"># now x is a string</span>
+<span class="n">x</span> <span class="o">=</span> <span class="s2">"hello"</span>   <span class="c1"># now x is a string</span>
 <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="c1"># now x is a list</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dynamic typing demo:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dynamic typing demo:"</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Name: Chirag, Age: 25, Height: 5.6, Student: True
 Dynamic typing demo: [1, 2, 3]
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">cowsay</span>
 
-<span class="n">cowsay</span><span class="o">.</span><span class="n">kitty</span><span class="p">(</span><span class="s2">&quot;I am a kitty! not a snake!&quot;</span><span class="p">)</span>
+<span class="n">cowsay</span><span class="o">.</span><span class="n">kitty</span><span class="p">(</span><span class="s2">"I am a kitty! not a snake!"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>  __________________________
 | I am a kitty! not a snake! |
@@ -291,11 +291,11 @@ Dynamic typing demo: [1, 2, 3]
                               \
                                \
                                 \
-                                 (&quot;`-&#39;  &#39;-/&quot;) .___..--&#39; &#39; &quot;`-._
+                                 ("`-'  '-/") .___..--' ' "`-._
                                   ` *_ *  )    `-.   (      ) .`-.__. `)
-                                   (_Y_.) &#39; ._   )   `._` ;  `` -. .-&#39;
-                                _.. `--&#39;_..-_/   /--&#39; _ .&#39; ,4
-                               ( i l ),-&#39;&#39;  ( l i),&#39;  ( ( ! .-&#39;
+                                   (_Y_.) ' ._   )   `._` ;  `` -. .-'
+                                _.. `--'_..-_/   /--' _ .' ,4
+                               ( i l ),-''  ( l i),'  ( ( ! .-'
 </code></pre></div>
 <p><strong>Let's try basic operations:</strong></p>
 <ul>
@@ -310,15 +310,15 @@ Dynamic typing demo: [1, 2, 3]
 </li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># Print statement</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python: Less hiss, more code.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Python: Less hiss, more code."</span><span class="p">)</span>
 
 <span class="c1"># Arithmetic operations</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Product:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Division:&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Sum:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Difference:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Product:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Division:"</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Python: Less hiss, more code.
 Sum: 8
@@ -327,19 +327,19 @@ Product: 15
 Division: 1.6666666666666667
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Getting user input</span>
-<span class="c1"># name = input(&quot;What&#39;s your name? &quot;)</span>
-<span class="c1"># age = input(&quot;How old are you? &quot;)</span>
-<span class="c1"># print(f&quot;Hello {name}! You are {age} years old.&quot;)</span>
+<span class="c1"># name = input("What's your name? ")</span>
+<span class="c1"># age = input("How old are you? ")</span>
+<span class="c1"># print(f"Hello {name}! You are {age} years old.")</span>
 
 <span class="c1"># Note: Uncomment the above lines to try interactive input</span>
 
 <span class="c1"># String operations</span>
-<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Python Programming&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Uppercase:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowercase:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Replace:&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;Amazing Python&quot;</span><span class="p">))</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s2">"Python Programming"</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Original:"</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Uppercase:"</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lowercase:"</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Length:"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Replace:"</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"Python"</span><span class="p">,</span> <span class="s2">"Amazing Python"</span><span class="p">))</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Original: Python Programming
 Uppercase: PYTHON PROGRAMMING
@@ -382,18 +382,18 @@ Complex is better than complicated.
 Flat is better than nested.
 Sparse is better than dense.
 Readability counts.
-Special cases aren&#39;t special enough to break the rules.
+Special cases aren't special enough to break the rules.
 Although practicality beats purity.
 Errors should never pass silently.
 Unless explicitly silenced.
 In the face of ambiguity, refuse the temptation to guess.
 There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&#39;re Dutch.
+Although that way may not be obvious at first unless you're Dutch.
 Now is better than never.
 Although never is often better than *right* now.
-If the implementation is hard to explain, it&#39;s a bad idea.
+If the implementation is hard to explain, it's a bad idea.
 If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&#39;s do more of those!
+Namespaces are one honking great idea -- let's do more of those!
 </code></pre></div>
 <p><strong>📋 Python Naming Conventions:</strong></p>
 <ul>
@@ -412,24 +412,24 @@ Namespaces are one honking great idea -- let&#39;s do more of those!
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># Basic Error Handling</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;not_a_number&quot;</span><span class="p">)</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">"not_a_number"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Oops! That&#39;s not a valid number: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Oops! That's not a valid number: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Better approach</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;42&quot;</span>  <span class="c1"># This would normally be input()</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="s2">"42"</span>  <span class="c1"># This would normally be input()</span>
     <span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">/</span> <span class="n">number</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a valid number!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Please enter a valid number!"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot divide by zero!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Cannot divide by zero!"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Something went wrong: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Something went wrong: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Oops! That&#39;s not a valid number: invalid literal for int() with base 10: &#39;not_a_number&#39;
+<div class="highlight"><pre><span></span><code>Oops! That's not a valid number: invalid literal for int() with base 10: 'not_a_number'
 Result: 2.380952380952381
 </code></pre></div>
 <h3 id="practice-exercises">📝 Practice Exercises</h3>

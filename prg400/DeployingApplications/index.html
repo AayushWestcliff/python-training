@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Deploying Applications - Python</title>
+    <title>Deploying Applications - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -250,7 +250,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -291,7 +291,7 @@
 <li>Familiarity with Python functions and classes</li>
 </ul>
 <p>Install Python dependencies before starting Section 3:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>fastapi<span class="w"> </span><span class="s1">&#39;uvicorn[standard]&#39;</span><span class="w"> </span>sqlalchemy
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>fastapi<span class="w"> </span><span class="s1">'uvicorn[standard]'</span><span class="w"> </span>sqlalchemy
 </code></pre></div>
 <hr />
 <h2 id="section-0-what-were-building">Section 0 — What We're Building</h2>
@@ -486,7 +486,7 @@ POST /tasks HTTP/1.1
 Host: localhost:8000
 Content-Type: application/json
 
-{&quot;title&quot;: &quot;Buy groceries&quot;}
+{"title": "Buy groceries"}
 
 
 RESPONSE
@@ -494,7 +494,7 @@ RESPONSE
 HTTP/1.1 201 Created
 Content-Type: application/json
 
-{&quot;id&quot;: 1, &quot;title&quot;: &quot;Buy groceries&quot;, &quot;completed&quot;: false, &quot;created_at&quot;: &quot;2026-04-16T10:00:00&quot;}
+{"id": 1, "title": "Buy groceries", "completed": false, "created_at": "2026-04-16T10:00:00"}
 </code></pre></div>
 <p>Every HTTP interaction follows this shape: <strong>method + URL + headers + optional body</strong> going out, <strong>status code + headers + optional body</strong> coming back.</p>
 <hr />
@@ -537,11 +537,11 @@ Content-Type: application/json
 </table>
 <h3 id="how-a-browser-consumes-an-api">How a Browser Consumes an API</h3>
 <p>When a web page needs data, JavaScript uses the <code>fetch</code> API:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript running in the browser</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:8000/tasks&#39;</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">tasks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
-<span class="c1">// [{&quot;id&quot;: 1, &quot;title&quot;: &quot;Buy groceries&quot;, &quot;completed&quot;: false, ...}]</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>JavaScript<span class="w"> </span>running<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>browser
+const<span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>await<span class="w"> </span>fetch<span class="o">(</span><span class="s1">'http://localhost:8000/tasks'</span><span class="o">)</span><span class="p">;</span>
+const<span class="w"> </span><span class="nv">tasks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>await<span class="w"> </span>response.json<span class="o">()</span><span class="p">;</span>
+console.log<span class="o">(</span>tasks<span class="o">)</span><span class="p">;</span>
+//<span class="w"> </span><span class="o">[{</span><span class="s2">"id"</span>:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s2">"title"</span>:<span class="w"> </span><span class="s2">"Buy groceries"</span>,<span class="w"> </span><span class="s2">"completed"</span>:<span class="w"> </span>false,<span class="w"> </span>...<span class="o">}]</span>
 </code></pre></div>
 <p>The browser sends an HTTP GET to your FastAPI server and receives JSON. Your Python code never knows whether the caller is a browser, a mobile app, or <code>curl</code>.</p>
 <h3 id="testing-with-curl">Testing with <code>curl</code></h3>
@@ -551,8 +551,8 @@ curl<span class="w"> </span>http://localhost:8000/tasks
 
 <span class="c1"># Create a new task</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Buy groceries&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"title": "Buy groceries"}'</span>
 
 <span class="c1"># Mark task 1 as completed</span>
 curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </span>http://localhost:8000/tasks/1/complete
@@ -587,7 +587,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </sp
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Task Manager API&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Task Manager API'</span><span class="p">)</span>
 
 <span class="c1"># In-memory storage — replaced with SQLite in Section 4</span>
 <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
@@ -605,32 +605,32 @@ curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </sp
     <span class="n">created_at</span><span class="p">:</span> <span class="nb">str</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/tasks'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_tasks</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">tasks</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/tasks'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">TaskCreate</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">_next_id</span>
     <span class="n">new_task</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">_next_id</span><span class="p">,</span>
-        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-        <span class="s1">&#39;completed&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s1">'id'</span><span class="p">:</span> <span class="n">_next_id</span><span class="p">,</span>
+        <span class="s1">'title'</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">'completed'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">'created_at'</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
     <span class="p">}</span>
     <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_task</span><span class="p">)</span>
     <span class="n">_next_id</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">new_task</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">'/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">complete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">task</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">:</span>
-            <span class="n">task</span><span class="p">[</span><span class="s1">&#39;completed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">task</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">:</span>
+            <span class="n">task</span><span class="p">[</span><span class="s1">'completed'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">return</span> <span class="n">task</span>
-    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">'Task not found'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="running-the-application">Running the Application</h3>
 <p>From the <code>taskapi/</code> directory:</p>
@@ -644,12 +644,12 @@ curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </sp
 <h3 id="testing-with-curl_1">Testing with curl</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create two tasks</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Buy groceries&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"title": "Buy groceries"}'</span>
 
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Write tests&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"title": "Write tests"}'</span>
 
 <span class="c1"># List all tasks</span>
 curl<span class="w"> </span>http://localhost:8000/tasks
@@ -660,12 +660,12 @@ curl<span class="w"> </span>-X<span class="w"> </span>PATCH<span class="w"> </sp
 <h3 id="how-fastapi-handles-validation">How FastAPI Handles Validation</h3>
 <p>Send a bad request — omit the required <code>title</code> field:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{}'</span>
 </code></pre></div>
 <p>FastAPI returns <code>422 Unprocessable Entity</code> with a detailed error — no extra validation code needed:</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;detail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;loc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;title&quot;</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;msg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;field required&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;value_error.missing&quot;</span><span class="p">}]</span>
+<span class="w">  </span><span class="nt">"detail"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">"loc"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"body"</span><span class="p">,</span><span class="w"> </span><span class="s2">"title"</span><span class="p">],</span><span class="w"> </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field required"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value_error.missing"</span><span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div>
 <blockquote>
@@ -727,15 +727,15 @@ task = Task(...)  maps to    INSERT INTO tasks ...
 <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">sessionmaker</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DATABASE_URL&#39;</span><span class="p">,</span> <span class="s1">&#39;sqlite:///./tasks.db&#39;</span><span class="p">)</span>
+<span class="n">DATABASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">'DATABASE_URL'</span><span class="p">,</span> <span class="s1">'sqlite:///./tasks.db'</span><span class="p">)</span>
 
-<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">,</span> <span class="n">connect_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;check_same_thread&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE_URL</span><span class="p">,</span> <span class="n">connect_args</span><span class="o">=</span><span class="p">{</span><span class="s1">'check_same_thread'</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
 <span class="n">SessionLocal</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">autocommit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">autoflush</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
 <span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;tasks&#39;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">'tasks'</span>
 
     <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">title</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -744,7 +744,7 @@ task = Task(...)  maps to    INSERT INTO tasks ...
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_db</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yield a database session; close it when the request is done.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Yield a database session; close it when the request is done."""</span>
     <span class="n">db</span> <span class="o">=</span> <span class="n">SessionLocal</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">yield</span> <span class="n">db</span>
@@ -753,7 +753,7 @@ task = Task(...)  maps to    INSERT INTO tasks ...
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">create_tables</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create all tables if they do not already exist.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create all tables if they do not already exist."""</span>
     <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
 </code></pre></div>
 <p>Now replace <code>taskapi/app/main.py</code> with the version below. The three routes are identical — only the storage layer changes from a Python list to SQLAlchemy queries.</p>
@@ -764,7 +764,7 @@ task = Task(...)  maps to    INSERT INTO tasks ...
 <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Session</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">app.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span><span class="p">,</span> <span class="n">get_db</span><span class="p">,</span> <span class="n">create_tables</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Task Manager API&#39;</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Task Manager API'</span><span class="p">)</span>
 
 <span class="n">create_tables</span><span class="p">()</span>  <span class="c1"># creates tasks.db and the tasks table on first run</span>
 
@@ -782,19 +782,19 @@ task = Task(...)  maps to    INSERT INTO tasks ...
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_task_to_dict</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
-        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
-        <span class="s1">&#39;completed&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">completed</span><span class="p">,</span>
-        <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s1">'id'</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+        <span class="s1">'title'</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="s1">'completed'</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">completed</span><span class="p">,</span>
+        <span class="s1">'created_at'</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
     <span class="p">}</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'/tasks'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="nb">list</span><span class="p">[</span><span class="n">TaskResponse</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_tasks</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">_task_to_dict</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()]</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/tasks&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'/tasks'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">TaskCreate</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
     <span class="n">db_task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
     <span class="n">db</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">db_task</span><span class="p">)</span>
@@ -803,11 +803,11 @@ task = Task(...)  maps to    INSERT INTO tasks ...
     <span class="k">return</span> <span class="n">_task_to_dict</span><span class="p">(</span><span class="n">db_task</span><span class="p">)</span>
 
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete&#39;</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">'/tasks/</span><span class="si">{task_id}</span><span class="s1">/complete'</span><span class="p">,</span> <span class="n">response_model</span><span class="o">=</span><span class="n">TaskResponse</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">complete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">'Task not found'</span><span class="p">)</span>
     <span class="n">task</span><span class="o">.</span><span class="n">completed</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
     <span class="n">db</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
@@ -907,35 +907,35 @@ sqlalchemy==2.0.30
 <h3 id="dockerfile"><code>Dockerfile</code></h3>
 <p>This uses a <strong>multi-stage build</strong>: the builder stage installs dependencies into a virtual environment; the runtime stage copies only what is needed, producing a lean final image with no build tools.</p>
 <p>Copy into <code>taskapi/Dockerfile</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c"># Stage 1: Builder — install dependencies</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Stage 1: Builder — install dependencies</span>
+FROM<span class="w"> </span>python:3.12-slim<span class="w"> </span>AS<span class="w"> </span>builder
 
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-<span class="k">RUN</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+WORKDIR<span class="w"> </span>/app
+RUN<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
 
-<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
-<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+COPY<span class="w"> </span>requirements.txt<span class="w"> </span>.
+RUN<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 
 
-<span class="c"># Stage 2: Runtime — lean final image, no build tools</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">runtime</span>
+<span class="c1"># Stage 2: Runtime — lean final image, no build tools</span>
+FROM<span class="w"> </span>python:3.12-slim<span class="w"> </span>AS<span class="w"> </span>runtime
 
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+WORKDIR<span class="w"> </span>/app
 
-<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
-<span class="k">COPY</span><span class="w"> </span>app/<span class="w"> </span>./app/
+COPY<span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
+COPY<span class="w"> </span>app/<span class="w"> </span>./app/
 
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+ENV<span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+ENV<span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
 
-<span class="c"># Run as a non-root user — security best practice</span>
-<span class="k">RUN</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
-<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+<span class="c1"># Run as a non-root user — security best practice</span>
+RUN<span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">""</span><span class="w"> </span>appuser
+USER<span class="w"> </span>appuser
 
-<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+EXPOSE<span class="w"> </span><span class="m">8000</span>
+CMD<span class="w"> </span><span class="o">[</span><span class="s2">"uvicorn"</span>,<span class="w"> </span><span class="s2">"app.main:app"</span>,<span class="w"> </span><span class="s2">"--host"</span>,<span class="w"> </span><span class="s2">"0.0.0.0"</span>,<span class="w"> </span><span class="s2">"--port"</span>,<span class="w"> </span><span class="s2">"8000"</span><span class="o">]</span>
 </code></pre></div>
 <h3 id="docker-commands">Docker Commands</h3>
 <p>Run all commands from the <code>taskapi/</code> directory.</p>
@@ -987,7 +987,7 @@ docker<span class="w"> </span>rmi<span class="w"> </span>taskapi
 <span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8000:8000"</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
@@ -1091,20 +1091,20 @@ With Nginx:
 </code></pre></div>
 <h3 id="nginxconf"><code>nginx.conf</code></h3>
 <p>Copy into <code>taskapi/nginx/nginx.conf</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">taskapi</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">app</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code>upstream<span class="w"> </span>taskapi<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>server<span class="w"> </span>app:8000<span class="p">;</span>
+<span class="o">}</span>
 
-<span class="k">server</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+server<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>listen<span class="w"> </span><span class="m">80</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kn">proxy_pass</span><span class="w">         </span><span class="s">http://taskapi</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">Host</span><span class="w">              </span><span class="nv">$host</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Real-IP</span><span class="w">         </span><span class="nv">$remote_addr</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Forwarded-For</span><span class="w">   </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>proxy_pass<span class="w">         </span>http://taskapi<span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>Host<span class="w">              </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>X-Real-IP<span class="w">         </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>X-Forwarded-For<span class="w">   </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
 <p><strong>Key parts explained:</strong></p>
 <table>
@@ -1139,7 +1139,7 @@ With Nginx:
 <span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span>
 <span class="w">    </span><span class="nt">expose</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8000"</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./data:/app/data</span>
 <span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
@@ -1148,7 +1148,7 @@ With Nginx:
 <span class="w">  </span><span class="nt">nginx</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:alpine</span>
 <span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"80:80"</span>
 <span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./nginx/nginx.conf:/etc/nginx/conf.d/default.conf</span>
 <span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
@@ -1188,8 +1188,8 @@ With Nginx:
 curl<span class="w"> </span>http://localhost/tasks
 
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Test through Nginx&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"title": "Test through Nginx"}'</span>
 </code></pre></div>
 <hr />
 <h2 id="section-8-putting-it-all-together">Section 8 — Putting It All Together</h2>
@@ -1220,7 +1220,7 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
    Forwards:  GET /tasks HTTP/1.1  to  app:8000  (Docker internal DNS)
 
 3. FastAPI (uvicorn) receives the request on port 8000
-   Matches route:  @app.get(&#39;/tasks&#39;)
+   Matches route:  @app.get('/tasks')
    Opens a SQLAlchemy session via Depends(get_db)
    Queries:  SELECT * FROM tasks
    Returns JSON response with status 200
@@ -1425,8 +1425,8 @@ tasks IN A    203.0.113.42      ; tasks.example.com → server IP
 </ol>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a task</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/tasks<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;title&quot;: &quot;Delete me&quot;}&#39;</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">'{"title": "Delete me"}'</span>
 
 <span class="c1"># Delete task 1</span>
 curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://localhost/tasks/1
@@ -1440,16 +1440,19 @@ curl<span class="w"> </span>http://localhost/tasks
 
 Add this route to `app/main.py`:
 
-<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">'/tasks/</span><span class="si">{task_id}</span><span class="s1">'</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">&#39;Task not found&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">404</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="s1">'Task not found'</span><span class="p">)</span>
     <span class="n">db</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
     <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </code></pre></div>
 
+
 Rebuild and restart:
+
 
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
 </code></pre></div>

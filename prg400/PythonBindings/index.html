@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Python Bindings (C/C++) - Python</title>
+    <title>Python Bindings (C/C++) - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -232,7 +232,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -384,7 +384,7 @@
 <h3 id="11-creating-a-simple-c-library">1.1 Creating a Simple C Library</h3>
 <p>Let's start by writing a small C file and compiling it into a shared library.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Step 1: Write a C source file</span>
-<span class="n">c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">#include &lt;stdio.h&gt;</span>
 <span class="s2">#include &lt;math.h&gt;</span>
 
@@ -417,15 +417,15 @@
 <span class="s2">// Return a greeting string</span>
 <span class="s2">const char* greet(const char* name) {</span>
 <span class="s2">    static char buffer[256];</span>
-<span class="s2">    snprintf(buffer, sizeof(buffer), &quot;Hello, </span><span class="si">%s</span><span class="s2">! Welcome from C.&quot;, name);</span>
+<span class="s2">    snprintf(buffer, sizeof(buffer), "Hello, </span><span class="si">%s</span><span class="s2">! Welcome from C.", name);</span>
 <span class="s2">    return buffer;</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mylib.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"mylib.c"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_code</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C source file written: mylib.c&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"C source file written: mylib.c"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>C source file written: mylib.c
 </code></pre></div>
@@ -434,24 +434,24 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 
 <span class="c1"># Step 2: Compile the C code into a shared library</span>
-<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>  <span class="c1"># macOS</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for macOS...&quot;</span><span class="p">)</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;-fPIC&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
-    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.dylib&quot;</span>
-<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for Linux...&quot;</span><span class="p">)</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.so&quot;</span><span class="p">,</span> <span class="s2">&quot;-fPIC&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
-    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.so&quot;</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Darwin"</span><span class="p">:</span>  <span class="c1"># macOS</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Compiling for macOS..."</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"gcc"</span><span class="p">,</span> <span class="s2">"-shared"</span><span class="p">,</span> <span class="s2">"-o"</span><span class="p">,</span> <span class="s2">"mylib.dylib"</span><span class="p">,</span> <span class="s2">"-fPIC"</span><span class="p">,</span> <span class="s2">"mylib.c"</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">"mylib.dylib"</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Linux"</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Compiling for Linux..."</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"gcc"</span><span class="p">,</span> <span class="s2">"-shared"</span><span class="p">,</span> <span class="s2">"-o"</span><span class="p">,</span> <span class="s2">"mylib.so"</span><span class="p">,</span> <span class="s2">"-fPIC"</span><span class="p">,</span> <span class="s2">"mylib.c"</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">"mylib.so"</span>
 <span class="k">else</span><span class="p">:</span>  <span class="c1"># Windows</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compiling for Windows...&quot;</span><span class="p">)</span>
-    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gcc&quot;</span><span class="p">,</span> <span class="s2">&quot;-shared&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dll&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.c&quot;</span><span class="p">]</span>
-    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">&quot;mylib.dll&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Compiling for Windows..."</span><span class="p">)</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"gcc"</span><span class="p">,</span> <span class="s2">"-shared"</span><span class="p">,</span> <span class="s2">"-o"</span><span class="p">,</span> <span class="s2">"mylib.dll"</span><span class="p">,</span> <span class="s2">"mylib.c"</span><span class="p">]</span>
+    <span class="n">lib_name</span> <span class="o">=</span> <span class="s2">"mylib.dll"</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled successfully: </span><span class="si">{</span><span class="n">lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Compiled successfully: </span><span class="si">{</span><span class="n">lib_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compilation failed:</span><span class="se">\n</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Compilation failed:</span><span class="se">\n</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Compiling for macOS...
 Compiled successfully: mylib.dylib
@@ -466,10 +466,10 @@ Compiled successfully: mylib.dylib
 <span class="c1"># --- Calling add(int, int) -&gt; int ---</span>
 <span class="c1"># By default, ctypes assumes int arguments and int return</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(10, 25) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"add(10, 25) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">factorial</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(5) = </span><span class="si">{</span><span class="n">factorial</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"factorial(5) = </span><span class="si">{</span><span class="n">factorial</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>add(10, 25) = 35
 factorial(5) = 120
@@ -480,7 +480,7 @@ factorial(5) = 120
 <span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;multiply(3.14, 2.0) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"multiply(3.14, 2.0) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>multiply(3.14, 2.0) = 6.28
 </code></pre></div>
@@ -489,7 +489,7 @@ factorial(5) = 120
 <span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_longlong</span>
 
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>factorial(5) = 120
 factorial(10) = 3628800
@@ -506,11 +506,11 @@ factorial(20) = 2432902008176640000
 <span class="n">ArrayType</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">ArrayType</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Before: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># The C function modified our array in-place!</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Before: [1.0, 2.0, 3.0, 4.0, 5.0]
@@ -522,9 +522,9 @@ After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
 
 <span class="c1"># C strings are bytes in Python, so we encode</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Aayush&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s2">"Aayush"</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">)</span>
 <span class="n">greeting</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">greeting</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Hello, Aayush! Welcome from C.
 </code></pre></div>
@@ -596,8 +596,8 @@ After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 <span class="kn">import</span><span class="w"> </span><span class="nn">ctypes.util</span>
 
 <span class="c1"># Find and load the C math library</span>
-<span class="n">libm_path</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_library</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Math library path: </span><span class="si">{</span><span class="n">libm_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">libm_path</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_library</span><span class="p">(</span><span class="s2">"m"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Math library path: </span><span class="si">{</span><span class="n">libm_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">libm_path</span><span class="p">:</span>
     <span class="n">libm</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">libm_path</span><span class="p">)</span>
@@ -609,13 +609,13 @@ After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 <span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
 <span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;C sqrt(144.0) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">144.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"C sqrt(144.0) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">144.0</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Call the C pow function</span>
 <span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
 <span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;C pow(2, 10) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"C pow(2, 10) = </span><span class="si">{</span><span class="n">libm</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Math library path: /usr/lib/libm.dylib
 C sqrt(144.0) = 12.0
@@ -629,8 +629,8 @@ C pow(2, 10) = 1024.0
 
 <span class="c1"># libc.strlen.argtypes = [???]</span>
 <span class="c1"># libc.strlen.restype = ???</span>
-<span class="c1"># result = libc.strlen(b&quot;Hello, World!&quot;)</span>
-<span class="c1"># print(f&quot;strlen = {result}&quot;)</span>
+<span class="c1"># result = libc.strlen(b"Hello, World!")</span>
+<span class="c1"># print(f"strlen = {result}")</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
 <span class="c1"># Hint: strlen takes a const char* and returns a size_t (use c_size_t)</span>
@@ -638,8 +638,8 @@ C pow(2, 10) = 1024.0
 
 <span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">]</span>
 <span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_size_t</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Hello, World!&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">libc</span><span class="o">.</span><span class="n">strlen</span><span class="p">(</span><span class="sa">b</span><span class="s2">"Hello, World!"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"strlen = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>strlen = 13
 </code></pre></div>
@@ -668,41 +668,41 @@ C pow(2, 10) = 1024.0
 
 <span class="c1"># Declare the C functions we want to call</span>
 <span class="c1"># This looks like actual C header declarations!</span>
-<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">    int add(int a, int b);</span>
 <span class="s2">    double multiply(double a, double b);</span>
 <span class="s2">    long long factorial(int n);</span>
 <span class="s2">    void square_array(double* arr, int size);</span>
 <span class="s2">    const char* greet(const char* name);</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">"""</span><span class="p">)</span>
 
 <span class="c1"># Load our compiled library</span>
 <span class="n">lib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">lib_name</span><span class="p">))</span>
 
 <span class="c1"># Call functions -- much cleaner than ctypes!</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(15, 27) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;multiply(2.5, 4.0) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(12) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"add(15, 27) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">27</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"multiply(2.5, 4.0) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mf">4.0</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"factorial(12) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>add(15, 27) = 42
 multiply(2.5, 4.0) = 10.0
 factorial(12) = 479001600
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Working with arrays in cffi</span>
-<span class="n">arr</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;double[5]&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"double[5]"</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before: </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Before: </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">lib</span><span class="o">.</span><span class="n">square_array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After:  </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After:  </span><span class="si">{</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Before: [1.0, 2.0, 3.0, 4.0, 5.0]
 After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Working with strings in cffi</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;Student&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">greet</span><span class="p">(</span><span class="sa">b</span><span class="s2">"Student"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf-8"</span><span class="p">))</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Hello, Student! Welcome from C.
 </code></pre></div>
@@ -713,13 +713,13 @@ After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 <span class="n">ffi_builder</span> <span class="o">=</span> <span class="n">FFI</span><span class="p">()</span>
 
 <span class="c1"># Define the interface (what Python sees)</span>
-<span class="n">ffi_builder</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">ffi_builder</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">    int fibonacci(int n);</span>
 <span class="s2">    double distance(double x1, double y1, double x2, double y2);</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="s2">"""</span><span class="p">)</span>
 
 <span class="c1"># Provide the actual C implementation</span>
-<span class="n">ffi_builder</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span><span class="s2">&quot;_math_helpers&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">ffi_builder</span><span class="o">.</span><span class="n">set_source</span><span class="p">(</span><span class="s2">"_math_helpers"</span><span class="p">,</span> <span class="s2">"""</span>
 <span class="s2">    #include &lt;math.h&gt;</span>
 
 <span class="s2">    int fibonacci(int n) {</span>
@@ -736,36 +736,36 @@ After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 <span class="s2">    double distance(double x1, double y1, double x2, double y2) {</span>
 <span class="s2">        return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));</span>
 <span class="s2">    }</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
-    <span class="n">libraries</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>  <span class="c1"># link against libm for sqrt</span>
+<span class="s2">"""</span><span class="p">,</span>
+    <span class="n">libraries</span><span class="o">=</span><span class="p">[</span><span class="s2">"m"</span><span class="p">]</span>  <span class="c1"># link against libm for sqrt</span>
 <span class="p">)</span>
 
 <span class="c1"># Compile the extension module</span>
 <span class="n">ffi_builder</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>generating ./_math_helpers.c
-the current directory is &#39;/Users/aayush/Documents/Kings/python-training/prg400&#39;
+the current directory is '/Users/aayush/Documents/Kings/python-training/prg400'
 
 
-ld: warning: duplicate -rpath &#39;/Users/aayush/micromamba/envs/stats/lib&#39; ignored
+ld: warning: duplicate -rpath '/Users/aayush/micromamba/envs/stats/lib' ignored
 
 
 
 
 
-&#39;/Users/aayush/Documents/Kings/python-training/prg400/_math_helpers.cpython-310-darwin.so&#39;
+'/Users/aayush/Documents/Kings/python-training/prg400/_math_helpers.cpython-310-darwin.so'
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;../lib&quot;</span><span class="p">))</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"../lib"</span><span class="p">))</span>
 <span class="c1"># Now import and use the compiled module</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">_math_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">ffi</span><span class="p">,</span> <span class="n">lib</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fibonacci(10) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fibonacci(30) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fibonacci(10) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"fibonacci(30) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(1,2 -&gt; 4,6) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance(1,2 -&gt; 4,6) = </span><span class="si">{</span><span class="n">lib</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>fibonacci(10) = 55
 fibonacci(30) = 832040
@@ -838,8 +838,8 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <li><strong>Method table</strong> -- maps Python function names to C function pointers</li>
 <li><strong>Module definition</strong> -- describes the module to Python</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="c1"># Let&#39;s write a complete C extension module</span>
-<span class="n">c_extension_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Let's write a complete C extension module</span>
+<span class="n">c_extension_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">#include &lt;Python.h&gt;</span>
 
 <span class="s2">// ========================================</span>
@@ -852,8 +852,8 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">static PyObject* mymodule_add(PyObject* self, PyObject* args) {</span>
 <span class="s2">    int a, b;</span>
 
-<span class="s2">    // Parse Python arguments: &quot;ii&quot; means two integers</span>
-<span class="s2">    if (!PyArg_ParseTuple(args, &quot;ii&quot;, &amp;a, &amp;b)) {</span>
+<span class="s2">    // Parse Python arguments: "ii" means two integers</span>
+<span class="s2">    if (!PyArg_ParseTuple(args, "ii", &amp;a, &amp;b)) {</span>
 <span class="s2">        return NULL;  // Raise TypeError on parse failure</span>
 <span class="s2">    }</span>
 
@@ -864,12 +864,12 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">static PyObject* mymodule_fibonacci(PyObject* self, PyObject* args) {</span>
 <span class="s2">    int n;</span>
 
-<span class="s2">    if (!PyArg_ParseTuple(args, &quot;i&quot;, &amp;n)) {</span>
+<span class="s2">    if (!PyArg_ParseTuple(args, "i", &amp;n)) {</span>
 <span class="s2">        return NULL;</span>
 <span class="s2">    }</span>
 
 <span class="s2">    if (n &lt; 0) {</span>
-<span class="s2">        PyErr_SetString(PyExc_ValueError, &quot;n must be non-negative&quot;);</span>
+<span class="s2">        PyErr_SetString(PyExc_ValueError, "n must be non-negative");</span>
 <span class="s2">        return NULL;</span>
 <span class="s2">    }</span>
 
@@ -886,14 +886,14 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">static PyObject* mymodule_sum_list(PyObject* self, PyObject* args) {</span>
 <span class="s2">    PyObject* list_obj;</span>
 
-<span class="s2">    // &quot;O&quot; means a single Python object</span>
-<span class="s2">    if (!PyArg_ParseTuple(args, &quot;O&quot;, &amp;list_obj)) {</span>
+<span class="s2">    // "O" means a single Python object</span>
+<span class="s2">    if (!PyArg_ParseTuple(args, "O", &amp;list_obj)) {</span>
 <span class="s2">        return NULL;</span>
 <span class="s2">    }</span>
 
-<span class="s2">    // Verify it&#39;s actually a list</span>
+<span class="s2">    // Verify it's actually a list</span>
 <span class="s2">    if (!PyList_Check(list_obj)) {</span>
-<span class="s2">        PyErr_SetString(PyExc_TypeError, &quot;Expected a list&quot;);</span>
+<span class="s2">        PyErr_SetString(PyExc_TypeError, "Expected a list");</span>
 <span class="s2">        return NULL;</span>
 <span class="s2">    }</span>
 
@@ -908,7 +908,7 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">        } else if (PyFloat_Check(item)) {</span>
 <span class="s2">            total += PyFloat_AsDouble(item);</span>
 <span class="s2">        } else {</span>
-<span class="s2">            PyErr_SetString(PyExc_TypeError, &quot;List must contain only numbers&quot;);</span>
+<span class="s2">            PyErr_SetString(PyExc_TypeError, "List must contain only numbers");</span>
 <span class="s2">            return NULL;</span>
 <span class="s2">        }</span>
 <span class="s2">    }</span>
@@ -921,9 +921,9 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">// ========================================</span>
 
 <span class="s2">static PyMethodDef MyModuleMethods[] = {</span>
-<span class="s2">    {&quot;add&quot;,       mymodule_add,       METH_VARARGS, &quot;Add two integers.&quot;},</span>
-<span class="s2">    {&quot;fibonacci&quot;, mymodule_fibonacci, METH_VARARGS, &quot;Compute nth Fibonacci number.&quot;},</span>
-<span class="s2">    {&quot;sum_list&quot;,  mymodule_sum_list,  METH_VARARGS, &quot;Sum a list of numbers.&quot;},</span>
+<span class="s2">    {"add",       mymodule_add,       METH_VARARGS, "Add two integers."},</span>
+<span class="s2">    {"fibonacci", mymodule_fibonacci, METH_VARARGS, "Compute nth Fibonacci number."},</span>
+<span class="s2">    {"sum_list",  mymodule_sum_list,  METH_VARARGS, "Sum a list of numbers."},</span>
 <span class="s2">    {NULL, NULL, 0, NULL}  // Sentinel: marks end of table</span>
 <span class="s2">};</span>
 
@@ -933,8 +933,8 @@ distance(1,2 -&gt; 4,6) = 5.0000
 
 <span class="s2">static struct PyModuleDef mymodule = {</span>
 <span class="s2">    PyModuleDef_HEAD_INIT,</span>
-<span class="s2">    &quot;mymodule&quot;,           // Module name</span>
-<span class="s2">    &quot;A sample C extension module for demonstration.&quot;,  // Docstring</span>
+<span class="s2">    "mymodule",           // Module name</span>
+<span class="s2">    "A sample C extension module for demonstration.",  // Docstring</span>
 <span class="s2">    -1,                    // -1 means module keeps state in global variables</span>
 <span class="s2">    MyModuleMethods        // Method table</span>
 <span class="s2">};</span>
@@ -944,55 +944,55 @@ distance(1,2 -&gt; 4,6) = 5.0000
 <span class="s2">PyMODINIT_FUNC PyInit_mymodule(void) {</span>
 <span class="s2">    return PyModule_Create(&amp;mymodule);</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mymodule.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"mymodule.c"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">c_extension_code</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C extension source written: mymodule.c&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"C extension source written: mymodule.c"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>C extension source written: mymodule.c
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write a setup.py to build the extension</span>
-<span class="n">setup_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="n">setup_code</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">from setuptools import setup, Extension</span>
 
 <span class="s2">module = Extension(</span>
-<span class="s2">    &#39;mymodule&#39;,</span>
-<span class="s2">    sources=[&#39;mymodule.c&#39;],</span>
+<span class="s2">    'mymodule',</span>
+<span class="s2">    sources=['mymodule.c'],</span>
 <span class="s2">)</span>
 
 <span class="s2">setup(</span>
-<span class="s2">    name=&#39;mymodule&#39;,</span>
-<span class="s2">    version=&#39;1.0&#39;,</span>
-<span class="s2">    description=&#39;A sample C extension module&#39;,</span>
+<span class="s2">    name='mymodule',</span>
+<span class="s2">    version='1.0',</span>
+<span class="s2">    description='A sample C extension module',</span>
 <span class="s2">    ext_modules=[module],</span>
 <span class="s2">)</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;setup.py&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"setup.py"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">setup_code</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setup.py written&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"setup.py written"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>setup.py written
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Build the extension module</span>
 <span class="err">!</span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">build_ext</span> <span class="o">--</span><span class="n">inplace</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span> <span class="o">|</span> <span class="n">tail</span> <span class="o">-</span><span class="mi">5</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>building &#39;mymodule&#39; extension
+<div class="highlight"><pre><span></span><code>building 'mymodule' extension
 clang -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -I/Users/aayush/micromamba/envs/stats/include/python3.10 -c mymodule.c -o build/temp.macosx-11.0-arm64-cpython-310/mymodule.o
 clang -bundle -undefined dynamic_lookup -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib build/temp.macosx-11.0-arm64-cpython-310/mymodule.o -o build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so
-ld: warning: duplicate -rpath &#39;/Users/aayush/micromamba/envs/stats/lib&#39; ignored
+ld: warning: duplicate -rpath '/Users/aayush/micromamba/envs/stats/lib' ignored
 copying build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so -&gt;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Use our C extension module!</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">mymodule</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.add(100, 200) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.fibonacci(10) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.fibonacci(50) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;mymodule.sum_list([1, 2.5, 3, 4.5]) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mymodule.add(100, 200) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mymodule.fibonacci(10) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mymodule.fibonacci(50) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mymodule.sum_list([1, 2.5, 3, 4.5]) = </span><span class="si">{</span><span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.5</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>mymodule.add(100, 200) = 300
 mymodule.fibonacci(10) = 55
@@ -1003,17 +1003,17 @@ mymodule.sum_list([1, 2.5, 3, 4.5]) = 11.0
 <span class="k">try</span><span class="p">:</span>
     <span class="n">mymodule</span><span class="o">.</span><span class="n">fibonacci</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">(</span><span class="s2">&quot;not a list&quot;</span><span class="p">)</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">(</span><span class="s2">"not a list"</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;three&quot;</span><span class="p">])</span>
+    <span class="n">mymodule</span><span class="o">.</span><span class="n">sum_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"three"</span><span class="p">])</span>
 <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Caught error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Caught error: n must be non-negative
 Caught error: Expected a list
@@ -1078,20 +1078,16 @@ Caught error: List must contain only numbers
 </table>
 <h3 id="33-reference-counting-the-critical-concept">3.3 Reference Counting: The Critical Concept</h3>
 <p>In the C API, <strong>you</strong> manage memory. Every Python object has a reference count.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// You got a NEW reference (you own it) -- must DECREF when done</span>
-<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-<span class="c1">// ... use result ...</span>
-<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w">  </span><span class="c1">// Release your reference</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>You<span class="w"> </span>got<span class="w"> </span>a<span class="w"> </span>NEW<span class="w"> </span>reference<span class="w"> </span><span class="o">(</span>you<span class="w"> </span>own<span class="w"> </span>it<span class="o">)</span><span class="w"> </span>--<span class="w"> </span>must<span class="w"> </span>DECREF<span class="w"> </span>when<span class="w"> </span><span class="k">done</span>
+PyObject*<span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyLong_FromLong<span class="o">(</span><span class="m">42</span><span class="o">)</span><span class="p">;</span>
+//<span class="w"> </span>...<span class="w"> </span>use<span class="w"> </span>result<span class="w"> </span>...
+Py_DECREF<span class="o">(</span>result<span class="o">)</span><span class="p">;</span><span class="w">  </span>//<span class="w"> </span>Release<span class="w"> </span>your<span class="w"> </span>reference
 
-<span class="c1">// You got a BORROWED reference (someone else owns it) -- do NOT DECREF</span>
-<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyList_GetItem</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Borrowed!</span>
-<span class="c1">// ... use item but do NOT Py_DECREF(item) ...</span>
+//<span class="w"> </span>You<span class="w"> </span>got<span class="w"> </span>a<span class="w"> </span>BORROWED<span class="w"> </span>reference<span class="w"> </span><span class="o">(</span>someone<span class="w"> </span><span class="k">else</span><span class="w"> </span>owns<span class="w"> </span>it<span class="o">)</span><span class="w"> </span>--<span class="w"> </span><span class="k">do</span><span class="w"> </span>NOT<span class="w"> </span>DECREF
+PyObject*<span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyList_GetItem<span class="o">(</span>list,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="p">;</span><span class="w">  </span>//<span class="w"> </span>Borrowed!
+//<span class="w"> </span>...<span class="w"> </span>use<span class="w"> </span>item<span class="w"> </span>but<span class="w"> </span><span class="k">do</span><span class="w"> </span>NOT<span class="w"> </span>Py_DECREF<span class="o">(</span>item<span class="o">)</span><span class="w"> </span>...
 </code></pre></div>
-<p><strong>Rules:</strong>
-- Functions that <strong>create</strong> objects give you a <strong>new</strong> reference (you must DECREF)
-- Functions that <strong>get</strong> items from containers give you a <strong>borrowed</strong> reference (don't DECREF)
-- When returning an object from your function, you transfer ownership to the caller
-- <code>Py_INCREF</code> if you want to keep a borrowed reference alive</p>
+<p><strong>Rules:</strong> - Functions that <strong>create</strong> objects give you a <strong>new</strong> reference (you must DECREF) - Functions that <strong>get</strong> items from containers give you a <strong>borrowed</strong> reference (don't DECREF) - When returning an object from your function, you transfer ownership to the caller - <code>Py_INCREF</code> if you want to keep a borrowed reference alive</p>
 <hr />
 <h2 id="4-pybind11-modern-c-bindings">4. <code>pybind11</code> -- Modern C++ Bindings</h2>
 <hr />
@@ -1099,7 +1095,7 @@ Caught error: List must contain only numbers
 <h3 id="why-pybind11">Why <code>pybind11</code>?</h3>
 <ul>
 <li>Clean, modern C++ syntax</li>
-<li>Automatic type conversions (STL containers &lt;-&gt; Python types)</li>
+<li>Automatic type conversions (STL containers \&lt;-&gt; Python types)</li>
 <li>Supports classes, inheritance, overloading, lambdas</li>
 <li>Header-only -- easy to integrate</li>
 <li>The <strong>most popular</strong> way to create C++ bindings today</li>
@@ -1108,7 +1104,7 @@ Caught error: List must contain only numbers
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pybind11</span> <span class="o">-</span><span class="n">q</span>
 </code></pre></div>
 <h3 id="41-a-simple-pybind11-module">4.1 A Simple pybind11 Module</h3>
-<div class="highlight"><pre><span></span><code><span class="n">cpp_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">cpp_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">#include &lt;pybind11/pybind11.h&gt;</span>
 <span class="s2">#include &lt;pybind11/stl.h&gt;  // For automatic STL &lt;-&gt; Python conversions</span>
 <span class="s2">#include &lt;string&gt;</span>
@@ -1150,7 +1146,7 @@ Caught error: List must contain only numbers
 
 <span class="s2">double dot_product(const std::vector&lt;double&gt;&amp; a, const std::vector&lt;double&gt;&amp; b) {</span>
 <span class="s2">    if (a.size() != b.size()) {</span>
-<span class="s2">        throw std::runtime_error(&quot;Vectors must have the same length&quot;);</span>
+<span class="s2">        throw std::runtime_error("Vectors must have the same length");</span>
 <span class="s2">    }</span>
 <span class="s2">    return std::inner_product(a.begin(), a.end(), b.begin(), 0.0);</span>
 <span class="s2">}</span>
@@ -1169,7 +1165,7 @@ Caught error: List must contain only numbers
 
 <span class="s2">    Vector2D normalized() const {</span>
 <span class="s2">        double mag = magnitude();</span>
-<span class="s2">        if (mag == 0) throw std::runtime_error(&quot;Cannot normalize zero vector&quot;);</span>
+<span class="s2">        if (mag == 0) throw std::runtime_error("Cannot normalize zero vector");</span>
 <span class="s2">        return Vector2D(x / mag, y / mag);</span>
 <span class="s2">    }</span>
 
@@ -1182,67 +1178,67 @@ Caught error: List must contain only numbers
 <span class="s2">    }</span>
 
 <span class="s2">    std::string repr() const {</span>
-<span class="s2">        return &quot;Vector2D(&quot; + std::to_string(x) + &quot;, &quot; + std::to_string(y) + &quot;)&quot;;</span>
+<span class="s2">        return "Vector2D(" + std::to_string(x) + ", " + std::to_string(y) + ")";</span>
 <span class="s2">    }</span>
 <span class="s2">};</span>
 
 <span class="s2">// ---- Module Definition ----</span>
 
 <span class="s2">PYBIND11_MODULE(mathtools, m) {</span>
-<span class="s2">    m.doc() = &quot;A C++ math utilities module built with pybind11&quot;;</span>
+<span class="s2">    m.doc() = "A C++ math utilities module built with pybind11";</span>
 
 <span class="s2">    // Bind simple functions</span>
-<span class="s2">    m.def(&quot;add&quot;, &amp;add, &quot;Add two integers&quot;,</span>
-<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));  // Named arguments!</span>
+<span class="s2">    m.def("add", &amp;add, "Add two integers",</span>
+<span class="s2">          py::arg("a"), py::arg("b"));  // Named arguments!</span>
 
-<span class="s2">    m.def(&quot;hypotenuse&quot;, &amp;hypotenuse, &quot;Compute hypotenuse&quot;,</span>
-<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));</span>
+<span class="s2">    m.def("hypotenuse", &amp;hypotenuse, "Compute hypotenuse",</span>
+<span class="s2">          py::arg("a"), py::arg("b"));</span>
 
-<span class="s2">    m.def(&quot;repeat_string&quot;, &amp;repeat_string, &quot;Repeat a string n times&quot;,</span>
-<span class="s2">          py::arg(&quot;s&quot;), py::arg(&quot;n&quot;) = 2);  // Default argument!</span>
+<span class="s2">    m.def("repeat_string", &amp;repeat_string, "Repeat a string n times",</span>
+<span class="s2">          py::arg("s"), py::arg("n") = 2);  // Default argument!</span>
 
-<span class="s2">    m.def(&quot;range_vec&quot;, &amp;range_vec, &quot;Create a vector of integers&quot;,</span>
-<span class="s2">          py::arg(&quot;start&quot;), py::arg(&quot;end&quot;));</span>
+<span class="s2">    m.def("range_vec", &amp;range_vec, "Create a vector of integers",</span>
+<span class="s2">          py::arg("start"), py::arg("end"));</span>
 
-<span class="s2">    m.def(&quot;dot_product&quot;, &amp;dot_product, &quot;Compute dot product of two vectors&quot;,</span>
-<span class="s2">          py::arg(&quot;a&quot;), py::arg(&quot;b&quot;));</span>
+<span class="s2">    m.def("dot_product", &amp;dot_product, "Compute dot product of two vectors",</span>
+<span class="s2">          py::arg("a"), py::arg("b"));</span>
 
 <span class="s2">    // Bind a C++ class</span>
-<span class="s2">    py::class_&lt;Vector2D&gt;(m, &quot;Vector2D&quot;)</span>
+<span class="s2">    py::class_&lt;Vector2D&gt;(m, "Vector2D")</span>
 <span class="s2">        .def(py::init&lt;double, double&gt;(),   // Constructor</span>
-<span class="s2">             py::arg(&quot;x&quot;) = 0, py::arg(&quot;y&quot;) = 0)</span>
-<span class="s2">        .def_readwrite(&quot;x&quot;, &amp;Vector2D::x)  // Public attributes</span>
-<span class="s2">        .def_readwrite(&quot;y&quot;, &amp;Vector2D::y)</span>
-<span class="s2">        .def(&quot;magnitude&quot;, &amp;Vector2D::magnitude)</span>
-<span class="s2">        .def(&quot;normalized&quot;, &amp;Vector2D::normalized)</span>
-<span class="s2">        .def(&quot;dot&quot;, &amp;Vector2D::dot, py::arg(&quot;other&quot;))</span>
-<span class="s2">        .def(&quot;__add__&quot;, &amp;Vector2D::operator+)  // Python operator overloading!</span>
-<span class="s2">        .def(&quot;__repr__&quot;, &amp;Vector2D::repr);</span>
+<span class="s2">             py::arg("x") = 0, py::arg("y") = 0)</span>
+<span class="s2">        .def_readwrite("x", &amp;Vector2D::x)  // Public attributes</span>
+<span class="s2">        .def_readwrite("y", &amp;Vector2D::y)</span>
+<span class="s2">        .def("magnitude", &amp;Vector2D::magnitude)</span>
+<span class="s2">        .def("normalized", &amp;Vector2D::normalized)</span>
+<span class="s2">        .def("dot", &amp;Vector2D::dot, py::arg("other"))</span>
+<span class="s2">        .def("__add__", &amp;Vector2D::operator+)  // Python operator overloading!</span>
+<span class="s2">        .def("__repr__", &amp;Vector2D::repr);</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;mathtools.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"mathtools.cpp"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cpp_code</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C++ source written: mathtools.cpp&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"C++ source written: mathtools.cpp"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>C++ source written: mathtools.cpp
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Build using pybind11&#39;s build helpers</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pybind11</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sysconfig</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build using pybind11's build helpers</span>
+import<span class="w"> </span>pybind11
+import<span class="w"> </span>sysconfig
 
 <span class="c1"># Get compiler flags</span>
-<span class="n">include_flags</span> <span class="o">=</span> <span class="err">!</span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pybind11</span> <span class="o">--</span><span class="n">includes</span>
-<span class="n">include_flags</span> <span class="o">=</span> <span class="n">include_flags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nv">include_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!python<span class="w"> </span>-m<span class="w"> </span>pybind11<span class="w"> </span>--includes
+<span class="nv">include_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>include_flags<span class="o">[</span><span class="m">0</span><span class="o">]</span>
 
-<span class="n">ext_suffix</span> <span class="o">=</span> <span class="n">sysconfig</span><span class="o">.</span><span class="n">get_config_var</span><span class="p">(</span><span class="s1">&#39;EXT_SUFFIX&#39;</span><span class="p">)</span>
+<span class="nv">ext_suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sysconfig.get_config_var<span class="o">(</span><span class="s1">'EXT_SUFFIX'</span><span class="o">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Include flags: </span><span class="si">{</span><span class="n">include_flags</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extension suffix: </span><span class="si">{</span><span class="n">ext_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+print<span class="o">(</span>f<span class="s2">"Include flags: {include_flags}"</span><span class="o">)</span>
+print<span class="o">(</span>f<span class="s2">"Extension suffix: {ext_suffix}"</span><span class="o">)</span>
 
 <span class="c1"># Compile</span>
-<span class="err">!</span><span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">O2</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">17</span> <span class="o">-</span><span class="n">fPIC</span> <span class="o">-</span><span class="n">undefined</span> <span class="n">dynamic_lookup</span> <span class="p">{</span><span class="n">include_flags</span><span class="p">}</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">mathtools</span><span class="p">{</span><span class="n">ext_suffix</span><span class="p">}</span>
+!c++<span class="w"> </span>-O2<span class="w"> </span>-shared<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-fPIC<span class="w"> </span>-undefined<span class="w"> </span>dynamic_lookup<span class="w"> </span><span class="o">{</span>include_flags<span class="o">}</span><span class="w"> </span>mathtools.cpp<span class="w"> </span>-o<span class="w"> </span>mathtools<span class="o">{</span>ext_suffix<span class="o">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Include flags: -I/Users/aayush/micromamba/envs/stats/include/python3.10 -I/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/pybind11/include
 Extension suffix: .cpython-310-darwin.so
@@ -1250,44 +1246,44 @@ Extension suffix: .cpython-310-darwin.so
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">mathtools</span>
 
 <span class="c1"># Simple functions</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;add(a=5, b=3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hypotenuse(3, 4) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repeat_string(&#39;Ha&#39;, 3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">&#39;Ha&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;repeat_string(&#39;Hi&#39;) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">&#39;Hi&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">  (default n=2)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"add(a=5, b=3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"hypotenuse(3, 4) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">hypotenuse</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"repeat_string('Ha', 3) = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">'Ha'</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"repeat_string('Hi') = </span><span class="si">{</span><span class="n">mathtools</span><span class="o">.</span><span class="n">repeat_string</span><span class="p">(</span><span class="s1">'Hi'</span><span class="p">)</span><span class="si">}</span><span class="s2">  (default n=2)"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>add(a=5, b=3) = 8
 hypotenuse(3, 4) = 5.0
-repeat_string(&#39;Ha&#39;, 3) = HaHaHa
-repeat_string(&#39;Hi&#39;) = HiHi  (default n=2)
+repeat_string('Ha', 3) = HaHaHa
+repeat_string('Hi') = HiHi  (default n=2)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># STL containers converted automatically!</span>
 <span class="n">nums</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">range_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;range_vec(1, 6) = </span><span class="si">{</span><span class="n">nums</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"range_vec(1, 6) = </span><span class="si">{</span><span class="n">nums</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Pass Python lists to C++ std::vector</span>
 <span class="n">dp</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">dot_product</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;dot_product([1,2,3], [4,5,6]) = </span><span class="si">{</span><span class="n">dp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"dot_product([1,2,3], [4,5,6]) = </span><span class="si">{</span><span class="n">dp</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>range_vec(1, 6) = [1, 2, 3, 4, 5]
-Type: &lt;class &#39;list&#39;&gt;
+Type: &lt;class 'list'&gt;
 dot_product([1,2,3], [4,5,6]) = 32.0
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Using the C++ class from Python</span>
 <span class="n">v1</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">v2</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1 = </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v2 = </span><span class="si">{</span><span class="n">v2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.magnitude() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.normalized() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1 + v2 = </span><span class="si">{</span><span class="n">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.dot(v2) = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1 = </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v2 = </span><span class="si">{</span><span class="n">v2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1.magnitude() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">magnitude</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1.normalized() = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1 + v2 = </span><span class="si">{</span><span class="n">v1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v2</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1.dot(v2) = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Access attributes</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;v1.x = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, v1.y = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"v1.x = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, v1.y = </span><span class="si">{</span><span class="n">v1</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">v1</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After v1.x = 10: </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"After v1.x = 10: </span><span class="si">{</span><span class="n">v1</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>v1 = Vector2D(3.000000, 4.000000)
 v2 = Vector2D(1.000000, 2.000000)
@@ -1302,13 +1298,13 @@ After v1.x = 10: Vector2D(10.000000, 4.000000)
 <span class="k">try</span><span class="p">:</span>
     <span class="n">mathtools</span><span class="o">.</span><span class="n">dot_product</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">zero</span> <span class="o">=</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">zero</span><span class="o">.</span><span class="n">normalized</span><span class="p">()</span>
 <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Caught: Vectors must have the same length
 Caught: Cannot normalize zero vector
@@ -1335,7 +1331,7 @@ Caught: Cannot normalize zero vector
 <h3 id="51-basic-cython-adding-type-declarations">5.1 Basic Cython: Adding Type Declarations</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pure Python version -- for comparison</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">python_primes</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all primes up to n using trial division.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Find all primes up to n using trial division."""</span>
     <span class="n">primes</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">is_prime</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1351,37 +1347,37 @@ Caught: Cannot normalize zero vector
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>3.09 ms ± 77.7 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython version -- almost the same code, but with type declarations!</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython version -- almost the same code, but with type declarations!</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">cython_primes</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all primes up to n using trial division (Cython).&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">primes</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">candidate</span><span class="p">,</span> <span class="nf">divisor</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">bint</span> <span class="nf">is_prime</span>
+def<span class="w"> </span>cython_primes<span class="o">(</span>int<span class="w"> </span>n<span class="o">)</span>:
+<span class="w">    </span><span class="s2">"""Find all primes up to n using trial division (Cython)."""</span>
+<span class="w">    </span>cdef<span class="w"> </span>list<span class="w"> </span><span class="nv">primes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>candidate,<span class="w"> </span>divisor
+<span class="w">    </span>cdef<span class="w"> </span>bint<span class="w"> </span>is_prime
 
-    <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
-        <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">for</span> <span class="n">divisor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">candidate</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
-                <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
-            <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">primes</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>candidate<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span><span class="m">2</span>,<span class="w"> </span>n<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">is_prime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>divisor<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span><span class="m">2</span>,<span class="w"> </span>int<span class="o">(</span>candidate<span class="w"> </span>**<span class="w"> </span><span class="m">0</span>.5<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>candidate<span class="w"> </span>%<span class="w"> </span><span class="nv">divisor</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">                </span><span class="nv">is_prime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<span class="w">                </span><span class="k">break</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>is_prime:
+<span class="w">            </span>primes.append<span class="o">(</span>candidate<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>primes
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Compare performance!</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pure Python:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Pure Python:"</span><span class="p">)</span>
 <span class="o">%</span><span class="n">timeit</span> <span class="n">python_primes</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cython:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Cython:"</span><span class="p">)</span>
 <span class="o">%</span><span class="n">timeit</span> <span class="n">cython_primes</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 
 <span class="c1"># Verify correctness</span>
 <span class="c1"># assert python_primes(100) == cython_primes(100)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">python_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cython_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Results match! Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cython_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> primes up to 100&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Results match! Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cython_primes</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span><span class="si">}</span><span class="s2"> primes up to 100"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Pure Python:
 3.03 ms ± 146 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
@@ -1394,34 +1390,34 @@ Cython:
 Results match! Found 27 primes up to 100
 </code></pre></div>
 <h3 id="52-cython-with-c-functions">5.2 Cython with C Functions</h3>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython can call C standard library functions directly!</span>
-<span class="k">from</span><span class="w"> </span><span class="nn">libc.math</span><span class="w"> </span><span class="k">cimport</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">M_PI</span>
-<span class="k">from</span><span class="w"> </span><span class="nn">libc.stdlib</span><span class="w"> </span><span class="k">cimport</span> <span class="n">malloc</span><span class="p">,</span> <span class="n">free</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython can call C standard library functions directly!</span>
+from<span class="w"> </span>libc.math<span class="w"> </span>cimport<span class="w"> </span>sqrt,<span class="w"> </span>sin,<span class="w"> </span>cos,<span class="w"> </span>M_PI
+from<span class="w"> </span>libc.stdlib<span class="w"> </span>cimport<span class="w"> </span>malloc,<span class="w"> </span>free
 
-<span class="k">def</span><span class="w"> </span><span class="nf">fast_distance</span><span class="p">(</span><span class="n">double</span> <span class="n">x1</span><span class="p">,</span> <span class="n">double</span> <span class="n">y1</span><span class="p">,</span> <span class="n">double</span> <span class="n">x2</span><span class="p">,</span> <span class="n">double</span> <span class="n">y2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Euclidean distance using C&#39;s sqrt.&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dx</span><span class="w"> </span><span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dy</span><span class="w"> </span><span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
-    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span>
+def<span class="w"> </span>fast_distance<span class="o">(</span>double<span class="w"> </span>x1,<span class="w"> </span>double<span class="w"> </span>y1,<span class="w"> </span>double<span class="w"> </span>x2,<span class="w"> </span>double<span class="w"> </span>y2<span class="o">)</span>:
+<span class="w">    </span><span class="s2">"""Compute Euclidean distance using C's sqrt."""</span>
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x2<span class="w"> </span>-<span class="w"> </span>x1
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>y2<span class="w"> </span>-<span class="w"> </span>y1
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>sqrt<span class="o">(</span>dx<span class="w"> </span>*<span class="w"> </span>dx<span class="w"> </span>+<span class="w"> </span>dy<span class="w"> </span>*<span class="w"> </span>dy<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">circle_points</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate n points on a unit circle.&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">points</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">angle</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
+def<span class="w"> </span>circle_points<span class="o">(</span>int<span class="w"> </span>n<span class="o">)</span>:
+<span class="w">    </span><span class="s2">"""Generate n points on a unit circle."""</span>
+<span class="w">    </span>cdef<span class="w"> </span>list<span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span>angle
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>i
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">angle</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">n</span>
-        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">points</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>n<span class="o">)</span>:
+<span class="w">        </span><span class="nv">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>.0<span class="w"> </span>*<span class="w"> </span>M_PI<span class="w"> </span>*<span class="w"> </span>i<span class="w"> </span>/<span class="w"> </span>n
+<span class="w">        </span>points.append<span class="o">((</span>cos<span class="o">(</span>angle<span class="o">)</span>,<span class="w"> </span>sin<span class="o">(</span>angle<span class="o">)))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>points
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">fast_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">fast_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">points</span> <span class="o">=</span> <span class="n">circle_points</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">8 points on unit circle:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">8 points on unit circle:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">points</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Point </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Point </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: (</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">7.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>distance(0,0 -&gt; 3,4) = 5.0
 
@@ -1436,57 +1432,57 @@ Results match! Found 27 primes up to 100
   Point 7: ( 0.7071, -0.7071)
 </code></pre></div>
 <h3 id="53-wrapping-existing-c-code-with-cython">5.3 Wrapping Existing C Code with Cython</h3>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython can wrap external C functions</span>
-<span class="c"># First, declare the C interface (like a header file)</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython can wrap external C functions</span>
+<span class="c1"># First, declare the C interface (like a header file)</span>
 
-<span class="k">cdef</span><span class="w"> </span><span class="kr">extern</span> <span class="k">from</span> <span class="s">&quot;string.h&quot;</span><span class="p">:</span>
-    <span class="n">size_t</span> <span class="n">strlen</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span>
-    <span class="nb">int</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s1</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s2</span><span class="p">)</span>
+cdef<span class="w"> </span>extern<span class="w"> </span>from<span class="w"> </span><span class="s2">"string.h"</span>:
+<span class="w">    </span>size_t<span class="w"> </span>strlen<span class="o">(</span>const<span class="w"> </span>char*<span class="w"> </span>s<span class="o">)</span>
+<span class="w">    </span>int<span class="w"> </span>strcmp<span class="o">(</span>const<span class="w"> </span>char*<span class="w"> </span>s1,<span class="w"> </span>const<span class="w"> </span>char*<span class="w"> </span>s2<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">c_string_length</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get string length using C&#39;s strlen.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+def<span class="w"> </span>c_string_length<span class="o">(</span>bytes<span class="w"> </span>s<span class="o">)</span>:
+<span class="w">    </span><span class="s2">"""Get string length using C's strlen."""</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>strlen<span class="o">(</span>s<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">c_string_compare</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s1</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">s2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare strings using C&#39;s strcmp.</span>
-<span class="sd">    Returns: negative if s1 &lt; s2, 0 if equal, positive if s1 &gt; s2&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">result</span><span class="w"> </span><span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mf">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &lt; {s2}&quot;</span>
-    <span class="k">elif</span> <span class="n">result</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} == {s2}&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &gt; {s2}&quot;</span>
+def<span class="w"> </span>c_string_compare<span class="o">(</span>bytes<span class="w"> </span>s1,<span class="w"> </span>bytes<span class="w"> </span>s2<span class="o">)</span>:
+<span class="w">    </span><span class="s2">"""Compare strings using C's strcmp.</span>
+<span class="s2">    Returns: negative if s1 &lt; s2, 0 if equal, positive if s1 &gt; s2"""</span>
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>strcmp<span class="o">(</span>s1,<span class="w"> </span>s2<span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>result<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{s1} &lt; {s2}"</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{s1} == {s2}"</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{s1} &gt; {s2}"</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Hello&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Python Bindings&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Python Bindings&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"strlen('Hello') = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Hello'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"strlen('Python Bindings') = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">'Python Bindings'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;banana&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;zebra&#39;</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">&#39;aardvark&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">'apple'</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">'banana'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">'hello'</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">'hello'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"strcmp: </span><span class="si">{</span><span class="n">c_string_compare</span><span class="p">(</span><span class="sa">b</span><span class="s1">'zebra'</span><span class="p">,</span><span class="w"> </span><span class="sa">b</span><span class="s1">'aardvark'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>strlen(&#39;Hello&#39;) = 5
-strlen(&#39;Python Bindings&#39;) = 15
+<div class="highlight"><pre><span></span><code>strlen('Hello') = 5
+strlen('Python Bindings') = 15
 
-strcmp: b&#39;apple&#39; &lt; b&#39;banana&#39;
-strcmp: b&#39;hello&#39; == b&#39;hello&#39;
-strcmp: b&#39;zebra&#39; &gt; b&#39;aardvark&#39;
+strcmp: b'apple' &lt; b'banana'
+strcmp: b'hello' == b'hello'
+strcmp: b'zebra' &gt; b'aardvark'
 </code></pre></div>
 <hr />
 <h2 id="6-performance-comparison">6. Performance Comparison</h2>
 <hr />
 <p>Let's benchmark all approaches on the same task: computing the sum of squares of a large list.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">cython_sum_squares</span><span class="p">(</span><span class="nb">list</span> <span class="n">data</span><span class="p">):</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">total</span><span class="w"> </span><span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">x</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">n</span><span class="w"> </span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-    <span class="k">return</span> <span class="n">total</span>
+<div class="highlight"><pre><span></span><code>%%cython
+def<span class="w"> </span>cython_sum_squares<span class="o">(</span>list<span class="w"> </span>data<span class="o">)</span>:
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.0
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span>x
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>i
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">(</span>data<span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>n<span class="o">)</span>:
+<span class="w">        </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>data<span class="o">[</span>i<span class="o">]</span>
+<span class="w">        </span><span class="nv">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>x<span class="w"> </span>*<span class="w"> </span>x
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>total
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
@@ -1515,14 +1511,14 @@ strcmp: b&#39;zebra&#39; &gt; b&#39;aardvark&#39;
 
 <span class="c1"># --- Benchmark ---</span>
 <span class="n">approaches</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">&quot;Pure Python&quot;</span><span class="p">,</span> <span class="n">python_sum_squares</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Python built-in sum&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)),</span>
-    <span class="p">(</span><span class="s2">&quot;ctypes (C)&quot;</span><span class="p">,</span> <span class="n">ctypes_sum_squares</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;Cython&quot;</span><span class="p">,</span> <span class="n">cython_sum_squares</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Pure Python"</span><span class="p">,</span> <span class="n">python_sum_squares</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Python built-in sum"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">)),</span>
+    <span class="p">(</span><span class="s2">"ctypes (C)"</span><span class="p">,</span> <span class="n">ctypes_sum_squares</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">"Cython"</span><span class="p">,</span> <span class="n">cython_sum_squares</span><span class="p">),</span>
 <span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Approach&#39;</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Time (ms)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Speedup&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'Approach'</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Time (ms)'</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'Speedup'</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
 
 <span class="n">baseline</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">approaches</span><span class="p">:</span>
@@ -1539,7 +1535,7 @@ strcmp: b&#39;zebra&#39; &gt; b&#39;aardvark&#39;
         <span class="n">baseline</span> <span class="o">=</span> <span class="n">elapsed</span>
 
     <span class="n">speedup</span> <span class="o">=</span> <span class="n">baseline</span> <span class="o">/</span> <span class="n">elapsed</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">&gt;10.3f</span><span class="si">}</span><span class="s2">ms </span><span class="si">{</span><span class="n">speedup</span><span class="si">:</span><span class="s2">&gt;9.1f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;25</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">&gt;10.3f</span><span class="si">}</span><span class="s2">ms </span><span class="si">{</span><span class="n">speedup</span><span class="si">:</span><span class="s2">&gt;9.1f</span><span class="si">}</span><span class="s2">x"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Approach                     Time (ms)    Speedup
 --------------------------------------------------
@@ -1554,7 +1550,7 @@ Cython                         0.608ms       4.4x
 <p>Real-world C/C++ code often uses structs. Let's see how each approach handles them.</p>
 <h3 id="71-structs-with-ctypes">7.1 Structs with <code>ctypes</code></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write a C library with structs</span>
-<span class="n">struct_c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">struct_c_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">#include &lt;stdio.h&gt;</span>
 <span class="s2">#include &lt;math.h&gt;</span>
 <span class="s2">#include &lt;string.h&gt;</span>
@@ -1585,25 +1581,25 @@ Cython                         0.608ms       4.4x
 <span class="s2">} Student;</span>
 
 <span class="s2">void print_student(Student* s) {</span>
-<span class="s2">    printf(&quot;Student: </span><span class="si">%s</span><span class="s2">, Age: </span><span class="si">%d</span><span class="s2">, GPA: </span><span class="si">%.2f</span><span class="s2">\n&quot;, s-&gt;name, s-&gt;age, s-&gt;gpa);</span>
+<span class="s2">    printf("Student: </span><span class="si">%s</span><span class="s2">, Age: </span><span class="si">%d</span><span class="s2">, GPA: </span><span class="si">%.2f</span><span class="s2">\n", s-&gt;name, s-&gt;age, s-&gt;gpa);</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;structs.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"structs.c"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">struct_c_code</span><span class="p">)</span>
 
 <span class="c1"># Compile</span>
-<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Darwin"</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">dylib</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span>
-    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.dylib&quot;</span>
-<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">"structs.dylib"</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Linux"</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">so</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span> <span class="o">-</span><span class="n">lm</span>
-    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.so&quot;</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">"structs.so"</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">structs</span><span class="o">.</span><span class="n">dll</span> <span class="n">structs</span><span class="o">.</span><span class="n">c</span>
-    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">&quot;structs.dll&quot;</span>
+    <span class="n">struct_lib_name</span> <span class="o">=</span> <span class="s2">"structs.dll"</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled: </span><span class="si">{</span><span class="n">struct_lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Compiled: </span><span class="si">{</span><span class="n">struct_lib_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Compiled: structs.dylib
 </code></pre></div>
@@ -1613,19 +1609,19 @@ Cython                         0.608ms       4.4x
 <span class="c1"># Define the C struct as a Python class</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">Point3D</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
     <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
     <span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Point3D(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Point3D(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="si">}</span><span class="s2">)"</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
     <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span> <span class="o">*</span> <span class="mi">64</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;gpa&quot;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span> <span class="o">*</span> <span class="mi">64</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"age"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"gpa"</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
     <span class="p">]</span>
 
 <span class="c1"># Load the library</span>
@@ -1645,11 +1641,11 @@ Cython                         0.608ms       4.4x
 <span class="n">p2</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
 
 <span class="n">dist</span> <span class="o">=</span> <span class="n">slib</span><span class="o">.</span><span class="n">point_distance</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance between </span><span class="si">{</span><span class="n">p1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">p2</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">dist</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Distance between </span><span class="si">{</span><span class="n">p1</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">p2</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">dist</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">mid</span> <span class="o">=</span> <span class="n">Point3D</span><span class="p">()</span>
 <span class="n">slib</span><span class="o">.</span><span class="n">point_midpoint</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p1</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">p2</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">mid</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Midpoint = </span><span class="si">{</span><span class="n">mid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Midpoint = </span><span class="si">{</span><span class="n">mid</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Distance between Point3D(1.0, 2.0, 3.0) and Point3D(4.0, 6.0, 3.0) = 5.0000
 Midpoint = Point3D(2.5, 4.0, 3.0)
@@ -1659,7 +1655,7 @@ Midpoint = Point3D(2.5, 4.0, 3.0)
 <span class="n">slib</span><span class="o">.</span><span class="n">print_student</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
-<span class="n">student</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Alice Johnson&quot;</span>  <span class="c1"># C strings are bytes</span>
+<span class="n">student</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"Alice Johnson"</span>  <span class="c1"># C strings are bytes</span>
 <span class="n">student</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">21</span>
 <span class="n">student</span><span class="o">.</span><span class="n">gpa</span> <span class="o">=</span> <span class="mf">3.85</span>
 
@@ -1672,7 +1668,7 @@ Midpoint = Point3D(2.5, 4.0, 3.0)
 <hr />
 <p>Sometimes C code needs to call back into Python. This is common in event-driven code, sorting algorithms, and numerical methods.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write C code that accepts function pointers</span>
-<span class="n">callback_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">callback_code</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"""</span>
 <span class="s2">#include &lt;stdio.h&gt;</span>
 
 <span class="s2">// Type for a callback function: takes a double, returns a double</span>
@@ -1694,22 +1690,22 @@ Midpoint = Point3D(2.5, 4.0, 3.0)
 <span class="s2">    }</span>
 <span class="s2">    return sum * h;</span>
 <span class="s2">}</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;callbacks.c&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"callbacks.c"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">callback_code</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Darwin"</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">dylib</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
-    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.dylib&quot;</span>
-<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Linux&quot;</span><span class="p">:</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">"callbacks.dylib"</span>
+<span class="k">elif</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"Linux"</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">so</span> <span class="o">-</span><span class="n">fPIC</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
-    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.so&quot;</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">"callbacks.so"</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="err">!</span><span class="n">gcc</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">o</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">dll</span> <span class="n">callbacks</span><span class="o">.</span><span class="n">c</span>
-    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">&quot;callbacks.dll&quot;</span>
+    <span class="n">cb_lib_name</span> <span class="o">=</span> <span class="s2">"callbacks.dll"</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compiled: </span><span class="si">{</span><span class="n">cb_lib_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Compiled: </span><span class="si">{</span><span class="n">cb_lib_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Compiled: callbacks.dylib
 </code></pre></div>
@@ -1739,15 +1735,15 @@ Midpoint = Point3D(2.5, 4.0, 3.0)
 
 <span class="c1"># Apply the callback</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Original: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">square</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Squared:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Squared:  </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Reset and try cube</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">cblib</span><span class="o">.</span><span class="n">apply_func</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cube</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cubed:    </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cubed:    </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Original: [1.0, 2.0, 3.0, 4.0, 5.0]
 Squared:  [1.0, 4.0, 9.0, 16.0, 25.0]
@@ -1763,11 +1759,11 @@ Cubed:    [1.0, 8.0, 27.0, 64.0, 125.0]
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">sin_func</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Integral of sin(x) from 0 to pi = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 2.0)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Integral of sin(x) from 0 to pi = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 2.0)"</span><span class="p">)</span>
 
 <span class="c1"># Integrate x^2 from 0 to 1 =&gt; should be 1/3 = 0.333...</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">cblib</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Integral of x^2 from 0 to 1 = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 0.333333)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Integral of x^2 from 0 to 1 = </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> (expected: 0.333333)"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Integral of sin(x) from 0 to pi = 2.000000 (expected: 2.0)
 Integral of x^2 from 0 to 1 = 0.333333 (expected: 0.333333)
@@ -1798,20 +1794,20 @@ Integral of x^2 from 0 to 1 = 0.333333 (expected: 0.333333)
 <li>You want auto-generated wrappers with minimal hand-written code</li>
 </ul>
 <h3 id="swig-interface-file-example">SWIG Interface File Example</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// mylib.i -- SWIG interface file</span>
-<span class="o">%</span><span class="n">module</span><span class="w"> </span><span class="n">mylib</span>
-<span class="o">%</span><span class="p">{</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mylib.h&quot;</span><span class="c1">    // Include our header</span>
-<span class="o">%</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>mylib.i<span class="w"> </span>--<span class="w"> </span>SWIG<span class="w"> </span>interface<span class="w"> </span>file
+%module<span class="w"> </span>mylib
+%<span class="o">{</span>
+<span class="c1">#include "mylib.h"    // Include our header</span>
+%<span class="o">}</span>
 
-<span class="c1">// Tell SWIG which functions to wrap</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+//<span class="w"> </span>Tell<span class="w"> </span>SWIG<span class="w"> </span>which<span class="w"> </span>functions<span class="w"> </span>to<span class="w"> </span>wrap
+int<span class="w"> </span>add<span class="o">(</span>int<span class="w"> </span>a,<span class="w"> </span>int<span class="w"> </span>b<span class="o">)</span><span class="p">;</span>
+double<span class="w"> </span>multiply<span class="o">(</span>double<span class="w"> </span>a,<span class="w"> </span>double<span class="w"> </span>b<span class="o">)</span><span class="p">;</span>
 </code></pre></div>
-<p>Then build with:
-<div class="highlight"><pre><span></span><code>swig<span class="w"> </span>-python<span class="w"> </span>mylib.i
-gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> </span>-I/usr/include/python3.x<span class="w"> </span>mylib.c<span class="w"> </span>mylib_wrap.c<span class="w"> </span>-o<span class="w"> </span>_mylib.so
-</code></pre></div></p>
+<p>Then build with:</p>
+<div class="highlight"><pre><span></span><code>swig -python mylib.i
+gcc -shared -fPIC -I/usr/include/python3.x mylib.c mylib_wrap.c -o _mylib.so
+</code></pre></div>
 <p>SWIG is powerful but has a steeper learning curve and generates verbose wrapper code. For new projects, <strong>pybind11</strong> or <strong>Cython</strong> are generally preferred.</p>
 <hr />
 <h2 id="10-choosing-the-right-approach">10. Choosing the Right Approach</h2>
@@ -1912,12 +1908,10 @@ gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> 
 <span class="c1"># 1. Write a C function: void mat_mult(double* A, double* B, double* C, int n)</span>
 <span class="c1"># 2. Compile it into a shared library</span>
 <span class="c1"># 3. Load it with ctypes and call it</span>
-<span class="c1"># 4. Verify the result against Python&#39;s manual calculation</span>
+<span class="c1"># 4. Verify the result against Python's manual calculation</span>
 </code></pre></div>
 <h3 id="exercise-2-string-processing-with-cffi">Exercise 2: String Processing with cffi</h3>
-<p>Use cffi (API mode) to write a C function that:
-- Takes a string and a character
-- Returns the count of that character in the string</p>
+<p>Use cffi (API mode) to write a C function that: - Takes a string and a character - Returns the count of that character in the string</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
 <span class="c1"># Use ffi.cdef() and ffi.set_source() to define and compile the function</span>
 </code></pre></div>
@@ -1925,7 +1919,7 @@ gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> 
 <p>Take this pure Python function and optimize it with Cython type declarations. Measure the speedup.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Optimize this with Cython:</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">mandelbrot_python</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a Mandelbrot set.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate a Mandelbrot set."""</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
@@ -1950,26 +1944,26 @@ gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> 
 <span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
 
 <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;mylib.c&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.so&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;mylib.dll&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;structs.c&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.so&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;structs.dll&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;callbacks.c&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.so&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.dylib&quot;</span><span class="p">,</span> <span class="s2">&quot;callbacks.dll&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mathtools.cpp&quot;</span><span class="p">,</span> <span class="s2">&quot;mathtools*.so&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mymodule.c&quot;</span><span class="p">,</span> <span class="s2">&quot;mymodule*.so&quot;</span><span class="p">,</span> <span class="s2">&quot;mymodule*.cpython*&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;setup.py&quot;</span><span class="p">,</span> <span class="s2">&quot;_math_helpers*&quot;</span><span class="p">,</span>
+    <span class="s2">"mylib.c"</span><span class="p">,</span> <span class="s2">"mylib.so"</span><span class="p">,</span> <span class="s2">"mylib.dylib"</span><span class="p">,</span> <span class="s2">"mylib.dll"</span><span class="p">,</span>
+    <span class="s2">"structs.c"</span><span class="p">,</span> <span class="s2">"structs.so"</span><span class="p">,</span> <span class="s2">"structs.dylib"</span><span class="p">,</span> <span class="s2">"structs.dll"</span><span class="p">,</span>
+    <span class="s2">"callbacks.c"</span><span class="p">,</span> <span class="s2">"callbacks.so"</span><span class="p">,</span> <span class="s2">"callbacks.dylib"</span><span class="p">,</span> <span class="s2">"callbacks.dll"</span><span class="p">,</span>
+    <span class="s2">"mathtools.cpp"</span><span class="p">,</span> <span class="s2">"mathtools*.so"</span><span class="p">,</span>
+    <span class="s2">"mymodule.c"</span><span class="p">,</span> <span class="s2">"mymodule*.so"</span><span class="p">,</span> <span class="s2">"mymodule*.cpython*"</span><span class="p">,</span>
+    <span class="s2">"setup.py"</span><span class="p">,</span> <span class="s2">"_math_helpers*"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Removed: </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Remove build directory</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">):</span>
-    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;build&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Removed: build/&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">"build"</span><span class="p">):</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">"build"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Removed: build/"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cleanup complete!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Cleanup complete!"</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Removed: mylib.c
 Removed: mylib.dylib
