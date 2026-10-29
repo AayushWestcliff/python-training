@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Vibe Coding - Python</title>
+    <title>Vibe Coding - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -214,7 +214,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -306,11 +306,7 @@
 <blockquote>
 <p><em>"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because LLMs are getting good enough."</em></p>
 </blockquote>
-<p>He described a workflow where developers:
-- Describe what they want in natural language
-- Let the AI generate the code
-- Accept suggestions without always reading them deeply
-- Iterate quickly through prompts rather than through manual edits</p>
+<p>He described a workflow where developers: - Describe what they want in natural language - Let the AI generate the code - Accept suggestions without always reading them deeply - Iterate quickly through prompts rather than through manual edits</p>
 <hr />
 <h3 id="the-spectrum-of-ai-assisted-development">The Spectrum of AI-Assisted Development</h3>
 <div class="highlight"><pre><span></span><code>TRADITIONAL                                              PURE VIBE
@@ -462,10 +458,10 @@ CODING                                                   CODING
 └────────────────────────────────────────────────────────────────┘
 </code></pre></div>
 <h3 id="bad-prompt-vs-good-prompt">Bad Prompt vs. Good Prompt</h3>
-<p><strong>❌ Weak prompt:</strong>
+<p><strong>❌ Weak prompt:</strong></p>
 <div class="highlight"><pre><span></span><code>make a login api
-</code></pre></div></p>
-<p><strong>✅ Strong prompt:</strong>
+</code></pre></div>
+<p><strong>✅ Strong prompt:</strong></p>
 <div class="highlight"><pre><span></span><code>You are a senior Python developer. I&#39;m building a FastAPI application.
 
 Create a POST /auth/login endpoint that:
@@ -477,7 +473,7 @@ Create a POST /auth/login endpoint that:
 - Includes type hints and a brief docstring
 
 Do not create the full app — just the router function and the Pydantic schemas.
-</code></pre></div></p>
+</code></pre></div>
 <hr />
 <h3 id="prompting-patterns-for-developers">Prompting Patterns for Developers</h3>
 <table>
@@ -816,10 +812,7 @@ It should accept a query parameter `q` and return tasks where
 the title contains the search string (case-insensitive).
 Use SQLAlchemy&#39;s ilike() for the filter.
 </code></pre></div>
-<p>Check:
-1. Does it use <code>ilike()</code> correctly?
-2. Does it handle the case where <code>q</code> is empty?
-3. Is the route registered before <code>/tasks/{task_id}</code> to avoid conflict?</p>
+<p>Check: 1. Does it use <code>ilike()</code> correctly? 2. Does it handle the case where <code>q</code> is empty? 3. Is the route registered before <code>/tasks/{task_id}</code> to avoid conflict?</p>
 <hr />
 <h2 id="section-5-ai-assisted-django-development">Section 5 — AI-Assisted Django Development</h2>
 <h3 id="when-to-use-django-vs-fastapi">When to Use Django vs FastAPI</h3>
@@ -1049,10 +1042,7 @@ a custom manager on Post that returns only published posts.
 <hr />
 <h2 id="section-6-ai-for-infrastructure-docker-nginx">Section 6 — AI for Infrastructure: Docker &amp; Nginx</h2>
 <h3 id="infrastructure-as-code-ais-comfort-zone">Infrastructure as Code — AI's Comfort Zone</h3>
-<p>Docker configurations are:
-- Pattern-heavy (same structure for every app type)
-- Easy to forget details (exposed ports, volume mounts, healthchecks)
-- Time-consuming to look up from scratch</p>
+<p>Docker configurations are: - Pattern-heavy (same structure for every app type) - Easy to forget details (exposed ports, volume mounts, healthchecks) - Time-consuming to look up from scratch</p>
 <p>This makes them a <strong>perfect target for AI generation</strong>.</p>
 <hr />
 <h3 id="prompt-for-full-stack-docker-setup">Prompt for Full Stack Docker Setup</h3>
@@ -1915,12 +1905,7 @@ Requirements:
 <h3 id="assignment-preview">Assignment Preview</h3>
 <blockquote>
 <p>Using AI assistance, build a <strong>REST API</strong> for a topic of your choice using <strong>FastAPI</strong> or <strong>Django REST Framework</strong>.</p>
-<p>Requirements:
-- At least 3 models with relationships
-- Full CRUD for at least one resource
-- JWT authentication
-- A <code>Dockerfile</code> and <code>docker-compose.yml</code> that runs the app
-- A <code>PROMPTS.md</code> file documenting the prompts you used and what changes you made to the AI output</p>
+<p>Requirements: - At least 3 models with relationships - Full CRUD for at least one resource - JWT authentication - A <code>Dockerfile</code> and <code>docker-compose.yml</code> that runs the app - A <code>PROMPTS.md</code> file documenting the prompts you used and what changes you made to the AI output</p>
 <p><strong>The <code>PROMPTS.md</code> file is the most important deliverable</strong> — it shows you reviewed, understood, and improved the AI's work.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><span class="c1"># ──────────────────────────────────────────────────────────────</span>

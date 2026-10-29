@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Python Bindings (C/C++) - Python</title>
+    <title>Python Bindings (C/C++) - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -232,7 +232,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -1078,20 +1078,16 @@ Caught error: List must contain only numbers
 </table>
 <h3 id="33-reference-counting-the-critical-concept">3.3 Reference Counting: The Critical Concept</h3>
 <p>In the C API, <strong>you</strong> manage memory. Every Python object has a reference count.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// You got a NEW reference (you own it) -- must DECREF when done</span>
-<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyLong_FromLong</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-<span class="c1">// ... use result ...</span>
-<span class="n">Py_DECREF</span><span class="p">(</span><span class="n">result</span><span class="p">);</span><span class="w">  </span><span class="c1">// Release your reference</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>You<span class="w"> </span>got<span class="w"> </span>a<span class="w"> </span>NEW<span class="w"> </span>reference<span class="w"> </span><span class="o">(</span>you<span class="w"> </span>own<span class="w"> </span>it<span class="o">)</span><span class="w"> </span>--<span class="w"> </span>must<span class="w"> </span>DECREF<span class="w"> </span>when<span class="w"> </span><span class="k">done</span>
+PyObject*<span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyLong_FromLong<span class="o">(</span><span class="m">42</span><span class="o">)</span><span class="p">;</span>
+//<span class="w"> </span>...<span class="w"> </span>use<span class="w"> </span>result<span class="w"> </span>...
+Py_DECREF<span class="o">(</span>result<span class="o">)</span><span class="p">;</span><span class="w">  </span>//<span class="w"> </span>Release<span class="w"> </span>your<span class="w"> </span>reference
 
-<span class="c1">// You got a BORROWED reference (someone else owns it) -- do NOT DECREF</span>
-<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyList_GetItem</span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// Borrowed!</span>
-<span class="c1">// ... use item but do NOT Py_DECREF(item) ...</span>
+//<span class="w"> </span>You<span class="w"> </span>got<span class="w"> </span>a<span class="w"> </span>BORROWED<span class="w"> </span>reference<span class="w"> </span><span class="o">(</span>someone<span class="w"> </span><span class="k">else</span><span class="w"> </span>owns<span class="w"> </span>it<span class="o">)</span><span class="w"> </span>--<span class="w"> </span><span class="k">do</span><span class="w"> </span>NOT<span class="w"> </span>DECREF
+PyObject*<span class="w"> </span><span class="nv">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>PyList_GetItem<span class="o">(</span>list,<span class="w"> </span><span class="m">0</span><span class="o">)</span><span class="p">;</span><span class="w">  </span>//<span class="w"> </span>Borrowed!
+//<span class="w"> </span>...<span class="w"> </span>use<span class="w"> </span>item<span class="w"> </span>but<span class="w"> </span><span class="k">do</span><span class="w"> </span>NOT<span class="w"> </span>Py_DECREF<span class="o">(</span>item<span class="o">)</span><span class="w"> </span>...
 </code></pre></div>
-<p><strong>Rules:</strong>
-- Functions that <strong>create</strong> objects give you a <strong>new</strong> reference (you must DECREF)
-- Functions that <strong>get</strong> items from containers give you a <strong>borrowed</strong> reference (don't DECREF)
-- When returning an object from your function, you transfer ownership to the caller
-- <code>Py_INCREF</code> if you want to keep a borrowed reference alive</p>
+<p><strong>Rules:</strong> - Functions that <strong>create</strong> objects give you a <strong>new</strong> reference (you must DECREF) - Functions that <strong>get</strong> items from containers give you a <strong>borrowed</strong> reference (don't DECREF) - When returning an object from your function, you transfer ownership to the caller - <code>Py_INCREF</code> if you want to keep a borrowed reference alive</p>
 <hr />
 <h2 id="4-pybind11-modern-c-bindings">4. <code>pybind11</code> -- Modern C++ Bindings</h2>
 <hr />
@@ -1099,7 +1095,7 @@ Caught error: List must contain only numbers
 <h3 id="why-pybind11">Why <code>pybind11</code>?</h3>
 <ul>
 <li>Clean, modern C++ syntax</li>
-<li>Automatic type conversions (STL containers &lt;-&gt; Python types)</li>
+<li>Automatic type conversions (STL containers \&lt;-&gt; Python types)</li>
 <li>Supports classes, inheritance, overloading, lambdas</li>
 <li>Header-only -- easy to integrate</li>
 <li>The <strong>most popular</strong> way to create C++ bindings today</li>
@@ -1229,20 +1225,20 @@ Caught error: List must contain only numbers
 <div class="highlight"><pre><span></span><code>C++ source written: mathtools.cpp
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Build using pybind11&#39;s build helpers</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pybind11</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">sysconfig</span>
+import<span class="w"> </span>pybind11
+import<span class="w"> </span>sysconfig
 
 <span class="c1"># Get compiler flags</span>
-<span class="n">include_flags</span> <span class="o">=</span> <span class="err">!</span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pybind11</span> <span class="o">--</span><span class="n">includes</span>
-<span class="n">include_flags</span> <span class="o">=</span> <span class="n">include_flags</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nv">include_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>!python<span class="w"> </span>-m<span class="w"> </span>pybind11<span class="w"> </span>--includes
+<span class="nv">include_flags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>include_flags<span class="o">[</span><span class="m">0</span><span class="o">]</span>
 
-<span class="n">ext_suffix</span> <span class="o">=</span> <span class="n">sysconfig</span><span class="o">.</span><span class="n">get_config_var</span><span class="p">(</span><span class="s1">&#39;EXT_SUFFIX&#39;</span><span class="p">)</span>
+<span class="nv">ext_suffix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sysconfig.get_config_var<span class="o">(</span><span class="s1">&#39;EXT_SUFFIX&#39;</span><span class="o">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Include flags: </span><span class="si">{</span><span class="n">include_flags</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extension suffix: </span><span class="si">{</span><span class="n">ext_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+print<span class="o">(</span>f<span class="s2">&quot;Include flags: {include_flags}&quot;</span><span class="o">)</span>
+print<span class="o">(</span>f<span class="s2">&quot;Extension suffix: {ext_suffix}&quot;</span><span class="o">)</span>
 
 <span class="c1"># Compile</span>
-<span class="err">!</span><span class="n">c</span><span class="o">++</span> <span class="o">-</span><span class="n">O2</span> <span class="o">-</span><span class="n">shared</span> <span class="o">-</span><span class="n">std</span><span class="o">=</span><span class="n">c</span><span class="o">++</span><span class="mi">17</span> <span class="o">-</span><span class="n">fPIC</span> <span class="o">-</span><span class="n">undefined</span> <span class="n">dynamic_lookup</span> <span class="p">{</span><span class="n">include_flags</span><span class="p">}</span> <span class="n">mathtools</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">mathtools</span><span class="p">{</span><span class="n">ext_suffix</span><span class="p">}</span>
+!c++<span class="w"> </span>-O2<span class="w"> </span>-shared<span class="w"> </span>-std<span class="o">=</span>c++17<span class="w"> </span>-fPIC<span class="w"> </span>-undefined<span class="w"> </span>dynamic_lookup<span class="w"> </span><span class="o">{</span>include_flags<span class="o">}</span><span class="w"> </span>mathtools.cpp<span class="w"> </span>-o<span class="w"> </span>mathtools<span class="o">{</span>ext_suffix<span class="o">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Include flags: -I/Users/aayush/micromamba/envs/stats/include/python3.10 -I/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/pybind11/include
 Extension suffix: .cpython-310-darwin.so
@@ -1351,24 +1347,24 @@ Caught: Cannot normalize zero vector
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>3.09 ms ± 77.7 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython version -- almost the same code, but with type declarations!</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython version -- almost the same code, but with type declarations!</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">cython_primes</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all primes up to n using trial division (Cython).&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">primes</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">candidate</span><span class="p">,</span> <span class="nf">divisor</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">bint</span> <span class="nf">is_prime</span>
+def<span class="w"> </span>cython_primes<span class="o">(</span>int<span class="w"> </span>n<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Find all primes up to n using trial division (Cython).&quot;&quot;&quot;</span>
+<span class="w">    </span>cdef<span class="w"> </span>list<span class="w"> </span><span class="nv">primes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>candidate,<span class="w"> </span>divisor
+<span class="w">    </span>cdef<span class="w"> </span>bint<span class="w"> </span>is_prime
 
-    <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
-        <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">True</span>
-        <span class="k">for</span> <span class="n">divisor</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">candidate</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">divisor</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
-                <span class="n">is_prime</span> <span class="o">=</span> <span class="bp">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">is_prime</span><span class="p">:</span>
-            <span class="n">primes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">primes</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>candidate<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span><span class="m">2</span>,<span class="w"> </span>n<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">is_prime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>divisor<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span><span class="m">2</span>,<span class="w"> </span>int<span class="o">(</span>candidate<span class="w"> </span>**<span class="w"> </span><span class="m">0</span>.5<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>candidate<span class="w"> </span>%<span class="w"> </span><span class="nv">divisor</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">                </span><span class="nv">is_prime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<span class="w">                </span><span class="k">break</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>is_prime:
+<span class="w">            </span>primes.append<span class="o">(</span>candidate<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>primes
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Compare performance!</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pure Python:&quot;</span><span class="p">)</span>
@@ -1394,27 +1390,27 @@ Cython:
 Results match! Found 27 primes up to 100
 </code></pre></div>
 <h3 id="52-cython-with-c-functions">5.2 Cython with C Functions</h3>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython can call C standard library functions directly!</span>
-<span class="k">from</span><span class="w"> </span><span class="nn">libc.math</span><span class="w"> </span><span class="k">cimport</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">M_PI</span>
-<span class="k">from</span><span class="w"> </span><span class="nn">libc.stdlib</span><span class="w"> </span><span class="k">cimport</span> <span class="n">malloc</span><span class="p">,</span> <span class="n">free</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython can call C standard library functions directly!</span>
+from<span class="w"> </span>libc.math<span class="w"> </span>cimport<span class="w"> </span>sqrt,<span class="w"> </span>sin,<span class="w"> </span>cos,<span class="w"> </span>M_PI
+from<span class="w"> </span>libc.stdlib<span class="w"> </span>cimport<span class="w"> </span>malloc,<span class="w"> </span>free
 
-<span class="k">def</span><span class="w"> </span><span class="nf">fast_distance</span><span class="p">(</span><span class="n">double</span> <span class="n">x1</span><span class="p">,</span> <span class="n">double</span> <span class="n">y1</span><span class="p">,</span> <span class="n">double</span> <span class="n">x2</span><span class="p">,</span> <span class="n">double</span> <span class="n">y2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Euclidean distance using C&#39;s sqrt.&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dx</span><span class="w"> </span><span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">dy</span><span class="w"> </span><span class="o">=</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span>
-    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span>
+def<span class="w"> </span>fast_distance<span class="o">(</span>double<span class="w"> </span>x1,<span class="w"> </span>double<span class="w"> </span>y1,<span class="w"> </span>double<span class="w"> </span>x2,<span class="w"> </span>double<span class="w"> </span>y2<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Compute Euclidean distance using C&#39;s sqrt.&quot;&quot;&quot;</span>
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x2<span class="w"> </span>-<span class="w"> </span>x1
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>y2<span class="w"> </span>-<span class="w"> </span>y1
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>sqrt<span class="o">(</span>dx<span class="w"> </span>*<span class="w"> </span>dx<span class="w"> </span>+<span class="w"> </span>dy<span class="w"> </span>*<span class="w"> </span>dy<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">circle_points</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate n points on a unit circle.&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">list</span> <span class="nf">points</span><span class="w"> </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">angle</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
+def<span class="w"> </span>circle_points<span class="o">(</span>int<span class="w"> </span>n<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate n points on a unit circle.&quot;&quot;&quot;</span>
+<span class="w">    </span>cdef<span class="w"> </span>list<span class="w"> </span><span class="nv">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span>angle
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>i
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">angle</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="n">n</span>
-        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">points</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>n<span class="o">)</span>:
+<span class="w">        </span><span class="nv">angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span>.0<span class="w"> </span>*<span class="w"> </span>M_PI<span class="w"> </span>*<span class="w"> </span>i<span class="w"> </span>/<span class="w"> </span>n
+<span class="w">        </span>points.append<span class="o">((</span>cos<span class="o">(</span>angle<span class="o">)</span>,<span class="w"> </span>sin<span class="o">(</span>angle<span class="o">)))</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>points
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;distance(0,0 -&gt; 3,4) = </span><span class="si">{</span><span class="n">fast_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -1436,28 +1432,28 @@ Results match! Found 27 primes up to 100
   Point 7: ( 0.7071, -0.7071)
 </code></pre></div>
 <h3 id="53-wrapping-existing-c-code-with-cython">5.3 Wrapping Existing C Code with Cython</h3>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="c"># Cython can wrap external C functions</span>
-<span class="c"># First, declare the C interface (like a header file)</span>
+<div class="highlight"><pre><span></span><code>%%cython
+<span class="c1"># Cython can wrap external C functions</span>
+<span class="c1"># First, declare the C interface (like a header file)</span>
 
-<span class="k">cdef</span><span class="w"> </span><span class="kr">extern</span> <span class="k">from</span> <span class="s">&quot;string.h&quot;</span><span class="p">:</span>
-    <span class="n">size_t</span> <span class="n">strlen</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span>
-    <span class="nb">int</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s1</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">s2</span><span class="p">)</span>
+cdef<span class="w"> </span>extern<span class="w"> </span>from<span class="w"> </span><span class="s2">&quot;string.h&quot;</span>:
+<span class="w">    </span>size_t<span class="w"> </span>strlen<span class="o">(</span>const<span class="w"> </span>char*<span class="w"> </span>s<span class="o">)</span>
+<span class="w">    </span>int<span class="w"> </span>strcmp<span class="o">(</span>const<span class="w"> </span>char*<span class="w"> </span>s1,<span class="w"> </span>const<span class="w"> </span>char*<span class="w"> </span>s2<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">c_string_length</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get string length using C&#39;s strlen.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+def<span class="w"> </span>c_string_length<span class="o">(</span>bytes<span class="w"> </span>s<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Get string length using C&#39;s strlen.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>strlen<span class="o">(</span>s<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">c_string_compare</span><span class="p">(</span><span class="nb">bytes</span> <span class="n">s1</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">s2</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare strings using C&#39;s strcmp.</span>
-<span class="sd">    Returns: negative if s1 &lt; s2, 0 if equal, positive if s1 &gt; s2&quot;&quot;&quot;</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">result</span><span class="w"> </span><span class="o">=</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mf">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &lt; {s2}&quot;</span>
-    <span class="k">elif</span> <span class="n">result</span> <span class="o">==</span> <span class="mf">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} == {s2}&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">f</span><span class="s">&quot;{s1} &gt; {s2}&quot;</span>
+def<span class="w"> </span>c_string_compare<span class="o">(</span>bytes<span class="w"> </span>s1,<span class="w"> </span>bytes<span class="w"> </span>s2<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Compare strings using C&#39;s strcmp.</span>
+<span class="s2">    Returns: negative if s1 &lt; s2, 0 if equal, positive if s1 &gt; s2&quot;&quot;&quot;</span>
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>strcmp<span class="o">(</span>s1,<span class="w"> </span>s2<span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>result<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{s1} &lt; {s2}&quot;</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="nv">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{s1} == {s2}&quot;</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{s1} &gt; {s2}&quot;</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Hello&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;strlen(&#39;Python Bindings&#39;) = </span><span class="si">{</span><span class="n">c_string_length</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;Python Bindings&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1477,16 +1473,16 @@ strcmp: b&#39;zebra&#39; &gt; b&#39;aardvark&#39;
 <h2 id="6-performance-comparison">6. Performance Comparison</h2>
 <hr />
 <p>Let's benchmark all approaches on the same task: computing the sum of squares of a large list.</p>
-<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">cython</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">cython_sum_squares</span><span class="p">(</span><span class="nb">list</span> <span class="n">data</span><span class="p">):</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">total</span><span class="w"> </span><span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">double</span> <span class="nf">x</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">i</span>
-    <span class="k">cdef</span><span class="w"> </span><span class="kt">int</span> <span class="nf">n</span><span class="w"> </span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
-    <span class="k">return</span> <span class="n">total</span>
+<div class="highlight"><pre><span></span><code>%%cython
+def<span class="w"> </span>cython_sum_squares<span class="o">(</span>list<span class="w"> </span>data<span class="o">)</span>:
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span><span class="nv">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.0
+<span class="w">    </span>cdef<span class="w"> </span>double<span class="w"> </span>x
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span>i
+<span class="w">    </span>cdef<span class="w"> </span>int<span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">(</span>data<span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>n<span class="o">)</span>:
+<span class="w">        </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>data<span class="o">[</span>i<span class="o">]</span>
+<span class="w">        </span><span class="nv">total</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>x<span class="w"> </span>*<span class="w"> </span>x
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>total
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
@@ -1798,20 +1794,20 @@ Integral of x^2 from 0 to 1 = 0.333333 (expected: 0.333333)
 <li>You want auto-generated wrappers with minimal hand-written code</li>
 </ul>
 <h3 id="swig-interface-file-example">SWIG Interface File Example</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// mylib.i -- SWIG interface file</span>
-<span class="o">%</span><span class="n">module</span><span class="w"> </span><span class="n">mylib</span>
-<span class="o">%</span><span class="p">{</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;mylib.h&quot;</span><span class="c1">    // Include our header</span>
-<span class="o">%</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>mylib.i<span class="w"> </span>--<span class="w"> </span>SWIG<span class="w"> </span>interface<span class="w"> </span>file
+%module<span class="w"> </span>mylib
+%<span class="o">{</span>
+<span class="c1">#include &quot;mylib.h&quot;    // Include our header</span>
+%<span class="o">}</span>
 
-<span class="c1">// Tell SWIG which functions to wrap</span>
-<span class="kt">int</span><span class="w"> </span><span class="n">add</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="kt">double</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+//<span class="w"> </span>Tell<span class="w"> </span>SWIG<span class="w"> </span>which<span class="w"> </span>functions<span class="w"> </span>to<span class="w"> </span>wrap
+int<span class="w"> </span>add<span class="o">(</span>int<span class="w"> </span>a,<span class="w"> </span>int<span class="w"> </span>b<span class="o">)</span><span class="p">;</span>
+double<span class="w"> </span>multiply<span class="o">(</span>double<span class="w"> </span>a,<span class="w"> </span>double<span class="w"> </span>b<span class="o">)</span><span class="p">;</span>
 </code></pre></div>
-<p>Then build with:
-<div class="highlight"><pre><span></span><code>swig<span class="w"> </span>-python<span class="w"> </span>mylib.i
-gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> </span>-I/usr/include/python3.x<span class="w"> </span>mylib.c<span class="w"> </span>mylib_wrap.c<span class="w"> </span>-o<span class="w"> </span>_mylib.so
-</code></pre></div></p>
+<p>Then build with:</p>
+<div class="highlight"><pre><span></span><code>swig -python mylib.i
+gcc -shared -fPIC -I/usr/include/python3.x mylib.c mylib_wrap.c -o _mylib.so
+</code></pre></div>
 <p>SWIG is powerful but has a steeper learning curve and generates verbose wrapper code. For new projects, <strong>pybind11</strong> or <strong>Cython</strong> are generally preferred.</p>
 <hr />
 <h2 id="10-choosing-the-right-approach">10. Choosing the Right Approach</h2>
@@ -1915,9 +1911,7 @@ gcc<span class="w"> </span>-shared<span class="w"> </span>-fPIC<span class="w"> 
 <span class="c1"># 4. Verify the result against Python&#39;s manual calculation</span>
 </code></pre></div>
 <h3 id="exercise-2-string-processing-with-cffi">Exercise 2: String Processing with cffi</h3>
-<p>Use cffi (API mode) to write a C function that:
-- Takes a string and a character
-- Returns the count of that character in the string</p>
+<p>Use cffi (API mode) to write a C function that: - Takes a string and a character - Returns the count of that character in the string</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Your code here:</span>
 <span class="c1"># Use ffi.cdef() and ffi.set_source() to define and compile the function</span>
 </code></pre></div>

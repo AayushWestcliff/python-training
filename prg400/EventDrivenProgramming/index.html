@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Event Driven Programming - Python</title>
+    <title>Event Driven Programming - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -204,7 +204,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -223,15 +223,12 @@
               
                 <h1 id="event-driven-programming-in-python">Event-Driven Programming in Python</h1>
 <blockquote>
-<p><em>"Don't call us, we'll call you."</em><br />
+<p><em>"Don't call us, we'll call you."</em>\
 — The Hollywood Principle (a.k.a. Inversion of Control)</p>
 </blockquote>
 <hr />
 <p>In traditional programming, <strong>you</strong> decide the order things happen. In event-driven programming, <strong>events</strong> decide.</p>
-<p>Think about it:
-- You don't keep checking if someone texted you — your phone <strong>notifies</strong> you
-- A waiter doesn't keep asking "ready to order?" every second — you <strong>signal</strong> them
-- A fire alarm doesn't check every room — the <strong>smoke triggers</strong> it</p>
+<p>Think about it: - You don't keep checking if someone texted you — your phone <strong>notifies</strong> you - A waiter doesn't keep asking "ready to order?" every second — you <strong>signal</strong> them - A fire alarm doesn't check every room — the <strong>smoke triggers</strong> it</p>
 <p>This is the core idea: <strong>react to things when they happen</strong>, rather than constantly checking.</p>
 <hr />
 <h3 id="what-well-cover">What We'll Cover</h3>
@@ -455,10 +452,7 @@ Fetching user 42...
 Got user: Alice (role: admin)
 </code></pre></div>
 <h3 id="try-it-yourself-callback-calculator">Try It Yourself: Callback Calculator</h3>
-<p>Complete the <code>calculate</code> function below. It should:
-1. Perform the operation
-2. Call <code>on_result</code> with the answer
-3. Call <code>on_error</code> if something goes wrong (like division by zero)</p>
+<p>Complete the <code>calculate</code> function below. It should: 1. Perform the operation 2. Call <code>on_result</code> with the answer 3. Call <code>on_error</code> if something goes wrong (like division by zero)</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">on_result</span><span class="p">,</span> <span class="n">on_error</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform a calculation and call the appropriate callback.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -645,10 +639,7 @@ Customer 4 tries to buy a tablet:
   FAILED: tablet - Out of stock
 </code></pre></div>
 <h3 id="try-it-yourself-chat-room-events">Try It Yourself: Chat Room Events</h3>
-<p>Build a <code>ChatRoom</code> class using <code>EventEmitter</code> that emits these events:
-- <code>"user_joined"</code> — when someone joins (pass the username)
-- <code>"message"</code> — when someone sends a message (pass username and text)
-- <code>"user_left"</code> — when someone leaves (pass the username)</p>
+<p>Build a <code>ChatRoom</code> class using <code>EventEmitter</code> that emits these events: - <code>"user_joined"</code> — when someone joins (pass the username) - <code>"message"</code> — when someone sends a message (pass username and text) - <code>"user_left"</code> — when someone leaves (pass the username)</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -757,10 +748,7 @@ Customer 4 tries to buy a tablet:
 <hr />
 <h2 id="3-the-event-loop-the-engine-behind-it-all">3. The Event Loop: The Engine Behind It All</h2>
 <hr />
-<p>An <strong>event loop</strong> is a loop that:
-1. Waits for events to occur
-2. Dispatches them to the right handlers
-3. Goes back to waiting</p>
+<p>An <strong>event loop</strong> is a loop that: 1. Waits for events to occur 2. Dispatches them to the right handlers 3. Goes back to waiting</p>
 <div class="highlight"><pre><span></span><code>while running:
     event = wait_for_next_event()
     handler = find_handler(event)
@@ -1033,9 +1021,7 @@ Orders: [&#39;Espresso (hot)&#39;, &#39;Latte (hot)&#39;, &#39;Cappuccino (hot)&
 Total time: 2.0s
 Orders: [&#39;Espresso (hot)&#39;, &#39;Latte (hot)&#39;, &#39;Cappuccino (hot)&#39;]
 </code></pre></div>
-<p>Notice the difference!
-- <strong>Sequential</strong>: ~6 seconds (2 + 2 + 2)
-- <strong>Concurrent</strong>: ~2 seconds (all 3 run at the same time!)</p>
+<p>Notice the difference! - <strong>Sequential</strong>: ~6 seconds (2 + 2 + 2) - <strong>Concurrent</strong>: ~2 seconds (all 3 run at the same time!)</p>
 <p><code>asyncio.gather</code> starts all coroutines, and while one is "sleeping" (waiting for I/O), the others can run.</p>
 <h3 id="43-asynciocreate_task-fire-and-forget">4.3 <code>asyncio.create_task</code> — Fire and Forget</h3>
 <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">background_job</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">duration</span><span class="p">):</span>
@@ -1469,6 +1455,7 @@ Success! Got: {&#39;status&#39;: &#39;ok&#39;, &#39;data&#39;: [1, 2, 3]}
 5
 </code></pre></div>
 
+
 **Why?**
 - `a()` and `b()` start together, both print their first line (`1`, `3`)
 - Both hit `await asyncio.sleep()` — they *pause* and yield control
@@ -1521,12 +1508,7 @@ If each fetch takes 1 second: A = 3s, B = 1s.
 <hr />
 <h2 id="final-challenge-async-task-pipeline">Final Challenge: Async Task Pipeline</h2>
 <p>Build an async pipeline that processes "orders" through multiple stages. Each stage is a coroutine that transforms the order.</p>
-<p><strong>Requirements:</strong>
-1. Create an <code>AsyncPipeline</code> class with <code>add_stage(name, handler)</code> and <code>process(item)</code> methods
-2. Each stage's handler is an async function that takes an item and returns a transformed item
-3. <code>process()</code> should run the item through all stages <strong>sequentially</strong> (output of one is input to next)
-4. Add logging that shows each stage starting/finishing
-5. Process multiple orders <strong>concurrently</strong> using <code>asyncio.gather</code></p>
+<p><strong>Requirements:</strong> 1. Create an <code>AsyncPipeline</code> class with <code>add_stage(name, handler)</code> and <code>process(item)</code> methods 2. Each stage's handler is an async function that takes an item and returns a transformed item 3. <code>process()</code> should run the item through all stages <strong>sequentially</strong> (output of one is input to next) 4. Add logging that shows each stage starting/finishing 5. Process multiple orders <strong>concurrently</strong> using <code>asyncio.gather</code></p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AsyncPipeline</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">stages</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of (name, handler) tuples</span>

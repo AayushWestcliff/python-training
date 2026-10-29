@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Async Programming - Python</title>
+    <title>Async Programming - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -230,7 +230,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -249,7 +249,7 @@
               
                 <h1 id="deep-dive-asyncio-in-python">Deep Dive: <code>asyncio</code> in Python</h1>
 <blockquote>
-<p><em>"Concurrency is not parallelism. Concurrency is about dealing with lots of things at once. Parallelism is about doing lots of things at once."</em><br />
+<p><em>"Concurrency is not parallelism. Concurrency is about dealing with lots of things at once. Parallelism is about doing lots of things at once."</em>\
 — Rob Pike</p>
 </blockquote>
 <hr />
@@ -347,12 +347,14 @@
 **3 seconds.** `time.sleep` is **blocking** — the entire program halts at each call.
 
 With `asyncio`, we can do this in **1 second**:
+
 <div class="highlight"><pre><span></span><code><span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
 <span class="p">)</span>
 </code></pre></div>
+
 All three sleeps run concurrently!
 
 </details>
@@ -627,6 +629,7 @@ Done!
 
 <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">countdown</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">countdown</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </code></pre></div>
+
 
 Notice how both countdowns print interleaved — they truly run concurrently!
 
@@ -1490,12 +1493,7 @@ Total time: 1.0s (all ran concurrently!)
 <hr />
 <h2 id="8-real-world-project-async-web-crawler">8. Real-World Project: Async Web Crawler</h2>
 <hr />
-<p>Let's put everything together! We'll build a simulated web crawler that:
-1. Starts from a list of seed URLs
-2. Fetches pages concurrently (rate limited)
-3. Extracts links from each page
-4. Uses a queue to manage the crawl frontier
-5. Respects a max depth and max pages limit</p>
+<p>Let's put everything together! We'll build a simulated web crawler that: 1. Starts from a list of seed URLs 2. Fetches pages concurrently (rate limited) 3. Extracts links from each page 4. Uses a queue to manage the crawl frontier 5. Respects a max depth and max pages limit</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
@@ -1782,6 +1780,7 @@ end Y     (0.5s)
 end X     (1.0s)
 </code></pre></div>
 
+
 All start immediately (gather runs them concurrently). They end in order of their sleep duration.
 
 </details>
@@ -1821,9 +1820,11 @@ Fix: restructure the code so the lock is not held across the call, or avoid nest
 
 **It's sequential!** The `for` loop `await`s each `fetch()` one at a time. To fetch concurrently:
 
+
 <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">fetch_all</span><span class="p">(</span><span class="n">urls</span><span class="p">):</span>
     <span class="k">return</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">])</span>
 </code></pre></div>
+
 
 This is the most common asyncio performance mistake.
 
@@ -1838,6 +1839,7 @@ When you need to call a **blocking** function from async code without freezing t
 - File I/O (open/read/write)
 - CPU-bound operations
 - Third-party libraries that don't support async
+
 
 <div class="highlight"><pre><span></span><code><span class="c1"># Instead of:</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;big_file.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># Blocks!</span>
@@ -1886,22 +1888,22 @@ When you need to call a **blocking** function from async code without freezing t
 </code></pre></div>
 <h3 id="coordination">Coordination</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Queue (producer-consumer)</span>
-<span class="n">queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-<span class="n">item</span> <span class="o">=</span> <span class="k">await</span> <span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="nv">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>asyncio.Queue<span class="o">(</span><span class="nv">maxsize</span><span class="o">=</span><span class="m">10</span><span class="o">)</span>
+await<span class="w"> </span>queue.put<span class="o">(</span>item<span class="o">)</span>
+<span class="nv">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>await<span class="w"> </span>queue.get<span class="o">()</span>
 
 <span class="c1"># Lock (mutual exclusion)</span>
-<span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">():</span>
-    <span class="c1"># critical section</span>
+async<span class="w"> </span>with<span class="w"> </span>asyncio.Lock<span class="o">()</span>:
+<span class="w">    </span><span class="c1"># critical section</span>
 
 <span class="c1"># Semaphore (rate limiting)</span>
-<span class="k">async</span> <span class="k">with</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="c1"># max 5 concurrent</span>
+async<span class="w"> </span>with<span class="w"> </span>asyncio.Semaphore<span class="o">(</span><span class="m">5</span><span class="o">)</span>:
+<span class="w">    </span><span class="c1"># max 5 concurrent</span>
 
 <span class="c1"># Event (signaling)</span>
-<span class="n">event</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
-<span class="k">await</span> <span class="n">event</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>   <span class="c1"># block until set</span>
-<span class="n">event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>          <span class="c1"># release all waiters</span>
+<span class="nv">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>asyncio.Event<span class="o">()</span>
+await<span class="w"> </span>event.wait<span class="o">()</span><span class="w">   </span><span class="c1"># block until set</span>
+event.set<span class="o">()</span><span class="w">          </span><span class="c1"># release all waiters</span>
 </code></pre></div>
 <h3 id="bridging-syncasync">Bridging Sync/Async</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Blocking -&gt; async</span>

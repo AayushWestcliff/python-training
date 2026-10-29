@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>FastAPI - Python</title>
+    <title>FastAPI - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -216,7 +216,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -396,10 +396,7 @@ passlib[bcrypt]==1.7.4
 <p>Copy <code>app/main.py</code> from the code cell below, then run:</p>
 <div class="highlight"><pre><span></span><code>uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
 </code></pre></div>
-<p>Visit:
-- <code>http://localhost:8000/</code> — raw JSON response
-- <code>http://localhost:8000/docs</code> — Swagger UI (try the endpoints interactively)
-- <code>http://localhost:8000/redoc</code> — ReDoc documentation</p>
+<p>Visit: - <code>http://localhost:8000/</code> — raw JSON response - <code>http://localhost:8000/docs</code> — Swagger UI (try the endpoints interactively) - <code>http://localhost:8000/redoc</code> — ReDoc documentation</p>
 <h3 id="how-a-route-works">How a Route Works</h3>
 <div class="highlight"><pre><span></span><code>@app.get(&quot;/destinations&quot;)      ← HTTP method + URL path
 def list_destinations():       ← Python function (sync or async)
@@ -447,7 +444,7 @@ def list_destinations():       ← Python function (sync or async)
 <h3 id="query-parameters">Query Parameters</h3>
 <p>A <strong>query parameter</strong> is anything after <code>?</code> in the URL: <code>GET /destinations?country=France&amp;max_price=200</code>.</p>
 <p>Declare them as function arguments with default values:</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_destinations</span><span class="p">(</span><span class="n">country</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">max_price</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code>def<span class="w"> </span>list_destinations<span class="o">(</span>country:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None,<span class="w"> </span>max_price:<span class="w"> </span><span class="nv">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None<span class="o">)</span>:
 </code></pre></div>
 <ul>
 <li>If <code>country</code> is not in the URL, it is <code>None</code></li>
@@ -541,10 +538,7 @@ def list_destinations():       ← Python function (sync or async)
 </ul>
 <p>Keeping them separate gives you control over each direction independently.</p>
 <h3 id="response_model"><code>response_model</code></h3>
-<p>Passing <code>response_model=DestinationResponse</code> to the decorator tells FastAPI to:
-1. Validate the return value against the model
-2. Strip any fields not declared in the response model (security benefit)
-3. Document the response shape in Swagger UI</p>
+<p>Passing <code>response_model=DestinationResponse</code> to the decorator tells FastAPI to: 1. Validate the return value against the model 2. Strip any fields not declared in the response model (security benefit) 3. Document the response shape in Swagger UI</p>
 <h3 id="field-validation">Field Validation</h3>
 <p><code>Field()</code> from Pydantic adds constraints directly to the model:</p>
 <table>
@@ -1152,12 +1146,12 @@ Response ←  [Middleware 1]  ←  [Middleware 2]  ←  Route Function
 <p><code>auto_error=False</code> means FastAPI won't automatically reject requests without the header — your dependency function handles that, giving you control over the error message.</p>
 <h3 id="dependency-injection-for-auth">Dependency Injection for Auth</h3>
 <p>The <code>get_api_key</code> function is a FastAPI dependency. Add it to any route that needs protection:</p>
-<div class="highlight"><pre><span></span><code><span class="nd">@router</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_trip</span><span class="p">(</span>
-    <span class="n">trip</span><span class="p">:</span> <span class="n">TripCreate</span><span class="p">,</span>
-    <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">),</span>
-    <span class="n">current_user</span><span class="p">:</span> <span class="n">User</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_api_key</span><span class="p">),</span>   <span class="err">←</span> <span class="n">protects</span> <span class="n">the</span> <span class="n">route</span>
-<span class="p">):</span>
+<div class="highlight"><pre><span></span><code>@router.post<span class="o">(</span><span class="s2">&quot;/&quot;</span>,<span class="w"> </span><span class="nv">status_code</span><span class="o">=</span><span class="m">201</span><span class="o">)</span>
+def<span class="w"> </span>create_trip<span class="o">(</span>
+<span class="w">    </span>trip:<span class="w"> </span>TripCreate,
+<span class="w">    </span>db:<span class="w"> </span><span class="nv">Session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Depends<span class="o">(</span>get_db<span class="o">)</span>,
+<span class="w">    </span>current_user:<span class="w"> </span><span class="nv">User</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Depends<span class="o">(</span>get_api_key<span class="o">)</span>,<span class="w">   </span>←<span class="w"> </span>protects<span class="w"> </span>the<span class="w"> </span>route
+<span class="o">)</span>:
 </code></pre></div>
 <p>If <code>get_api_key</code> raises <code>HTTPException</code>, FastAPI returns that response immediately — the route function is never called.</p>
 <h3 id="how-to-get-an-api-key">How to Get an API Key</h3>
@@ -1296,9 +1290,7 @@ Response ←  [Middleware 1]  ←  [Middleware 2]  ←  Route Function
 5. Server decodes the token, extracts the username, loads the User
 </code></pre></div>
 <h3 id="token-expiry">Token Expiry</h3>
-<p>The <code>exp</code> claim in the payload is a Unix timestamp. When the token expires:
-- The server decodes successfully but finds <code>exp &lt; now</code>
-- Returns <code>401 Unauthorized</code> with <code>"Token has expired — please log in again"</code></p>
+<p>The <code>exp</code> claim in the payload is a Unix timestamp. When the token expires: - The server decodes successfully but finds <code>exp &lt; now</code> - Returns <code>401 Unauthorized</code> with <code>"Token has expired — please log in again"</code></p>
 <h3 id="testing-the-flow">Testing the Flow</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># 1. Register</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/auth/register<span class="w"> </span><span class="se">\</span>
@@ -1481,10 +1473,18 @@ curl<span class="w"> </span>http://localhost:8000/bookings/me<span class="w"> </
 <p>Build the complete <strong>Bookings</strong> feature by replacing the stub <code>routers/bookings.py</code> with a full implementation.</p>
 <h3 id="requirements">Requirements</h3>
 <ol>
-<li><code>POST /bookings</code> — JWT-protected. Creates a booking for the authenticated user.</li>
-<li>Return <code>404</code> if the trip does not exist</li>
-<li>Return <code>400</code> if <code>spots_available &lt;= 0</code></li>
-<li>Decrement <code>spots_available</code> by 1 on success</li>
+<li>
+<p><code>POST /bookings</code> — JWT-protected. Creates a booking for the authenticated user.</p>
+</li>
+<li>
+<p>Return <code>404</code> if the trip does not exist</p>
+</li>
+<li>
+<p>Return <code>400</code> if <code>spots_available &lt;= 0</code></p>
+</li>
+<li>
+<p>Decrement <code>spots_available</code> by 1 on success</p>
+</li>
 <li>
 <p>Return the booking with status <code>"confirmed"</code></p>
 </li>
@@ -1494,9 +1494,15 @@ curl<span class="w"> </span>http://localhost:8000/bookings/me<span class="w"> </
 <li>
 <p><code>PATCH /bookings/{id}/cancel</code> — JWT-protected. Cancels one of the user's bookings.</p>
 </li>
-<li>Return <code>404</code> if the booking does not belong to the current user</li>
-<li>Return <code>400</code> if the booking is already cancelled</li>
-<li>Restore <code>spots_available</code> by 1 on success</li>
+<li>
+<p>Return <code>404</code> if the booking does not belong to the current user</p>
+</li>
+<li>
+<p>Return <code>400</code> if the booking is already cancelled</p>
+</li>
+<li>
+<p>Restore <code>spots_available</code> by 1 on success</p>
+</li>
 </ol>
 <h3 id="verify-with-swagger-ui">Verify With Swagger UI</h3>
 <p>Start the server and open <code>http://localhost:8000/docs</code>.</p>

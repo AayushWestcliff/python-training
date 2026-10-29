@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Object Oriented Programming - Python</title>
+    <title>Object Oriented Programming - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -72,6 +72,116 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-object-oriented-programming-real-world-examples">Why Object-Oriented Programming? Real-World Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#example-1-a-university-system">Example 1: A University System</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-2-food-delivery-app-foodmandu-pathao-food">Example 2: Food Delivery App (Foodmandu, Pathao Food)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-3-banking-system-your-bank-app">Example 3: Banking System (Your Bank App)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#example-4-ride-sharing-app-pathao-indrive">Example 4: Ride-Sharing App (Pathao, inDrive)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-four-pillars-of-oop-preview">The Four Pillars of OOP (Preview)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#quick-mental-exercise">Quick Mental Exercise</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-quick-warm-up-object-identity-mutability-references">1. Quick Warm-Up: Object Identity, Mutability &amp; References</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#try-it-predict-the-output">🎯 Try It: Predict the Output</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-classes-objects">2. Classes &amp; Objects</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-the-__init__-method-and-instance-attributes">2.1 The __init__ Method and Instance Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-class-attributes-vs-instance-attributes">2.2 Class Attributes vs Instance Attributes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#23-methods-instance-class-and-static">2.3 Methods: Instance, Class, and Static</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#24-__repr__-vs-__str__">2.4 __repr__ vs __str__</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#try-it-create-a-book-class">🎯 Try It: Create a Book Class</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-encapsulation-properties">3. Encapsulation &amp; Properties</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-the-property-decorator">3.1 The @property Decorator</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-validation-rules-with-properties">3.2 Validation Rules with Properties</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-inheritance-polymorphism">4. Inheritance &amp; Polymorphism</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#41-base-class-and-child-class">4.1 Base Class and Child Class</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#42-method-overriding-and-super">4.2 Method Overriding and super()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#43-liskov-substitution-principle-lsp">4.3 Liskov Substitution Principle (LSP)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-composition-vs-inheritance">5. Composition vs Inheritance</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#51-composition-example-computer-system">5.1 Composition Example: Computer System</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-dataclasses">6. Dataclasses</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#61-basic-dataclass">6.1 Basic Dataclass</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#62-frozen-dataclass-immutable">6.2 Frozen Dataclass (Immutable)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#63-default-factory-for-mutable-defaults">6.3 Default Factory for Mutable Defaults</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-dunder-methods-you-actually-use">7. Dunder Methods You Actually Use</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#71-container-methods-__len__-__iter__-__contains__">7.1 Container Methods: __len__, __iter__, __contains__</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#72-equality-and-ordering-__eq__-__lt__-etc">7.2 Equality and Ordering: __eq__, __lt__, etc.</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-real-life-mini-project-food-delivery-order-system">8. Real-Life Mini-Project: Food Delivery Order System</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#81-core-classes">8.1 Core Classes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#82-the-order-class-composition">8.2 The Order Class (Composition)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#83-demo-creating-orders">8.3 Demo: Creating Orders</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#84-what-if-scenarios">8.4 What-If Scenarios</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-practice-section-in-class-exercises">9. Practice Section: In-Class Exercises</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-counter-class">Exercise 1: Counter Class</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-temperature-converter-classmethod">Exercise 2: Temperature Converter (Classmethod)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-3-password-property-with-validation">Exercise 3: Password Property with Validation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-4-animal-inheritance">Exercise 4: Animal Inheritance</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-5-dataclass-with-validation">Exercise 5: Dataclass with Validation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-6-make-it-iterable">Exercise 6: Make it Iterable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-7-composition-library-system">Exercise 7: Composition - Library System</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-8-implement-__eq__-and-__hash__">Exercise 8: Implement __eq__ and __hash__</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../SOLID_Principles/">Design Patterns (SOLID)</a>
@@ -102,7 +212,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -119,7 +229,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="oop-foundations-in-python"><strong>OOP Foundations in Python</strong></h2>
+                <h1 id="oop-foundations-in-python">OOP Foundations in Python</h1>
 <h3 id="learning-objectives"><strong>Learning Objectives</strong></h3>
 <p>By the end of this notebook, you will be able to:</p>
 <ol>

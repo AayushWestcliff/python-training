@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Deploying Applications - Python</title>
+    <title>Deploying Applications - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -250,7 +250,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -537,11 +537,11 @@ Content-Type: application/json
 </table>
 <h3 id="how-a-browser-consumes-an-api">How a Browser Consumes an API</h3>
 <p>When a web page needs data, JavaScript uses the <code>fetch</code> API:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript running in the browser</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;http://localhost:8000/tasks&#39;</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">tasks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
-<span class="c1">// [{&quot;id&quot;: 1, &quot;title&quot;: &quot;Buy groceries&quot;, &quot;completed&quot;: false, ...}]</span>
+<div class="highlight"><pre><span></span><code>//<span class="w"> </span>JavaScript<span class="w"> </span>running<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>browser
+const<span class="w"> </span><span class="nv">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>await<span class="w"> </span>fetch<span class="o">(</span><span class="s1">&#39;http://localhost:8000/tasks&#39;</span><span class="o">)</span><span class="p">;</span>
+const<span class="w"> </span><span class="nv">tasks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>await<span class="w"> </span>response.json<span class="o">()</span><span class="p">;</span>
+console.log<span class="o">(</span>tasks<span class="o">)</span><span class="p">;</span>
+//<span class="w"> </span><span class="o">[{</span><span class="s2">&quot;id&quot;</span>:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s2">&quot;title&quot;</span>:<span class="w"> </span><span class="s2">&quot;Buy groceries&quot;</span>,<span class="w"> </span><span class="s2">&quot;completed&quot;</span>:<span class="w"> </span>false,<span class="w"> </span>...<span class="o">}]</span>
 </code></pre></div>
 <p>The browser sends an HTTP GET to your FastAPI server and receives JSON. Your Python code never knows whether the caller is a browser, a mobile app, or <code>curl</code>.</p>
 <h3 id="testing-with-curl">Testing with <code>curl</code></h3>
@@ -907,35 +907,35 @@ sqlalchemy==2.0.30
 <h3 id="dockerfile"><code>Dockerfile</code></h3>
 <p>This uses a <strong>multi-stage build</strong>: the builder stage installs dependencies into a virtual environment; the runtime stage copies only what is needed, producing a lean final image with no build tools.</p>
 <p>Copy into <code>taskapi/Dockerfile</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c"># Stage 1: Builder — install dependencies</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Stage 1: Builder — install dependencies</span>
+FROM<span class="w"> </span>python:3.12-slim<span class="w"> </span>AS<span class="w"> </span>builder
 
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-<span class="k">RUN</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+WORKDIR<span class="w"> </span>/app
+RUN<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>/opt/venv
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
 
-<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>.
-<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+COPY<span class="w"> </span>requirements.txt<span class="w"> </span>.
+RUN<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 
 
-<span class="c"># Stage 2: Runtime — lean final image, no build tools</span>
-<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12-slim</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">runtime</span>
+<span class="c1"># Stage 2: Runtime — lean final image, no build tools</span>
+FROM<span class="w"> </span>python:3.12-slim<span class="w"> </span>AS<span class="w"> </span>runtime
 
-<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+WORKDIR<span class="w"> </span>/app
 
-<span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
-<span class="k">COPY</span><span class="w"> </span>app/<span class="w"> </span>./app/
+COPY<span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/opt/venv<span class="w"> </span>/opt/venv
+COPY<span class="w"> </span>app/<span class="w"> </span>./app/
 
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
-<span class="k">ENV</span><span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
+ENV<span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;/opt/venv/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
+ENV<span class="w"> </span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span><span class="m">1</span>
+ENV<span class="w"> </span><span class="nv">PYTHONDONTWRITEBYTECODE</span><span class="o">=</span><span class="m">1</span>
 
-<span class="c"># Run as a non-root user — security best practice</span>
-<span class="k">RUN</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
-<span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+<span class="c1"># Run as a non-root user — security best practice</span>
+RUN<span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>appuser
+USER<span class="w"> </span>appuser
 
-<span class="k">EXPOSE</span><span class="w"> </span><span class="s">8000</span>
-<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;uvicorn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+EXPOSE<span class="w"> </span><span class="m">8000</span>
+CMD<span class="w"> </span><span class="o">[</span><span class="s2">&quot;uvicorn&quot;</span>,<span class="w"> </span><span class="s2">&quot;app.main:app&quot;</span>,<span class="w"> </span><span class="s2">&quot;--host&quot;</span>,<span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span>,<span class="w"> </span><span class="s2">&quot;--port&quot;</span>,<span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="o">]</span>
 </code></pre></div>
 <h3 id="docker-commands">Docker Commands</h3>
 <p>Run all commands from the <code>taskapi/</code> directory.</p>
@@ -1091,20 +1091,20 @@ With Nginx:
 </code></pre></div>
 <h3 id="nginxconf"><code>nginx.conf</code></h3>
 <p>Copy into <code>taskapi/nginx/nginx.conf</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">upstream</span><span class="w"> </span><span class="s">taskapi</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">server</span><span class="w"> </span><span class="n">app</span><span class="p">:</span><span class="mi">8000</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code>upstream<span class="w"> </span>taskapi<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>server<span class="w"> </span>app:8000<span class="p">;</span>
+<span class="o">}</span>
 
-<span class="k">server</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+server<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>listen<span class="w"> </span><span class="m">80</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kn">proxy_pass</span><span class="w">         </span><span class="s">http://taskapi</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">Host</span><span class="w">              </span><span class="nv">$host</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Real-IP</span><span class="w">         </span><span class="nv">$remote_addr</span><span class="p">;</span>
-<span class="w">        </span><span class="kn">proxy_set_header</span><span class="w">   </span><span class="s">X-Forwarded-For</span><span class="w">   </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span>proxy_pass<span class="w">         </span>http://taskapi<span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>Host<span class="w">              </span><span class="nv">$host</span><span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>X-Real-IP<span class="w">         </span><span class="nv">$remote_addr</span><span class="p">;</span>
+<span class="w">        </span>proxy_set_header<span class="w">   </span>X-Forwarded-For<span class="w">   </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
 <p><strong>Key parts explained:</strong></p>
 <table>
@@ -1440,6 +1440,7 @@ curl<span class="w"> </span>http://localhost/tasks
 
 Add this route to `app/main.py`:
 
+
 <div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/tasks/</span><span class="si">{task_id}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">status_code</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">delete_task</span><span class="p">(</span><span class="n">task_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">db</span><span class="p">:</span> <span class="n">Session</span> <span class="o">=</span> <span class="n">Depends</span><span class="p">(</span><span class="n">get_db</span><span class="p">)):</span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Task</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Task</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
@@ -1449,7 +1450,9 @@ Add this route to `app/main.py`:
     <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 </code></pre></div>
 
+
 Rebuild and restart:
+
 
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
 </code></pre></div>

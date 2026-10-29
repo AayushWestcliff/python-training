@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Creating Distributable Packages - Python</title>
+    <title>Creating Distributable Packages - Python Module</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> Python
+          <a href="../.." class="icon icon-home"> Python Module
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -204,7 +204,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">Python</a>
+          <a href="../..">Python Module</a>
         
       </nav>
       <div class="wy-nav-content">
@@ -444,14 +444,14 @@
 </code></pre></div>
 <h3 id="projectscripts"><code>[project.scripts]</code></h3>
 <p>Defines CLI commands (covered in Section 5):</p>
-<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
-<span class="n">texttools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools.cli:main&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">project</span><span class="o">.</span><span class="n">scripts</span><span class="p">]</span>
+<span class="n">texttools</span> <span class="o">=</span> <span class="s2">&quot;texttools.cli:main&quot;</span>
 <span class="c1">#  command     module   function</span>
 </code></pre></div>
 <h3 id="toolsetuptoolspackagesfind"><code>[tool.setuptools.packages.find]</code></h3>
 <p>Tells setuptools where to find your package — critical for the <code>src/</code> layout:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[tool.setuptools.packages.find]</span>
-<span class="n">where</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">tool</span><span class="o">.</span><span class="n">setuptools</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">find</span><span class="p">]</span>
+<span class="n">where</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">]</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Write the pyproject.toml for texttools</span>
 
@@ -581,8 +581,8 @@ the:<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <h3 id="how-it-works">How It Works</h3>
 <p>When pip installs your package, it reads <code>[project.scripts]</code> in <code>pyproject.toml</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[project.scripts]</span>
-<span class="n">texttools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;texttools.cli:main&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">project</span><span class="o">.</span><span class="n">scripts</span><span class="p">]</span>
+<span class="n">texttools</span> <span class="o">=</span> <span class="s2">&quot;texttools.cli:main&quot;</span>
 <span class="c1">#  command     module   function</span>
 </code></pre></div>
 <p>pip creates a small wrapper executable (<code>texttools</code>) in the system <code>bin/</code> directory that calls <code>texttools.cli.main()</code>.</p>
@@ -640,8 +640,7 @@ The Lord of the Rings
 </code></pre></div>
 <blockquote>
 <p><strong>Note on <code>if __name__ == "__main__"</code>:</strong></p>
-<p>This guard lets you run the module directly with <code>python -m texttools.cli</code>.
-Entry points call <code>main()</code> directly — the guard is for manual invocation during development.</p>
+<p>This guard lets you run the module directly with <code>python -m texttools.cli</code>. Entry points call <code>main()</code> directly — the guard is for manual invocation during development.</p>
 </blockquote>
 <hr />
 <h2 id="section-6-testing-the-installed-package">Section 6 — Testing the Installed Package</h2>
@@ -858,14 +857,12 @@ Checking texttools_project/dist/texttools-0.1.0.tar.gz: [32mPASSED[0m
 <div class="highlight"><pre><span></span><code><span class="c1"># Run in your terminal</span>
 twine<span class="w"> </span>upload<span class="w"> </span>--repository<span class="w"> </span>testpypi<span class="w"> </span>dist/*
 </code></pre></div>
-<p>When prompted:
-- Username: <code>__token__</code> (literally)
-- Password: your API token (starts with <code>pypi-</code>)</p>
+<p>When prompted: - Username: <code>__token__</code> (literally) - Password: your API token (starts with <code>pypi-</code>)</p>
 <p>Or use a <code>.pypirc</code> config file:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ~/.pypirc</span>
-<span class="k">[testpypi]</span>
-<span class="na">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">__token__</span>
-<span class="na">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">pypi-your-token-here</span>
+<span class="p">[</span><span class="n">testpypi</span><span class="p">]</span>
+<span class="n">username</span> <span class="o">=</span> <span class="n">__token__</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">pypi</span><span class="o">-</span><span class="n">your</span><span class="o">-</span><span class="n">token</span><span class="o">-</span><span class="n">here</span>
 </code></pre></div>
 <h3 id="step-3-install-from-testpypi">Step 3 — Install From TestPyPI</h3>
 <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--index-url<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>texttools
