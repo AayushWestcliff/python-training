@@ -1,43 +1,37 @@
 # OOP Foundations in Python
 
+This notebook takes you from *"what is an object?"* to building a small food-delivery ordering system with classes. Every idea comes with code you can run, so keep the notebook open and run each cell as you read.
 
-### **Learning Objectives**
+### Learning Objectives
 
-By the end of this notebook, you will be able to:
+By the end of this notebook you will be able to:
 
-1. **Explain** object identity, mutability, and references in Python
+1. Explain object identity, mutability and references in Python
+2. Write classes with `__init__`, attributes and methods
+3. Protect an object's data with properties and validation
+4. Use inheritance and polymorphism without breaking the Liskov Substitution Principle
+5. Decide when composition is a better fit than inheritance
+6. Write data-focused classes quickly with `@dataclass`
+7. Implement the dunder methods you'll actually use (`__len__`, `__iter__`, `__eq__`, ...)
+8. Combine all of the above in a small real-world project
 
-2. **Create** classes with proper initialization, attributes, and methods
+### Prerequisites
 
-3. **Implement** encapsulation using properties with validation
+- Python 3.10 or newer
+- Comfortable with variables, loops and functions
+- Comfortable with lists and dictionaries
 
-4. **Apply** inheritance and polymorphism following the Liskov Substitution Principle
+### How to Use This Notebook
 
-5. **Choose** between composition and inheritance for object relationships
-
-6. **Use** dataclasses for cleaner data-focused classes
-
-7. **Implement** common dunder methods (`__len__`, `__iter__`, `__eq__`, etc.)
-
-8. **Build** a real-world mini-project demonstrating OOP concepts
-
----
-
-### **Prerequisites**
-
-- Python 3.8+ installed
-
-- Understanding of basic Python syntax (variables, functions, loops)
-
-- Familiarity with lists, dictionaries, and basic data structures
-
-- Experience writing simple Python functions
+- Run the cells **from top to bottom**. Later cells reuse classes defined earlier.
+- **Try it** cells are for you. Write your answer first, then open *Show solution* to compare.
+- Each section ends with a **Quick recap**. Read only the recaps when revising before an exam.
 
 ---
 
 ## Why Object-Oriented Programming? Real-World Examples
 
-Before we write any code, let's understand OOP through everyday examples. OOP models the real world by representing things as **objects** with **attributes** (data) and **behaviors** (actions).
+Before writing any code, let's look at apps you already use. OOP models the real world by representing things as **objects** with **attributes** (data) and **behaviors** (actions).
 
 ---
 
@@ -46,45 +40,45 @@ Before we write any code, let's understand OOP through everyday examples. OOP mo
 Think about how a university works:
 
 | Real-World Entity | Class | Attributes (Data) | Behaviors (Methods) |
-|-------------------|-------|-------------------|---------------------|
+|----|----|----|----|
 | A student | `Student` | name, student_id, gpa, enrolled_courses | enroll(), drop_course(), calculate_gpa() |
 | A professor | `Professor` | name, employee_id, department, courses_teaching | assign_grade(), publish_research() |
 | A course | `Course` | code, title, credits, students_enrolled | add_student(), remove_student(), get_roster() |
 
-**Key insight**: Each "thing" in the system becomes a **class**, and each specific instance (like "Alice" or "CS101") becomes an **object**.
+Each *kind* of thing becomes a **class**. Each specific thing (the student "Alice", the course "CS101") is an **object** made from that class.
 
 ---
 
 ### Example 2: Food Delivery App (Foodmandu, Pathao Food)
 
 | Real-World Entity | Class | Attributes | Behaviors |
-|-------------------|-------|------------|-----------|
+|----|----|----|----|
 | A customer | `Customer` | name, phone, address, payment_method | place_order(), track_order(), rate_restaurant() |
 | A restaurant | `Restaurant` | name, location, menu_items, rating | accept_order(), update_menu(), close_for_day() |
 | An order | `Order` | items, total_price, status, delivery_time | calculate_total(), apply_discount(), update_status() |
 | A delivery rider | `Rider` | name, vehicle, current_location, orders_delivered | accept_delivery(), mark_delivered(), navigate_to() |
 
-**Key insight**: Objects can **contain other objects** (an Order contains MenuItems) — this is **composition**.
+Notice that an `Order` contains menu items and belongs to a `Customer`. Objects holding other objects is called **composition**.
 
 ---
 
 ### Example 3: Banking System (Your Bank App)
 
 | Real-World Entity | Class | Attributes | Behaviors |
-|-------------------|-------|------------|-----------|
+|----|----|----|----|
 | Account | `BankAccount` | account_number, balance, owner, type | deposit(), withdraw(), transfer(), get_statement() |
 | Savings Account | `SavingsAccount` | (inherits from BankAccount) + interest_rate | calculate_interest(), apply_interest() |
 | Customer | `Customer` | name, accounts[], contact_info | open_account(), close_account() |
 | Transaction | `Transaction` | amount, date, type, from_account, to_account | execute(), reverse() |
 
-**Key insight**: `SavingsAccount` **inherits** from `BankAccount` — it has all the same features plus some extra ones. This is **inheritance**.
+A `SavingsAccount` can do everything a `BankAccount` can, plus earn interest. Building a new class on top of an existing one is called **inheritance**.
 
 ---
 
 ### Example 4: Ride-Sharing App (Pathao, inDrive)
 
 | Concept | Real-World Example | OOP Principle |
-|---------|-------------------|---------------|
+|----|----|----|
 | **Class** | The concept of "a rider" | Blueprint/template |
 | **Object** | You, specifically, as a rider | Instance of the class |
 | **Attribute** | Your name, phone number, rating | Data stored in object |
@@ -98,7 +92,7 @@ Think about how a university works:
 ### The Four Pillars of OOP (Preview)
 
 | Pillar | What It Means | Real-World Analogy |
-|--------|---------------|-------------------|
+|----|----|----|
 | **Encapsulation** | Bundle data + methods together; hide internal details | A TV remote: you press buttons without knowing the electronics inside |
 | **Abstraction** | Show only essential features, hide complexity | A car dashboard: you see speed, not engine internals |
 | **Inheritance** | Create new classes based on existing ones | A "Mountain Bike" is a type of "Bicycle" which is a type of "Vehicle" |
@@ -110,29 +104,32 @@ Think about how a university works:
 
 Before we code, think about these:
 
-1. **Your phone**: What are its attributes? What methods does it have?
-2. **A playlist on Spotify**: What data does it store? What can you do with it?
-3. **An airline booking**: What objects are involved? How do they relate?
+1.  **Your phone**: What are its attributes? What methods does it have?
+2.  **A playlist on Spotify**: What data does it store? What can you do with it?
+3.  **An airline booking**: What objects are involved? How do they relate?
 
 > **Think pair share**: Turn to your neighbor and describe one real-world system as classes with attributes and methods.
 
 ---
 
-Now let's see how to implement these concepts in Python!
+### From the Real World to Code
 
-1️⃣ What objects exist? → Classes
+Whenever you design a program with classes, ask these four questions:
 
-2️⃣ What do they store? → Attributes
+1. **What things exist?** Those become classes.
+2. **What does each thing know?** Those become attributes.
+3. **What can each thing do?** Those become methods.
+4. **How are the things connected?** That tells you whether to use composition or inheritance.
 
-3️⃣ What can they do? → Methods
-
-4️⃣ How do they relate? → Composition / Inheritance
+Keep these questions in mind; we'll answer them again in the mini-project at the end.
 
 ---
 
 ## 1. Quick Warm-Up: Object Identity, Mutability & References
 
-Before diving into classes, let's solidify our understanding of how Python handles objects under the hood.
+Everything in Python is an object: numbers, strings, lists, functions, even classes. Before writing our own classes, we need to be clear about how Python stores objects and what a variable really is.
+
+A variable is **a name that points to an object**. Two names can point to the same object.
 
 
 ```python
@@ -158,14 +155,16 @@ print(f"a == c: {a == c}")   # True - equal values
     b = [1, 2, 3]
     c = [1, 2, 3]
     
-    id(a) = 4572384320
-    id(b) = 4572384320
-    id(c) = 4572575168
+    id(a) = 4459232064
+    id(b) = 4459232064
+    id(c) = 4459126144
     
     a is b: True
     a is c: False
     a == c: True
 
+
+`a` and `b` are two names for **one** list, so they have the same `id`. `c` looks the same but is a separate list. That's the difference between `is` (same object?) and `==` (same value?).
 
 
 ```python
@@ -191,6 +190,10 @@ print(f"Same object? {id(my_string) == string_id}")  # False!
     After concatenation: hello world
     Same object? False
 
+
+A list can be changed **in place**, so it keeps its identity. A string can't be changed, so `+` builds a brand-new string and the name now points to that.
+
+This matters for functions too. Default argument values are created **once**, when the function is defined, so a mutable default gets shared between calls:
 
 
 ```python
@@ -226,9 +229,9 @@ print(add_item_good("b"))  # ['b'] - Correct!
     ['b']
 
 
-### 🎯 Try It: Predict the Output
+### Try It: Predict the Output
 
-Before running the cell below, predict what will be printed. Then run it to verify.
+Write down what you think will be printed, **then** run the cell to check.
 
 
 ```python
@@ -251,25 +254,31 @@ print(f"x is y: {x is y}")
     x is y: False
 
 
+**Quick recap**
+
+- A variable is a name pointing to an object. `is` checks for the same object; `==` checks for equal values.
+- Lists, dicts and sets are **mutable** (change in place). Strings, numbers and tuples are **immutable**.
+- Never use `[]` or `{}` as a default argument. Use `None` and create the object inside the function.
+
 ---
 
 ## 2. Classes & Objects
 
-A **class** is a blueprint for creating objects. An **object** is an instance of a class.
+A **class** is a blueprint. An **object** (also called an *instance*) is one thing built from that blueprint. One `Student` class, many student objects.
 
 ### 2.1 The `__init__` Method and Instance Attributes
 
-The `__init__` method is called automatically when you create a new instance. It initializes the object's attributes.
+When you write `Student("Alice", ...)`, Python creates an empty object and immediately calls `__init__` on it. `self` is that new object, so `self.name = name` stores the name **on that particular student**.
 
 
 ```python
 class Student:
     """Represents a student enrolled in a course."""
-    
+
     def __init__(self, name: str, student_id: str, gpa: float = 0.0):
         """
         Initialize a new Student instance.
-        
+
         Args:
             name: Student's full name
             student_id: Unique identifier
@@ -278,7 +287,7 @@ class Student:
         self.name = name              # Instance attribute
         self.student_id = student_id  # Instance attribute
         self.gpa = gpa               # Instance attribute with default
-    
+
     def is_honor_roll(self) -> bool:
         """Check if student qualifies for honor roll."""
         return self.gpa >= 3.5
@@ -303,26 +312,27 @@ print(f"Honor roll? {bob.is_honor_roll()}")
 
 ### 2.2 Class Attributes vs Instance Attributes
 
-**Class attributes** are shared across all instances. **Instance attributes** are unique to each instance.
+- **Instance attributes** (set on `self`) belong to one object. Alice's balance is not Bob's balance.
+- **Class attributes** (written directly in the class body) are shared by every object of that class.
 
 
 ```python
 class BankAccount:
     """A simple bank account with class-level tracking."""
-    
+
     # Class attributes: shared by ALL instances
     bank_name = "Python National Bank"
     total_accounts = 0
-    
+
     def __init__(self, owner: str, balance: float = 0.0):
         # Instance attributes: unique to each instance
         self.owner = owner
         self.balance = balance
         self.account_number = BankAccount.total_accounts + 1
-        
+
         # Increment class attribute
         BankAccount.total_accounts += 1
-    
+
     def deposit(self, amount: float) -> None:
         """Add money to the account."""
         if amount > 0:
@@ -354,10 +364,13 @@ print("\n✓ Class attribute shared correctly")
 
 ### 2.3 Methods: Instance, Class, and Static
 
-Python supports three types of methods:
-- **Instance methods**: Take `self` as first argument, operate on instance data
-- **Class methods**: Take `cls` as first argument, operate on class data
-- **Static methods**: No implicit first argument, utility functions
+Python classes can have three kinds of methods:
+
+| Kind | First parameter | Use it when... |
+|---|---|---|
+| Instance method | `self` | the method needs this object's data (most methods) |
+| Class method (`@classmethod`) | `cls` | the method works with the class itself, e.g. an alternative way to create objects |
+| Static method (`@staticmethod`) | none | it's a helper that belongs with the class but needs no object or class data |
 
 
 ```python
@@ -365,33 +378,33 @@ import datetime
 
 class Employee:
     """Demonstrates different method types."""
-    
+
     company = "Tech Corp"
     employee_count = 0
-    
+
     def __init__(self, name: str, hire_year: int):
         self.name = name
         self.hire_year = hire_year
         Employee.employee_count += 1
-    
+
     # Instance method: operates on self
     def years_employed(self) -> int:
         """Calculate years with company."""
         return datetime.date.today().year - self.hire_year
-    
+
     # Class method: operates on class, not instance
     @classmethod
     def get_company_info(cls) -> str:
         """Return company information."""
         return f"{cls.company} - {cls.employee_count} employees"
-    
+
     # Alternative constructor using classmethod
     @classmethod
     def from_string(cls, data: str) -> "Employee":
         """Create employee from 'name,year' string."""
         name, year = data.split(",")
         return cls(name.strip(), int(year.strip()))
-    
+
     # Static method: utility function, no self or cls
     @staticmethod
     def is_valid_year(year: int) -> bool:
@@ -427,21 +440,23 @@ print(f"Is 1800 valid? {Employee.is_valid_year(1800)}")
 - **`__repr__`**: Unambiguous representation for developers (debugging)
 - **`__str__`**: Readable representation for users (display)
 
-Rule of thumb: `__repr__` should return something you can use to recreate the object.
+`print()` and f-strings use `__str__`. The interactive shell, the debugger and lists use `__repr__`.
+
+Rule of thumb: `__repr__` should look like the code that would recreate the object.
 
 
 ```python
 class Point:
     """A 2D point with proper string representations."""
-    
+
     def __init__(self, x: float, y: float):
         self.x = x
         self.y = y
-    
+
     def __repr__(self) -> str:
         """Developer representation - can recreate object."""
         return f"Point({self.x}, {self.y})"
-    
+
     def __str__(self) -> str:
         """User-friendly representation."""
         return f"({self.x}, {self.y})"
@@ -463,28 +478,29 @@ print(f"List: {points}")
     List: [Point(1, 2), Point(3, 4)]
 
 
-### 🎯 Try It: Create a Book Class
+### Try It: Create a Book Class
 
 Create a `Book` class with:
-- `title`, `author`, `pages` as instance attributes
-- `total_books` as a class attribute (tracks count)
-- `__repr__` that shows `Book('Title', 'Author', pages)`
-- `is_long()` method that returns True if pages > 300
+
+- `title`, `author` and `pages` as instance attributes
+- `total_books` as a class attribute that counts how many books have been created
+- a `__repr__` that returns `Book('Title', 'Author', pages)`
+- an `is_long()` method that returns `True` if the book has more than 300 pages
 
 
 ```python
 # Your code here:
 class Book:
     total_books = 0
-    
+
     def __init__(self, title: str, author: str, pages: int):
         # TODO: Initialize attributes
         pass
-    
+
     def __repr__(self) -> str:
         # TODO: Return representation
         pass
-    
+
     def is_long(self) -> bool:
         # TODO: Check if pages > 300
         pass
@@ -497,46 +513,79 @@ class Book:
 # print(f"Total books: {Book.total_books}")
 ```
 
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class Book:
+    total_books = 0
+
+    def __init__(self, title: str, author: str, pages: int):
+        self.title = title
+        self.author = author
+        self.pages = pages
+        Book.total_books += 1
+
+    def __repr__(self) -> str:
+        return f"Book({self.title!r}, {self.author!r}, {self.pages})"
+
+    def is_long(self) -> bool:
+        return self.pages > 300
+```
+
+</details>
+
+**Quick recap**
+
+- A class is a blueprint; an object is one thing built from it.
+- `__init__` runs when an object is created and stores its data on `self`.
+- Instance attributes belong to one object; class attributes are shared by all objects.
+- Instance methods get `self`, class methods get `cls`, static methods get neither.
+- `__str__` is for users, `__repr__` is for developers.
+
 ---
 
 ## 3. Encapsulation & Properties
 
-**Encapsulation** means bundling data with methods that operate on it, while controlling access.
+**Encapsulation** means keeping an object's data and the code that works on it together, and controlling how that data can be changed from outside.
 
-Python uses naming conventions:
-- `public_attr`: Public, accessible from anywhere
-- `_protected_attr`: Protected, "internal use" (convention only)
-- `__private_attr`: Private, name-mangled to `_ClassName__private_attr`
+Python doesn't have true `private` like Java. It relies on naming conventions instead:
+
+| Name | Meaning |
+|---|---|
+| `balance` | Public. Anyone can read and change it. |
+| `_balance` | Internal. "Please don't touch this from outside." Python won't stop you; it's a convention. |
+| `__balance` | Name-mangled to `_ClassName__balance` to avoid clashes in subclasses. Rarely needed. |
 
 ### 3.1 The `@property` Decorator
 
-Properties let you define attributes with custom getter, setter, and deleter behavior.
+A property looks like a normal attribute to whoever uses the class, but behind the scenes it runs a method. That lets you add validation or calculations **without** changing how the attribute is used.
 
 
 ```python
 class Temperature:
     """Temperature with validation using properties."""
-    
+
     def __init__(self, celsius: float = 0.0):
         self._celsius = celsius  # Protected attribute
-    
+
     @property
     def celsius(self) -> float:
         """Get temperature in Celsius."""
         return self._celsius
-    
+
     @celsius.setter
     def celsius(self, value: float) -> None:
         """Set temperature with validation."""
         if value < -273.15:
             raise ValueError("Temperature below absolute zero is not possible")
         self._celsius = value
-    
+
     @property
     def fahrenheit(self) -> float:
         """Get temperature in Fahrenheit (computed property)."""
         return self._celsius * 9/5 + 32
-    
+
     @fahrenheit.setter
     def fahrenheit(self, value: float) -> None:
         """Set temperature via Fahrenheit."""
@@ -567,34 +616,36 @@ except ValueError as e:
     ✓ Validation error: Temperature below absolute zero is not possible
 
 
+`temp.fahrenheit` is never stored anywhere. It's calculated from `_celsius` every time you read it. And because the Fahrenheit setter goes through the Celsius setter, the absolute-zero check protects both.
+
 ### 3.2 Validation Rules with Properties
 
-Properties are perfect for enforcing business rules.
+Properties are a good place to enforce rules about your data. If every change goes through a setter, invalid data can never get into the object, not even through `__init__`.
 
 
 ```python
 class User:
     """User with validated email and age."""
-    
+
     def __init__(self, username: str, email: str, age: int):
         self.username = username
         self.email = email  # Uses setter
         self.age = age      # Uses setter
-    
+
     @property
     def email(self) -> str:
         return self._email
-    
+
     @email.setter
     def email(self, value: str) -> None:
         if "@" not in value or "." not in value.split("@")[-1]:
             raise ValueError(f"Invalid email format: {value}")
         self._email = value.lower().strip()
-    
+
     @property
     def age(self) -> int:
         return self._age
-    
+
     @age.setter
     def age(self, value: int) -> None:
         if not isinstance(value, int):
@@ -602,7 +653,7 @@ class User:
         if not 0 <= value <= 150:
             raise ValueError("Age must be between 0 and 150")
         self._age = value
-    
+
     @property
     def is_adult(self) -> bool:
         """Read-only computed property."""
@@ -641,36 +692,45 @@ for name, email, age in test_cases:
       ✓ invalid_age_range: Age must be between 0 and 150
 
 
+**Quick recap**
+
+- A leading underscore (`_name`) means "internal". It's a convention, not a lock.
+- `@property` runs code when an attribute is read; `@x.setter` runs code when it's assigned.
+- Put validation in setters, and assign through them in `__init__`, so bad data never gets in.
+
 ---
 
 ## 4. Inheritance & Polymorphism
 
-**Inheritance** allows a class to inherit attributes and methods from a parent class.
+**Inheritance** lets a new class (the *child*) reuse everything from an existing class (the *parent*) and add or change only what's different.
 
-**Polymorphism** means objects of different types can be treated uniformly through a common interface.
+**Polymorphism** means you can call the same method on different kinds of objects and each one does the right thing for itself. In the loop below, `describe()` doesn't care whether it's dealing with a rectangle or a circle.
+
+`Shape` is an **abstract base class** (`ABC`): you can't create a plain `Shape`, and every child **must** implement the methods marked `@abstractmethod`.
 
 ### 4.1 Base Class and Child Class
 
 
 ```python
+import math
 from abc import ABC, abstractmethod
 
 class Shape(ABC):
     """Abstract base class for shapes."""
-    
+
     def __init__(self, name: str):
         self.name = name
-    
+
     @abstractmethod
     def area(self) -> float:
         """Calculate and return the area."""
         pass
-    
+
     @abstractmethod
     def perimeter(self) -> float:
         """Calculate and return the perimeter."""
         pass
-    
+
     def describe(self) -> str:
         """Common method for all shapes."""
         return f"{self.name}: area={self.area():.2f}, perimeter={self.perimeter():.2f}"
@@ -678,34 +738,30 @@ class Shape(ABC):
 
 class Rectangle(Shape):
     """Rectangle implementation."""
-    
+
     def __init__(self, width: float, height: float):
         super().__init__("Rectangle")  # Call parent __init__
         self.width = width
         self.height = height
-    
+
     def area(self) -> float:
         return self.width * self.height
-    
+
     def perimeter(self) -> float:
         return 2 * (self.width + self.height)
 
 
 class Circle(Shape):
     """Circle implementation."""
-    
-    import math
-    
+
     def __init__(self, radius: float):
         super().__init__("Circle")
         self.radius = radius
-    
+
     def area(self) -> float:
-        import math
         return math.pi * self.radius ** 2
-    
+
     def perimeter(self) -> float:
-        import math
         return 2 * math.pi * self.radius
 
 
@@ -731,41 +787,41 @@ print(f"Is Rectangle a Rectangle? {isinstance(rect, Rectangle)}")
 
 ### 4.2 Method Overriding and `super()`
 
-Child classes can override parent methods. Use `super()` to call parent implementation.
+A child class can **override** a parent method (replace it completely) or **extend** it (call the parent's version with `super()` and add to it).
 
 
 ```python
 class Vehicle:
     """Base class for vehicles."""
-    
+
     def __init__(self, brand: str, model: str, year: int):
         self.brand = brand
         self.model = model
         self.year = year
-    
+
     def start(self) -> str:
         return f"Starting {self.brand} {self.model}"
-    
+
     def info(self) -> str:
         return f"{self.year} {self.brand} {self.model}"
 
 
 class ElectricCar(Vehicle):
     """Electric car with battery."""
-    
+
     def __init__(self, brand: str, model: str, year: int, battery_kwh: float):
         super().__init__(brand, model, year)  # Call parent __init__
         self.battery_kwh = battery_kwh
-    
+
     def start(self) -> str:
         # Override parent method
         return f"🔋 Silently starting {self.brand} {self.model}"
-    
+
     def info(self) -> str:
         # Extend parent method
         base_info = super().info()  # Get parent's info
         return f"{base_info} (Electric, {self.battery_kwh} kWh)"
-    
+
     def charge(self, kwh: float) -> str:
         """New method specific to ElectricCar."""
         return f"Charging {kwh} kWh"
@@ -797,7 +853,9 @@ print(tesla.charge(50)) # New method
 
 > "Objects of a superclass should be replaceable with objects of a subclass without breaking the program."
 
-**Bad Example**: Square inheriting from Rectangle breaks LSP because setting width should not affect height for a Rectangle, but must for a Square.
+In plain words: if your code works with a parent class, it must keep working when you hand it a child class.
+
+The classic counter-example: in maths a square *is a* rectangle, so it's tempting to write `class Square(Rectangle)`. But code using a rectangle expects that changing the width leaves the height alone. A square can't keep that promise.
 
 
 ```python
@@ -806,38 +864,38 @@ class RectangleBad:
     def __init__(self, width: float, height: float):
         self._width = width
         self._height = height
-    
+
     @property
     def width(self) -> float:
         return self._width
-    
+
     @width.setter
     def width(self, value: float) -> None:
         self._width = value
-    
+
     @property
     def height(self) -> float:
         return self._height
-    
+
     @height.setter
     def height(self, value: float) -> None:
         self._height = value
-    
+
     def area(self) -> float:
         return self._width * self._height
 
 
 class SquareBad(RectangleBad):
     """Violates LSP: changing width also changes height."""
-    
+
     def __init__(self, side: float):
         super().__init__(side, side)
-    
+
     @RectangleBad.width.setter
     def width(self, value: float) -> None:
         self._width = value
         self._height = value  # Forces square constraint
-    
+
     @RectangleBad.height.setter
     def height(self, value: float) -> None:
         self._height = value
@@ -866,6 +924,8 @@ print("\n⚠️ Square violates LSP: behavior changed unexpectedly")
     ⚠️ Square violates LSP: behavior changed unexpectedly
 
 
+The function was written for rectangles and got a wrong answer from a "rectangle". The fix is to stop pretending a square is a rectangle and give both a common parent instead:
+
 
 ```python
 # GOOD: LSP-compliant design using shared base
@@ -873,7 +933,7 @@ from abc import ABC, abstractmethod
 
 class ShapeLSP(ABC):
     """Abstract base for shapes - LSP compliant."""
-    
+
     @abstractmethod
     def area(self) -> float:
         pass
@@ -881,21 +941,21 @@ class ShapeLSP(ABC):
 
 class RectangleGood(ShapeLSP):
     """Rectangle that doesn't promise width/height independence."""
-    
+
     def __init__(self, width: float, height: float):
         self.width = width
         self.height = height
-    
+
     def area(self) -> float:
         return self.width * self.height
 
 
 class SquareGood(ShapeLSP):
     """Square as its own type, not a Rectangle subclass."""
-    
+
     def __init__(self, side: float):
         self.side = side
-    
+
     def area(self) -> float:
         return self.side ** 2
 
@@ -914,14 +974,26 @@ print("\n✓ LSP compliant: each shape behaves consistently")
     ✓ LSP compliant: each shape behaves consistently
 
 
+**Quick recap**
+
+- A child class inherits everything from its parent and can override or extend it.
+- `super()` calls the parent's version of a method.
+- An abstract base class defines methods every child must implement.
+- Polymorphism: the same method call does different things depending on the object's class.
+- Liskov Substitution Principle: a child must work anywhere its parent is expected. If it can't, don't inherit.
+
 ---
 
 ## 5. Composition vs Inheritance
 
-**Inheritance**: "is-a" relationship (Dog is an Animal)
-**Composition**: "has-a" relationship (Car has an Engine)
+| | Relationship | Example |
+|---|---|---|
+| **Inheritance** | "is-a" | A `Dog` *is an* `Animal` |
+| **Composition** | "has-a" | A `Car` *has an* `Engine` |
 
-> **Prefer composition over inheritance** - it's more flexible and avoids tight coupling.
+With composition, a class holds other objects as attributes and asks them to do the work. You can swap one part (say, a bigger SSD) without touching the rest.
+
+> **Prefer composition over inheritance.** It's more flexible and keeps classes loosely connected. Use inheritance only when the "is-a" relationship is genuinely true.
 
 ### 5.1 Composition Example: Computer System
 
@@ -929,54 +1001,54 @@ print("\n✓ LSP compliant: each shape behaves consistently")
 ```python
 class CPU:
     """Central Processing Unit component."""
-    
+
     def __init__(self, brand: str, cores: int, speed_ghz: float):
         self.brand = brand
         self.cores = cores
         self.speed_ghz = speed_ghz
-    
+
     def process(self, task: str) -> str:
         return f"CPU processing '{task}' on {self.cores} cores at {self.speed_ghz}GHz"
 
 
 class RAM:
     """Memory component."""
-    
+
     def __init__(self, size_gb: int, type_: str = "DDR4"):
         self.size_gb = size_gb
         self.type_ = type_
-    
+
     def load(self, data: str) -> str:
         return f"Loading '{data}' into {self.size_gb}GB {self.type_} RAM"
 
 
 class Storage:
     """Storage component."""
-    
+
     def __init__(self, size_gb: int, type_: str = "SSD"):
         self.size_gb = size_gb
         self.type_ = type_
-    
+
     def save(self, file: str) -> str:
         return f"Saving '{file}' to {self.size_gb}GB {self.type_}"
 
 
 class Computer:
     """Computer composed of components (has-a relationship)."""
-    
+
     def __init__(self, name: str, cpu: CPU, ram: RAM, storage: Storage):
         self.name = name
         self.cpu = cpu        # Has-a CPU
         self.ram = ram        # Has-a RAM
         self.storage = storage  # Has-a Storage
-    
+
     def run_program(self, program: str) -> None:
         """Run a program using all components."""
         print(f"--- {self.name} running '{program}' ---")
         print(self.storage.save(program))
         print(self.ram.load(program))
         print(self.cpu.process(program))
-    
+
     def specs(self) -> str:
         """Return computer specifications."""
         return (f"{self.name}: {self.cpu.brand} {self.cpu.cores}-core, "
@@ -1004,11 +1076,18 @@ gaming_pc.run_program("Cyberpunk 2077")
     CPU processing 'Cyberpunk 2077' on 12 cores at 4.8GHz
 
 
+`Computer` doesn't know *how* to process, load or save anything. It hands each job to the part that does. Want a faster machine? Pass in a different `CPU` object; the `Computer` class doesn't change.
+
+**Quick recap**
+
+- Inheritance models "is-a"; composition models "has-a".
+- Composition lets you swap parts without changing the class that uses them, so reach for it first.
+
 ---
 
 ## 6. Dataclasses
 
-Dataclasses (Python 3.7+) reduce boilerplate for classes that mainly store data.
+Many classes exist mainly to hold data. Writing `__init__`, `__repr__` and `__eq__` for each of them gets repetitive. The `@dataclass` decorator writes those for you from the type-annotated fields.
 
 ### 6.1 Basic Dataclass
 
@@ -1023,10 +1102,10 @@ class ProductOld:
         self.name = name
         self.price = price
         self.quantity = quantity
-    
+
     def __repr__(self):
         return f"ProductOld(name={self.name!r}, price={self.price}, quantity={self.quantity})"
-    
+
     def __eq__(self, other):
         if not isinstance(other, ProductOld):
             return NotImplemented
@@ -1040,7 +1119,7 @@ class Product:
     name: str
     price: float
     quantity: int = 0  # Default value
-    
+
     def total_value(self) -> float:
         """You can still add custom methods."""
         return self.price * self.quantity
@@ -1066,7 +1145,7 @@ print(f"\nmouse == mouse2: {mouse == mouse2}")  # True
 
 ### 6.2 Frozen Dataclass (Immutable)
 
-Use `frozen=True` to create immutable instances (like tuples).
+With `frozen=True` the fields can't be changed after the object is created, just like a tuple. Frozen objects are also hashable, so they can be used as dictionary keys or put in sets.
 
 
 ```python
@@ -1075,7 +1154,7 @@ class Coordinate:
     """Immutable coordinate - cannot be modified after creation."""
     latitude: float
     longitude: float
-    
+
     def distance_to(self, other: "Coordinate") -> float:
         """Simplified distance calculation (not real geo distance)."""
         import math
@@ -1112,7 +1191,7 @@ print(f"\nLocations dict: {locations}")
 
 ### 6.3 Default Factory for Mutable Defaults
 
-Use `field(default_factory=...)` for mutable default values (lists, dicts).
+Remember the mutable-default trap from Section 1? Dataclasses protect you from it: `items: list = []` is an error. Use `field(default_factory=list)` so each object gets its own new list.
 
 
 ```python
@@ -1127,11 +1206,11 @@ class ShoppingCart:
     # RIGHT: Use field with default_factory
     items: List[str] = field(default_factory=list)
     prices: Dict[str, float] = field(default_factory=dict)
-    
+
     def add_item(self, item: str, price: float) -> None:
         self.items.append(item)
         self.prices[item] = price
-    
+
     def total(self) -> float:
         return sum(self.prices.values())
 
@@ -1158,11 +1237,18 @@ print("\n✓ Each cart has independent items list")
     ✓ Each cart has independent items list
 
 
+**Quick recap**
+
+- `@dataclass` generates `__init__`, `__repr__` and `__eq__` from the fields.
+- `frozen=True` makes objects read-only and hashable.
+- Use `field(default_factory=list)` (or `dict`) for mutable defaults.
+- Use `__post_init__` if you need to validate fields after creation.
+
 ---
 
 ## 7. Dunder Methods You Actually Use
 
-"Dunder" = double underscore methods (`__name__`). They enable Python's syntactic sugar.
+"Dunder" is short for **d**ouble **under**score, as in `__len__`. You almost never call them directly. Python calls them for you: `len(x)` calls `x.__len__()`, `for item in x` calls `x.__iter__()`, and so on. Implement them, and your objects work with Python's built-in syntax.
 
 ### 7.1 Container Methods: `__len__`, `__iter__`, `__contains__`
 
@@ -1170,30 +1256,30 @@ print("\n✓ Each cart has independent items list")
 ```python
 class Playlist:
     """A playlist that behaves like a container."""
-    
+
     def __init__(self, name: str):
         self.name = name
         self._songs: List[str] = []
-    
+
     def add(self, song: str) -> None:
         self._songs.append(song)
-    
+
     def __len__(self) -> int:
         """Enable len(playlist)."""
         return len(self._songs)
-    
+
     def __iter__(self):
         """Enable for song in playlist."""
         return iter(self._songs)
-    
+
     def __contains__(self, song: str) -> bool:
         """Enable 'song in playlist'."""
         return song in self._songs
-    
+
     def __getitem__(self, index: int) -> str:
         """Enable playlist[0]."""
         return self._songs[index]
-    
+
     def __repr__(self) -> str:
         return f"Playlist('{self.name}', {len(self)} songs)"
 
@@ -1237,30 +1323,30 @@ from functools import total_ordering
 @total_ordering  # Generates other comparisons from __eq__ and __lt__
 class Version:
     """Software version with comparison support."""
-    
+
     def __init__(self, major: int, minor: int, patch: int):
         self.major = major
         self.minor = minor
         self.patch = patch
-    
+
     def __repr__(self) -> str:
         return f"Version({self.major}, {self.minor}, {self.patch})"
-    
+
     def __str__(self) -> str:
         return f"{self.major}.{self.minor}.{self.patch}"
-    
+
     def __eq__(self, other: object) -> bool:
         """Enable == comparison."""
         if not isinstance(other, Version):
             return NotImplemented
         return (self.major, self.minor, self.patch) == (other.major, other.minor, other.patch)
-    
+
     def __lt__(self, other: "Version") -> bool:
         """Enable < comparison. @total_ordering provides <=, >, >=."""
         if not isinstance(other, Version):
             return NotImplemented
         return (self.major, self.minor, self.patch) < (other.major, other.minor, other.patch)
-    
+
     def __hash__(self) -> int:
         """Make hashable for use in sets/dicts."""
         return hash((self.major, self.minor, self.patch))
@@ -1290,15 +1376,28 @@ print(f"\nSorted: {sorted(versions)}")
     Sorted: [Version(1, 0, 0), Version(1, 2, 3), Version(2, 0, 0)]
 
 
+With `@total_ordering` we only wrote `__eq__` and `__lt__`; Python filled in `<=`, `>` and `>=`. Because `<` works, `sorted()` works too.
+
+**Watch out:** if you define `__eq__`, Python removes the default `__hash__`. Define `__hash__` as well if the objects need to go in a set or be used as dict keys.
+
+**Quick recap**
+
+- Dunder methods let your objects work with `len()`, `for`, `in`, `[]`, `==`, `<` and `sorted()`.
+- With `@total_ordering` you only need `__eq__` and `__lt__`.
+- If you define `__eq__`, also define `__hash__` when objects must be hashable.
+
 ---
 
 ## 8. Real-Life Mini-Project: Food Delivery Order System
 
-Let's build a complete system demonstrating OOP concepts:
-- **Classes**: `Customer`, `MenuItem`, `Order`
-- **Composition**: Order has MenuItems
-- **Encapsulation**: Validated properties
-- **Polymorphism**: Different discount strategies
+Time to put everything together. We'll build the core of a food-delivery app like Foodmandu. Going back to our four design questions:
+
+| Question | Answer |
+|---|---|
+| What things exist? | `Customer`, `MenuItem`, `Order`, discount rules |
+| What does each thing know? | prices, categories, customer details, items in an order |
+| What can each thing do? | add items, calculate totals, apply discounts, complete an order |
+| How are they connected? | an `Order` **has** a customer and menu items (composition); each discount rule **is a** `DiscountStrategy` (inheritance) |
 
 ### 8.1 Core Classes
 
@@ -1326,11 +1425,11 @@ class MenuItem:
     price: float
     category: Category
     is_vegetarian: bool = False
-    
+
     def __post_init__(self):
         if self.price < 0:
             raise ValueError("Price cannot be negative")
-    
+
     def __str__(self) -> str:
         veg = " (V)" if self.is_vegetarian else ""
         return f"{self.name}{veg} - ${self.price:.2f}"
@@ -1344,7 +1443,7 @@ class Customer:
     phone: str
     is_premium: bool = False
     orders_count: int = 0
-    
+
     def __str__(self) -> str:
         status = "Premium" if self.is_premium else "Regular"
         return f"{self.name} ({status} - {self.orders_count} orders)"
@@ -1353,12 +1452,12 @@ class Customer:
 # Abstract base for discount strategies (Strategy Pattern preview)
 class DiscountStrategy(ABC):
     """Abstract discount strategy."""
-    
+
     @abstractmethod
     def calculate_discount(self, subtotal: float, customer: Customer) -> float:
         """Return discount amount."""
         pass
-    
+
     @property
     @abstractmethod
     def name(self) -> str:
@@ -1367,10 +1466,10 @@ class DiscountStrategy(ABC):
 
 class NoDiscount(DiscountStrategy):
     """No discount applied."""
-    
+
     def calculate_discount(self, subtotal: float, customer: Customer) -> float:
         return 0.0
-    
+
     @property
     def name(self) -> str:
         return "No discount"
@@ -1378,12 +1477,12 @@ class NoDiscount(DiscountStrategy):
 
 class PremiumDiscount(DiscountStrategy):
     """10% off for premium customers."""
-    
+
     def calculate_discount(self, subtotal: float, customer: Customer) -> float:
         if customer.is_premium:
             return subtotal * 0.10
         return 0.0
-    
+
     @property
     def name(self) -> str:
         return "Premium 10% off"
@@ -1391,12 +1490,12 @@ class PremiumDiscount(DiscountStrategy):
 
 class BulkDiscount(DiscountStrategy):
     """15% off for orders over $50."""
-    
+
     def calculate_discount(self, subtotal: float, customer: Customer) -> float:
         if subtotal >= 50:
             return subtotal * 0.15
         return 0.0
-    
+
     @property
     def name(self) -> str:
         return "Bulk 15% off (orders $50+)"
@@ -1417,10 +1516,10 @@ class Order:
     An order that HAS-A customer and HAS MenuItems (composition).
     Demonstrates encapsulation and composition.
     """
-    
+
     _order_counter = 0  # Class attribute for order numbering
     TAX_RATE = 0.13     # 13% tax
-    
+
     def __init__(self, customer: Customer, discount_strategy: DiscountStrategy = None):
         Order._order_counter += 1
         self._order_id = Order._order_counter
@@ -1429,19 +1528,19 @@ class Order:
         self._discount_strategy = discount_strategy or NoDiscount()
         self._created_at = datetime.now()
         self._is_completed = False
-    
+
     @property
     def order_id(self) -> int:
         return self._order_id
-    
+
     @property
     def customer(self) -> Customer:
         return self._customer
-    
+
     @property
     def is_completed(self) -> bool:
         return self._is_completed
-    
+
     def add_item(self, item: MenuItem, quantity: int = 1) -> None:
         """Add item to order."""
         if self._is_completed:
@@ -1449,43 +1548,43 @@ class Order:
         if quantity < 1:
             raise ValueError("Quantity must be at least 1")
         self._items.append((item, quantity))
-    
+
     @property
     def subtotal(self) -> float:
         """Calculate subtotal before tax and discount."""
         return sum(item.price * qty for item, qty in self._items)
-    
+
     @property
     def discount_amount(self) -> float:
         """Calculate discount based on strategy."""
         return self._discount_strategy.calculate_discount(
             self.subtotal, self._customer
         )
-    
+
     @property
     def tax_amount(self) -> float:
         """Calculate tax on discounted amount."""
         return (self.subtotal - self.discount_amount) * self.TAX_RATE
-    
+
     @property
     def total(self) -> float:
         """Calculate final total."""
         return self.subtotal - self.discount_amount + self.tax_amount
-    
+
     def complete(self) -> None:
         """Mark order as completed."""
         self._is_completed = True
         self._customer.orders_count += 1
-    
+
     # Container methods
     def __len__(self) -> int:
         """Return number of line items."""
         return len(self._items)
-    
+
     def __iter__(self):
         """Iterate over items."""
         return iter(self._items)
-    
+
     def __str__(self) -> str:
         lines = [
             f"═══ Order #{self._order_id} ═══",
@@ -1554,7 +1653,7 @@ print(order1)
     
     ═══ Order #1 ═══
     Customer: Alice
-    Date: 2026-03-09 21:35
+    Date: 2026-10-29 15:32
     ──────────────────────────────
       2x Grilled Salmon       $49.98
       1x Spring Rolls         $8.99
@@ -1636,22 +1735,37 @@ print(f"  → Bulk discount is better by ${bulk_disc - premium_disc:.2f}")
       → Bulk discount is better by $3.50
 
 
+### 8.5 Where Each Concept Shows Up
+
+| Concept | Where to find it in the project |
+|---|---|
+| Classes & objects | `Customer`, `MenuItem`, `Order` and the objects created in the demo |
+| Class attributes | `Order._order_counter`, `Order.TAX_RATE` |
+| Encapsulation & properties | `Order.subtotal`, `Order.total`, read-only `order_id` |
+| Inheritance & polymorphism | `NoDiscount`, `PremiumDiscount`, `BulkDiscount` all replace `DiscountStrategy` |
+| Composition | `Order` holds a `Customer` and a list of `MenuItem`s |
+| Dataclasses | `MenuItem`, `Customer` (with validation in `__post_init__`) |
+| Dunder methods | `Order.__len__`, `Order.__iter__`, `MenuItem.__str__` |
+
+Notice how adding a new discount (say, a festival discount during Dashain) means writing one new class. `Order` doesn't change at all.
+
 ---
 
 ## 9. Practice Section: In-Class Exercises
 
-Complete these exercises during class. Each includes a hint and expected outcome.
+Each exercise has a hint, the expected behaviour, and a test you can uncomment once your code is ready. Try it yourself before opening the solution.
 
 ### Exercise 1: Counter Class
 
 Create a `Counter` class that:
-- Starts at 0 (or a given value)
-- Has `increment()`, `decrement()`, `reset()` methods
-- Has a `value` property (read-only)
 
-**Hint**: Use `__init__` with a default parameter and a property for read-only access.
+- starts at 0, or at a value you pass in
+- has `increment()`, `decrement()` and `reset()` methods
+- has a read-only `value` property
 
-**Expected**: `Counter().increment().increment().value` → `2`
+**Hint**: Store the count in `self._value` and expose it with `@property` (no setter).
+
+**Expected**: after two `increment()` calls, `c.value` is `2`.
 
 
 ```python
@@ -1671,6 +1785,31 @@ class Counter:
 # print("✓ Exercise 1 passed!")
 ```
 
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class Counter:
+    def __init__(self, start: int = 0):
+        self._start = start
+        self._value = start
+
+    @property
+    def value(self) -> int:
+        return self._value
+
+    def increment(self) -> None:
+        self._value += 1
+
+    def decrement(self) -> None:
+        self._value -= 1
+
+    def reset(self) -> None:
+        self._value = self._start
+```
+
+</details>
+
 ### Exercise 2: Temperature Converter (Classmethod)
 
 Add a `from_fahrenheit(cls, f)` classmethod to convert from Fahrenheit.
@@ -1685,7 +1824,7 @@ Add a `from_fahrenheit(cls, f)` classmethod to convert from Fahrenheit.
 class TemperatureEx2:
     def __init__(self, celsius: float):
         self.celsius = celsius
-    
+
     # TODO: Add from_fahrenheit classmethod
 
 # Test:
@@ -1693,6 +1832,21 @@ class TemperatureEx2:
 # assert t.celsius == 100.0
 # print("✓ Exercise 2 passed!")
 ```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class TemperatureEx2:
+    def __init__(self, celsius: float):
+        self.celsius = celsius
+
+    @classmethod
+    def from_fahrenheit(cls, f: float) -> "TemperatureEx2":
+        return cls((f - 32) * 5 / 9)
+```
+
+</details>
 
 ### Exercise 3: Password Property with Validation
 
@@ -1716,6 +1870,28 @@ class UserAccount:
 # except ValueError:
 #     print("✓ Exercise 3 passed!")
 ```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class UserAccount:
+    def __init__(self, username: str, password: str):
+        self.username = username
+        self.password = password  # goes through the setter
+
+    @property
+    def password(self) -> str:
+        return self._password
+
+    @password.setter
+    def password(self, value: str) -> None:
+        if len(value) < 8:
+            raise ValueError("Password must be at least 8 characters")
+        self._password = value
+```
+
+</details>
 
 ### Exercise 4: Animal Inheritance
 
@@ -1742,6 +1918,30 @@ class Cat(Animal):
 # assert Cat("Whiskers").speak() == "Whiskers says Meow!"
 # print("✓ Exercise 4 passed!")
 ```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class Animal:
+    sound = "..."
+
+    def __init__(self, name: str):
+        self.name = name
+
+    def speak(self) -> str:
+        return f"{self.name} says {self.sound}"
+
+
+class Dog(Animal):
+    sound = "Woof!"
+
+
+class Cat(Animal):
+    sound = "Meow!"
+```
+
+</details>
 
 ### Exercise 5: Dataclass with Validation
 
@@ -1772,6 +1972,25 @@ class ProductEx5:
 #     print("✓ Exercise 5 passed!")
 ```
 
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class ProductEx5:
+    name: str
+    price: float
+    stock: int
+
+    def __post_init__(self):
+        if self.price < 0:
+            raise ValueError("Price cannot be negative")
+```
+
+</details>
+
 ### Exercise 6: Make it Iterable
 
 Add `__len__` and `__iter__` to this `TaskList` class.
@@ -1786,10 +2005,10 @@ Add `__len__` and `__iter__` to this `TaskList` class.
 class TaskList:
     def __init__(self):
         self._tasks = []
-    
+
     def add(self, task: str):
         self._tasks.append(task)
-    
+
     # TODO: Add __len__
     # TODO: Add __iter__
 
@@ -1801,6 +2020,26 @@ class TaskList:
 # assert list(tl) == ["Buy milk", "Call mom"]
 # print("✓ Exercise 6 passed!")
 ```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class TaskList:
+    def __init__(self):
+        self._tasks = []
+
+    def add(self, task: str):
+        self._tasks.append(task)
+
+    def __len__(self) -> int:
+        return len(self._tasks)
+
+    def __iter__(self):
+        return iter(self._tasks)
+```
+
+</details>
 
 ### Exercise 7: Composition - Library System
 
@@ -1831,6 +2070,31 @@ class Library:
 # print("✓ Exercise 7 passed!")
 ```
 
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class BookEx7:
+    title: str
+    author: str
+
+
+class Library:
+    def __init__(self):
+        self._books: list[BookEx7] = []
+
+    def add_book(self, book: BookEx7) -> None:
+        self._books.append(book)
+
+    def find_by_author(self, name: str) -> list[BookEx7]:
+        return [b for b in self._books if name.lower() in b.author.lower()]
+```
+
+</details>
+
 ### Exercise 8: Implement `__eq__` and `__hash__`
 
 Make `Student` comparable by student_id and usable in sets.
@@ -1838,3 +2102,63 @@ Make `Student` comparable by student_id and usable in sets.
 **Hint**: Two students are equal if they have the same student_id.
 
 **Expected**: `Student("Alice", 1) == Student("Alice Smith", 1)` → True
+
+
+```python
+# Exercise 8: Your code here
+class StudentEx8:
+    def __init__(self, name: str, student_id: int):
+        self.name = name
+        self.student_id = student_id
+
+    # TODO: Add __eq__ (compare by student_id)
+    # TODO: Add __hash__ (hash the student_id)
+
+# Test:
+# assert StudentEx8("Alice", 1) == StudentEx8("Alice Smith", 1)
+# assert StudentEx8("Alice", 1) != StudentEx8("Bob", 2)
+# assert len({StudentEx8("Alice", 1), StudentEx8("Alice Smith", 1)}) == 1
+# print("✓ Exercise 8 passed!")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class StudentEx8:
+    def __init__(self, name: str, student_id: int):
+        self.name = name
+        self.student_id = student_id
+
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, StudentEx8):
+            return NotImplemented
+        return self.student_id == other.student_id
+
+    def __hash__(self) -> int:
+        return hash(self.student_id)
+```
+
+</details>
+
+---
+
+## Summary & Cheat Sheet
+
+| Topic | Remember this |
+|---|---|
+| Objects & references | Variables are names pointing to objects. `is` = same object, `==` = same value. |
+| Classes | `class Name:` + `__init__(self, ...)`. `self` is the object being created or used. |
+| Attributes | Instance attributes on `self`; class attributes in the class body, shared by all. |
+| Methods | instance (`self`), `@classmethod` (`cls`), `@staticmethod` (neither). |
+| Encapsulation | `_name` for internal data, `@property` + setter for validation. |
+| Inheritance | `class Child(Parent):`, `super().method()` to reuse the parent's version. |
+| Polymorphism | Same method name, different behaviour per class. |
+| LSP | A child must work anywhere the parent works. |
+| Composition | "has-a". Prefer it over inheritance. |
+| Dataclasses | `@dataclass`, `frozen=True`, `field(default_factory=list)`, `__post_init__`. |
+| Dunder methods | `__repr__`, `__str__`, `__len__`, `__iter__`, `__contains__`, `__getitem__`, `__eq__`, `__lt__`, `__hash__`. |
+
+### What's Next
+
+The next notebook, **Design Patterns (SOLID)**, builds directly on this one. The discount strategies from the mini-project are your first taste of the *Strategy* pattern and the *Open/Closed* principle.

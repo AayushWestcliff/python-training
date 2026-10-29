@@ -1,35 +1,51 @@
 # Python Bindings: Connecting Python to C/C++
 
-> *"Python is great for prototyping and glue code, but when you need raw speed, you call C."*
-
----
+Python is quick to write but slow to run. C and C++ are the opposite. In this notebook you'll learn the main ways to call C and C++ code from Python, so you can get the best of both: write most of your program in Python and hand the heavy lifting to compiled code.
 
 ### Learning Objectives
 
-By the end of this notebook, you will be able to:
+By the end of this notebook you will be able to:
 
-1.  **Explain** what Python bindings are and why they matter
-2.  **Use** `ctypes` to call C functions from Python
-3.  **Use** `cffi` as a modern alternative to `ctypes`
-4.  **Write** C extension modules using the Python C API
-5.  **Use** `pybind11` to create Python bindings for C++ code
-6.  **Use** Cython to write high-performance Python extensions
-7.  **Compare** different binding approaches and choose the right one for a given scenario
+1. Explain what Python bindings are and why libraries like NumPy use them
+2. Call C functions from Python with `ctypes`
+3. Use `cffi` in ABI mode (load a library) and API mode (compile C code)
+4. Write a small C extension module with the Python C API
+5. Expose C++ functions and classes to Python with `pybind11`
+6. Speed up Python code with Cython type declarations
+7. Pass structs and callbacks between Python and C
+8. Pick the right binding approach for a given job
+
+### Prerequisites
+
+- Python 3.10 or newer, and comfort with functions and classes
+- Basic C: types, pointers, arrays and how to compile a file
+- A **C/C++ compiler**:
+    - **macOS:** run `xcode-select --install`. This gives you `clang`; the `gcc` and `c++` commands used below are aliases for it.
+    - **Linux:** install `gcc`, `g++` and the Python headers, e.g. `sudo apt install build-essential python3-dev`.
+    - **Windows:** the easiest path is WSL (then follow the Linux steps). For native Windows you need MinGW-w64 `gcc` for the `ctypes`/`cffi` examples and the "Microsoft C++ Build Tools" for extension modules. The `!gcc` / `!c++` commands here are written for macOS and Linux.
+- Python packages: `cffi`, `pybind11`, `cython` and `setuptools` (the install cells below take care of them)
+
+### How to Use This Notebook
+
+- Run the cells **from top to bottom**. Later cells reuse libraries and variables built earlier (`lib_name`, `ctypes_lib`, ...).
+- Cells starting with `%%writefile` save C/C++ source to disk; the cell after usually compiles it. All generated files land in the notebook's folder, and the **Cleanup** section at the end removes them.
+- **Try it** and **Exercise** cells are for you. Write your answer first, then open *Show solution* to compare.
+- Each section ends with a **Quick recap**. Read only the recaps when revising before an exam.
 
 ---
 
 ## Why Python Bindings?
 
----
+Python is easy to write, but a pure Python loop is often 10 to 100 times slower than the same loop in C. A **binding** is the glue that lets Python call code written in another language. With bindings you can:
 
-Python is powerful and easy to write, but it's **slow** compared to compiled languages like C and C++. Python bindings let you:
-
-- **Speed up** performance-critical code (numerical computation, image processing)
-- **Reuse** existing C/C++ libraries (OpenSSL, SQLite, system APIs)
-- **Access** hardware and OS features not available in pure Python
-- **Wrap** legacy codebases with a Pythonic interface
+- **Speed up** the slow parts of a program (number crunching, image processing)
+- **Reuse** existing C/C++ libraries instead of rewriting them (OpenSSL, SQLite, system APIs)
+- **Reach** hardware and operating-system features that pure Python can't
+- **Wrap** an old C codebase in a friendly Python interface
 
 ### Real-World Examples
+
+You've probably already used bindings without noticing:
 
 | Python Library | Underlying C/C++ Code            |
 |----------------|----------------------------------|
@@ -38,8 +54,6 @@ Python is powerful and easy to write, but it's **slow** compared to compiled lan
 | Pillow (PIL)   | C image decoding libraries       |
 | sqlite3        | SQLite C library                 |
 | OpenCV (cv2)   | C++ computer vision library      |
-
----
 
 ### How Python Talks to C/C++
 
@@ -56,13 +70,9 @@ Python is powerful and easy to write, but it's **slow** compared to compiled lan
  Hardware (CPU, GPU, etc.)
 ```
 
-The **binding layer** translates between Python objects and C/C++ data types.
+The binding layer's job is translation: it turns Python objects into C values on the way in, and C values back into Python objects on the way out.
 
----
-
-## Overview of Binding Approaches
-
----
+### Overview of Binding Approaches
 
 | Approach | Language | Difficulty | Use Case |
 |----|----|----|----|
@@ -73,28 +83,33 @@ The **binding layer** translates between Python objects and C/C++ data types.
 | Cython | C/C++ | Medium | Write C extensions using Python-like syntax |
 | SWIG | C/C++ | Medium | Auto-generate bindings for multiple languages |
 
+We'll go through them roughly in this order, from "no compiling Python-side at all" to "build a real extension module".
+
+**Quick recap**
+
+- A binding lets Python call compiled C/C++ code.
+- We use bindings for speed, to reuse existing libraries, and to reach OS/hardware features.
+- Many popular libraries (NumPy, Pillow, sqlite3) are thin Python layers over C or C++.
+
 ---
 
-## 1. `ctypes` -- Calling C from Python (No Compilation Needed)
+## 1. `ctypes`: Calling C from Python
 
----
+`ctypes` ships with Python, so there's nothing to install. It loads a **shared library** (`.so` on Linux, `.dylib` on macOS, `.dll` on Windows) and lets you call its functions directly.
 
-`ctypes` is a **built-in** Python module. It lets you load shared libraries (`.so` on Linux, `.dll` on Windows, `.dylib` on macOS) and call their functions directly.
+Things to know before we start:
 
-### Key Concepts
-
-- No need to write any C code yourself -- just load existing libraries
-- You must manually specify argument types and return types
-- Part of Python's standard library (no `pip install` needed)
+- The C code must already be compiled. `ctypes` doesn't compile anything for you.
+- You have to tell `ctypes` the argument types and return type of each function. It can't read C header files.
+- If you get the types wrong, you get wrong answers or a crash, not a friendly error.
 
 ### 1.1 Creating a Simple C Library
 
-Let's start by writing a small C file and compiling it into a shared library.
+First we need a C library to call. The next cell saves a small C file with five functions; the one after compiles it into a shared library.
 
 
 ```python
-# Step 1: Write a C source file
-c_code = r"""
+%%writefile mylib.c
 #include <stdio.h>
 #include <math.h>
 
@@ -130,16 +145,15 @@ const char* greet(const char* name) {
     snprintf(buffer, sizeof(buffer), "Hello, %s! Welcome from C.", name);
     return buffer;
 }
-"""
 
-with open("mylib.c", "w") as f:
-    f.write(c_code)
-
-print("C source file written: mylib.c")
 ```
 
-    C source file written: mylib.c
+    Writing mylib.c
 
+
+Now compile it. The command is slightly different on each operating system, so we pick it with `platform.system()` and remember the file name in `lib_name` for later cells.
+
+On macOS and Linux this is the same as typing `gcc -shared -fPIC -o mylib.so mylib.c` in a terminal. `-shared` asks for a library instead of a program, and `-fPIC` makes the code work no matter where in memory it gets loaded.
 
 
 ```python
@@ -174,6 +188,8 @@ else:
 
 ### 1.2 Loading and Calling C Functions with `ctypes`
 
+`ctypes.CDLL` loads the library. After that, every C function is available as an attribute of `lib`.
+
 
 ```python
 import ctypes
@@ -183,17 +199,20 @@ import os
 lib = ctypes.CDLL(os.path.abspath(lib_name))
 
 # --- Calling add(int, int) -> int ---
-# By default, ctypes assumes int arguments and int return
+# By default, ctypes assumes every argument and the return value are C ints
 result = lib.add(10, 25)
 print(f"add(10, 25) = {result}")
 
-factorial = lib.factorial(5)
-print(f"factorial(5) = {factorial}")
+# factorial really returns a long long, but ctypes doesn't know that yet.
+# For small results the int guess happens to work...
+print(f"factorial(5) = {lib.factorial(5)}")
 ```
 
     add(10, 25) = 35
     factorial(5) = 120
 
+
+`add` worked with no setup because "everything is an `int`" is exactly what `ctypes` assumes. As soon as a function uses other types, you must spell them out with `argtypes` (a list of argument types) and `restype` (the return type).
 
 
 ```python
@@ -224,7 +243,11 @@ for n in [5, 10, 20]:
     factorial(20) = 2432902008176640000
 
 
+**What just happened?** `factorial(20)` is about 2.4 × 10¹⁸, far too big for a 32-bit `int`. Because we set `restype = ctypes.c_longlong`, `ctypes` reads all 64 bits of the answer. Without that line, `factorial(20)` would silently come back as a wrong, truncated number. That's why the rule is: **always set `argtypes` and `restype`**, even when the default seems to work.
+
 ### 1.3 Working with Pointers and Arrays
+
+A C function that takes `double*` wants the address of a block of doubles. In `ctypes`, `ctypes.c_double * 5` is a *type* meaning "array of 5 doubles", and calling it creates one.
 
 
 ```python
@@ -250,7 +273,11 @@ print(f"After:  {list(data)}")
     After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 
 
+The C function changed our array **in place**: C received a pointer to the same memory that `data` uses, so no copy came back. This is how most C functions return large results.
+
 ### 1.4 Working with Strings
+
+C strings are just bytes ending in a zero byte, so on the Python side we pass `bytes` (`b"..."` or `.encode()`) and decode what comes back.
 
 
 ```python
@@ -274,6 +301,7 @@ print(greeting.decode("utf-8"))
 | `int`       | `c_int`          | `int`             |
 | `long`      | `c_long`         | `int`             |
 | `long long` | `c_longlong`     | `int`             |
+| `size_t`    | `c_size_t`       | `int`             |
 | `float`     | `c_float`        | `float`           |
 | `double`    | `c_double`       | `float`           |
 | `char`      | `c_char`         | `bytes` (1 char)  |
@@ -284,7 +312,7 @@ print(greeting.decode("utf-8"))
 
 ### 1.6 Calling System Libraries with `ctypes`
 
-You don't always need to write your own C code. You can call **system libraries** directly.
+You don't have to write your own C code to use `ctypes`. The C libraries that come with your operating system work too. Here we call `sqrt` and `pow` from the C math library.
 
 
 ```python
@@ -319,13 +347,17 @@ print(f"C pow(2, 10) = {libm.pow(2.0, 10.0)}")
     C pow(2, 10) = 1024.0
 
 
-### Try It: Use ctypes to call `strlen`
+`ctypes.util.find_library("m")` searches the system for the math library (`libm`). On some systems the math functions live inside the main C library instead, so we fall back to `ctypes.CDLL(None)`, which means "the C library this Python process is already using".
 
-Load the C standard library and call the `strlen` function to find the length of a string.
+### Try It: Call `strlen` with `ctypes`
 
-```bash
+Load the C standard library and call `strlen` to get the length of `b"Hello, World!"`.
+
+Hint: `strlen` takes a `const char*` and returns a `size_t`. On macOS and Linux, `ctypes.CDLL(None)` gives you the C library; on Windows use `ctypes.cdll.msvcrt`.
+
+
+```python
 # Your code here:
-# Hint: strlen takes a const char* and returns a size_t (use c_size_t)
 # libc = ctypes.CDLL(None)  # loads the default C library
 
 # libc.strlen.argtypes = [???]
@@ -334,46 +366,54 @@ Load the C standard library and call the `strlen` function to find the length of
 # print(f"strlen = {result}")
 ```
 
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
-# Your code here:
-# Hint: strlen takes a const char* and returns a size_t (use c_size_t)
-libc = ctypes.CDLL(None)  # loads the default C library
+libc = ctypes.CDLL(None)  # Windows: ctypes.cdll.msvcrt
 
 libc.strlen.argtypes = [ctypes.c_char_p]
 libc.strlen.restype = ctypes.c_size_t
 result = libc.strlen(b"Hello, World!")
-print(f"strlen = {result}")
+print(f"strlen = {result}")  # strlen = 13
 ```
 
-    strlen = 13
+</details>
 
+**Quick recap**
+
+- `ctypes` is in the standard library and calls functions in an already-compiled shared library.
+- Always set `argtypes` and `restype`; the default assumes `int` everywhere and can silently give wrong results.
+- Arrays are made with `ctypes.c_double * n`; C can modify them in place.
+- C strings are `bytes` in Python: encode before calling, decode the result.
 
 ---
 
-## 2. `cffi` -- C Foreign Function Interface
+## 2. `cffi`: C Foreign Function Interface
 
----
+`cffi` does the same job as `ctypes`, but you describe the C functions using **real C declarations** instead of `ctypes` objects. It has two modes:
 
-`cffi` is a more modern and Pythonic alternative to `ctypes`. It has two modes:
+- **ABI mode:** load an existing shared library at runtime, just like `ctypes`.
+- **API mode:** give `cffi` some C source code; it compiles it into a Python module for you.
 
-- **ABI mode** (like ctypes): Load and call shared libraries at runtime
-- **API mode**: Compile C code at build time for better performance and safety
+Why people often prefer `cffi` over `ctypes`:
 
-### Why `cffi` over `ctypes`?
-
-- You write C declarations in actual C syntax (not ctypes wrappers)
-- Better error messages
-- Supports both ABI and API (compiled) mode
-- Used by PyPy for its C extension support
+- You can copy declarations straight from a C header file.
+- Error messages are clearer.
+- API mode lets the C compiler check your types, which catches many mistakes before they turn into crashes.
+- It's the recommended way to call C from PyPy.
 
 
 ```python
 # Install cffi if needed
-!pip install cffi -q
+%pip install cffi -q
 ```
 
-### 2.1 ABI Mode -- Loading Existing Libraries
+We use `%pip` rather than `!pip` so the package is installed into the same Python environment the notebook kernel is running in.
+
+### 2.1 ABI Mode: Loading Existing Libraries
+
+Here we load the same `mylib` we compiled for `ctypes`. Notice there is no `argtypes`/`restype` setup: the `cdef` declarations already contain all the type information.
 
 
 ```python
@@ -421,6 +461,10 @@ print(f"After:  {[arr[i] for i in range(5)]}")
     After:  [1.0, 4.0, 9.0, 16.0, 25.0]
 
 
+`ffi.new("double[5]", [...])` allocates a C array and fills it. `cffi` frees it automatically when `arr` is no longer used.
+
+When a C function returns `char*`, `cffi` gives you a pointer object. `ffi.string()` copies the characters into a Python `bytes` object:
+
 
 ```python
 # Working with strings in cffi
@@ -431,9 +475,9 @@ print(ffi.string(result).decode("utf-8"))
     Hello, Student! Welcome from C.
 
 
-### 2.2 API Mode -- Compile C Code Inline
+### 2.2 API Mode: Compile C Code Inline
 
-API mode compiles C code at build time, giving you better performance and type safety.
+In API mode, `cffi` writes a small C wrapper around your code, runs the compiler and produces a real extension module (here called `_math_helpers`). The `cdef` part says what Python can see; `set_source` holds the actual C code. The compiler output below is long, and that's normal.
 
 
 ```python
@@ -474,24 +518,23 @@ ffi_builder.compile(verbose=True)
 ```
 
     generating ./_math_helpers.c
-    the current directory is '/Users/aayush/Documents/Kings/python-training/prg400'
-    
-    
-    ld: warning: duplicate -rpath '/Users/aayush/micromamba/envs/stats/lib' ignored
-    
-    
-    
-    
-    
-    '/Users/aayush/Documents/Kings/python-training/prg400/_math_helpers.cpython-310-darwin.so'
+    the current directory is '/path/to/prg400'
 
+
+
+
+
+    '/path/to/prg400/_math_helpers.cpython-312-darwin.so'
+
+
+
+The build produced a file like `_math_helpers.cpython-312-darwin.so` in the current folder, so we can import it like any other module. It gives us its own `ffi` and `lib` objects.
+
+> **Heads up:** this replaces the `ffi` and `lib` names from the ABI-mode example above. That's why later cells reload `mylib` under a new name.
 
 
 ```python
-import sys
-
-sys.path.append(os.path.abspath("../lib"))
-# Now import and use the compiled module
+# Import and use the compiled module (it was built in the current folder)
 from _math_helpers import ffi, lib
 
 print(f"fibonacci(10) = {lib.fibonacci(10)}")
@@ -518,39 +561,46 @@ print(f"distance(1,2 -> 4,6) = {lib.distance(1, 2, 4, 6):.4f}")
 | PyPy support | Limited | Excellent |
 | Learning curve | Lower | Slightly higher |
 
+**Quick recap**
+
+- `cffi` describes C functions with ordinary C declarations in `ffi.cdef()`.
+- ABI mode (`ffi.dlopen`) loads an existing library, like `ctypes`.
+- API mode (`set_source` + `compile`) builds a real extension module from C source.
+- Use `ffi.new()` to allocate C data and `ffi.string()` to read C strings.
+
 ---
 
-## 3. Python C API -- Writing Extension Modules
+## 3. Python C API: Writing Extension Modules
 
----
+The **Python C API** is the C interface CPython itself is built on. With it you write C functions that take and return real Python objects. NumPy's core and many of the standard library modules (like `math`) are written this way.
 
-The **Python C API** lets you write C code that directly creates Python objects. This is how CPython itself is built and how many high-performance libraries (like NumPy) work internally.
+Use it when:
 
-### When to Use the C API
+- you need full control and the best possible performance
+- you're building a library that needs tight integration with Python's internals
 
-- You need **maximum performance** and control
-- You're building a library that will be distributed to many users
-- You want tight integration with Python's internals
+The downsides:
 
-### Trade-offs
+- It's the most work: lots of boilerplate for every function.
+- You manage memory yourself with reference counts (`Py_INCREF` / `Py_DECREF`).
+- Mistakes cause memory leaks or segfaults.
+- It only works with CPython (not PyPy and friends).
 
-- Most complex approach -- lots of boilerplate
-- Manual reference counting (`Py_INCREF` / `Py_DECREF`)
-- Easy to introduce memory leaks or segfaults
-- Only works with CPython (not PyPy, Jython, etc.)
+In practice you'll usually reach for `pybind11` or Cython instead. We still look at the C API because every other tool generates this kind of code for you behind the scenes.
 
 ### 3.1 Anatomy of a C Extension Module
 
 A C extension module has three parts:
 
-1.  **Function implementations** -- the actual C functions that do work
-2.  **Method table** -- maps Python function names to C function pointers
-3.  **Module definition** -- describes the module to Python
+1. **Function implementations:** the C functions that do the work
+2. **Method table:** maps Python function names to those C functions
+3. **Module definition:** describes the module to Python, plus an init function named `PyInit_<modulename>`
+
+Read through the comments in the next cell; they walk through each part.
 
 
 ```python
-# Let's write a complete C extension module
-c_extension_code = r"""
+%%writefile mymodule.c
 #include <Python.h>
 
 // ========================================
@@ -655,21 +705,17 @@ static struct PyModuleDef mymodule = {
 PyMODINIT_FUNC PyInit_mymodule(void) {
     return PyModule_Create(&mymodule);
 }
-"""
 
-with open("mymodule.c", "w") as f:
-    f.write(c_extension_code)
-
-print("C extension source written: mymodule.c")
 ```
 
-    C extension source written: mymodule.c
+    Writing mymodule.c
 
+
+To compile an extension module we need the right compiler flags and the Python header files. `setuptools` knows all of this, so we write a tiny `setup.py` and let it do the work.
 
 
 ```python
-# Write a setup.py to build the extension
-setup_code = """
+%%writefile setup.py
 from setuptools import setup, Extension
 
 module = Extension(
@@ -683,29 +729,29 @@ setup(
     description='A sample C extension module',
     ext_modules=[module],
 )
-"""
 
-with open("setup.py", "w") as f:
-    f.write(setup_code)
-
-print("setup.py written")
 ```
 
-    setup.py written
+    Writing setup.py
 
 
 
 ```python
-# Build the extension module
-!python setup.py build_ext --inplace 2>&1 | tail -5
+import sys
+
+# Build the extension module in the current folder.
+# {sys.executable} makes sure we use the same Python as this notebook.
+!{sys.executable} setup.py build_ext --inplace 2>&1 | tail -5
 ```
 
+    running build_ext
     building 'mymodule' extension
-    clang -Wno-unused-result -Wsign-compare -Wunreachable-code -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -fPIC -O2 -isystem /Users/aayush/micromamba/envs/stats/include -arch arm64 -I/Users/aayush/micromamba/envs/stats/include/python3.10 -c mymodule.c -o build/temp.macosx-11.0-arm64-cpython-310/mymodule.o
-    clang -bundle -undefined dynamic_lookup -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib -Wl,-rpath,/Users/aayush/micromamba/envs/stats/lib -L/Users/aayush/micromamba/envs/stats/lib build/temp.macosx-11.0-arm64-cpython-310/mymodule.o -o build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so
-    ld: warning: duplicate -rpath '/Users/aayush/micromamba/envs/stats/lib' ignored
-    copying build/lib.macosx-11.0-arm64-cpython-310/mymodule.cpython-310-darwin.so ->
+    clang -fno-strict-overflow -Wsign-compare -Wunreachable-code -fno-common -dynamic -DNDEBUG -g -O3 -Wall -I/path/to/prg400/venv/include -I/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12 -c mymodule.c -o build/temp.macosx-26.0-arm64-cpython-312/mymodule.o
+    clang -bundle -undefined dynamic_lookup build/temp.macosx-26.0-arm64-cpython-312/mymodule.o -o build/lib.macosx-26.0-arm64-cpython-312/mymodule.cpython-312-darwin.so
+    copying build/lib.macosx-26.0-arm64-cpython-312/mymodule.cpython-312-darwin.so -> 
 
+
+`build_ext --inplace` puts the compiled module (e.g. `mymodule.cpython-312-darwin.so`) right next to the notebook, so a normal `import` finds it.
 
 
 ```python
@@ -723,6 +769,10 @@ print(f"mymodule.sum_list([1, 2.5, 3, 4.5]) = {mymodule.sum_list([1, 2.5, 3, 4.5
     mymodule.fibonacci(50) = 12586269025
     mymodule.sum_list([1, 2.5, 3, 4.5]) = 11.0
 
+
+Note that `fibonacci(50)` is 12,586,269,025, bigger than a 32-bit `int` can hold. It works because the C code uses `long long` and returns it with `PyLong_FromLongLong`.
+
+Errors raised in C with `PyErr_SetString` arrive in Python as normal exceptions:
 
 
 ```python
@@ -748,7 +798,9 @@ except TypeError as e:
     Caught error: List must contain only numbers
 
 
-### 3.2 PyArg_ParseTuple Format Codes
+### 3.2 `PyArg_ParseTuple` Format Codes
+
+`PyArg_ParseTuple(args, "ii", &a, &b)` reads the Python arguments into C variables. The string says what types to expect:
 
 | Code | C Type                        | Python Type                  |
 |------|-------------------------------|------------------------------|
@@ -760,13 +812,13 @@ except TypeError as e:
 | `s`  | `const char*`                 | `str`                        |
 | `O`  | `PyObject*`                   | any object                   |
 | `O!` | `PyObject*` (with type check) | specific type                |
-| `|`  | --                            | marks start of optional args |
+| <code>&#124;</code> | (none)             | marks the start of optional arguments |
 
 ### 3.3 Reference Counting: The Critical Concept
 
-In the C API, **you** manage memory. Every Python object has a reference count.
+Every Python object keeps a count of how many places refer to it. When the count drops to zero, the object is freed. In Python this happens for you; in the C API **you** keep the count correct.
 
-```bash
+```c
 // You got a NEW reference (you own it) -- must DECREF when done
 PyObject* result = PyLong_FromLong(42);
 // ... use result ...
@@ -777,35 +829,51 @@ PyObject* item = PyList_GetItem(list, 0);  // Borrowed!
 // ... use item but do NOT Py_DECREF(item) ...
 ```
 
-**Rules:** - Functions that **create** objects give you a **new** reference (you must DECREF) - Functions that **get** items from containers give you a **borrowed** reference (don't DECREF) - When returning an object from your function, you transfer ownership to the caller - `Py_INCREF` if you want to keep a borrowed reference alive
+The rules:
+
+- Functions that **create** objects give you a **new** reference. You must `Py_DECREF` it when you're done (or return it).
+- Functions that **get** items from containers usually give you a **borrowed** reference. Don't `Py_DECREF` it.
+- When your function returns an object, ownership passes to the caller.
+- If you want to keep a borrowed reference for later, call `Py_INCREF` on it first.
+
+Get this wrong in one direction and you leak memory; get it wrong in the other and Python frees an object you're still using.
+
+**Quick recap**
+
+- A C extension module has three parts: functions, a method table and a module definition with `PyInit_<name>`.
+- `PyArg_ParseTuple` converts Python arguments to C; `PyLong_From...` / `PyFloat_From...` convert results back.
+- Return `NULL` after `PyErr_SetString` to raise a Python exception.
+- New references must be released with `Py_DECREF`; borrowed references must not.
+- Build with `setuptools` (`setup.py build_ext --inplace`).
 
 ---
 
-## 4. `pybind11` -- Modern C++ Bindings
+## 4. `pybind11`: Modern C++ Bindings
 
----
+`pybind11` is a **header-only** C++ library for exposing C++ code to Python. "Header-only" means there's nothing to link: you `#include` it and compile. Compared with the raw C API, it removes almost all the boilerplate.
 
-`pybind11` is a **header-only** C++ library that makes it easy to expose C++ code to Python. It's inspired by Boost.Python but is much lighter and uses modern C++11/14/17 features.
+What you get:
 
-### Why `pybind11`?
+- Short, readable binding code
+- Automatic conversions between STL containers and Python types (`std::vector` ↔ `list`, `std::string` ↔ `str`, ...)
+- Support for classes, inheritance, overloading and lambdas
+- C++ exceptions turned into Python exceptions
 
-- Clean, modern C++ syntax
-- Automatic type conversions (STL containers \<-> Python types)
-- Supports classes, inheritance, overloading, lambdas
-- Header-only -- easy to integrate
-- The **most popular** way to create C++ bindings today
+It's currently the most popular way to bind C++ code (its successor `nanobind` works the same way).
 
 
 ```python
 # Install pybind11
-!pip install pybind11 -q
+%pip install pybind11 -q
 ```
 
 ### 4.1 A Simple pybind11 Module
 
+All the binding code lives in the `PYBIND11_MODULE` block at the bottom. Everything above it is ordinary C++ that knows nothing about Python.
+
 
 ```python
-cpp_code = r"""
+%%writefile mathtools.cpp
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>  // For automatic STL <-> Python conversions
 #include <string>
@@ -916,39 +984,44 @@ PYBIND11_MODULE(mathtools, m) {
         .def("__add__", &Vector2D::operator+)  // Python operator overloading!
         .def("__repr__", &Vector2D::repr);
 }
-"""
 
-with open("mathtools.cpp", "w") as f:
-    f.write(cpp_code)
-
-print("C++ source written: mathtools.cpp")
 ```
 
-    C++ source written: mathtools.cpp
+    Writing mathtools.cpp
 
 
-```bash
-# Build using pybind11's build helpers
-import pybind11
+### 4.2 Compiling the Module
+
+We compile with the C++ compiler directly. It needs two include folders (Python's headers and pybind11's headers), and the output file must end with Python's extension suffix (e.g. `.cpython-312-darwin.so`) so `import` can find it.
+
+On macOS we also pass `-undefined dynamic_lookup`, which says "the Python functions you can't find yet will be provided by the Python process that loads this module". Linux doesn't need it.
+
+
+```python
+import platform
+import sys
 import sysconfig
 
-# Get compiler flags
-include_flags = !python -m pybind11 --includes
-include_flags = include_flags[0]
+import pybind11
 
-ext_suffix = sysconfig.get_config_var('EXT_SUFFIX')
+include_flags = f"-I{sysconfig.get_paths()['include']} -I{pybind11.get_include()}"
+ext_suffix = sysconfig.get_config_var("EXT_SUFFIX")
+mac_flags = "-undefined dynamic_lookup" if platform.system() == "Darwin" else ""
 
 print(f"Include flags: {include_flags}")
 print(f"Extension suffix: {ext_suffix}")
 
 # Compile
-!c++ -O2 -shared -std=c++17 -fPIC -undefined dynamic_lookup {include_flags} mathtools.cpp -o mathtools{ext_suffix}
+!c++ -O2 -shared -std=c++17 -fPIC {mac_flags} {include_flags} mathtools.cpp -o mathtools{ext_suffix}
 ```
 
-```
-Include flags: -I/Users/aayush/micromamba/envs/stats/include/python3.10 -I/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/pybind11/include
-Extension suffix: .cpython-310-darwin.so
-```
+    Include flags: -I/opt/homebrew/opt/python@3.12/Frameworks/Python.framework/Versions/3.12/include/python3.12 -I/path/to/prg400/venv/lib/python3.12/site-packages/pybind11/include
+    Extension suffix: .cpython-312-darwin.so
+
+
+No output after the two `print`s means the compile succeeded. For a real project you'd let `setuptools` or `scikit-build` run this command for you, but it's worth seeing it once by hand.
+
+Now the module behaves like any Python module, including keyword and default arguments:
 
 
 ```python
@@ -983,6 +1056,10 @@ print(f"dot_product([1,2,3], [4,5,6]) = {dp}")
     Type: <class 'list'>
     dot_product([1,2,3], [4,5,6]) = 32.0
 
+
+`range_vec` returned a C++ `std::vector<int>`, and `pybind11` turned it into a normal Python `list`. Going the other way, our Python lists became `std::vector<double>` for `dot_product`.
+
+C++ classes work too. Because we bound `operator+` as `__add__` and `repr()` as `__repr__`, `Vector2D` objects support `+` and print nicely:
 
 
 ```python
@@ -1032,37 +1109,43 @@ except RuntimeError as e:
     Caught: Cannot normalize zero vector
 
 
+A `std::runtime_error` thrown in C++ arrives in Python as a `RuntimeError`, with the same message.
+
+**Quick recap**
+
+- `pybind11` is a header-only C++ library; all binding code lives in `PYBIND11_MODULE`.
+- `m.def(...)` binds functions; `py::arg` gives keyword and default arguments.
+- `py::class_<T>` binds classes, including attributes, methods and operators.
+- STL containers and C++ exceptions are converted to Python types automatically.
+
 ---
 
-## 5. Cython -- Python-like Syntax, C-like Speed
+## 5. Cython: Python-like Syntax, C-like Speed
 
----
+Cython is a language that is almost Python, plus optional C type declarations (`cdef int i`). Cython translates your code into C and compiles it into an extension module.
 
-Cython is a **superset of Python** that adds optional C type declarations. You write `.pyx` files that look almost like Python but compile to C.
+Why use it:
 
-### Why Cython?
+- It's the easiest way to speed up existing Python code: start with plain Python, then add types to the slow parts.
+- It can also call C and C++ libraries directly.
+- Big projects such as scikit-learn, pandas and lxml use it.
 
-- Easiest migration path from pure Python to C speed
-- Write Python-like code with type annotations for speed
-- Can also wrap existing C/C++ libraries
-- Used by major projects: scikit-learn, pandas, lxml
+In Jupyter, the `%%cython` cell magic compiles a cell for you, so you don't need a `setup.py`.
 
 
 ```python
-!pip install cython -q
+%pip install cython -q
 ```
 
 
 ```python
-# Cython can be used directly in Jupyter with the %%cython magic
+# Enable the %%cython magic
 %load_ext Cython
 ```
 
-    The Cython extension is already loaded. To reload it, use:
-      %reload_ext Cython
-
-
 ### 5.1 Basic Cython: Adding Type Declarations
+
+Let's start with a pure Python function that finds primes, and time it.
 
 
 ```python
@@ -1083,12 +1166,18 @@ def python_primes(n):
 %timeit python_primes(10000)
 ```
 
-    3.09 ms ± 77.7 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+    2.33 ms ± 18.3 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 
 
-```bash
+Now the Cython version. The algorithm is identical; we only declare the C types of the variables.
+
+We take the square root with C's `sqrt` and cast it to an `int` with `<int>`. Watch out: writing `candidate ** 0.5` with a C `int` here does *not* behave like Python, and in an earlier version of this notebook it quietly reported 25 and 49 as primes.
+
+
+```cython
 %%cython
-# Cython version -- almost the same code, but with type declarations!
+# Cython version: almost the same code, but with type declarations!
+from libc.math cimport sqrt
 
 def cython_primes(int n):
     """Find all primes up to n using trial division (Cython)."""
@@ -1098,7 +1187,7 @@ def cython_primes(int n):
 
     for candidate in range(2, n + 1):
         is_prime = True
-        for divisor in range(2, int(candidate ** 0.5) + 1):
+        for divisor in range(2, <int>sqrt(candidate) + 1):
             if candidate % divisor == 0:
                 is_prime = False
                 break
@@ -1116,31 +1205,37 @@ print("Pure Python:")
 print("\nCython:")
 %timeit cython_primes(10000)
 
-# Verify correctness
-# assert python_primes(100) == cython_primes(100)
-print(python_primes(100))
+# Always check that the fast version gives the same answer
+assert python_primes(10000) == cython_primes(10000)
 print(cython_primes(100))
 print(f"\nResults match! Found {len(cython_primes(100))} primes up to 100")
 ```
 
     Pure Python:
-    3.03 ms ± 146 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+
+
+    2.34 ms ± 16.8 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
     
     Cython:
-    438 μs ± 11.7 μs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
-    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-    [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 37, 41, 43, 47, 49, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
-    
-    Results match! Found 27 primes up to 100
 
+
+    76 μs ± 683 ns per loop (mean ± std. dev. of 7 runs, 10,000 loops each)
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    
+    Results match! Found 25 primes up to 100
+
+
+**What just happened?** The typed loop variables let Cython turn the inner loop into plain C arithmetic with no Python objects involved, which is where the speedup comes from. The `assert` matters just as much as the timing: a fast function that gives wrong answers is useless. Your exact timings will differ from your neighbour's.
 
 ### 5.2 Cython with C Functions
 
-```bash
+`cimport` (note the **c**) imports C-level declarations. Here we use C's `sqrt`, `sin`, `cos` and `M_PI` straight from `libc.math`.
+
+
+```cython
 %%cython
 # Cython can call C standard library functions directly!
 from libc.math cimport sqrt, sin, cos, M_PI
-from libc.stdlib cimport malloc, free
 
 def fast_distance(double x1, double y1, double x2, double y2):
     """Compute Euclidean distance using C's sqrt."""
@@ -1185,7 +1280,10 @@ for i, (x, y) in enumerate(points):
 
 ### 5.3 Wrapping Existing C Code with Cython
 
-```bash
+To call a C function Cython doesn't know about yet, you declare it in a `cdef extern from` block. It works like a header file: you tell Cython the function names and their types.
+
+
+```cython
 %%cython
 # Cython can wrap external C functions
 # First, declare the C interface (like a header file)
@@ -1228,15 +1326,26 @@ print(f"strcmp: {c_string_compare(b'zebra', b'aardvark')}")
     strcmp: b'zebra' > b'aardvark'
 
 
+`strcmp` only tells us the order of two strings: negative, zero or positive. The Python wrapper turns that number into a readable message.
+
+**Quick recap**
+
+- Cython is Python plus optional C type declarations (`cdef int x`), compiled to C.
+- In Jupyter, `%load_ext Cython` and then `%%cython` compiles a cell.
+- Typed loops run as plain C and can be many times faster than Python.
+- `cimport` and `cdef extern from` give direct access to C functions.
+- Always check that the optimised version gives the same results as the original.
+
 ---
 
 ## 6. Performance Comparison
 
----
+Let's benchmark several approaches on the same task: the sum of squares of 100,000 numbers.
 
-Let's benchmark all approaches on the same task: computing the sum of squares of a large list.
+First, the Cython version:
 
-```bash
+
+```cython
 %%cython
 def cython_sum_squares(list data):
     cdef double total = 0.0
@@ -1264,7 +1373,7 @@ def python_sum_squares(data):
     return total
 
 # --- ctypes version ---
-# Reload the ctypes library (lib was overwritten by the cffi API mode import above)
+# Reload mylib under a new name (`lib` now points at the cffi module from section 2)
 ctypes_lib = ctypes.CDLL(os.path.abspath(lib_name))
 ctypes_lib.square_array.argtypes = [ctypes.POINTER(ctypes.c_double), ctypes.c_int]
 ctypes_lib.square_array.restype = None
@@ -1307,26 +1416,46 @@ for name, func in approaches:
 
     Approach                     Time (ms)    Speedup
     --------------------------------------------------
-    Pure Python                    2.690ms       1.0x
-    Python built-in sum            2.276ms       1.2x
-    ctypes (C)                     8.426ms       0.3x
-    Cython                         0.608ms       4.4x
 
+
+    Pure Python                    2.096ms       1.0x
+
+
+    Python built-in sum            2.112ms       1.0x
+
+    
+
+
+    ctypes (C)                     7.709ms       0.3x
+    Cython                         0.527ms       4.0x
+
+
+**What just happened?** Two results usually surprise students:
+
+- **`ctypes` is the slowest**, even though the squaring happens in C. Converting 100,000 Python numbers into a C array (and summing them back in Python) costs far more than the C work itself. Crossing the Python/C boundary has a price, so bindings pay off when C does a lot of work per call, not when you shuttle data back and forth.
+- **Cython wins** because the whole loop, including reading the list, runs as compiled code.
+
+Your numbers will be different on your machine, but the ranking is usually the same.
+
+**Quick recap**
+
+- Calling C is not automatically faster: converting data between Python and C costs time.
+- Bindings pay off when each call does a lot of work in C.
+- Measure before and after optimising, and on realistic data.
 
 ---
 
 ## 7. Structures and Complex Data Types
 
----
-
-Real-world C/C++ code often uses structs. Let's see how each approach handles them.
+Real C code often groups data in structs. Here we use `ctypes` to pass structs to C.
 
 ### 7.1 Structs with `ctypes`
 
+First, a C library that works with two structs: a 3D point and a student record.
+
 
 ```python
-# Write a C library with structs
-struct_c_code = r"""
+%%writefile structs.c
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
@@ -1359,12 +1488,17 @@ typedef struct {
 void print_student(Student* s) {
     printf("Student: %s, Age: %d, GPA: %.2f\n", s->name, s->age, s->gpa);
 }
-"""
 
-with open("structs.c", "w") as f:
-    f.write(struct_c_code)
+```
 
-# Compile
+    Writing structs.c
+
+
+
+```python
+import platform
+
+# Compile (Linux needs -lm to link sqrt from the math library)
 if platform.system() == "Darwin":
     !gcc -shared -o structs.dylib -fPIC structs.c
     struct_lib_name = "structs.dylib"
@@ -1380,6 +1514,10 @@ print(f"Compiled: {struct_lib_name}")
 
     Compiled: structs.dylib
 
+
+On the Python side, a struct is a class that inherits from `ctypes.Structure` and lists its fields in `_fields_`. The fields must be in the **same order with the same types** as the C struct, because `ctypes` uses them to lay out the bytes in memory.
+
+`ctypes.byref(p1)` passes the address of `p1`, which is what a `Point3D*` parameter expects.
 
 
 ```python
@@ -1432,6 +1570,10 @@ print(f"Midpoint = {mid}")
     Midpoint = Point3D(2.5, 4.0, 3.0)
 
 
+`point_midpoint` doesn't return anything. It writes its answer into the `mid` struct we passed by reference, the same "output parameter" pattern as `square_array`.
+
+A fixed-size `char name[64]` becomes `ctypes.c_char * 64`, and we fill it with `bytes`:
+
 
 ```python
 # Using a struct with strings
@@ -1444,23 +1586,31 @@ student.age = 21
 student.gpa = 3.85
 
 slib.print_student(ctypes.byref(student))
+
+# The printf above writes to the C-level stdout; print from Python as well
+print(f"From Python: {student.name.decode()}, {student.age}, {student.gpa}")
 ```
 
-    Student: Alice Johnson, Age: 21, GPA: 3.85
+    From Python: Alice Johnson, 21, 3.85
 
+
+> The `printf` output comes from C, not from Python's `print`. Jupyter only captures Python's output, so the C line often appears in the terminal that started Jupyter instead of under the cell. That's why the cell also prints the fields from Python.
+
+**Quick recap**
+
+- Mirror a C struct with a `ctypes.Structure` subclass and a `_fields_` list in the same order as C.
+- Use `ctypes.byref(obj)` to pass a pointer to a struct.
+- Fixed-size C strings (`char name[64]`) become `ctypes.c_char * 64` and take `bytes`.
 
 ---
 
 ## 8. Callbacks: Passing Python Functions to C
 
----
-
-Sometimes C code needs to call back into Python. This is common in event-driven code, sorting algorithms, and numerical methods.
+Sometimes C needs to call *back* into Python: think of a sort that takes a comparison function, an event handler, or a numerical routine that needs "the function to integrate". In C this is done with a **function pointer**.
 
 
 ```python
-# Write C code that accepts function pointers
-callback_code = r"""
+%%writefile callbacks.c
 #include <stdio.h>
 
 // Type for a callback function: takes a double, returns a double
@@ -1482,10 +1632,15 @@ double integrate(MathFunc f, double a, double b, int n) {
     }
     return sum * h;
 }
-"""
 
-with open("callbacks.c", "w") as f:
-    f.write(callback_code)
+```
+
+    Writing callbacks.c
+
+
+
+```python
+import platform
 
 if platform.system() == "Darwin":
     !gcc -shared -o callbacks.dylib -fPIC callbacks.c
@@ -1502,6 +1657,8 @@ print(f"Compiled: {cb_lib_name}")
 
     Compiled: callbacks.dylib
 
+
+`ctypes.CFUNCTYPE(return_type, arg_types...)` creates a function-pointer type. Using it as a decorator wraps a Python function so C can call it like a normal C function.
 
 
 ```python
@@ -1570,13 +1727,22 @@ print(f"Integral of x^2 from 0 to 1 = {result:.6f} (expected: 0.333333)")
     Integral of x^2 from 0 to 1 = 0.333333 (expected: 0.333333)
 
 
+**What just happened?** `integrate` called our Python `sin_func` 10,001 times from inside C. Each call crosses from C back into Python, so callbacks are convenient but not fast.
+
+One more trap: keep a Python reference to every callback object (here the names `square`, `cube`, `sin_func`) for as long as C might call it. If Python garbage-collects it while C still holds the pointer, the program crashes.
+
+**Quick recap**
+
+- C uses function pointers for callbacks; `ctypes.CFUNCTYPE` builds the matching type.
+- Decorate a Python function with that type to pass it to C.
+- Every callback call crosses back into Python, so it's slow in tight loops.
+- Keep a reference to callback objects while C may still use them.
+
 ---
 
-## 9. SWIG -- Simplified Wrapper and Interface Generator
+## 9. SWIG: Simplified Wrapper and Interface Generator
 
----
-
-SWIG is a tool that **automatically generates** binding code for multiple languages (Python, Java, Ruby, etc.) from C/C++ header files.
+SWIG reads your C/C++ header files and **generates** binding code for many languages: Python, Java, Ruby and more. We won't run it here (it's a separate tool to install), but you should recognise it when you meet it in older projects.
 
 ### How SWIG Works
 
@@ -1598,13 +1764,13 @@ SWIG is a tool that **automatically generates** binding code for multiple langua
 
 ### When to Use SWIG
 
-- You have a large existing C/C++ codebase
-- You need bindings for multiple languages (not just Python)
-- You want auto-generated wrappers with minimal hand-written code
+- You have a large existing C/C++ codebase.
+- You need bindings for several languages, not just Python.
+- You want the wrappers generated with as little hand-written code as possible.
 
 ### SWIG Interface File Example
 
-```bash
+```c
 // mylib.i -- SWIG interface file
 %module mylib
 %{
@@ -1618,16 +1784,22 @@ double multiply(double a, double b);
 
 Then build with:
 
-    swig -python mylib.i
-    gcc -shared -fPIC -I/usr/include/python3.x mylib.c mylib_wrap.c -o _mylib.so
+```bash
+swig -python mylib.i
+gcc -shared -fPIC -I/usr/include/python3.x mylib.c mylib_wrap.c -o _mylib.so
+```
 
-SWIG is powerful but has a steeper learning curve and generates verbose wrapper code. For new projects, **pybind11** or **Cython** are generally preferred.
+SWIG works, but the generated code is large and hard to debug. For new Python-only projects, `pybind11` or Cython are usually a better choice.
+
+**Quick recap**
+
+- SWIG generates bindings from header files plus a small `.i` interface file.
+- Its strength is targeting many languages from one codebase.
+- For new Python-only projects, prefer `pybind11` or Cython.
 
 ---
 
 ## 10. Choosing the Right Approach
-
----
 
 ### Decision Flowchart
 
@@ -1657,74 +1829,180 @@ Do you already have a compiled C/C++ library (.so/.dll)?
 | Cython | Speeding up Python code incrementally | When you can't install Cython |
 | SWIG | Multi-language bindings, large codebases | Small projects |
 
+**Quick recap**
+
+- Existing C library with a few functions: `ctypes` or `cffi` ABI mode.
+- C++ code, especially classes: `pybind11`.
+- Slow Python code you want to speed up gradually: Cython.
+- The raw C API is for when you really need full control.
+
 ---
 
 ## 11. Best Practices and Common Pitfalls
 
----
-
 ### Do's
 
-- Always set `argtypes` and `restype` in ctypes (prevents segfaults)
-- Handle memory management carefully (who allocates? who frees?)
-- Test with small inputs before scaling up
-- Use `try/except` around C calls -- crashes in C can be hard to debug
-- Document the expected C types for each function
+- Always set `argtypes` and `restype` in `ctypes`. Wrong types cause wrong results or crashes.
+- Decide who allocates and who frees every piece of memory, and write it down.
+- Test with small inputs before scaling up.
+- Wrap calls in `try/except` where the binding raises Python exceptions. (A real crash inside C can't be caught; it kills the kernel.)
+- Document the C types each function expects.
 
 ### Don'ts
 
-- Don't forget that C strings are bytes (`b"hello"`) not Python strings
-- Don't pass Python objects to C functions that expect C types
-- Don't ignore return values that indicate errors
-- Don't assume the same binary works across OS/architecture
-- Don't use `ctypes` for performance-critical tight loops (overhead per call)
+- Don't forget that C strings are `bytes` (`b"hello"`), not `str`.
+- Don't pass Python objects to C functions that expect C types.
+- Don't ignore return values that signal errors.
+- Don't assume a compiled library works on another OS or CPU architecture. Recompile it there.
+- Don't call C through `ctypes` inside a tight Python loop; the per-call overhead adds up.
 
 ### Memory Safety
 
+`ctypes` arrays check their index on the **Python** side. C does no such check, so the real danger is giving C the wrong size.
+
 
 ```python
-# DANGEROUS: buffer overflow!
 arr = (ctypes.c_int * 5)()
-arr[10] = 42  # Writing past the end -- undefined behavior!
 
-# SAFE: check bounds yourself
-size = 5
-arr = (ctypes.c_int * size)()
-index = 10
-if 0 <= index < size:
-    arr[index] = 42
+# Python-side indexing is bounds-checked by ctypes:
+try:
+    arr[10] = 42
+except IndexError as e:
+    print(f"ctypes caught it: {e}")
+
+# C has no such check. This would make square_array write past the
+# end of a 5-element buffer: undefined behaviour, maybe a crash.
+# DON'T run it:
+# ctypes_lib.square_array((ctypes.c_double * 5)(), 1000)
+
+# SAFE: always pass the real length
+small = (ctypes.c_double * 5)(1, 2, 3, 4, 5)
+ctypes_lib.square_array(small, len(small))
+print(list(small))
 ```
+
+    ctypes caught it: invalid index
+    [1.0, 4.0, 9.0, 16.0, 25.0]
+
+
+Using `len(small)` instead of a hand-typed number means the size you pass to C can never drift away from the real size of the array.
+
+**Quick recap**
+
+- Set types explicitly and agree on who owns each piece of memory.
+- C does no bounds checking: always pass the true length of a buffer.
+- A crash in C kills the whole Python process; `try/except` can't save you.
+- Recompile native libraries for each OS and CPU architecture.
 
 ---
 
 ## Exercises
 
----
+Each exercise has an empty code cell for your answer. Try it yourself before opening the solution.
 
-### Exercise 1: Matrix Multiplication with ctypes
+### Exercise 1: Matrix Multiplication with `ctypes`
 
 Write a C function that multiplies two 3x3 matrices, compile it, and call it from Python using `ctypes`.
 
-```bash
+1. Write a C function `void mat_mult(double* A, double* B, double* C, int n)` that stores `A × B` in `C`. Store each matrix as a flat array of `n*n` doubles in row order, so element `(i, j)` is at index `i*n + j`.
+2. Compile it into a shared library.
+3. Load it with `ctypes` and call it.
+4. Check the result against a matrix product computed in plain Python.
+
+
+```python
 # Your code here:
-# 1. Write a C function: void mat_mult(double* A, double* B, double* C, int n)
-# 2. Compile it into a shared library
-# 3. Load it with ctypes and call it
-# 4. Verify the result against Python's manual calculation
+
 ```
 
-### Exercise 2: String Processing with cffi
+<details markdown="1">
+<summary>Show solution</summary>
 
-Use cffi (API mode) to write a C function that: - Takes a string and a character - Returns the count of that character in the string
+```python
+import ctypes, os, platform, subprocess
 
-```bash
-# Your code here:
-# Use ffi.cdef() and ffi.set_source() to define and compile the function
+c_src = r"""
+void mat_mult(double* A, double* B, double* C, int n) {
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++) {
+            double s = 0.0;
+            for (int k = 0; k < n; k++)
+                s += A[i*n + k] * B[k*n + j];
+            C[i*n + j] = s;
+        }
+}
+"""
+with open("matmul.c", "w") as f:
+    f.write(c_src)
+
+ext = {"Darwin": "dylib", "Linux": "so"}.get(platform.system(), "dll")
+subprocess.run(["gcc", "-shared", "-fPIC", "-o", f"matmul.{ext}", "matmul.c"], check=True)
+
+mm = ctypes.CDLL(os.path.abspath(f"matmul.{ext}"))
+Arr = ctypes.POINTER(ctypes.c_double)
+mm.mat_mult.argtypes = [Arr, Arr, Arr, ctypes.c_int]
+mm.mat_mult.restype = None
+
+n = 3
+A = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+B = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+a = (ctypes.c_double * 9)(*A)
+b = (ctypes.c_double * 9)(*B)
+c = (ctypes.c_double * 9)()
+mm.mat_mult(a, b, c, n)
+
+expected = [sum(A[i*n + k] * B[k*n + j] for k in range(n))
+            for i in range(n) for j in range(n)]
+print(list(c))                  # [30.0, 24.0, 18.0, 84.0, 69.0, 54.0, 138.0, 114.0, 90.0]
+assert list(c) == expected
 ```
+
+</details>
+
+### Exercise 2: String Processing with `cffi`
+
+Use `cffi` in API mode to write a C function that:
+
+- takes a string and a character
+- returns how many times that character appears in the string
+
+Use `ffi.cdef()` and `ffi.set_source()` to define and compile it, then call it from Python.
+
+
+```python
+# Your code here:
+
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+from cffi import FFI
+
+builder = FFI()
+builder.cdef("int count_char(const char* s, char c);")
+builder.set_source("_strtools", """
+    int count_char(const char* s, char c) {
+        int count = 0;
+        for (; *s; s++)
+            if (*s == c) count++;
+        return count;
+    }
+""")
+builder.compile(verbose=False)
+
+from _strtools import lib as strlib
+
+print(strlib.count_char(b"mississippi", b"s"))  # 4
+print(strlib.count_char(b"banana", b"a"))       # 3
+```
+
+</details>
 
 ### Exercise 3: Cython Optimization
 
-Take this pure Python function and optimize it with Cython type declarations. Measure the speedup.
+Take the pure Python function below and make it faster with Cython type declarations. Then measure the speedup with `%timeit` and compare the two results.
 
 
 ```python
@@ -1748,13 +2026,64 @@ def mandelbrot_python(width, height, max_iter=100):
 # Use %%cython magic in the next cell
 ```
 
-```bash
-# Write your Cython version here using %%cython magic
+
+```python
+# Write your Cython version here, starting the cell with %%cython
+
 ```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+%%cython
+def mandelbrot_cython(int width, int height, int max_iter=100):
+    """Generate a Mandelbrot set (Cython)."""
+    cdef list result = []
+    cdef int row, col, iteration
+    cdef double c_real, c_imag, z_real, z_imag, tmp
+
+    for row in range(height):
+        for col in range(width):
+            c_real = (col - width / 2.0) * 4.0 / width
+            c_imag = (row - height / 2.0) * 4.0 / height
+            z_real = 0.0
+            z_imag = 0.0
+            iteration = 0
+            while z_real * z_real + z_imag * z_imag < 4.0 and iteration < max_iter:
+                tmp = z_real * z_real - z_imag * z_imag + c_real
+                z_imag = 2 * z_real * z_imag + c_imag
+                z_real = tmp
+                iteration += 1
+            result.append(iteration)
+    return result
+
+# In the next cell:
+# py = mandelbrot_python(200, 100)
+# cy = mandelbrot_cython(200, 100)
+# print(sum(p != c for p, c in zip(py, cy)), "of", len(py), "pixels differ")
+# %timeit mandelbrot_python(200, 100)
+# %timeit mandelbrot_cython(200, 100)
+```
+
+</details>
+
+Two things to notice in the solution:
+
+- `width / 2.0` instead of `width / 2`: with C `int`s, `/` can mean integer division, so the float literal keeps the maths the same as the Python version.
+- When you compare the results, a handful of pixels (4 out of 20,000 on an Apple M-series Mac) may differ by one iteration. Those points sit exactly on the `|z|² = 4` boundary, and the C compiler is allowed to fuse a multiply and an add into one instruction with slightly different rounding. That's floating-point arithmetic, not a bug in your code.
+
+**Quick recap**
+
+- Exercise 1 is the full `ctypes` workflow: write C, compile, set types, call, verify.
+- Exercise 2 shows how little code `cffi` API mode needs for a new C function.
+- Exercise 3 is the usual Cython recipe: same algorithm, add `cdef` types, then measure and compare.
 
 ---
 
 ## Cleanup
+
+This notebook created quite a few source files and compiled libraries in the current folder. Run the next cell to remove them.
 
 
 ```python
@@ -1768,6 +2097,7 @@ patterns = [
     "mathtools.cpp", "mathtools*.so",
     "mymodule.c", "mymodule*.so", "mymodule*.cpython*",
     "setup.py", "_math_helpers*",
+    "matmul.*", "_strtools*",  # from the exercise solutions
 ]
 
 for pattern in patterns:
@@ -1791,13 +2121,13 @@ print("\nCleanup complete!")
     Removed: callbacks.c
     Removed: callbacks.dylib
     Removed: mathtools.cpp
-    Removed: mathtools.cpython-310-darwin.so
+    Removed: mathtools.cpython-312-darwin.so
     Removed: mymodule.c
-    Removed: mymodule.cpython-310-darwin.so
+    Removed: mymodule.cpython-312-darwin.so
     Removed: setup.py
     Removed: _math_helpers.o
-    Removed: _math_helpers.cpython-310-darwin.so
     Removed: _math_helpers.c
+    Removed: _math_helpers.cpython-312-darwin.so
     Removed: build/
     
     Cleanup complete!
@@ -1805,21 +2135,41 @@ print("\nCleanup complete!")
 
 ---
 
-## Summary
+## Summary & Cheat Sheet
 
 | What We Covered  | Key Takeaway                                             |
 |------------------|----------------------------------------------------------|
-| **ctypes**       | Built-in, load any shared library, manual type mapping   |
-| **cffi**         | Cleaner C declarations, supports compilation (API mode)  |
-| **Python C API** | Full control, lots of boilerplate, manual refcounting    |
-| **pybind11**     | Best for C++, automatic conversions, clean syntax        |
-| **Cython**       | Python-like syntax compiles to C, easy optimization path |
-| **SWIG**         | Auto-generates bindings, good for multi-language support |
-| **Structs**      | Mirror C structs in Python with ctypes.Structure         |
-| **Callbacks**    | Pass Python functions to C using CFUNCTYPE               |
+| `ctypes`         | Built-in, load any shared library, manual type mapping   |
+| `cffi`           | C-syntax declarations; ABI mode loads, API mode compiles |
+| Python C API     | Full control, lots of boilerplate, manual refcounting    |
+| `pybind11`       | Best for C++, automatic conversions, clean syntax        |
+| Cython           | Python-like syntax compiles to C, easy optimization path |
+| SWIG             | Auto-generates bindings, good for multi-language support |
+| Structs          | Mirror C structs in Python with `ctypes.Structure`       |
+| Callbacks        | Pass Python functions to C using `CFUNCTYPE`             |
 
-### What's Next?
+### Commands to Remember
 
-- Explore NumPy's C API for array-level bindings
-- Look into `maturin` and `PyO3` for Rust-Python bindings
-- Study how major libraries (NumPy, Pandas) use these techniques internally
+```python
+# ctypes
+lib = ctypes.CDLL("./mylib.so")
+lib.f.argtypes = [ctypes.c_double]; lib.f.restype = ctypes.c_double
+
+# cffi
+ffi = FFI(); ffi.cdef("double f(double);"); lib = ffi.dlopen("./mylib.so")
+
+# C extension / pybind11 build
+!{sys.executable} setup.py build_ext --inplace
+# (add -undefined dynamic_lookup on macOS)
+!c++ -O2 -shared -std=c++17 -fPIC $(python -m pybind11 --includes) m.cpp -o m$(python3-config --extension-suffix)
+
+# Cython in Jupyter
+%load_ext Cython
+%%cython
+```
+
+### What's Next
+
+- Explore NumPy's C API and the buffer protocol for passing whole arrays without copying.
+- Try `maturin` and `PyO3` to write Python extensions in Rust.
+- Pick a library you use (NumPy, Pillow, pandas) and look at how it organises its C, C++ or Cython code.

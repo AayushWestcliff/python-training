@@ -1,126 +1,124 @@
 # Creating Distributable Python Packages
 
-> *"Namespaces are one honking great idea — let's do more of those!"*
->
-> — The Zen of Python
-
----
+So far you've shared code by copying `.py` files around. In this notebook we turn a small text-utility module into a real package that anyone can install with `pip install`, run from the terminal, and upgrade cleanly.
 
 ### Learning Objectives
 
-By the end of this notebook, you will be able to:
+By the end of this notebook you will be able to:
 
-1.  **Explain** the difference between a Python script, a module, and a distributable package
-2.  **Structure** a package using the modern `src/` layout
-3.  **Write** a complete `pyproject.toml` with metadata, dependencies, and build config
-4.  **Install** your package locally in editable mode with `pip install -e .`
-5.  **Create** CLI entry points so users can run your package from the terminal
-6.  **Build** a distributable wheel (`.whl`) and source distribution (`.tar.gz`)
-7.  **Publish** a package to TestPyPI
-8.  **Apply** semantic versioning correctly
-
----
+1. Explain the difference between a script, a module and a distributable package
+2. Lay out a package using the modern `src/` layout
+3. Write a complete `pyproject.toml` with metadata, dependencies and build settings
+4. Install your package locally in editable mode with `pip install -e .`
+5. Create CLI entry points so users can run your package from the terminal
+6. Build a wheel (`.whl`) and a source distribution (`.tar.gz`)
+7. Publish a package to TestPyPI
+8. Pick the right version number using semantic versioning
 
 ### Prerequisites
 
-- Python 3.8+ installed
-- Comfortable with functions, modules, and `import`
-- Basic terminal usage (running commands)
-- `pip` and `build` installed (`pip install build`)
+- Python 3.9 or newer
+- Comfortable with functions, modules and `import`
+- Basic terminal use (running commands, changing directories)
+- `pip` available (the notebook installs `build`, `pytest` and `twine` for you when needed)
+
+### How to Use This Notebook
+
+- Run the cells **from top to bottom**. We build one package, `texttools`, step by step, and later cells depend on files written by earlier ones.
+- The package is created in a folder called `texttools_project/` next to this notebook. You can open it in your editor at any point to see the real files.
+- Try the practice tasks and the challenge yourself first, then open *Show solution* to compare.
+- Each section ends with a **Quick recap**. Read only the recaps when revising.
 
 ---
 
-## Section 1 — Why Not Just Share a `.py` File?
+## 1. Why Not Just Share a `.py` File?
 
-Imagine you wrote a brilliant Python utility. You want your teammate — or the world — to use it.
+Say you've written a handy Python utility and a teammate wants to use it. The first thing most people do is email them the file. Here's what tends to go wrong:
 
-Your first instinct might be:
-
-> *"I'll just email them the file."*
-
-Here's what happens next:
-
-| Problem | Consequence |
+| Problem | What happens |
 |----|----|
-| They put the file in the wrong directory | `ImportError` — it can't be found |
-| Your code depends on `requests` | They don't know they need to install it |
-| You fix a bug | They're still using the old file |
-| They want a CLI command | They have to figure out how to run the script |
+| They save the file in the wrong folder | `ImportError`: Python can't find it |
+| Your code needs `requests` | Nobody told them to install it |
+| You fix a bug | They're still running the old copy |
+| They want to run it as a command | They have to work out how to call the script |
 | You release v2 | Nobody knows which version they have |
 
-**A distributable package solves all of this.** It is a bundle that:
+A **distributable package** fixes all of these. It's a bundle that:
 
-- Can be installed with a single command: `pip install texttools`
-- Declares its own dependencies automatically
-- Has a version number
-- Can expose CLI commands
-- Can be updated cleanly
+- installs with one command: `pip install texttools`
+- declares its own dependencies, so pip installs them too
+- carries a version number
+- can add commands to the terminal
+- can be upgraded cleanly with `pip install --upgrade`
 
----
-
-### The Packaging Ecosystem at a Glance
+### The Packaging Pipeline at a Glance
 
 ```
 You write code
      |
      v
-[ pyproject.toml ]  <- describes your package (name, version, deps...)
+[ pyproject.toml ]        <- describes your package (name, version, dependencies...)
      |
      v
-[ python -m build ]  <- packages your code into a distributable format
+[ python -m build ]       <- bundles your code into distributable files
      |
      v
-[ .whl file ]  <- the "wheel" - what pip installs
+[ .whl + .tar.gz files ]  <- the "wheel" is what pip actually installs
      |
      v
-[ pip upload to PyPI ]  <- published for anyone to install
+[ twine upload ]          <- publishes the files to PyPI
      |
      v
-[ pip install texttools ]  <- your users install it
+[ pip install texttools ] <- your users install it
 ```
 
-We will build every step of this chain today.
+We'll go through every step of this pipeline in this notebook.
+
+**Quick recap**
+
+- Copying `.py` files breaks as soon as there are dependencies, bug fixes or new versions.
+- A package has a name, a version, its dependencies and (optionally) terminal commands.
+- The pipeline is: `pyproject.toml` -> `python -m build` -> `twine upload` -> `pip install`.
 
 ---
 
-## Section 2 — Anatomy of a Modern Python Package
+## 2. Anatomy of a Modern Python Package
 
 ### The `src/` Layout
 
-There are two common ways to lay out a Python package. We will use the **`src/` layout** — the modern, recommended approach:
+There are two common ways to lay out a package. We'll use the **`src/` layout**, which is what the Python Packaging Guide recommends:
 
 ```
-texttools/                   <- project root (repo root)
+texttools_project/           <- project root (usually your git repo)
 |
 +-- src/
 |   +-- texttools/           <- the actual Python package
-|       +-- __init__.py      <- makes it a package, exposes public API
-|       +-- core.py          <- core utility functions
-|       +-- cli.py           <- command-line interface
+|       +-- __init__.py      <- marks it as a package, defines the public API
+|       +-- core.py          <- the utility functions
+|       +-- cli.py           <- the command-line interface
 |
 +-- tests/
 |   +-- test_core.py         <- unit tests
 |
-+-- pyproject.toml           <- package metadata and build config
++-- pyproject.toml           <- package metadata and build settings
 +-- README.md
 ```
 
-**Why `src/`?** Without it, Python can accidentally import your local folder instead of the installed package. The `src/` directory forces Python to only use the installed version during testing.
+Why put the package inside `src/`? If the package folder sits right next to your tests, Python can import the *local folder* instead of the *installed package*. Your tests then pass on your machine even when the installed version is broken. With `src/`, the only way to import `texttools` is to install it, so your tests check what users actually get.
 
-| Layout           | Risk                                                |
+| Layout | What can go wrong |
 |------------------|-----------------------------------------------------|
-| Flat (no `src/`) | Local folder shadows installed package during tests |
-| `src/` layout    | Tests always run against the installed package      |
-
----
+| Flat (no `src/`) | The local folder shadows the installed package during tests |
+| `src/` layout | Tests always run against the installed package |
 
 ### What `__init__.py` Does
 
-The `__init__.py` file serves two purposes:
+`__init__.py` has two jobs:
 
-1.  **Signals to Python** that this directory is a package (not just a folder)
-2.  **Defines the public API** — what users see when they `import texttools`
+1. It tells Python that this folder is a **package**, not just a folder.
+2. It defines the **public API**: what users get when they write `import texttools`.
 
+Here's the `__init__.py` we're going to write. Don't run anything yet; we create the real file in Step 1 below.
 
 ```python
 # src/texttools/__init__.py
@@ -132,23 +130,19 @@ from texttools.core import word_count, reverse_words, title_case_smart
 __all__ = ["word_count", "reverse_words", "title_case_smart"]
 ```
 
-> **`__version__`** is the conventional way to expose your package version in code.
->
-> **`__all__`** controls what `from texttools import *` exports. Defining it makes your public API explicit.
+- `__version__` is the usual way to expose your package's version in code.
+- `__all__` controls what `from texttools import *` brings in. Listing names here makes your public API explicit.
 
----
+### Step 1: Create the Folder Structure
 
-### Building `texttools` — Step 1: Create the File Structure
-
-Let's build our package from scratch. Run the cells below in sequence.
+Now let's build `texttools` for real. Run the cells below in order. Each one writes a file into `texttools_project/`.
 
 
 ```python
 import os
 import pathlib
 
-# Build the package inside a temporary working directory
-# so it does not interfere with this notebook environment.
+# Everything goes inside texttools_project/, next to this notebook.
 
 BASE = pathlib.Path("texttools_project")
 
@@ -170,11 +164,84 @@ for d in dirs:
       texttools_project/tests
 
 
+### Step 2: Write the Package Code
+
+`core.py` holds the three functions our package offers. We store the file's contents in a string and write it to disk, so you can read the whole file right here in the notebook.
+
 
 ```python
 # src/texttools/core.py - the actual utility functions
 
-core_code = "\"\"\"Core text utility functions for texttools.\"\"\"\n\n\ndef word_count(text: str) -> dict:\n    \"\"\"Count the frequency of each word in a string.\n\n    Args:\n        text: The input string to analyse.\n\n    Returns:\n        A dictionary mapping each word (lowercased) to its count.\n\n    Example:\n        >>> word_count(\"the cat sat on the mat\")\n        {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}\n    \"\"\"\n    words = text.lower().split()\n    counts: dict = {}\n    for word in words:\n        # Strip basic punctuation\n        word = word.strip(\".,!?;:'\")\n        if word:\n            counts[word] = counts.get(word, 0) + 1\n    return counts\n\n\ndef reverse_words(text: str) -> str:\n    \"\"\"Reverse the order of words in a string.\n\n    Args:\n        text: The input string.\n\n    Returns:\n        A new string with word order reversed.\n\n    Example:\n        >>> reverse_words(\"Hello World\")\n        'World Hello'\n    \"\"\"\n    return \" \".join(reversed(text.split()))\n\n\ndef title_case_smart(text: str) -> str:\n    \"\"\"Convert a string to title case, skipping common short words.\n\n    Short connector words (a, an, the, and, but, or, for, nor, on,\n    at, to, by, in, of, up) remain lowercase unless they are the\n    first or last word.\n\n    Args:\n        text: The input string.\n\n    Returns:\n        A title-cased string respecting common style guidelines.\n\n    Example:\n        >>> title_case_smart(\"the lord of the rings\")\n        'The Lord of the Rings'\n    \"\"\"\n    SKIP = {\"a\", \"an\", \"the\", \"and\", \"but\", \"or\", \"for\", \"nor\",\n            \"on\", \"at\", \"to\", \"by\", \"in\", \"of\", \"up\"}\n    words = text.lower().split()\n    result = []\n    for i, word in enumerate(words):\n        if i == 0 or i == len(words) - 1 or word not in SKIP:\n            result.append(word.capitalize())\n        else:\n            result.append(word)\n    return \" \".join(result)\n"
+core_code = '''"""Core text utility functions for texttools."""
+
+
+def word_count(text: str) -> dict:
+    """Count the frequency of each word in a string.
+
+    Args:
+        text: The input string to analyse.
+
+    Returns:
+        A dictionary mapping each word (lowercased) to its count.
+
+    Example:
+        >>> word_count("the cat sat on the mat")
+        {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}
+    """
+    words = text.lower().split()
+    counts: dict = {}
+    for word in words:
+        # Strip basic punctuation
+        word = word.strip(".,!?;:'")
+        if word:
+            counts[word] = counts.get(word, 0) + 1
+    return counts
+
+
+def reverse_words(text: str) -> str:
+    """Reverse the order of words in a string.
+
+    Args:
+        text: The input string.
+
+    Returns:
+        A new string with word order reversed.
+
+    Example:
+        >>> reverse_words("Hello World")
+        'World Hello'
+    """
+    return " ".join(reversed(text.split()))
+
+
+def title_case_smart(text: str) -> str:
+    """Convert a string to title case, skipping common short words.
+
+    Short connector words (a, an, the, and, but, or, for, nor, on,
+    at, to, by, in, of, up) remain lowercase unless they are the
+    first or last word.
+
+    Args:
+        text: The input string.
+
+    Returns:
+        A title-cased string respecting common style guidelines.
+
+    Example:
+        >>> title_case_smart("the lord of the rings")
+        'The Lord of the Rings'
+    """
+    SKIP = {"a", "an", "the", "and", "but", "or", "for", "nor",
+            "on", "at", "to", "by", "in", "of", "up"}
+    words = text.lower().split()
+    result = []
+    for i, word in enumerate(words):
+        if i == 0 or i == len(words) - 1 or word not in SKIP:
+            result.append(word.capitalize())
+        else:
+            result.append(word)
+    return " ".join(result)
+'''
 
 (BASE / "src" / "texttools" / "core.py").write_text(core_code)
 print("core.py written.")
@@ -187,7 +254,14 @@ print("core.py written.")
 ```python
 # src/texttools/__init__.py - the public API
 
-init_code = "\"\"\"texttools - a small text utility library.\"\"\"\n\n__version__ = \"0.1.0\"\n\nfrom texttools.core import word_count, reverse_words, title_case_smart\n\n__all__ = [\"word_count\", \"reverse_words\", \"title_case_smart\"]\n"
+init_code = '''"""texttools - a small text utility library."""
+
+__version__ = "0.1.0"
+
+from texttools.core import word_count, reverse_words, title_case_smart
+
+__all__ = ["word_count", "reverse_words", "title_case_smart"]
+'''
 
 (BASE / "src" / "texttools" / "__init__.py").write_text(init_code)
 print("__init__.py written.")
@@ -196,27 +270,35 @@ print("__init__.py written.")
     __init__.py written.
 
 
+**What just happened?** We now have `src/texttools/core.py` and `src/texttools/__init__.py` on disk. You can't `import texttools` yet, because Python doesn't know about the `src/` folder. Installing the package (Section 4) is what fixes that.
+
+**Quick recap**
+
+- Use the `src/` layout: `src/<package>/` for code, `tests/` beside it, `pyproject.toml` at the root.
+- `src/` stops your tests from accidentally importing the local folder instead of the installed package.
+- `__init__.py` marks a package and defines its public API (`__version__`, `__all__`).
+
 ---
 
-## Section 3 — `pyproject.toml` Deep Dive
+## 3. `pyproject.toml` Deep Dive
 
-`pyproject.toml` is the single source of truth for your package. It replaced the older `setup.py` and `setup.cfg` approach.
+`pyproject.toml` is the one file that describes your package. It replaced the older `setup.py` and `setup.cfg` files, which you'll still see in older projects.
 
-It has three main sections:
+It has a few tables (sections). Let's go through them one at a time.
 
-### `[build-system]`
+### `[build-system]`: *how* to build the package
 
-Tells pip **how** to build your package. We use `setuptools`:
+This tells pip which build tool to use. We use `setuptools`:
 
 ```toml
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 ```
 
-### `[project]`
+We ask for setuptools 77 or newer because that's the version that understands the modern `license = "MIT"` field below.
 
-Describes **what** your package is:
+### `[project]`: *what* the package is
 
 ```toml
 [project]
@@ -225,43 +307,74 @@ version = "0.1.0"
 description = "A small text utility library"
 authors = [{name = "Your Name", email = "you@example.com"}]
 readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT"}
+requires-python = ">=3.9"
+license = "MIT"
 dependencies = []
 
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 ```
 
-### `[project.scripts]`
+A few notes:
 
-Defines CLI commands (covered in Section 5):
+- `dependencies` lists other packages yours needs, e.g. `["requests>=2.31"]`. Ours needs none.
+- `license` is a short SPDX code like `"MIT"` or `"Apache-2.0"`. Older tutorials write `license = {text = "MIT"}` and add a `License :: ...` classifier; current setuptools warns about both, so don't copy that style.
+- `classifiers` are tags that help people find your package on PyPI.
 
+### `[project.scripts]`: terminal commands
 
-```python
+This creates CLI commands (more on this in Section 5):
+
+```toml
 [project.scripts]
 texttools = "texttools.cli:main"
-#  command     module   function
+#  ^command    ^module  ^function
 ```
 
-### `[tool.setuptools.packages.find]`
+### `[tool.setuptools.packages.find]`: where the code lives
 
-Tells setuptools where to find your package — critical for the `src/` layout:
+This tells setuptools to look inside `src/` for packages. You need it for the `src/` layout:
 
-
-```python
+```toml
 [tool.setuptools.packages.find]
 where = ["src"]
 ```
+
+### Step 3: Write `pyproject.toml` and `README.md`
+
+Now we put all of those tables together into one file.
 
 
 ```python
 # Write the pyproject.toml for texttools
 
-pyproject = "[build-system]\nrequires = [\"setuptools>=42\", \"wheel\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"texttools\"\nversion = \"0.1.0\"\ndescription = \"A small text utility library for word analysis and formatting\"\nauthors = [{name = \"Your Name\", email = \"you@example.com\"}]\nreadme = \"README.md\"\nrequires-python = \">=3.8\"\nlicense = {text = \"MIT\"}\ndependencies = []\n\nclassifiers = [\n    \"Programming Language :: Python :: 3\",\n    \"License :: OSI Approved :: MIT License\",\n    \"Operating System :: OS Independent\",\n]\n\n[project.scripts]\ntexttools = \"texttools.cli:main\"\n\n[tool.setuptools.packages.find]\nwhere = [\"src\"]\n"
+pyproject = """[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "texttools"
+version = "0.1.0"
+description = "A small text utility library for word analysis and formatting"
+authors = [{name = "Your Name", email = "you@example.com"}]
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+dependencies = []
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+texttools = "texttools.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+"""
 
 (BASE / "pyproject.toml").write_text(pyproject)
 print("pyproject.toml written.")
@@ -270,11 +383,45 @@ print("pyproject.toml written.")
     pyproject.toml written.
 
 
+`pyproject.toml` says `readme = "README.md"`, so that file has to exist too. PyPI shows it as your package's front page.
+
 
 ```python
 # Write a minimal README.md (referenced by pyproject.toml)
 
-readme = "# texttools\n\nA small text utility library for word analysis and formatting.\n\n## Installation\n\n```bash\npip install texttools\n```\n\n## Usage\n\n```python\nfrom texttools import word_count, reverse_words, title_case_smart\n\nprint(word_count(\"the cat sat on the mat\"))\n# {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}\n\nprint(reverse_words(\"Hello World\"))\n# 'World Hello'\n\nprint(title_case_smart(\"the lord of the rings\"))\n# 'The Lord of the Rings'\n```\n\n## CLI\n\n```bash\ntexttools count \"the cat sat on the mat\"\ntexttools reverse \"Hello World\"\ntexttools titlecase \"the lord of the rings\"\n```\n"
+readme = '''# texttools
+
+A small text utility library for word analysis and formatting.
+
+## Installation
+
+~~~bash
+pip install texttools
+~~~
+
+## Usage
+
+~~~python
+from texttools import word_count, reverse_words, title_case_smart
+
+print(word_count("the cat sat on the mat"))
+# {'the': 2, 'cat': 1, 'sat': 1, 'on': 1, 'mat': 1}
+
+print(reverse_words("Hello World"))
+# 'World Hello'
+
+print(title_case_smart("the lord of the rings"))
+# 'The Lord of the Rings'
+~~~
+
+## CLI
+
+~~~bash
+texttools count "the cat sat on the mat"
+texttools reverse "Hello World"
+texttools titlecase "the lord of the rings"
+~~~
+'''
 
 (BASE / "README.md").write_text(readme)
 print("README.md written.")
@@ -283,22 +430,29 @@ print("README.md written.")
     README.md written.
 
 
+**Quick recap**
+
+- `[build-system]` says *how* to build (setuptools); `[project]` says *what* the package is.
+- Use `license = "MIT"` (an SPDX string), not the old `{text = ...}` table or license classifiers.
+- `[project.scripts]` maps a terminal command to a Python function.
+- With the `src/` layout you need `[tool.setuptools.packages.find] where = ["src"]`.
+
 ---
 
-## Section 4 — Installing Locally with `pip install -e .`
+## 4. Installing Locally with `pip install -e .`
 
-Before publishing to PyPI, you want to use and test your package locally. The `-e` flag stands for **editable install**.
+Before publishing anything, you want to use and test the package on your own machine. The `-e` flag means **editable install**.
 
 ### Editable Install vs Regular Install
 
 | Mode | Command | How it works |
 |----|----|----|
-| Regular | `pip install .` | Copies files into `site-packages` — changes require reinstall |
-| Editable | `pip install -e .` | Links to your source — changes are reflected immediately |
+| Regular | `pip install .` | Copies your files into `site-packages`. Every change needs a reinstall. |
+| Editable | `pip install -e .` | Points Python at your source folder. Changes show up straight away. |
 
-**Editable mode is the standard workflow during development.**
+During development you'll almost always use editable mode.
 
-### How It Works Under the Hood
+### What Happens Under the Hood
 
 ```
 pip install -e texttools_project/
@@ -307,11 +461,15 @@ pip install -e texttools_project/
 reads pyproject.toml
      |
      v
-creates a .pth file in site-packages pointing to src/
+writes a small .pth file into site-packages that points to src/
      |
      v
 Python can now find 'import texttools'
 ```
+
+### Step 4: Install the Package
+
+In a terminal you'd run `pip install -e texttools_project/`. Here we run the same command from Python so it installs into this notebook's environment.
 
 
 ```python
@@ -340,6 +498,10 @@ if src_path not in sys.path:
     Package installed successfully.
     Added texttools_project/src to sys.path
 
+
+**What just happened?** pip installed `texttools` in editable mode. The `.pth` file it wrote is only read when Python starts, so this already-running notebook wouldn't see it. That's why the cell also adds `src/` to `sys.path` by hand. In a fresh terminal or a restarted kernel you wouldn't need that line.
+
+Let's check that the import works.
 
 
 ```python
@@ -381,48 +543,101 @@ print(texttools.title_case_smart("the lord of the rings: the return of the king"
     The Lord of the Rings: the Return of the King
 
 
+**Checkpoint:** you should see `texttools version: 0.1.0` followed by the results of the three functions. If you get `ModuleNotFoundError`, re-run the install cell above.
+
+Notice the title-case result: `the` stays lowercase after `Rings:` because our function only looks at word position, not punctuation. Good enough for a teaching example.
+
+**Quick recap**
+
+- `pip install -e .` installs your package in editable mode: edit the code, re-run, no reinstall.
+- A regular `pip install .` copies the files, so you'd need to reinstall after every change.
+- Editable installs work through a `.pth` file that Python reads at start-up.
+
 ---
 
-## Section 5 — Entry Points: Creating CLI Commands
+## 5. Entry Points: Creating CLI Commands
 
-Entry points let users run your package as a command from the terminal:
+Entry points let users run your package as a normal terminal command:
 
 ```bash
 $ texttools count "the cat sat on the mat"
 cat: 1
 mat: 1
-on:  1
+on: 1
 sat: 1
 the: 2
 ```
 
 ### How It Works
 
-When pip installs your package, it reads `[project.scripts]` in `pyproject.toml`:
+When pip installs your package, it reads `[project.scripts]` from `pyproject.toml`:
 
-
-```python
+```toml
 [project.scripts]
 texttools = "texttools.cli:main"
-#  command     module   function
+#  ^command    ^module  ^function
 ```
 
-pip creates a small wrapper executable (`texttools`) in the system `bin/` directory that calls `texttools.cli.main()`.
+pip then creates a tiny launcher program called `texttools` in your environment's `bin/` folder (`Scripts\` on Windows). Running it simply calls `texttools.cli.main()`.
 
-### Writing the CLI Module
+### Step 5: Write the CLI Module
 
-The `cli.py` module uses `argparse` to parse command-line arguments.
+`cli.py` uses `argparse` from the standard library to read the command-line arguments. It has three sub-commands: `count`, `reverse` and `titlecase`.
 
 
 ```python
 # src/texttools/cli.py - command-line interface
 
-cli_code = "\"\"\"Command-line interface for texttools.\"\"\"\n\nimport argparse\nimport sys\nfrom texttools.core import word_count, reverse_words, title_case_smart\n\n\ndef main() -> None:\n    \"\"\"Entry point for the texttools CLI.\"\"\"\n    parser = argparse.ArgumentParser(\n        prog=\"texttools\",\n        description=\"Text utility commands\",\n    )\n\n    subparsers = parser.add_subparsers(dest=\"command\", required=True)\n\n    # count command\n    count_parser = subparsers.add_parser(\"count\", help=\"Count word frequencies\")\n    count_parser.add_argument(\"text\", help=\"Text to analyse\")\n\n    # reverse command\n    reverse_parser = subparsers.add_parser(\"reverse\", help=\"Reverse word order\")\n    reverse_parser.add_argument(\"text\", help=\"Text to reverse\")\n\n    # titlecase command\n    title_parser = subparsers.add_parser(\"titlecase\", help=\"Smart title case\")\n    title_parser.add_argument(\"text\", help=\"Text to convert\")\n\n    args = parser.parse_args()\n\n    if args.command == \"count\":\n        counts = word_count(args.text)\n        for word, n in sorted(counts.items()):\n            print(f\"{word}: {n}\")\n\n    elif args.command == \"reverse\":\n        print(reverse_words(args.text))\n\n    elif args.command == \"titlecase\":\n        print(title_case_smart(args.text))\n\n\nif __name__ == \"__main__\":\n    main()\n"
+cli_code = '''"""Command-line interface for texttools."""
+
+import argparse
+import sys
+from texttools.core import word_count, reverse_words, title_case_smart
+
+
+def main() -> None:
+    """Entry point for the texttools CLI."""
+    parser = argparse.ArgumentParser(
+        prog="texttools",
+        description="Text utility commands",
+    )
+
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    # count command
+    count_parser = subparsers.add_parser("count", help="Count word frequencies")
+    count_parser.add_argument("text", help="Text to analyse")
+
+    # reverse command
+    reverse_parser = subparsers.add_parser("reverse", help="Reverse word order")
+    reverse_parser.add_argument("text", help="Text to reverse")
+
+    # titlecase command
+    title_parser = subparsers.add_parser("titlecase", help="Smart title case")
+    title_parser.add_argument("text", help="Text to convert")
+
+    args = parser.parse_args()
+
+    if args.command == "count":
+        counts = word_count(args.text)
+        for word, n in sorted(counts.items()):
+            print(f"{word}: {n}")
+
+    elif args.command == "reverse":
+        print(reverse_words(args.text))
+
+    elif args.command == "titlecase":
+        print(title_case_smart(args.text))
+
+
+if __name__ == "__main__":
+    main()
+'''
 
 (BASE / "src" / "texttools" / "cli.py").write_text(cli_code)
 print("cli.py written.")
 
-# Reinstall to register the entry point
+# Reinstall so pip registers the new entry point
 result = subprocess.run(
     [sys.executable, "-m", "pip", "install", "-e", str(BASE), "--quiet"],
     capture_output=True,
@@ -430,14 +645,20 @@ result = subprocess.run(
 )
 print("Package reinstalled." if result.returncode == 0 else result.stderr)
 
-# Ensure src/ stays on path
+# Make sure src/ is still on the path
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 ```
 
     cli.py written.
+
+
     Package reinstalled.
 
+
+We reinstalled because entry points are created at install time. Adding `cli.py` alone doesn't create the `texttools` command.
+
+Now let's try the CLI. In a terminal you would type `texttools count "..."`. Here we call the same code with `python -m texttools.cli`, which works no matter where the launcher was installed.
 
 
 ```python
@@ -469,17 +690,24 @@ print(result2.stdout)
     
     texttools titlecase 'the lord of the rings':
     The Lord of the Rings
+    
 
 
-> **Note on `if __name__ == "__main__"`:**
->
-> This guard lets you run the module directly with `python -m texttools.cli`. Entry points call `main()` directly — the guard is for manual invocation during development.
+**Checkpoint:** the word counts should be sorted alphabetically, and the title should read `The Lord of the Rings`.
+
+**Why `if __name__ == "__main__":`?** That guard at the bottom of `cli.py` is what makes `python -m texttools.cli` work. The installed `texttools` command doesn't need it, because it calls `main()` directly. The guard is just handy while you're developing.
+
+**Quick recap**
+
+- `[project.scripts]` turns `command = "module:function"` into a real terminal command.
+- The command is created when the package is installed, so reinstall after adding an entry point.
+- `argparse` sub-parsers give you `git`-style sub-commands like `texttools count`.
 
 ---
 
-## Section 6 — Testing the Installed Package
+## 6. Testing the Installed Package
 
-A critical point: **tests should run against the installed package, not the local source files.** This is exactly what the `src/` layout guarantees.
+Tests should run against the **installed** package, not loose source files. The `src/` layout guarantees that: the tests can only `import texttools` because it's installed.
 
 ### Test Structure
 
@@ -488,13 +716,66 @@ tests/
 +-- test_core.py
 ```
 
-Note: **no `__init__.py` in `tests/`**. pytest does not need it, and omitting it avoids import conflicts.
+Note there's **no `__init__.py` in `tests/`**. pytest doesn't need one, and leaving it out avoids confusing import problems.
+
+### Step 6: Write and Run the Tests
 
 
 ```python
 # Write the test file
 
-test_code = "\"\"\"Tests for texttools.core\"\"\"\n\nimport pytest\nfrom texttools import word_count, reverse_words, title_case_smart\n\n\nclass TestWordCount:\n    def test_basic_count(self):\n        result = word_count(\"the cat sat on the mat\")\n        assert result[\"the\"] == 2\n        assert result[\"cat\"] == 1\n\n    def test_case_insensitive(self):\n        result = word_count(\"Python python PYTHON\")\n        assert result[\"python\"] == 3\n\n    def test_strips_punctuation(self):\n        result = word_count(\"hello, world!\")\n        assert \"hello\" in result\n        assert \"world\" in result\n\n    def test_empty_string(self):\n        assert word_count(\"\") == {}\n\n\nclass TestReverseWords:\n    def test_basic_reverse(self):\n        assert reverse_words(\"Hello World\") == \"World Hello\"\n\n    def test_single_word(self):\n        assert reverse_words(\"Python\") == \"Python\"\n\n    def test_multiple_words(self):\n        assert reverse_words(\"one two three\") == \"three two one\"\n\n\nclass TestTitleCaseSmart:\n    def test_short_words_lowercase(self):\n        result = title_case_smart(\"the lord of the rings\")\n        assert result == \"The Lord of the Rings\"\n\n    def test_first_word_always_capitalised(self):\n        result = title_case_smart(\"of mice and men\")\n        assert result.startswith(\"Of\")\n\n    def test_last_word_always_capitalised(self):\n        result = title_case_smart(\"the cat in the hat\")\n        assert result.endswith(\"Hat\")\n\n    def test_single_word(self):\n        assert title_case_smart(\"python\") == \"Python\"\n"
+test_code = '''"""Tests for texttools.core"""
+
+import pytest
+from texttools import word_count, reverse_words, title_case_smart
+
+
+class TestWordCount:
+    def test_basic_count(self):
+        result = word_count("the cat sat on the mat")
+        assert result["the"] == 2
+        assert result["cat"] == 1
+
+    def test_case_insensitive(self):
+        result = word_count("Python python PYTHON")
+        assert result["python"] == 3
+
+    def test_strips_punctuation(self):
+        result = word_count("hello, world!")
+        assert "hello" in result
+        assert "world" in result
+
+    def test_empty_string(self):
+        assert word_count("") == {}
+
+
+class TestReverseWords:
+    def test_basic_reverse(self):
+        assert reverse_words("Hello World") == "World Hello"
+
+    def test_single_word(self):
+        assert reverse_words("Python") == "Python"
+
+    def test_multiple_words(self):
+        assert reverse_words("one two three") == "three two one"
+
+
+class TestTitleCaseSmart:
+    def test_short_words_lowercase(self):
+        result = title_case_smart("the lord of the rings")
+        assert result == "The Lord of the Rings"
+
+    def test_first_word_always_capitalised(self):
+        result = title_case_smart("of mice and men")
+        assert result.startswith("Of")
+
+    def test_last_word_always_capitalised(self):
+        result = title_case_smart("the cat in the hat")
+        assert result.endswith("Hat")
+
+    def test_single_word(self):
+        assert title_case_smart("python") == "Python"
+'''
 
 (BASE / "tests" / "test_core.py").write_text(test_code)
 print("test_core.py written.")
@@ -514,7 +795,7 @@ subprocess.run(
 # Run the tests
 
 result = subprocess.run(
-    [sys.executable, "-m", "pytest", str(BASE / "tests"), "-v"],
+    [sys.executable, "-m", "pytest", str(BASE / "tests"), "-v", "--color=no"],
     capture_output=True,
     text=True
 )
@@ -524,62 +805,76 @@ if result.stderr:
     print(result.stderr)
 ```
 
-    [1m============================= test session starts ==============================[0m
-    platform darwin -- Python 3.10.18, pytest-9.0.3, pluggy-1.6.0 -- /Users/aayush/micromamba/envs/stats/bin/python
+    ============================= test session starts ==============================
+    platform darwin -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- .venv/bin/python
     cachedir: .pytest_cache
-    rootdir: /Users/aayush/Documents/Kings/python-training/prg400/texttools_project
+    rootdir: texttools_project
     configfile: pyproject.toml
-    [1mcollecting ... [0mcollected 11 items
+    plugins: platformdirs-4.14.0, anyio-4.15.1
+    collecting ... collected 11 items
     
-    texttools_project/tests/test_core.py::TestWordCount::test_basic_count [32mPASSED[0m[32m [  9%][0m
-    texttools_project/tests/test_core.py::TestWordCount::test_case_insensitive [32mPASSED[0m[32m [ 18%][0m
-    texttools_project/tests/test_core.py::TestWordCount::test_strips_punctuation [32mPASSED[0m[32m [ 27%][0m
-    texttools_project/tests/test_core.py::TestWordCount::test_empty_string [32mPASSED[0m[32m [ 36%][0m
-    texttools_project/tests/test_core.py::TestReverseWords::test_basic_reverse [32mPASSED[0m[32m [ 45%][0m
-    texttools_project/tests/test_core.py::TestReverseWords::test_single_word [32mPASSED[0m[32m [ 54%][0m
-    texttools_project/tests/test_core.py::TestReverseWords::test_multiple_words [32mPASSED[0m[32m [ 63%][0m
-    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_short_words_lowercase [32mPASSED[0m[32m [ 72%][0m
-    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_first_word_always_capitalised [32mPASSED[0m[32m [ 81%][0m
-    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_last_word_always_capitalised [32mPASSED[0m[32m [ 90%][0m
-    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_single_word [32mPASSED[0m[32m [100%][0m
+    texttools_project/tests/test_core.py::TestWordCount::test_basic_count PASSED [  9%]
+    texttools_project/tests/test_core.py::TestWordCount::test_case_insensitive PASSED [ 18%]
+    texttools_project/tests/test_core.py::TestWordCount::test_strips_punctuation PASSED [ 27%]
+    texttools_project/tests/test_core.py::TestWordCount::test_empty_string PASSED [ 36%]
+    texttools_project/tests/test_core.py::TestReverseWords::test_basic_reverse PASSED [ 45%]
+    texttools_project/tests/test_core.py::TestReverseWords::test_single_word PASSED [ 54%]
+    texttools_project/tests/test_core.py::TestReverseWords::test_multiple_words PASSED [ 63%]
+    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_short_words_lowercase PASSED [ 72%]
+    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_first_word_always_capitalised PASSED [ 81%]
+    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_last_word_always_capitalised PASSED [ 90%]
+    texttools_project/tests/test_core.py::TestTitleCaseSmart::test_single_word PASSED [100%]
     
-    [32m============================== [32m[1m11 passed[0m[32m in 0.01s[0m[32m ==============================[0m
+    ============================== 11 passed in 0.01s ==============================
+    
 
+
+**Checkpoint:** you should see `11 passed`. If a test fails, read the assertion message, fix `core.py`, and run the test cell again. Thanks to the editable install there's no need to reinstall.
+
+**Quick recap**
+
+- Put tests in `tests/` next to `src/`, with no `__init__.py`.
+- Run them with `python -m pytest tests/`.
+- Because of the `src/` layout, a passing test means the *installed* package works.
 
 ---
 
-## Section 7 — Building a Distribution
+## 7. Building a Distribution
 
-When you are ready to share your package, build it into a distributable format:
+When you're ready to share the package, you build it into files that pip can install:
 
 | Format | Extension | Description |
 |----|----|----|
-| Wheel | `.whl` | Binary distribution — fast to install, most common |
-| Source distribution | `.tar.gz` | Source code archive — pip builds it on the user's machine |
+| Wheel | `.whl` | Ready-to-install archive. Fast to install and the most common format. |
+| Source distribution (sdist) | `.tar.gz` | Archive of your source code. pip builds it on the user's machine. |
 
-Always publish **both**. pip prefers wheels; the source distribution is a fallback.
+Always publish **both**. pip prefers the wheel and falls back to the sdist.
 
 ### The `build` Tool
 
-`python -m build` reads your `pyproject.toml` and produces both formats in a `dist/` directory:
+`python -m build` reads `pyproject.toml` and creates both files in a `dist/` folder:
 
-```bash
+```text
 dist/
 +-- texttools-0.1.0-py3-none-any.whl
 +-- texttools-0.1.0.tar.gz
 ```
 
-### Wheel Filename Anatomy
+### Reading a Wheel's Filename
 
-```
+```text
 texttools - 0.1.0 - py3 - none - any .whl
 ^           ^       ^     ^      ^
-package     version py   abi    platform
+package     version python abi   platform
 
 py3   = works with Python 3
-none  = no ABI dependency (pure Python)
-any   = works on any OS
+none  = no compiled code, so no ABI requirement (pure Python)
+any   = works on any operating system
 ```
+
+### Step 7: Build the Package
+
+This is the same as running `python -m build texttools_project/` in a terminal. It can take a little while the first time because it sets up a clean build environment.
 
 
 ```python
@@ -593,42 +888,20 @@ subprocess.run(
 result = subprocess.run(
     [sys.executable, "-m", "build", str(BASE)],
     capture_output=True,
-    text=True
+    text=True,
+    env={**os.environ, "NO_COLOR": "1"},  # plain text output, no colour codes
 )
 
-output = result.stdout
-print(output[-1500:] if len(output) > 1500 else output)
+# The full log is long; the last line tells us whether it worked
+print(result.stdout.strip().splitlines()[-1] if result.stdout.strip() else "(no output)")
 if result.returncode != 0:
     print("STDERR:", result.stderr[-1000:])
 ```
 
-    ttools.egg-info/top_level.txt
-    reading manifest file 'src/texttools.egg-info/SOURCES.txt'
-    writing manifest file 'src/texttools.egg-info/SOURCES.txt'
-    installing to build/bdist.macosx-11.0-arm64/wheel
-    running install
-    running install_lib
-    creating build/bdist.macosx-11.0-arm64/wheel
-    creating build/bdist.macosx-11.0-arm64/wheel/texttools
-    copying build/lib/texttools/__init__.py -> build/bdist.macosx-11.0-arm64/wheel/./texttools
-    copying build/lib/texttools/core.py -> build/bdist.macosx-11.0-arm64/wheel/./texttools
-    copying build/lib/texttools/cli.py -> build/bdist.macosx-11.0-arm64/wheel/./texttools
-    running install_egg_info
-    Copying src/texttools.egg-info to build/bdist.macosx-11.0-arm64/wheel/./texttools-0.1.0-py3.10.egg-info
-    running install_scripts
-    creating build/bdist.macosx-11.0-arm64/wheel/texttools-0.1.0.dist-info/WHEEL
-    creating '/Users/aayush/Documents/Kings/python-training/prg400/texttools_project/dist/.tmp-ivcv_32v/texttools-0.1.0-py3-none-any.whl' and adding 'build/bdist.macosx-11.0-arm64/wheel' to it
-    adding 'texttools/__init__.py'
-    adding 'texttools/cli.py'
-    adding 'texttools/core.py'
-    adding 'texttools-0.1.0.dist-info/METADATA'
-    adding 'texttools-0.1.0.dist-info/WHEEL'
-    adding 'texttools-0.1.0.dist-info/entry_points.txt'
-    adding 'texttools-0.1.0.dist-info/top_level.txt'
-    adding 'texttools-0.1.0.dist-info/RECORD'
-    removing build/bdist.macosx-11.0-arm64/wheel
-    [1m[92mSuccessfully built [4mtexttools-0.1.0.tar.gz[0m[1m[92m and [4mtexttools-0.1.0-py3-none-any.whl[0m[1m[92m[0m
+    Successfully built texttools-0.1.0.tar.gz and texttools-0.1.0-py3-none-any.whl
 
+
+A wheel is just a zip file, so we can look inside it with the `zipfile` module:
 
 
 ```python
@@ -665,31 +938,39 @@ with zipfile.ZipFile(whl) as z:
       texttools/core.py
 
 
+**Checkpoint:** `dist/` should contain one `.whl` and one `.tar.gz`. Inside the wheel you should see your three `.py` files plus a `dist-info/` folder. `METADATA` holds what you wrote in `pyproject.toml`, and `entry_points.txt` holds the `texttools` command.
+
+**Quick recap**
+
+- `python -m build` creates a wheel (`.whl`) and an sdist (`.tar.gz`) in `dist/`.
+- A wheel name reads `name-version-python-abi-platform.whl`; `py3-none-any` means pure Python.
+- A wheel is a zip file of your package plus a `dist-info/` metadata folder.
+
 ---
 
-## Section 8 — Publishing to TestPyPI
+## 8. Publishing to TestPyPI
 
-**PyPI** (the Python Package Index) is the official registry — `pip install` downloads from here.
+**PyPI** (the Python Package Index, [pypi.org](https://pypi.org)) is the official registry. `pip install` downloads from there.
 
-**TestPyPI** is a separate, safe sandbox for testing uploads. Always test there before publishing to real PyPI.
+**TestPyPI** ([test.pypi.org](https://test.pypi.org)) is a separate practice server. Always try an upload there before using the real PyPI.
 
 ### Before You Publish
 
-1.  Create an account at [test.pypi.org](https://test.pypi.org)
-2.  Generate an API token: Account Settings → API Tokens
-3.  Install `twine`: `pip install twine`
+1. Create an account at [test.pypi.org](https://test.pypi.org).
+2. Create an API token: *Account settings -> API tokens*.
+3. Install `twine`: `pip install twine`.
+4. Pick a **unique name**. Package names on PyPI and TestPyPI are first come, first served, and `texttools` is almost certainly taken. Change `name` in `pyproject.toml` to something like `texttools-yourname`, then rebuild. Users still write `import texttools`, because the import name comes from the `src/texttools/` folder, not from `name`.
 
 ### The Workflow
 
-```
-Build          ->   Validate        ->   Upload
-python -m build    twine check          twine upload
-                   dist/*
+```text
+Build              ->   Check              ->   Upload
+python -m build         twine check dist/*      twine upload dist/*
 ```
 
-### Step 1 — Validate Before Uploading
+### Step 8: Check the Files Before Uploading
 
-`twine check` verifies your metadata is well-formed and the README renders correctly on PyPI.
+`twine check` makes sure your metadata is valid and that your README will display properly on PyPI.
 
 
 ```python
@@ -703,7 +984,7 @@ import glob as glob_module
 dist_files = glob_module.glob(str(BASE / "dist" / "*"))
 
 result = subprocess.run(
-    [sys.executable, "-m", "twine", "check"] + dist_files,
+    [sys.executable, "-m", "twine", "--no-color", "check"] + dist_files,
     capture_output=True,
     text=True
 )
@@ -712,78 +993,93 @@ if result.stderr:
     print(result.stderr)
 ```
 
-    Checking texttools_project/dist/texttools-0.1.0-py3-none-any.whl: [32mPASSED[0m
-    Checking texttools_project/dist/texttools-0.1.0.tar.gz: [32mPASSED[0m
+    Checking texttools_project/dist/texttools-0.1.0-py3-none-any.whl: PASSED
+    Checking texttools_project/dist/texttools-0.1.0.tar.gz: PASSED
+    
 
 
-### Step 2 — Upload to TestPyPI
+**Checkpoint:** both files should say `PASSED`.
 
-**This is not auto-executed** — you need a real TestPyPI account and token.
+### Step 9: Upload to TestPyPI (in your terminal)
+
+This step isn't run in the notebook because it needs your own TestPyPI account and token. In a terminal, from the `texttools_project/` folder:
 
 ```bash
-# Run in your terminal
 twine upload --repository testpypi dist/*
 ```
 
-When prompted: - Username: `__token__` (literally) - Password: your API token (starts with `pypi-`)
+When twine asks for credentials:
 
-Or use a `.pypirc` config file:
+- **Username:** `__token__` (type exactly that)
+- **Password:** your API token, which starts with `pypi-`
 
+To avoid typing the token every time, save it in a `~/.pypirc` file in your home folder:
 
-```python
+```ini
 # ~/.pypirc
 [testpypi]
 username = __token__
 password = pypi-your-token-here
 ```
 
-### Step 3 — Install From TestPyPI
+Keep this file private and never commit it to git.
+
+### Step 10: Install From TestPyPI
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ texttools
+pip install --index-url https://test.pypi.org/simple/ texttools-yourname
 ```
 
-### Step 4 — Publish to Real PyPI
+If your package has dependencies, add `--extra-index-url https://pypi.org/simple/` so pip can find them on the real PyPI (TestPyPI doesn't host most packages).
+
+### Step 11: Publish to the Real PyPI
+
+Once everything works on TestPyPI, create an account and token on [pypi.org](https://pypi.org) and run:
 
 ```bash
 twine upload dist/*
-pip install texttools
+pip install texttools-yourname
 ```
+
+**Quick recap**
+
+- Practise on TestPyPI first; real PyPI uploads can't be undone.
+- `twine check dist/*` validates the files; `twine upload` publishes them.
+- Log in with username `__token__` and an API token as the password.
+- The distribution name (`name` in `pyproject.toml`) must be unique; the import name can stay the same.
 
 ---
 
-## Section 9 — Versioning Best Practices
+## 9. Versioning Best Practices
 
 ### Semantic Versioning (SemVer)
 
-The standard for Python packages is **SemVer**: `MAJOR.MINOR.PATCH`
+Most Python packages use **semantic versioning**: `MAJOR.MINOR.PATCH`.
 
-```
+```text
   1  .  4  .  2
   ^     ^     ^
 MAJOR MINOR PATCH
 ```
 
-| Part      | Increment when...                            | Example             |
+| Part | Bump it when... | Example |
 |-----------|----------------------------------------------|---------------------|
-| **MAJOR** | You break backwards compatibility            | `1.0.0` -> `2.0.0` |
-| **MINOR** | You add functionality (backwards-compatible) | `1.0.0` -> `1.1.0` |
-| **PATCH** | You fix a bug (backwards-compatible)         | `1.0.0` -> `1.0.1` |
+| **MAJOR** | you break backwards compatibility | `1.4.2` -> `2.0.0` |
+| **MINOR** | you add a feature that doesn't break existing code | `1.4.2` -> `1.5.0` |
+| **PATCH** | you fix a bug without changing the API | `1.4.2` -> `1.4.3` |
 
-**`0.x.y`** versions (like `0.1.0`) signal that the API is not yet stable.
+When you bump one part, reset the parts to its right to zero. Versions starting with `0.` (like `0.1.0`) tell users the API isn't stable yet.
 
----
+### Keeping the Version in One Place
 
-### The Single Source of Truth Problem
+Right now the version lives in two places:
 
-Version numbers appear in two places:
+1. `pyproject.toml` -> `version = "0.1.0"`
+2. `src/texttools/__init__.py` -> `__version__ = "0.1.0"`
 
-1.  `pyproject.toml` -> `version = "0.1.0"`
-2.  `src/texttools/__init__.py` -> `__version__ = "0.1.0"`
+Update one, forget the other, and they drift apart. There are two clean fixes.
 
-If you update one and forget the other, they diverge. Two clean solutions:
-
-**Option A — Read from installed metadata at runtime (Python 3.8+):**
+**Option A: read the version from the installed metadata.** `pyproject.toml` becomes the only place you write the version, and your code asks for it at run time:
 
 
 ```python
@@ -803,7 +1099,7 @@ print(f"Version from metadata: {pkg_version}")
     Version from metadata: 0.1.0
 
 
-**Option B — Keep `__version__` in `__init__.py`, read it in `pyproject.toml`:**
+**Option B: keep `__version__` in `__init__.py` and let `pyproject.toml` read it.** Remove the `version = ...` line from `[project]` and add:
 
 ```toml
 [project]
@@ -813,80 +1109,139 @@ dynamic = ["version"]
 version = {attr = "texttools.__version__"}
 ```
 
-With this, `pyproject.toml` reads the version from your `__init__.py` — one place to change it.
+Now `__init__.py` is the one place to change the version. (You must delete the fixed `version` line; setuptools refuses a version that's both fixed and `dynamic`.)
 
----
+### Releasing a New Version
 
-### Bumping Versions
-
-```
-1. Update version in pyproject.toml (and __init__.py if applicable)
-2. git commit -m "bump version to 0.2.0"
+```text
+1. Update the version (pyproject.toml, or __init__.py with Option B)
+2. git commit -m "Bump version to 0.2.0"
 3. git tag v0.2.0
-4. python -m build
+4. Delete the old dist/ folder, then: python -m build
 5. twine upload dist/*
 ```
 
-> **Important:** PyPI does not allow re-uploading the same version.
+PyPI never lets you upload the same version twice, even if you delete it. If you made a mistake, release a new patch version.
+
+**Quick recap**
+
+- SemVer: MAJOR for breaking changes, MINOR for new features, PATCH for bug fixes.
+- Keep the version in one place: read it with `importlib.metadata.version()` or use `dynamic = ["version"]`.
+- Every upload needs a new version number; PyPI won't accept the same one twice.
 
 ---
 
-## Section 10 — Full Package Checklist
+## 10. Full Package Checklist
 
-```
+Use this list before every release:
+
+```text
 Structure
   [ ] src/<package>/ layout with __init__.py
   [ ] __version__ defined (or using importlib.metadata)
-  [ ] tests/ directory with no __init__.py
+  [ ] tests/ folder with no __init__.py
   [ ] README.md with installation and usage examples
 
 pyproject.toml
-  [ ] name is unique (check PyPI first)
+  [ ] name is unique (search PyPI first)
   [ ] version follows SemVer
-  [ ] description is a single informative sentence
+  [ ] description is one informative sentence
   [ ] requires-python set correctly
   [ ] dependencies listed (even if empty)
+  [ ] license set as an SPDX string, e.g. "MIT"
   [ ] classifiers added
-  [ ] [tool.setuptools.packages.find] where = ["src"] set
+  [ ] [tool.setuptools.packages.find] where = ["src"]
 
 Quality
-  [ ] All functions have docstrings
-  [ ] Tests cover happy path and edge cases
+  [ ] All public functions have docstrings
+  [ ] Tests cover the normal cases and the edge cases
   [ ] twine check passes with no warnings
 
 Publishing
   [ ] Tested on TestPyPI first
   [ ] Git tag created for this version
-  [ ] No secrets or credentials in the code
+  [ ] No secrets or passwords in the code
 ```
 
 ---
 
-## Challenge — Build Your Own Package
+## 11. Practice
 
-Build a distributable package called **`numtools`** (or choose your own name) from scratch.
+A few quick tasks to check your understanding before the bigger challenge. Answer each one before opening the solution.
+
+### Task 1: Which number do you bump?
+
+`texttools` is at version `1.4.2`. What is the next version for each change?
+
+1. You fix a bug where `word_count("")` crashed.
+2. You add a new function `char_count()`.
+3. You rename `reverse_words()` to `reverse()` and delete the old name.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+1. **`1.4.3`**: a bug fix is a PATCH.
+2. **`1.5.0`**: a new feature that doesn't break anything is a MINOR bump (PATCH resets to 0).
+3. **`2.0.0`**: removing a name breaks existing code, so it's a MAJOR bump.
+
+</details>
+
+### Task 2: Add a second command
+
+Add a terminal command called `tt-count` that runs a function `count_main()` in `texttools/cli.py`. What do you add to `pyproject.toml`, and what must you do afterwards?
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```toml
+[project.scripts]
+texttools = "texttools.cli:main"
+tt-count = "texttools.cli:count_main"
+```
+
+Then write `count_main()` in `cli.py` and **reinstall** (`pip install -e .`), because commands are only created at install time.
+
+</details>
+
+### Task 3: Read a wheel filename
+
+What does `requests-2.32.3-py3-none-any.whl` tell you? And what would you guess `numpy-2.1.0-cp312-cp312-macosx_14_0_arm64.whl` means?
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+- `requests` version `2.32.3`, for any Python 3 (`py3`), with no compiled code (`none`), on any operating system (`any`).
+- `numpy` version `2.1.0`, compiled for CPython 3.12 (`cp312`), using the CPython 3.12 ABI, and only for macOS 14 on Apple Silicon (`arm64`). numpy contains C code, so it needs a separate wheel per platform.
+
+</details>
+
+---
+
+## Challenge: Build Your Own Package
+
+Build a distributable package called **`numtools`** (or pick your own name) from scratch.
 
 ### Requirements
 
-1.  Use the `src/` layout
-2.  Have a proper `pyproject.toml` with all required fields
-3.  Expose at least **3 functions** in its public API via `__init__.py`
-4.  Have a **CLI entry point** with at least 2 subcommands
-5.  Include **tests** covering each function
-6.  Pass `twine check` after building
+1. Use the `src/` layout.
+2. Write a proper `pyproject.toml` with all the fields we used.
+3. Expose at least **3 functions** in the public API through `__init__.py`.
+4. Add a **CLI entry point** with at least 2 sub-commands.
+5. Include **tests** that cover each function.
+6. Pass `twine check` after building.
 
-### Suggested Function Ideas
+### Ideas for Functions
 
-| Theme | Possible Functions |
+| Theme | Possible functions |
 |----|----|
 | Numbers | `is_prime(n)`, `fibonacci(n)`, `factorial(n)` |
 | Dates | `days_until(date)`, `is_weekend(date)`, `format_date(date, style)` |
 | Files | `count_lines(path)`, `find_duplicates(dir)`, `largest_files(dir, n)` |
-| Colours | `hex_to_rgb(hex)`, `rgb_to_hex(r,g,b)`, `contrast_ratio(c1, c2)` |
+| Colours | `hex_to_rgb(hex)`, `rgb_to_hex(r, g, b)`, `contrast_ratio(c1, c2)` |
 
 ### Starter Structure
 
-```
+```text
 numtools/
 +-- src/
 |   +-- numtools/
@@ -898,6 +1253,8 @@ numtools/
 +-- pyproject.toml
 +-- README.md
 ```
+
+Work in the cell below. You can copy the patterns from the `texttools` cells above, or create the files in your editor and run the commands in a terminal.
 
 
 ```python
@@ -922,12 +1279,14 @@ print("Good luck!")
     Good luck!
 
 
-<details>
-<summary>Hint - pyproject.toml skeleton</summary>
+Stuck? Open a hint before you look at the full solution.
+
+<details markdown="1">
+<summary>Hint 1: pyproject.toml skeleton</summary>
 
 ```toml
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -936,8 +1295,8 @@ version = "0.1.0"
 description = "YOUR DESCRIPTION HERE"
 authors = [{name = "Your Name", email = "you@example.com"}]
 readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT"}
+requires-python = ">=3.9"
+license = "MIT"
 dependencies = []
 
 [project.scripts]
@@ -949,8 +1308,8 @@ where = ["src"]
 
 </details>
 
-<details>
-<summary>Hint - is_prime() implementation</summary>
+<details markdown="1">
+<summary>Hint 2: is_prime() implementation</summary>
 
 ```python
 def is_prime(n: int) -> bool:
@@ -964,26 +1323,185 @@ def is_prime(n: int) -> bool:
 
 </details>
 
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+import pathlib, subprocess, sys
+
+root = pathlib.Path("numtools")
+pkg = root / "src" / "numtools"
+pkg.mkdir(parents=True, exist_ok=True)
+(root / "tests").mkdir(exist_ok=True)
+
+(pkg / "core.py").write_text('''"""Small number utilities."""
+
+
+def is_prime(n: int) -> bool:
+    """Return True if n is a prime number."""
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+def fibonacci(n: int) -> list:
+    """Return the first n Fibonacci numbers."""
+    seq = []
+    a, b = 0, 1
+    for _ in range(n):
+        seq.append(a)
+        a, b = b, a + b
+    return seq
+
+
+def factorial(n: int) -> int:
+    """Return n! for n >= 0."""
+    if n < 0:
+        raise ValueError("n must be >= 0")
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+''')
+
+(pkg / "__init__.py").write_text('''"""numtools - small number utilities."""
+
+__version__ = "0.1.0"
+
+from numtools.core import is_prime, fibonacci, factorial
+
+__all__ = ["is_prime", "fibonacci", "factorial"]
+''')
+
+(pkg / "cli.py").write_text('''"""Command-line interface for numtools."""
+
+import argparse
+from numtools.core import is_prime, fibonacci, factorial
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(prog="numtools")
+    sub = parser.add_subparsers(dest="command", required=True)
+    for name in ("prime", "fib", "fact"):
+        sub.add_parser(name).add_argument("n", type=int)
+    args = parser.parse_args()
+
+    if args.command == "prime":
+        print(is_prime(args.n))
+    elif args.command == "fib":
+        print(fibonacci(args.n))
+    elif args.command == "fact":
+        print(factorial(args.n))
+
+
+if __name__ == "__main__":
+    main()
+''')
+
+(root / "tests" / "test_core.py").write_text('''import pytest
+from numtools import is_prime, fibonacci, factorial
+
+
+def test_is_prime():
+    assert is_prime(7)
+    assert not is_prime(1)
+    assert not is_prime(9)
+
+
+def test_fibonacci():
+    assert fibonacci(6) == [0, 1, 1, 2, 3, 5]
+    assert fibonacci(0) == []
+
+
+def test_factorial():
+    assert factorial(0) == 1
+    assert factorial(5) == 120
+    with pytest.raises(ValueError):
+        factorial(-1)
+''')
+
+(root / "README.md").write_text("# numtools\n\nSmall number utilities: is_prime, fibonacci, factorial.\n")
+
+(root / "pyproject.toml").write_text('''[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numtools"
+version = "0.1.0"
+description = "Small number utilities"
+authors = [{name = "Your Name", email = "you@example.com"}]
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+dependencies = []
+
+[project.scripts]
+numtools = "numtools.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+''')
+
+
+def run(*args):
+    out = subprocess.run([sys.executable, "-m", *args], capture_output=True, text=True)
+    print(" ".join(args[:2]), "->", "OK" if out.returncode == 0 else out.stdout + out.stderr)
+
+
+run("pip", "install", "-e", str(root), "--quiet")
+run("pytest", str(root / "tests"), "-q")
+run("build", str(root))
+run("twine", "check", *map(str, (root / "dist").glob("*")))
+```
+
+</details>
+
+In a terminal, the last four lines are simply:
+
+```bash
+pip install -e numtools/
+pytest numtools/tests/
+python -m build numtools/
+twine check numtools/dist/*
+```
+
 ---
 
-## Summary
+## Summary & Cheat Sheet
 
-| Concept | Key Takeaway |
+| Concept | Remember this |
 |----|----|
-| **`src/` layout** | Prevents local source from shadowing the installed package |
-| **`__init__.py`** | Defines the public API; holds `__version__` |
-| **`pyproject.toml`** | Single config for metadata, build system, and tooling |
-| **Editable install** | `pip install -e .` — changes are live without reinstalling |
-| **Entry points** | `[project.scripts]` maps a terminal command to a Python function |
-| **`python -m build`** | Produces `.whl` and `.tar.gz` in `dist/` |
-| **`twine`** | Validates and uploads distributions to PyPI/TestPyPI |
-| **SemVer** | `MAJOR.MINOR.PATCH` — be intentional about which number you bump |
+| `src/` layout | Keeps local source from shadowing the installed package during tests |
+| `__init__.py` | Marks the package, defines the public API, holds `__version__` |
+| `pyproject.toml` | One file for metadata, dependencies and build settings |
+| Editable install | `pip install -e .`: changes show up without reinstalling |
+| Entry points | `[project.scripts]` maps a terminal command to a Python function |
+| `python -m build` | Creates `.whl` and `.tar.gz` in `dist/` |
+| `twine` | `twine check` validates, `twine upload` publishes to PyPI/TestPyPI |
+| SemVer | `MAJOR.MINOR.PATCH`: think about which number your change deserves |
 
----
+### Commands You'll Use Most
+
+```bash
+pip install -e .                               # editable install while developing
+python -m pytest tests/                        # run the tests
+python -m build                                # create dist/*.whl and dist/*.tar.gz
+twine check dist/*                             # validate before uploading
+twine upload --repository testpypi dist/*      # practice upload
+twine upload dist/*                            # real upload to PyPI
+```
 
 ### Further Reading
 
 - [Python Packaging User Guide](https://packaging.python.org/en/latest/)
-- [pyproject.toml specification](https://packaging.python.org/en/latest/specifications/pyproject-toml/)
+- [Writing your pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 - [TestPyPI](https://test.pypi.org)
 - [setuptools documentation](https://setuptools.pypa.io/en/latest/)
+
+### What's Next
+
+The next notebook, **FastAPI**, moves from libraries to web services. The same ideas carry over: a `pyproject.toml` or `requirements.txt` to pin dependencies, a clear project layout, and tests that run against what you actually ship.

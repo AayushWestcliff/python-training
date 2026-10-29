@@ -1,39 +1,48 @@
 # Django
 
-> *"The web framework for perfectionists with deadlines."*
-
----
+In this notebook we build a blog platform with Django and Django REST Framework (DRF). We start with one plain JSON view and end with a token-protected REST API, nested comment URLs and a customised admin site.
 
 ### Learning Objectives
 
-By the end of this notebook, you will be able to:
+By the end of this notebook you will be able to:
 
-1.  **Create** a Django project and app from scratch
-2.  **Define** models and run database migrations
-3.  **Query** the database using the Django ORM
-4.  **Write** function-based and class-based views
-5.  **Build** a REST API using Django REST Framework serializers and ViewSets
-6.  **Protect** endpoints using authentication and permissions
-7.  **Register** models with the Django admin interface
-
----
+1. Create a Django project and app from scratch
+2. Define models and run database migrations
+3. Query the database with the Django ORM
+4. Write function-based and class-based views and connect them to URLs
+5. Build a REST API with DRF serializers, ViewSets and routers
+6. Protect endpoints with token authentication and permissions
+7. Manage your data with the Django admin site
 
 ### Prerequisites
 
-- Python 3.10+ installed
-- Familiarity with Python classes, decorators, and HTTP basics
+- Python 3.10 or newer
+- The OOP notebook (classes, inheritance, decorators) and some HTTP basics
+- The FastAPI notebook is helpful but not required. We compare the two frameworks a few times.
 
-Install dependencies before starting:
+Install everything used in this notebook:
 
 ```bash
-pip install django==5.0.6 djangorestframework==3.15.2 django-filter==24.2
+pip install django djangorestframework drf-nested-routers django-filter
 ```
+
+### How to Use This Notebook
+
+- Work through it **top to bottom**. Each section adds to the same project, called `blogplatform`.
+- The code cells are **not meant to be run inside Jupyter**. Django code has to live inside a project. Each cell tells you where it goes:
+    - `# file: blog/models.py` means the cell is the full content of that file. Create (or replace) the file and paste it in.
+    - `# add to: blogplatform/settings.py` means paste the cell into the existing file.
+    - `# run in: python manage.py shell` means type or paste it into the Django shell.
+    - Cells marked *Illustration* are short pieces to read, not to copy.
+- Run terminal commands (`python manage.py ...`) from the outer `blogplatform/` folder, the one that contains `manage.py`.
+- Try each **Exercise** yourself before opening *Show solution*.
+- Each section ends with a **Quick recap**. Read just the recaps when revising.
 
 ---
 
-## Section 0 — What We're Building
+## What We're Building
 
-We will build the **Blog Platform** — a web application with a REST API for managing blog posts, comments, and authors.
+We will build the **Blog Platform**: a web application with a REST API for blog posts, comments and authors.
 
 ```
 Browser / curl / Postman
@@ -49,28 +58,31 @@ Browser / curl / Postman
 
 ### Final Endpoint Table
 
-| Method | Path                        | Auth          | Description             |
-|--------|-----------------------------|---------------|-------------------------|
-| GET    | `/api/posts/`               | None          | List all posts          |
-| POST   | `/api/posts/`               | Token         | Create a post           |
-| GET    | `/api/posts/{id}/`          | None          | Retrieve a post         |
-| PUT    | `/api/posts/{id}/`          | Token + Owner | Update a post           |
-| DELETE | `/api/posts/{id}/`          | Token + Owner | Delete a post           |
-| GET    | `/api/posts/{id}/comments/` | None          | List comments on a post |
-| POST   | `/api/posts/{id}/comments/` | Token         | Add a comment           |
-| POST   | `/api/auth/register/`       | None          | Register a user         |
-| POST   | `/api/auth/token/`          | None          | Obtain auth token       |
+| Method | Path                          | Auth          | Description               |
+|--------|-------------------------------|---------------|---------------------------|
+| GET    | `/api/posts/`                 | None          | List all posts            |
+| POST   | `/api/posts/`                 | Token         | Create a post             |
+| GET    | `/api/posts/{id}/`            | None          | Get one post with comments|
+| PUT    | `/api/posts/{id}/`            | Token + Owner | Update a post             |
+| DELETE | `/api/posts/{id}/`            | Token + Owner | Delete a post             |
+| POST   | `/api/posts/{id}/publish/`    | Token + Owner | Publish a post            |
+| POST   | `/api/posts/{id}/unpublish/`  | Token + Owner | Unpublish a post          |
+| GET    | `/api/posts/{id}/comments/`   | None          | List comments on a post   |
+| POST   | `/api/posts/{id}/comments/`   | Token         | Add a comment             |
+| POST   | `/api/auth/register/`         | None          | Register a user           |
+| POST   | `/api/auth/token/`            | None          | Get an auth token         |
+| DELETE | `/api/auth/token/revoke/`     | Token         | Log out (delete token)    |
 
 ### Project Structure
 
 ```
 blogplatform/
 ├── manage.py
-├── blogplatform/          ← project config
+├── blogplatform/          <- project config
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-└── blog/                  ← our app
+└── blog/                  <- our app
     ├── models.py
     ├── serializers.py
     ├── views.py
@@ -79,19 +91,24 @@ blogplatform/
     └── admin.py
 ```
 
+**Quick recap**
+
+- One Django **project** (`blogplatform`) holds the settings; one **app** (`blog`) holds our code.
+- Anyone can read posts and comments. Writing needs a token, and only the author may change their own post.
+
 ---
 
-## Section 1 — Setup & First View
+## 1. Setup & First View
 
 ### Django vs FastAPI
 
 |  | Django | FastAPI |
 |----|----|----|
-| Philosophy | **Batteries included** — ORM, admin, auth, templates built in | Minimal core, compose what you need |
-| Data validation | Forms / DRF Serializers | Pydantic models |
-| Auto docs | None (DRF provides browsable API) | Swagger UI + ReDoc |
-| Async support | Partial (Django 4.1+) | Native async/await |
-| Best for | Full-stack web apps, content sites | High-throughput APIs, microservices |
+| Philosophy | Batteries included: ORM, admin, auth and templates built in | Small core, add what you need |
+| Data validation | Forms / DRF serializers | Pydantic models |
+| Auto docs | Not built in (DRF gives a browsable API) | Swagger UI + ReDoc |
+| Async support | Async views since 3.1; ORM mostly sync | Native async/await |
+| Best for | Full web apps, content sites, admin-heavy projects | Fast APIs, microservices |
 
 ### Creating a Project
 
@@ -101,14 +118,15 @@ cd blogplatform
 python manage.py startapp blog
 ```
 
-`startproject` generates the config package. `startapp` generates one **app** — a self-contained module with its own models, views, and URLs. A Django project is composed of one or more apps.
+`startproject` creates the configuration package (settings, root URLs). `startapp` creates one **app**: a self-contained folder with its own models, views and URLs. A Django project is made of one or more apps.
 
 ### Registering the App
 
-Open `blogplatform/settings.py` and add the new app to `INSTALLED_APPS`:
+Open `blogplatform/settings.py` and add DRF and our app to the `INSTALLED_APPS` list that's already there:
 
 
 ```python
+# add to: blogplatform/settings.py  (edit the existing INSTALLED_APPS)
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -116,37 +134,37 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',          # ← Django REST Framework
-    'rest_framework.authtoken', # ← Token authentication
-    'blog',                    # ← our app
+    'rest_framework',          # <- Django REST Framework
+    'rest_framework.authtoken', # <- Token authentication
+    'blog',                    # <- our app
 ]
 ```
 
 ### Running the Development Server
 
 ```bash
-python manage.py migrate      # apply built-in migrations (creates db.sqlite3)
-python manage.py runserver    # starts dev server at http://127.0.0.1:8000
+python manage.py migrate      # apply the built-in migrations (creates db.sqlite3)
+python manage.py runserver    # start the dev server at http://127.0.0.1:8000
 ```
 
 ### Your First View
 
-A **view** is a Python function (or class) that receives an `HttpRequest` and returns an `HttpResponse`.
+A **view** is a Python function (or class) that receives an `HttpRequest` and returns an `HttpResponse`. `JsonResponse` is an `HttpResponse` that turns a dict into JSON for you.
 
 
 ```python
-# blog/views.py
+# file: blog/views.py  (Section 1 checkpoint)
 from django.http import JsonResponse
 
 def health(request):
     return JsonResponse({"status": "ok", "version": "1.0.0"})
 ```
 
-Wire it to a URL:
+Now connect it to a URL. The app gets its own `urls.py`, and the project's `urls.py` includes it under `api/`:
 
 
 ```python
-# blog/urls.py  (create this file)
+# file: blog/urls.py  (Section 1 checkpoint; create this file)
 from django.urls import path
 from . import views
 
@@ -157,7 +175,7 @@ urlpatterns = [
 
 
 ```python
-# blogplatform/urls.py  (include the app URLs)
+# file: blogplatform/urls.py  (include the app URLs)
 from django.contrib import admin
 from django.urls import path, include
 
@@ -167,43 +185,52 @@ urlpatterns = [
 ]
 ```
 
-Visit `http://127.0.0.1:8000/api/health/` — Django returns `{"status": "ok", "version": "1.0.0"}`.
+Visit `http://127.0.0.1:8000/api/health/` and Django returns `{"status": "ok", "version": "1.0.0"}`.
 
-**🏋️ Mini Challenge:** Add a `GET /api/ping/` view that returns `{"message": "pong", "timestamp": <current UTC time as string>}`. Import `datetime` from Python's standard library.
+The full URL is the two pieces joined: `api/` from the project's `urls.py` plus `health/` from the app's `urls.py`.
 
+### Exercise 1: Ping
 
-```python
-# blog/views.py  (Section 1 checkpoint)
+Add a `GET /api/ping/` view that returns `{"message": "pong", "timestamp": <current UTC time as a string>}`. Use `datetime` from Python's standard library.
 
-from django.http import JsonResponse
-
-
-def health(request):
-    return JsonResponse({"status": "ok", "version": "1.0.0"})
-```
-
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
-# blog/urls.py  (Section 1 checkpoint)
+# add to: blog/views.py
+from datetime import datetime, timezone
 
-from django.urls import path
-from . import views
 
-urlpatterns = [
-    path('health/', views.health),
-]
+def ping(request):
+    return JsonResponse({
+        "message": "pong",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
+
+
+# add to: blog/urls.py  (inside urlpatterns)
+# path('ping/', views.ping),
 ```
+
+</details>
+
+**Quick recap**
+
+- `startproject` makes the config package; `startapp` makes an app. Add the app to `INSTALLED_APPS`.
+- A view takes a request and returns a response. `JsonResponse(dict)` returns JSON.
+- URLs are split: the project's `urls.py` uses `include()` to hand a prefix over to the app's `urls.py`.
 
 ---
 
-## Section 2 — Models & Migrations
+## 2. Models & Migrations
 
 ### What Is a Django Model?
 
-A **model** is a Python class that maps to a database table. Each class attribute is a column. Django's ORM translates Python operations into SQL.
+A **model** is a Python class that maps to a database table. Each class attribute is a column. Django's ORM turns Python code into SQL for you.
 
 
 ```python
+# Illustration: the smallest possible model
 from django.db import models
 
 class Post(models.Model):
@@ -211,7 +238,7 @@ class Post(models.Model):
     body  = models.TextField()
 ```
 
-Django creates the table `blog_post` (app name + model name, lowercase).
+Django names the table `blog_post`: app name plus model name, in lowercase.
 
 ### Common Field Types
 
@@ -222,14 +249,15 @@ Django creates the table `blog_post` (app name + model name, lowercase).
 | `IntegerField()` | `int` | INTEGER |
 | `FloatField()` | `float` | REAL |
 | `BooleanField()` | `bool` | BOOLEAN |
-| `DateTimeField(auto_now_add=True)` | `datetime` | DATETIME (set on create) |
+| `DateTimeField(auto_now_add=True)` | `datetime` | DATETIME (set once, on create) |
 | `DateTimeField(auto_now=True)` | `datetime` | DATETIME (set on every save) |
-| `ForeignKey(Model, on_delete=...)` | FK | INTEGER + constraint |
+| `ForeignKey(Model, on_delete=...)` | the related object | INTEGER + foreign key constraint |
 
 ### Relationships
 
 
 ```python
+# Illustration (fields shortened)
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     # CASCADE: deleting a Post also deletes all its Comments
@@ -240,26 +268,28 @@ class Comment(models.Model):
 
 ```
 Edit models.py
-      ↓
-python manage.py makemigrations   ← generates SQL instructions in blog/migrations/
-      ↓
-python manage.py migrate          ← executes the SQL against the database
+      |
+      v
+python manage.py makemigrations   <- writes a migration file in blog/migrations/
+      |
+      v
+python manage.py migrate          <- runs it against the database
 ```
 
-Always run both commands together. Never edit migration files by hand.
+Run both commands every time you change a model. Don't edit migration files by hand unless you really know what you're doing.
 
 ### Inspecting the Schema
 
 ```bash
 python manage.py sqlmigrate blog 0001
-# prints the SQL that Django will execute — useful for learning
+# prints the SQL Django will run. Great for learning what the ORM does.
 ```
 
-**🏋️ Mini Challenge:** Add a `slug` field to `Post` (`SlugField(unique=True)`) and a `published` boolean field (default `False`). Run `makemigrations` and `migrate`. Confirm the columns appear with `sqlmigrate`.
+Here is the full `models.py` for the project:
 
 
 ```python
-# blog/models.py  (Section 2 checkpoint)
+# file: blog/models.py  (Section 2 checkpoint)
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -295,100 +325,72 @@ class Comment(models.Model):
         return f'Comment by {self.author} on "{self.post}"'
 ```
 
+**What just happened?**
+
+- `author` links each post to Django's built-in `User` model, so we get user accounts and passwords for free.
+- `related_name='posts'` means you can write `alice.posts.all()`. Likewise `post.comments.all()` for comments.
+- `class Meta: ordering = ['-created_at']` makes every query return the newest posts first unless you ask otherwise.
+- `__str__` controls how a post is shown in the shell and the admin site.
+
+Now create the tables:
+
+```bash
+python manage.py makemigrations blog
+python manage.py migrate
+```
+
+### Exercise 2: Slug and Published Flag
+
+Suppose your `Post` model started without `slug` and `published`. Add a `slug` field (`SlugField(unique=True)`) and a `published` boolean field (default `False`), run `makemigrations` and `migrate`, and check the new columns with `sqlmigrate`.
+
+(The checkpoint above already includes both, so compare your answer with it.)
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/models.py  (inside class Post)
+slug      = models.SlugField(unique=True)
+published = models.BooleanField(default=False)
+
+# Then in the terminal:
+#   python manage.py makemigrations blog
+#   python manage.py migrate
+#   python manage.py sqlmigrate blog 0002    # the number of your new migration
+#
+# If the table already has rows, makemigrations asks for a default for `slug`.
+# A unique field can't share one default, so the easiest fix while learning is
+# to delete db.sqlite3 and the files in blog/migrations/ (keep __init__.py)
+# and start again.
+```
+
+</details>
+
+**Quick recap**
+
+- A model is a class; each field is a column. Django adds an `id` primary key for you.
+- `ForeignKey(..., on_delete=models.CASCADE, related_name='...')` links tables and gives you a reverse lookup.
+- Changed a model? `makemigrations`, then `migrate`. Every time.
+
 ---
 
-## Section 3 — Django ORM
+## 3. Django ORM
 
-### The QuerySet
+All the code in this section runs in the **Django shell**, a Python prompt with your project already loaded:
 
-Every ORM operation returns a **QuerySet** — a lazy, chainable list of model instances. The SQL is only executed when you iterate, slice, or call `list()` on it.
-
-
-```python
-# Nothing hits the DB yet:
-qs = Post.objects.filter(published=True)
-
-# DB query fires here:
-for post in qs:
-    print(post.title)
+```bash
+python manage.py shell
 ```
 
-### CRUD Operations
+Start with this session. It creates the user `alice` and a first post, which the later examples use. Run it only once: creating `alice` a second time fails because usernames are unique.
+
+Since Django 5.2 the shell imports your models automatically. The `import` lines in the cells are still there so the code also works in older versions and in plain scripts.
 
 
 ```python
-from blog.models import Post
-from django.contrib.auth.models import User
+# run in: python manage.py shell
 
-author = User.objects.get(username='alice')
-
-# CREATE
-post = Post.objects.create(
-    title='Hello Django',
-    slug='hello-django',
-    body='My first post.',
-    author=author,
-    published=True,
-)
-
-# READ — all
-Post.objects.all()
-
-# READ — filter
-Post.objects.filter(published=True)
-Post.objects.filter(author__username='alice')   # ← double-underscore traverses FK
-
-# READ — single record (raises DoesNotExist if missing)
-post = Post.objects.get(slug='hello-django')
-
-# UPDATE
-post.title = 'Hello Django (Updated)'
-post.save()
-
-# Bulk UPDATE (no .save() needed)
-Post.objects.filter(published=False).update(published=True)
-
-# DELETE
-post.delete()
-Post.objects.filter(published=False).delete()
-```
-
-### Lookups (Filtering)
-
-| Lookup | Example | Meaning |
-|----|----|----|
-| `exact` (default) | `filter(title='Hello')` | `title = 'Hello'` |
-| `icontains` | `filter(title__icontains='django')` | case-insensitive LIKE |
-| `gt / gte / lt / lte` | `filter(id__gt=5)` | comparison operators |
-| `in` | `filter(id__in=[1, 2, 3])` | `id IN (1,2,3)` |
-| `isnull` | `filter(slug__isnull=True)` | `IS NULL` |
-| Related field | `filter(author__username='alice')` | JOIN on FK |
-
-### `select_related` and `prefetch_related`
-
-
-```python
-# BAD — N+1 query problem: one query per post to fetch the author
-for post in Post.objects.all():
-    print(post.author.username)
-
-# GOOD — single JOIN query
-for post in Post.objects.select_related('author').all():
-    print(post.author.username)
-
-# For many-to-many or reverse FK (e.g., all comments per post)
-posts = Post.objects.prefetch_related('comments').all()
-```
-
-**🏋️ Mini Challenge:** Write a QuerySet that returns the 5 most recently created published posts whose title contains the word `"python"` (case-insensitive). Use method chaining on a single line.
-
-
-```python
-# Run these in the Django shell:  python manage.py shell
-#
-# Section 3 — ORM examples
-
-# ── Setup ──────────────────────────────────────────────────────────────────
+# Only needed if you run this as a plain script instead of in the shell:
 # import django, os
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blogplatform.settings')
 # django.setup()
@@ -417,28 +419,144 @@ alice_posts  = Post.objects.filter(author__username='alice').select_related('aut
 post.title = 'Getting Started with Python (Revised)'
 post.save()
 
-# Mini challenge answer ↓
+```
+
+### The QuerySet
+
+Every ORM query returns a **QuerySet**: a lazy, chainable list of model objects. "Lazy" means Django doesn't run any SQL until you actually need the results, for example when you loop over it, slice it or call `list()` on it.
+
+
+```python
+# run in: python manage.py shell
+# Nothing hits the DB yet:
+qs = Post.objects.filter(published=True)
+
+# DB query fires here:
+for post in qs:
+    print(post.title)
+```
+
+### CRUD Operations
+
+Here are create, read, update and delete side by side. Note the last two lines delete data; that's fine on a practice database.
+
+
+```python
+# run in: python manage.py shell
+from blog.models import Post
+from django.contrib.auth.models import User
+
+author = User.objects.get(username='alice')
+
+# CREATE
+post = Post.objects.create(
+    title='Hello Django',
+    slug='hello-django',
+    body='My first post.',
+    author=author,
+    published=True,
+)
+
+# READ: all
+Post.objects.all()
+
+# READ: filter
+Post.objects.filter(published=True)
+Post.objects.filter(author__username='alice')   # <- double-underscore traverses FK
+
+# READ: single record (raises DoesNotExist if missing)
+post = Post.objects.get(slug='hello-django')
+
+# UPDATE
+post.title = 'Hello Django (Updated)'
+post.save()
+
+# Bulk UPDATE (no .save() needed)
+Post.objects.filter(published=False).update(published=True)
+
+# DELETE
+post.delete()
+Post.objects.filter(published=False).delete()
+```
+
+### Lookups (Filtering)
+
+| Lookup | Example | Meaning |
+|----|----|----|
+| `exact` (default) | `filter(title='Hello')` | `title = 'Hello'` |
+| `icontains` | `filter(title__icontains='django')` | case-insensitive `LIKE` |
+| `gt` / `gte` / `lt` / `lte` | `filter(id__gt=5)` | `>`, `>=`, `<`, `<=` |
+| `in` | `filter(id__in=[1, 2, 3])` | `id IN (1, 2, 3)` |
+| `isnull` | `filter(slug__isnull=True)` | `IS NULL` |
+| Related field | `filter(author__username='alice')` | JOIN through the foreign key |
+
+### `select_related` and `prefetch_related`
+
+The **N+1 problem**: you load N posts with one query, then touching `post.author` runs one more query *per post*. These two methods fix it:
+
+
+```python
+# run in: python manage.py shell
+# BAD (the N+1 problem): one query per post to fetch the author
+for post in Post.objects.all():
+    print(post.author.username)
+
+# GOOD: single JOIN query
+for post in Post.objects.select_related('author').all():
+    print(post.author.username)
+
+# For many-to-many or reverse FK (e.g., all comments per post)
+posts = Post.objects.prefetch_related('comments').all()
+```
+
+Rule of thumb: `select_related` for a foreign key you follow *forwards* (post -> author, one object). `prefetch_related` for the *reverse* side or many-to-many (post -> comments, many objects).
+
+### Exercise 3: Recent Python Posts
+
+Write one QuerySet that returns the 5 most recently created **published** posts whose title contains `"python"` (any case). Chain the methods together.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# run in: python manage.py shell
 recent_python = (
     Post.objects
     .filter(published=True, title__icontains='python')
     .order_by('-created_at')[:5]
 )
+print(list(recent_python))
 ```
+
+</details>
+
+**Quick recap**
+
+- `Model.objects` gives you QuerySets: `all()`, `filter()`, `exclude()`, `get()`, `order_by()`.
+- QuerySets are lazy and chainable. SQL runs only when you use the results.
+- Double underscores do lookups (`title__icontains`) and follow relations (`author__username`).
+- Use `select_related` / `prefetch_related` to avoid the N+1 query problem.
 
 ---
 
-## Section 4 — Views & URL Patterns
+## 4. Views & URL Patterns
+
+Before we bring in DRF, let's see how far plain Django gets us. This helps you appreciate what DRF does for you in the next section.
 
 ### Function-Based Views (FBVs)
 
-A function-based view handles one or more HTTP methods in a single function. Use `request.method` to branch.
+A function-based view can handle several HTTP methods in one function. Check `request.method` to decide what to do.
 
 
 ```python
+# Illustration (blog/views.py)
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
+from .models import Post
 
+@csrf_exempt
 @require_http_methods(['GET', 'POST'])
 def post_list(request):
     if request.method == 'GET':
@@ -447,15 +565,20 @@ def post_list(request):
 
     elif request.method == 'POST':
         data = json.loads(request.body)
-        post = Post.objects.create(**data)
+        post = Post.objects.create(author=request.user, **data)
         return JsonResponse({'id': post.id}, status=201)
 ```
+
+Two things to notice:
+
+- **`@csrf_exempt`**: Django protects every POST, PUT and DELETE against CSRF attacks by default. That check expects a token that only Django's own HTML forms send, so a JSON request from curl gets `403 Forbidden`. We switch the check off for these demo views. DRF handles this properly for us later.
+- **`author=request.user`**: every post needs an author. `request.user` is the logged-in user (or `AnonymousUser` if nobody is logged in, which is why the checkpoint below checks first).
 
 ### URL Patterns
 
 
 ```python
-# blog/urls.py
+# Illustration (blog/urls.py)
 from django.urls import path
 from . import views
 
@@ -469,15 +592,16 @@ URL converters:
 
 | Converter     | Matches                   | Example                |
 |---------------|---------------------------|------------------------|
-| `<int:pk>`    | `0-9+`                    | `/posts/42/` → `pk=42` |
-| `<str:slug>`  | non-`/` chars             | `/posts/hello-world/`  |
+| `<int:pk>`    | digits                    | `/posts/42/` gives `pk=42` |
+| `<str:slug>`  | anything except `/`       | `/posts/hello-world/`  |
 | `<slug:slug>` | letters, digits, `-`, `_` | `/posts/hello-world/`  |
-| `<uuid:id>`   | UUID format               | `/items/550e8400-.../` |
+| `<uuid:id>`   | a UUID                    | `/items/550e8400-.../` |
 
-### get_object_or_404
+### `get_object_or_404`
 
 
 ```python
+# Illustration
 from django.shortcuts import get_object_or_404
 
 def post_detail(request, pk):
@@ -487,12 +611,14 @@ def post_detail(request, pk):
 
 ### Class-Based Views (CBVs)
 
-Django ships with generic CBVs that handle common patterns without boilerplate:
+With a class-based view, each HTTP method is its own method on the class. Django calls `get()` for GET requests, `delete()` for DELETE, and so on:
 
 
 ```python
+# Illustration
 from django.views import View
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404
 
 class PostDetailView(View):
     def get(self, request, pk):
@@ -502,28 +628,71 @@ class PostDetailView(View):
     def delete(self, request, pk):
         post = get_object_or_404(Post, pk=pk)
         post.delete()
-        return JsonResponse({}, status=204)
+        return HttpResponse(status=204)   # 204 means "no content", so no body
 ```
 
 
 ```python
-# blog/urls.py
+# Illustration (blog/urls.py)
 path('posts/<int:pk>/', PostDetailView.as_view()),
 ```
 
-**🏋️ Mini Challenge:** Write a `post_detail` FBV that handles `GET` (return the post as JSON), `PUT` (update `title` and `body` from request body), and `DELETE` (delete the post). Use `get_object_or_404`.
+### Exercise 4: A Post Detail View
+
+Write a `post_detail` function-based view that handles:
+
+- `GET`: return the post as JSON
+- `PUT`: update `title` and `body` from the JSON request body
+- `DELETE`: delete the post
+
+Use `get_object_or_404`.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/views.py
+@csrf_exempt
+@require_http_methods(['GET', 'PUT', 'DELETE'])
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'GET':
+        return JsonResponse({'id': post.id, 'title': post.title, 'body': post.body})
+
+    if request.method == 'PUT':
+        data = json.loads(request.body)
+        post.title = data.get('title', post.title)
+        post.body = data.get('body', post.body)
+        post.save()
+        return JsonResponse({'id': post.id, 'title': post.title})
+
+    post.delete()   # DELETE
+    return HttpResponse(status=204)
+```
+
+</details>
+
+Here is the full `views.py` and `urls.py` for this section. Compare how much code it takes; we'll replace all of it with a few lines of DRF in Section 6.
 
 
 ```python
-# blog/views.py  (Section 4 checkpoint — plain Django views)
+# file: blog/views.py  (Section 4 checkpoint: plain Django views)
 
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from .models import Post
 
 
+def health(request):
+    return JsonResponse({"status": "ok", "version": "1.0.0"})
+
+
+@csrf_exempt
+@require_http_methods(['GET', 'POST'])
 def post_list(request):
     if request.method == 'GET':
         posts = list(
@@ -534,6 +703,8 @@ def post_list(request):
         return JsonResponse(posts, safe=False)
 
     elif request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'login required'}, status=401)
         data = json.loads(request.body)
         post = Post.objects.create(
             title=data['title'],
@@ -544,6 +715,8 @@ def post_list(request):
         return JsonResponse({'id': post.id, 'title': post.title}, status=201)
 
 
+@csrf_exempt
+@require_http_methods(['GET', 'PUT', 'DELETE'])
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
@@ -566,29 +739,51 @@ def post_detail(request, pk):
 
     elif request.method == 'DELETE':
         post.delete()
-        return JsonResponse({}, status=204)
+        return HttpResponse(status=204)
 ```
-
----
-
-## Section 5 — Django REST Framework: Serializers
-
-### Why DRF?
-
-Raw Django views work but require manual JSON parsing, validation, and serialisation. **Django REST Framework (DRF)** provides:
-
-- **Serializers** — declare fields once; get validation and serialisation for free
-- **Generic views / ViewSets** — CRUD with minimal code
-- **Browsable API** — interactive HTML interface at every endpoint
-- **Authentication & permissions** — pluggable classes
-
-### ModelSerializer
-
-A `ModelSerializer` auto-generates fields from a model. Compare with FastAPI's `response_model`:
 
 
 ```python
-# blog/serializers.py
+# file: blog/urls.py  (Section 4 checkpoint)
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('health/', views.health),
+    path('posts/', views.post_list),              # /api/posts/
+    path('posts/<int:pk>/', views.post_detail),   # /api/posts/42/
+]
+```
+
+**What just happened?** `post_list` only lists *published* posts, and it uses `.values(...)` to get plain dicts that `JsonResponse` can serialise. A model object can't be turned into JSON directly, which is why `post_detail` builds its dict by hand. `safe=False` is needed because we return a list rather than a dict.
+
+**Quick recap**
+
+- Function-based views branch on `request.method`; class-based views have one method per HTTP verb.
+- `path('posts/<int:pk>/', view)` captures part of the URL and passes it to the view.
+- `get_object_or_404` saves you the try/except for missing objects.
+- Plain Django views mean manual JSON, manual validation and dealing with CSRF yourself. DRF fixes all three.
+
+---
+
+## 5. Django REST Framework: Serializers
+
+### Why DRF?
+
+Plain Django views work, but you write the JSON parsing, validation and serialisation by hand. **Django REST Framework (DRF)** gives you:
+
+- **Serializers**: declare the fields once and get validation and JSON conversion
+- **Generic views / ViewSets**: full CRUD in a few lines
+- **Browsable API**: a clickable HTML page for every endpoint
+- **Authentication & permissions**: ready-made classes you plug in
+
+### ModelSerializer
+
+A `ModelSerializer` builds its fields from a model. It plays the same role as the Pydantic `...Create` / `...Response` models in FastAPI, in one class:
+
+
+```python
+# Illustration (blog/serializers.py)
 from rest_framework import serializers
 from .models import Post, Comment
 
@@ -599,14 +794,22 @@ class PostSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'author']
 ```
 
-The `Meta` inner class maps the serializer to a model. `fields` lists which columns to include; `read_only_fields` cannot be set by the client.
+The inner `Meta` class connects the serializer to a model. `fields` lists the columns to include; `read_only_fields` are sent back to the client but can't be set by it.
 
 ### Validation
 
+Add `validate_<field>` methods for checks on one field, and `validate` for checks that involve several fields:
+
 
 ```python
+# Illustration (blog/serializers.py)
 class PostSerializer(serializers.ModelSerializer):
     title = serializers.CharField(min_length=5, max_length=200)
+
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'slug', 'body', 'published', 'author', 'created_at']
+        read_only_fields = ['id', 'created_at', 'author']
 
     def validate_slug(self, value):
         """Field-level validator."""
@@ -621,10 +824,15 @@ class PostSerializer(serializers.ModelSerializer):
         return data
 ```
 
+When a check fails, DRF answers `400 Bad Request` with the error message under the field name, for example `{"slug": ["Slug must not contain spaces."]}`.
+
 ### Nested Serializers
+
+A serializer can be used as a field inside another one. Here each post includes its full list of comments:
 
 
 ```python
+# Illustration (blog/serializers.py)
 class CommentSerializer(serializers.ModelSerializer):
     author_username = serializers.CharField(source='author.username', read_only=True)
 
@@ -644,11 +852,32 @@ class PostDetailSerializer(serializers.ModelSerializer):
                   'author_username', 'created_at', 'comments']
 ```
 
-**🏋️ Mini Challenge:** Add a `comment_count` field to `PostSerializer` that returns the number of comments on each post. Use `serializers.SerializerMethodField` and implement the `get_comment_count` method.
+`source='author.username'` reads a value through the relation, so the API shows `"alice"` instead of the author's id.
+
+### Exercise 5: Comment Count
+
+Add a `comment_count` field to `PostSerializer` that returns how many comments each post has. Use `serializers.SerializerMethodField` and write a `get_comment_count` method.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/serializers.py  (inside PostSerializer)
+comment_count = serializers.SerializerMethodField()
+
+def get_comment_count(self, obj):
+    return obj.comments.count()
+
+# and add 'comment_count' to Meta.fields
+```
+
+</details>
+
+Here is the full `serializers.py`, including the exercise. `PostDetailSerializer` inherits from `PostSerializer` and just adds the comments, so the two never get out of step.
 
 
 ```python
-# blog/serializers.py  (Section 5 checkpoint)
+# file: blog/serializers.py  (Section 5 checkpoint)
 
 from rest_framework import serializers
 from .models import Post, Comment
@@ -692,16 +921,26 @@ class PostDetailSerializer(PostSerializer):
         fields = PostSerializer.Meta.fields + ['comments']
 ```
 
+**Quick recap**
+
+- A `ModelSerializer` turns model objects into JSON and validates incoming JSON.
+- `Meta.fields` picks the columns; `read_only_fields` are output-only.
+- `validate_<field>()` for one field, `validate()` for several. Raise `serializers.ValidationError`.
+- `source='author.username'` and `SerializerMethodField` add computed fields.
+
 ---
 
-## Section 6 — DRF Views & Routers
+## 6. DRF Views & Routers
 
 ### APIView
 
-`APIView` is DRF's equivalent of Django's `View` — each HTTP method is a separate method on the class. DRF handles content negotiation and authentication automatically.
+`APIView` is DRF's version of Django's `View`: one method per HTTP verb. On top of that, DRF parses JSON for you (`request.data`), turns `Response` objects into JSON, and runs authentication and permission checks.
 
 
 ```python
+# Illustration (blog/views.py)
+from .models import Post
+from .serializers import PostSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -720,12 +959,13 @@ class PostListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 ```
 
-### ModelViewSet — Maximum Reuse
+### ModelViewSet
 
-A **ViewSet** groups all CRUD operations into one class. A **ModelViewSet** auto-implements `list`, `create`, `retrieve`, `update`, `partial_update`, and `destroy`.
+A **ViewSet** puts all the operations for one resource in one class. A **ModelViewSet** gives you `list`, `create`, `retrieve`, `update`, `partial_update` and `destroy` without writing any of them:
 
 
 ```python
+# Illustration (blog/views.py)
 from rest_framework import viewsets
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -735,11 +975,11 @@ class PostViewSet(viewsets.ModelViewSet):
 
 ### DRF Router
 
-Pair a ViewSet with a `DefaultRouter` to auto-generate all URL patterns:
+Give the ViewSet to a `DefaultRouter` and it creates all the URL patterns:
 
 
 ```python
-# blog/urls.py
+# Illustration (blog/urls.py)
 from rest_framework.routers import DefaultRouter
 from . import views
 
@@ -749,7 +989,7 @@ router.register('posts', views.PostViewSet, basename='post')
 urlpatterns = router.urls
 ```
 
-This single `register` call generates:
+That one `register` call creates:
 
 | URL                | Method | Action           |
 |--------------------|--------|------------------|
@@ -762,8 +1002,11 @@ This single `register` call generates:
 
 ### Custom Actions with `@action`
 
+For anything that isn't plain CRUD, add a method with `@action`. `detail=True` means it works on one object, so the URL includes the `pk`:
+
 
 ```python
+# Illustration (blog/views.py)
 from rest_framework.decorators import action
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -772,24 +1015,53 @@ class PostViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post'], url_path='publish')
     def publish(self, request, pk=None):
-        """POST /api/posts/{pk}/publish/ — marks a post as published."""
+        """POST /api/posts/{pk}/publish/ marks a post as published."""
         post = self.get_object()
         post.published = True
         post.save()
         return Response({'status': 'published'})
 ```
 
-**🏋️ Mini Challenge:** Add an `@action` called `unpublish` (detail=True, methods=['post']) that sets `post.published = False`. Register both `/publish/` and `/unpublish/` on the same ViewSet.
+### Exercise 6: Unpublish
+
+Add an `@action` called `unpublish` (`detail=True`, `methods=['post']`) that sets `post.published = False`. Both `/publish/` and `/unpublish/` should work on the same ViewSet.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/views.py  (inside PostViewSet)
+@action(detail=True, methods=['post'], url_path='unpublish')
+def unpublish(self, request, pk=None):
+    post = self.get_object()
+    post.published = False
+    post.save()
+    return Response({'status': 'unpublished'})
+```
+
+</details>
+
+### Section 6 Checkpoint
+
+Replace `blog/views.py` and `blog/urls.py` with the two cells below. The comments live under each post (`/api/posts/1/comments/`), which needs the `drf-nested-routers` package from the install command.
+
+**Heads-up:** until we add authentication in Section 7, you can *read* through the API but not create posts. `perform_create` saves `self.request.user` as the author, and an anonymous user can't be one, so a POST ends in a server error. That's exactly what the next section fixes.
 
 
 ```python
-# blog/views.py  (Section 6 checkpoint — DRF ViewSets)
+# file: blog/views.py  (Section 6 checkpoint: DRF ViewSets)
 
-from rest_framework import viewsets, status
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Post, Comment
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer
+
+
+def health(request):
+    return JsonResponse({"status": "ok", "version": "1.0.0"})
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -828,17 +1100,18 @@ class CommentViewSet(viewsets.ModelViewSet):
         # Scope comments to the parent post
         return Comment.objects.filter(
             post_id=self.kwargs['post_pk']
-        ).select_related('author')
+        ).select_related('author').order_by('created_at')   # oldest first
 
     def perform_create(self, serializer):
-        post = Post.objects.get(pk=self.kwargs['post_pk'])
+        post = get_object_or_404(Post, pk=self.kwargs['post_pk'])
         serializer.save(author=self.request.user, post=post)
 ```
 
 
 ```python
-# blog/urls.py  (Section 6 checkpoint — nested router)
+# file: blog/urls.py  (Section 6 checkpoint: nested router)
 
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 from rest_framework_nested import routers as nested_routers  # pip install drf-nested-routers
 from . import views
@@ -850,28 +1123,45 @@ router.register('posts', views.PostViewSet, basename='post')
 posts_router = nested_routers.NestedDefaultRouter(router, 'posts', lookup='post')
 posts_router.register('comments', views.CommentViewSet, basename='post-comments')
 
-urlpatterns = router.urls + posts_router.urls
+urlpatterns = [path('health/', views.health)] + router.urls + posts_router.urls
 ```
+
+**What just happened?**
+
+- `get_serializer_class()` picks the serializer per action: the detailed one (with comments) for a single post, the short one for lists.
+- `perform_create()` is a hook DRF calls when saving a new object. We use it to fill in fields the client must not choose, like `author`.
+- `NestedDefaultRouter(router, 'posts', lookup='post')` puts the comments URLs under a post, and passes the post's id to the view as `self.kwargs['post_pk']`.
+- `CommentViewSet` uses `get_object_or_404`, so commenting on a post that doesn't exist gives `404` rather than a server error. It also sorts the comments (`order_by('created_at')`); `Comment` has no default ordering, and paginating an unsorted list makes DRF print a warning.
+
+**Quick recap**
+
+- `APIView`: one method per verb, with `request.data` and `Response` doing the JSON work.
+- `ModelViewSet` + `DefaultRouter` = full CRUD and all its URLs in a few lines.
+- `@action(detail=True, methods=['post'])` adds extra endpoints like `/publish/`.
+- Override `get_queryset`, `get_serializer_class` and `perform_create` to customise a ViewSet.
 
 ---
 
-## Section 7 — Authentication & Permissions
+## 7. Authentication & Permissions
 
 ### DRF Authentication Classes
 
-| Class | How the client authenticates |
+| Class | How the client proves who it is |
 |----|----|
-| `SessionAuthentication` | Django session cookie (browser) |
-| `BasicAuthentication` | HTTP Basic — **only for testing** |
+| `SessionAuthentication` | Django session cookie (logging in through a browser) |
+| `BasicAuthentication` | HTTP Basic: username and password on every request. Testing only. |
 | `TokenAuthentication` | `Authorization: Token <token>` header |
-| `JWTAuthentication` (via `djangorestframework-simplejwt`) | `Authorization: Bearer <jwt>` header |
+| `JWTAuthentication` (from `djangorestframework-simplejwt`) | `Authorization: Bearer <jwt>` header |
+
+We'll use `TokenAuthentication`. It's like the API key from the FastAPI notebook: a random string stored in the database, one per user.
 
 ### Setting Up Token Authentication
 
-Add to `settings.py`:
+Add this to the bottom of `settings.py`:
 
 
 ```python
+# add to: blogplatform/settings.py
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -882,12 +1172,13 @@ REST_FRAMEWORK = {
 }
 ```
 
-Run `python manage.py migrate` to create the `authtoken_token` table.
+Then run `python manage.py migrate` again. `rest_framework.authtoken` (which we added to `INSTALLED_APPS` in Section 1) brings its own table, `authtoken_token`.
 
-Expose the token endpoint in `blogplatform/urls.py`:
+DRF also ships a ready-made view that swaps a username and password for a token. Add it to `blogplatform/urls.py`:
 
 
 ```python
+# Illustration (blogplatform/urls.py; the final version is in Section 9)
 from rest_framework.authtoken import views as drf_auth_views
 
 urlpatterns = [
@@ -901,33 +1192,38 @@ urlpatterns = [
 
 | Permission                  | Effect                                 |
 |-----------------------------|----------------------------------------|
-| `AllowAny`                  | Everyone — authenticated or not        |
-| `IsAuthenticated`           | Must have a valid token/session        |
-| `IsAuthenticatedOrReadOnly` | Unauthenticated users may only GET     |
+| `AllowAny`                  | Everyone, logged in or not             |
+| `IsAuthenticated`           | Must send a valid token / session      |
+| `IsAuthenticatedOrReadOnly` | Anonymous users may only read (GET, HEAD, OPTIONS) |
 | `IsAdminUser`               | `request.user.is_staff` must be `True` |
 
 ### Custom Object-Level Permission
 
-Only the post's author should be able to edit or delete it:
+Only a post's author should be able to edit or delete it. Built-in classes can't know that, so we write our own:
 
 
 ```python
-# blog/permissions.py
+# file: blog/permissions.py
+
 from rest_framework.permissions import BasePermission, SAFE_METHODS
 
+
 class IsOwnerOrReadOnly(BasePermission):
-    """Allow read to everyone; write only to the object's owner."""
+    """Write access only to the object's owner; read access for everyone."""
 
     def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:   # GET, HEAD, OPTIONS
+        if request.method in SAFE_METHODS:
             return True
         return obj.author == request.user
 ```
 
-Apply it to the ViewSet:
+`has_object_permission` runs when the view loads one specific object (retrieve, update, delete and our `publish` action). `SAFE_METHODS` is the tuple `('GET', 'HEAD', 'OPTIONS')`, the methods that don't change anything.
+
+Apply it to the ViewSet. DRF checks every class in the list, and all of them must agree:
 
 
 ```python
+# Illustration (blog/views.py)
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 
@@ -938,8 +1234,12 @@ class PostViewSet(viewsets.ModelViewSet):
 
 ### User Registration View
 
+DRF has no sign-up endpoint, so we write a small one. It creates the user and gives back a token straight away:
+
 
 ```python
+# Illustration (blog/views.py; the full file is below)
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
@@ -959,48 +1259,18 @@ class RegisterView(APIView):
         return Response({'token': token.key}, status=201)
 ```
 
-**🏋️ Mini Challenge:** Add a `DELETE /api/auth/token/` endpoint that deletes (revokes) the current user's token, forcing them to re-authenticate. The endpoint must require `IsAuthenticated`.
+`permission_classes = []` overrides the default from `settings.py`, so anyone may call it. Otherwise nobody could register without already having a token.
 
+### Exercise 7: Log Out
 
-```python
-# blog/permissions.py  (Section 7 checkpoint)
+Add a `DELETE /api/auth/token/revoke/` endpoint that deletes the current user's token, so they have to log in again. It must require `IsAuthenticated`.
 
-from rest_framework.permissions import BasePermission, SAFE_METHODS
-
-
-class IsOwnerOrReadOnly(BasePermission):
-    """Write access only to the object's owner; read access for everyone."""
-
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
-        return obj.author == request.user
-```
-
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
-# blog/views.py  (Section 7 — auth views added)
-
-from rest_framework.views import APIView
+# add to: blog/views.py
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-from django.contrib.auth.models import User
-
-
-class RegisterView(APIView):
-    permission_classes = []  # public
-
-    def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        if not username or not password:
-            return Response({'error': 'username and password required'}, status=400)
-        if User.objects.filter(username=username).exists():
-            return Response({'error': 'username already taken'}, status=400)
-        user  = User.objects.create_user(username=username, password=password)
-        token = Token.objects.create(user=user)
-        return Response({'token': token.key}, status=201)
 
 
 class RevokeTokenView(APIView):
@@ -1009,12 +1279,22 @@ class RevokeTokenView(APIView):
     def delete(self, request):
         request.user.auth_token.delete()
         return Response(status=204)
+
+
+# add to: blogplatform/urls.py  (inside urlpatterns)
+# path('api/auth/token/revoke/', RevokeTokenView.as_view()),
 ```
+
+</details>
+
+Here is the complete `views.py` with everything from Sections 6 and 7. Besides the new auth views, `CommentViewSet` now also uses `IsOwnerOrReadOnly`. Without it, any logged-in user could delete anyone else's comment.
 
 
 ```python
-# blog/views.py  (Section 7 checkpoint — full file)
+# file: blog/views.py  (Section 7 checkpoint: full file)
 
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
@@ -1025,6 +1305,10 @@ from django.contrib.auth.models import User
 from .models import Post, Comment
 from .serializers import PostSerializer, PostDetailSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
+
+
+def health(request):
+    return JsonResponse({"status": "ok", "version": "1.0.0"})
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -1056,21 +1340,21 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentViewSet(viewsets.ModelViewSet):
     serializer_class   = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     http_method_names  = ['get', 'post', 'delete', 'head', 'options']
 
     def get_queryset(self):
         return Comment.objects.filter(
             post_id=self.kwargs['post_pk']
-        ).select_related('author')
+        ).select_related('author').order_by('created_at')   # oldest first
 
     def perform_create(self, serializer):
-        post = Post.objects.get(pk=self.kwargs['post_pk'])
+        post = get_object_or_404(Post, pk=self.kwargs['post_pk'])
         serializer.save(author=self.request.user, post=post)
 
 
 class RegisterView(APIView):
-    permission_classes = []
+    permission_classes = []   # public: anyone can register
 
     def post(self, request):
         username = request.data.get('username')
@@ -1092,13 +1376,20 @@ class RevokeTokenView(APIView):
         return Response(status=204)
 ```
 
+**Quick recap**
+
+- Authentication answers "who are you?"; permissions answer "are you allowed?".
+- Set defaults in `REST_FRAMEWORK` in `settings.py`; override per view with `permission_classes`.
+- Clients send `Authorization: Token <key>`. Get the key from `/api/auth/token/` or `/api/auth/register/`.
+- Object-level rules ("only the author") go in `has_object_permission`.
+
 ---
 
-## Section 8 — Django Admin
+## 8. Django Admin
 
 ### What Is the Admin?
 
-Django ships with a fully functional web-based admin interface at `/admin/`. It requires zero custom frontend code — just register your models.
+Django comes with a complete web admin site at `/admin/`. You don't write any frontend code; you just register your models.
 
 ```bash
 python manage.py createsuperuser   # creates an admin user
@@ -1110,7 +1401,7 @@ python manage.py runserver
 
 
 ```python
-# blog/admin.py
+# Illustration (blog/admin.py, simplest version)
 from django.contrib import admin
 from .models import Post, Comment
 
@@ -1118,14 +1409,19 @@ admin.site.register(Post)
 admin.site.register(Comment)
 ```
 
-This gives you list/add/edit/delete views for both models immediately.
+That's enough to get list, add, edit and delete pages for both models.
 
 ### Customising the Admin
 
-Use `ModelAdmin` to control columns, filters, search, and inline editing:
+A `ModelAdmin` class controls the columns, filters, search box and more. An *inline* shows related objects (here, a post's comments) on the same page:
 
 
 ```python
+# Illustration (blog/admin.py)
+from django.contrib import admin
+from .models import Post, Comment
+
+
 class CommentInline(admin.TabularInline):
     model   = Comment
     extra   = 0        # don't show blank rows by default
@@ -1141,29 +1437,47 @@ class PostAdmin(admin.ModelAdmin):
     inlines         = [CommentInline]
     actions         = ['make_published']
 
+    @admin.action(description='Mark selected posts as published')
     def make_published(self, request, queryset):
         queryset.update(published=True)
-    make_published.short_description = 'Mark selected posts as published'
 ```
 
-### Key `ModelAdmin` Options
+`@admin.action(description=...)` is the current way to name a bulk action. Older code sets `make_published.short_description = ...` after the function, which still works.
+
+### Common `ModelAdmin` Options
 
 | Option                | Effect                                     |
 |-----------------------|--------------------------------------------|
-| `list_display`        | Columns shown in the object list           |
-| `list_filter`         | Sidebar filter panel                       |
-| `search_fields`       | Enables a search box (uses `LIKE` queries) |
+| `list_display`        | Columns shown in the list of objects       |
+| `list_filter`         | Filter panel in the sidebar                |
+| `search_fields`       | Adds a search box (uses `LIKE` queries)    |
 | `ordering`            | Default sort order                         |
-| `prepopulated_fields` | Auto-fills one field from another          |
-| `inlines`             | Embed related objects on the same page     |
-| `actions`             | Bulk actions available from the list view  |
+| `prepopulated_fields` | Fills one field from another as you type   |
+| `inlines`             | Shows related objects on the same page     |
+| `actions`             | Bulk actions in the list view              |
 | `readonly_fields`     | Fields shown but not editable              |
 
-**🏋️ Mini Challenge:** Register `Comment` with a `CommentAdmin` that shows `post`, `author`, and `created_at` in `list_display`, and allows filtering by `created_at`. Add a `search_fields` on `body` and `author__username`.
+### Exercise 8: Comment Admin
+
+Register `Comment` with a `CommentAdmin` that shows `post`, `author` and `created_at` as columns, can be filtered by `created_at`, and can be searched by `body` and `author__username`. (Remove the plain `admin.site.register(Comment)` line, since a model can only be registered once.)
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/admin.py
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display  = ['post', 'author', 'created_at']
+    list_filter   = ['created_at']
+    search_fields = ['body', 'author__username']
+```
+
+</details>
 
 
 ```python
-# blog/admin.py  (Section 8 checkpoint)
+# file: blog/admin.py  (Section 8 checkpoint)
 
 from django.contrib import admin
 from .models import Post, Comment
@@ -1196,81 +1510,25 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ['body', 'author__username']
 ```
 
+**Quick recap**
+
+- `python manage.py createsuperuser`, then log in at `/admin/`.
+- `@admin.register(Model)` + a `ModelAdmin` class to customise the pages.
+- `list_display`, `list_filter`, `search_fields` and `inlines` cover most needs.
+
 ---
 
-## Section 9 — Final `settings.py` & `urls.py`
+## 9. Final `settings.py` & `urls.py`
 
-Bring all pieces together in the project config files.
+Time to put all the pieces together in the project's config files.
 
-### `blogplatform/settings.py` (relevant additions)
+### `blogplatform/settings.py`
 
-
-```python
-INSTALLED_APPS = [
-    # ... django defaults ...
-    'rest_framework',
-    'rest_framework.authtoken',
-    'blog',
-]
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',  # browsable API login
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-}
-```
-
-### `blogplatform/urls.py` (final)
+These are only the parts we changed. Leave everything else that `startproject` generated as it is. Compared with Section 7 we've added `SessionAuthentication` (so you can log in to the browsable API) and pagination.
 
 
 ```python
-from django.contrib import admin
-from django.urls import path, include
-from rest_framework.authtoken import views as drf_auth_views
-from blog.views import RegisterView, RevokeTokenView
-
-urlpatterns = [
-    path('admin/',               admin.site.urls),
-    path('api/',                 include('blog.urls')),
-    path('api/auth/register/',   RegisterView.as_view()),
-    path('api/auth/token/',      drf_auth_views.obtain_auth_token),
-    path('api/auth/token/revoke/', RevokeTokenView.as_view()),
-    path('api-auth/',            include('rest_framework.urls')),  # browsable API login
-]
-```
-
-### Testing with curl
-
-```bash
-# Register
-curl -X POST http://127.0.0.1:8000/api/auth/register/ \
-  -H 'Content-Type: application/json' \
-  -d '{"username": "alice", "password": "secret123"}'
-# → {"token": "abc123..."}
-
-# Create a post (authenticated)
-curl -X POST http://127.0.0.1:8000/api/posts/ \
-  -H 'Authorization: Token abc123...' \
-  -H 'Content-Type: application/json' \
-  -d '{"title": "Hello Django", "slug": "hello-django", "body": "My first post!"}'
-
-# List posts (unauthenticated)
-curl http://127.0.0.1:8000/api/posts/
-
-# Publish a post
-curl -X POST http://127.0.0.1:8000/api/posts/1/publish/ \
-  -H 'Authorization: Token abc123...'
-```
-
-
-```python
-# blogplatform/settings.py  (Section 9 checkpoint — additions only)
+# add to: blogplatform/settings.py  (final version of the parts we changed)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -1299,9 +1557,11 @@ REST_FRAMEWORK = {
 }
 ```
 
+### `blogplatform/urls.py`
+
 
 ```python
-# blogplatform/urls.py  (Section 9 checkpoint — final)
+# file: blogplatform/urls.py  (final)
 
 from django.contrib import admin
 from django.urls import path, include
@@ -1318,29 +1578,160 @@ urlpatterns = [
 ]
 ```
 
+### Testing with curl
+
+```bash
+# Register
+curl -X POST http://127.0.0.1:8000/api/auth/register/ \
+  -H 'Content-Type: application/json' \
+  -d '{"username": "alice", "password": "secret123"}'
+# -> {"token": "abc123..."}
+
+# Create a post (logged in)
+curl -X POST http://127.0.0.1:8000/api/posts/ \
+  -H 'Authorization: Token abc123...' \
+  -H 'Content-Type: application/json' \
+  -d '{"title": "Hello Django", "slug": "hello-django", "body": "My first post!"}'
+
+# List posts (no login needed)
+curl http://127.0.0.1:8000/api/posts/
+
+# Publish a post (only its author can)
+curl -X POST http://127.0.0.1:8000/api/posts/1/publish/ \
+  -H 'Authorization: Token abc123...'
+
+# Log out
+curl -X DELETE http://127.0.0.1:8000/api/auth/token/revoke/ \
+  -H 'Authorization: Token abc123...'
+```
+
+Because pagination is switched on, the list endpoint now wraps the posts: `{"count": 1, "next": null, "previous": null, "results": [...]}`.
+
+You can also open `http://127.0.0.1:8000/api/posts/` in the browser to use the browsable API. Log in with the link in the top-right corner (that's what `api-auth/` is for).
+
+**Quick recap**
+
+- `INSTALLED_APPS` lists DRF, the token app and our app; `REST_FRAMEWORK` sets auth, permission and pagination defaults.
+- The project's `urls.py` mounts the admin, the app's API and the auth endpoints.
+- With pagination on, list responses look like `{count, next, previous, results}`.
+
 ---
 
-## Summary
+## Extra Practice
 
-| Concept | Key Takeaway |
+Three small features for the finished project. Each needs only a few lines.
+
+### Practice 1: Filter Posts
+
+Let clients filter the post list with `?published=true` and `?author__username=alice`, using the **django-filter** package (already in the install command).
+
+**Hint:** add `'django_filters'` to `INSTALLED_APPS`, set `DEFAULT_FILTER_BACKENDS` in `REST_FRAMEWORK`, and give `PostViewSet` a `filterset_fields` list.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blogplatform/settings.py
+INSTALLED_APPS += ['django_filters']
+
+REST_FRAMEWORK['DEFAULT_FILTER_BACKENDS'] = [
+    'django_filters.rest_framework.DjangoFilterBackend',
+]
+
+
+# add to: blog/views.py  (inside PostViewSet)
+filterset_fields = ['published', 'author__username']
+```
+
+</details>
+
+### Practice 2: Search and Sort
+
+Add `?search=django` (searches title and body) and `?ordering=title` / `?ordering=-created_at` to the post list, using DRF's `SearchFilter` and `OrderingFilter`.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/views.py
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
+
+# inside PostViewSet
+filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+search_fields = ['title', 'body']
+ordering_fields = ['created_at', 'title']
+
+# Setting filter_backends on the view replaces the default list from settings,
+# which is why DjangoFilterBackend is listed again here.
+```
+
+</details>
+
+### Practice 3: My Posts
+
+Add `GET /api/posts/mine/` that returns only the logged-in user's posts, including unpublished ones. Anonymous users should get `401`.
+
+**Hint:** `@action(detail=False, ...)` makes an action on the collection, so there's no `pk` in the URL.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+# add to: blog/views.py  (inside PostViewSet)
+@action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
+def mine(self, request):
+    posts = self.get_queryset().filter(author=request.user)
+    page = self.paginate_queryset(posts)
+    serializer = self.get_serializer(page, many=True)
+    return self.get_paginated_response(serializer.data)
+```
+
+</details>
+
+**Quick recap**
+
+- `filterset_fields` (django-filter) gives exact-match filters with one line.
+- `SearchFilter` and `OrderingFilter` add `?search=` and `?ordering=`.
+- `@action(detail=False)` adds endpoints on the collection, like `/api/posts/mine/`.
+
+---
+
+## Summary & Cheat Sheet
+
+| Topic | Remember this |
 |----|----|
-| **Project vs App** | A project is configuration; apps are reusable modules. One project, many apps. |
-| **Models** | Classes that map to DB tables. Fields are columns. Django handles DDL via migrations. |
-| **Migrations** | `makemigrations` → generate SQL; `migrate` → execute SQL. Always run both. |
-| **ORM** | Chainable QuerySets. Use `select_related` / `prefetch_related` to avoid N+1 queries. |
-| **Views** | Functions or classes that receive `HttpRequest` and return `HttpResponse`. |
-| **DRF Serializers** | Declare once — get validation, serialisation, and deserialization for free. |
-| **ModelViewSet** | One class = full CRUD. Pair with `DefaultRouter` to auto-generate URL patterns. |
-| **`@action`** | Attach extra endpoints to a ViewSet (`/publish/`, `/unpublish/`). |
-| **Permissions** | `IsAuthenticatedOrReadOnly` + custom `IsOwnerOrReadOnly` protects write operations. |
-| **Admin** | Register models, customise with `ModelAdmin` — full CRUD UI for free. |
+| Project vs app | A project is the configuration; apps hold the code. One project, many apps. |
+| Models | Classes that map to tables. Fields are columns. |
+| Migrations | `makemigrations` writes the change, `migrate` applies it. Always both. |
+| ORM | Lazy, chainable QuerySets. `select_related` / `prefetch_related` avoid N+1 queries. |
+| Views | Functions or classes that take an `HttpRequest` and return an `HttpResponse`. |
+| DRF serializers | Declare fields once; get validation and JSON in both directions. |
+| `ModelViewSet` | One class = full CRUD. Pair it with `DefaultRouter` for the URLs. |
+| `@action` | Extra endpoints on a ViewSet (`/publish/`, `/unpublish/`). |
+| Permissions | `IsAuthenticatedOrReadOnly` + a custom `IsOwnerOrReadOnly` protect writes. |
+| Admin | Register models and customise with `ModelAdmin` for a free management UI. |
 
----
+### Useful Commands
+
+```bash
+django-admin startproject blogplatform    # new project
+python manage.py startapp blog            # new app
+python manage.py makemigrations           # after changing models
+python manage.py migrate                  # apply migrations
+python manage.py createsuperuser          # admin login
+python manage.py shell                    # Python prompt with the project loaded
+python manage.py runserver                # dev server on port 8000
+```
 
 ### Further Reading
 
 - [Django documentation](https://docs.djangoproject.com/)
 - [Django REST Framework documentation](https://www.django-rest-framework.org/)
-- [Django ORM cheatsheet](https://docs.djangoproject.com/en/stable/ref/models/querysets/)
-- [drf-nested-routers](https://github.com/alanjds/drf-nested-routers) — nested URL routing for related resources
-- [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/) — JWT authentication for DRF
+- [QuerySet API reference](https://docs.djangoproject.com/en/stable/ref/models/querysets/)
+- [drf-nested-routers](https://github.com/alanjds/drf-nested-routers): nested URLs for related resources
+- [djangorestframework-simplejwt](https://django-rest-framework-simplejwt.readthedocs.io/): JWT authentication for DRF
+
+### What's Next
+
+The next notebook, **Deploying Applications**, shows how to take a project like this one (or the FastAPI one) off your laptop and run it on a real server.

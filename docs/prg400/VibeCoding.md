@@ -1,51 +1,52 @@
-# Vibe Coding: Using AI Tools and Agents in Modern Python Development
+# Vibe Coding: Using AI Tools and Agents in Python Development
 
-> *"The best programmers are not those who know the most, but those who know how to find the best answers — and now AI is part of that toolkit."*
+AI assistants can now write a lot of code for you. This notebook shows how to use them well: how to ask, how to check what comes back, and where you still have to do the thinking yourself.
 
----
+> "The best programmers aren't the ones who know the most. They're the ones who know how to find good answers, and AI is now one of the places to look."
 
-## Learning Objectives
+### Learning Objectives
 
-By the end of this lecture, you will be able to:
+By the end of this notebook you will be able to:
 
-1.  **Explain** what "vibe coding" is and where the term comes from
-2.  **Use** AI coding assistants (GitHub Copilot, ChatGPT, Claude) effectively with targeted prompts
-3.  **Evaluate** AI-generated code critically — spotting bugs, security issues, and hallucinations
-4.  **Scaffold** FastAPI and Django projects faster using AI-assisted workflows
-5.  **Generate** Dockerfiles and docker-compose configurations with AI guidance
-6.  **Understand** what AI agents are and how they differ from simple autocomplete
-7.  **Apply** a responsible AI workflow: generate → review → refine → own
+1. Explain what "vibe coding" means and where the term comes from
+2. Write clear, targeted prompts for tools like GitHub Copilot, ChatGPT and Claude
+3. Review AI-generated code critically and spot bugs, security holes and hallucinations
+4. Scaffold FastAPI and Django code faster with AI help
+5. Generate Dockerfiles and `docker-compose.yml` files with AI, and check them
+6. Explain what an AI agent is and how it differs from autocomplete
+7. Follow a responsible workflow: generate, review, refine, test, own
 
----
+### Prerequisites
 
-## Sections
+- Python 3.10 or newer
+- The FastAPI, Django and Deploying Applications notebooks from this course (we reuse their ideas)
+- Access to at least one AI coding tool (Copilot Chat, ChatGPT, Claude or similar) for the exercises
 
-| #  | Topic                                 |
-|-----|---------------------------------------|
-| 1   | What is Vibe Coding?                  |
-| 2   | The AI Developer Toolkit              |
-| 3   | The Art of Prompting                  |
-| 4   | AI-Assisted FastAPI Development       |
-| 5   | AI-Assisted Django Development        |
-| 6   | AI for Infrastructure: Docker & Nginx |
-| 7   | AI Agents in Development              |
-| 8   | Pitfalls, Hallucinations & Security   |
-| 9   | What AI Cannot Replace                |
-| 10  | Best Practices & Responsible Workflow |
+### How to Use This Notebook
+
+- Run the code cells **from top to bottom**. None of them call a real AI service, so they work offline and need no API keys.
+- Several cells hold AI-generated code **as a string** so you can read it without installing Django or Docker. To try it for real, copy it into a file.
+- Exercises ask you to write prompts or review code. Try first, then open *Show solution* to compare with an example answer.
+- Each section ends with a **Quick recap**. Read just the recaps when revising.
 
 ---
 
-## Section 1 — What is Vibe Coding?
+## 1. What is Vibe Coding?
 
-### The Term's Origin
+### Where the Term Comes From
 
-The phrase **"vibe coding"** was coined by **Andrej Karpathy** (co-founder of OpenAI, former Tesla AI director) in February 2025. His tweet read:
+Andrej Karpathy (a co-founder of OpenAI and former head of AI at Tesla) coined the phrase **vibe coding** in a post in February 2025:
 
-> *"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because LLMs are getting good enough."*
+> "There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists. It's possible because the LLMs (e.g. Cursor Composer w Sonnet) are getting too good."
 
-He described a workflow where developers: - Describe what they want in natural language - Let the AI generate the code - Accept suggestions without always reading them deeply - Iterate quickly through prompts rather than through manual edits
+He was describing a way of working where you:
 
----
+- describe what you want in plain English
+- let the AI write the code
+- accept its suggestions without always reading them closely
+- fix things by sending another prompt rather than editing the code yourself
+
+He was mostly talking about quick throwaway projects. For anything you have to maintain, the "forget the code exists" part is where the trouble starts, and most of this notebook is about that.
 
 ### The Spectrum of AI-Assisted Development
 
@@ -59,169 +60,170 @@ CODING                                                   CODING
                                and snippets  you review
 ```
 
-**Most professional developers today operate in the middle** — using AI to accelerate work while retaining full understanding and responsibility for the code.
-
----
+Most working developers sit somewhere in the middle. They let AI speed things up, but they still understand the code and take responsibility for it.
 
 ### Why This Matters Now
 
-| Year | Milestone                                            |
-|------|------------------------------------------------------|
-| 2021 | GitHub Copilot beta — AI autocomplete arrives        |
-| 2022 | ChatGPT released — conversational code generation    |
-| 2023 | GPT-4, Claude 2 — near-human reasoning on code       |
-| 2024 | Copilot Workspace, Cursor IDE — agentic coding tools |
-| 2025 | AI agents write, test, deploy code autonomously      |
+| Year | Milestone |
+|------|-----------|
+| 2021 | GitHub Copilot preview: AI autocomplete arrives in the editor |
+| 2022 | ChatGPT released: you can *chat* about code |
+| 2023 | GPT-4 and Claude 2: much stronger reasoning about code |
+| 2024 | Copilot Workspace, Cursor and similar tools start editing whole projects |
+| 2025 | Agent tools (Copilot agent mode, Claude Code, Codex and others) can edit files, run tests and iterate on their own |
+
+### Class Discussion (3 minutes)
+
+- Have you used GitHub Copilot, ChatGPT or Claude to help write code?
+- What worked well? What didn't?
+- Do you think AI will replace programmers? Why or why not?
+
+**Quick recap**
+
+- "Vibe coding" (Karpathy, Feb 2025) means describing what you want and letting the AI write it, often without reading it closely.
+- In practice it's a spectrum, from hand-written code to fully AI-written code.
+- Professional work sits in the middle: AI drafts, you understand and own the result.
 
 ---
 
-### 💬 Class Discussion (3 minutes)
+## 2. The AI Developer Toolkit
 
-> - Have you used GitHub Copilot, ChatGPT, or Claude to help write code?
-> - What worked well? What didn't?
-> - Do you think AI will replace programmers? Why or why not?
+### Common AI Coding Tools
 
----
+This list changes every few months, so treat it as a snapshot rather than a ranking.
 
-## Section 2 — The AI Developer Toolkit
+| Tool | Type | Good for |
+|------|------|----------|
+| GitHub Copilot | IDE plugin + agent | Autocomplete in the editor, chat, PR review, agent mode |
+| Cursor | AI-first editor (a VS Code fork) | Working with the whole codebase as context, multi-file edits |
+| Claude (Anthropic) | Chat, API and the Claude Code CLI agent | Long code generation, talking through design, terminal-based agent work |
+| ChatGPT (OpenAI) | Chat + API | Explanations, debugging, general coding questions |
+| Gemini Code Assist | IDE plugin | Development on Google Cloud |
+| Amazon Q Developer | IDE plugin | Development on AWS |
+| Aider | CLI tool | Pair programming in the terminal, commits to git for you |
 
-### Major AI Coding Tools in 2025
-
-| Tool | Type | Best For |
-|----|----|----|
-| **GitHub Copilot** | IDE plugin + agent | In-editor autocomplete, PR review, workspace agents |
-| **Cursor** | AI-native IDE | Full codebase context, multi-file edits |
-| **Claude (Anthropic)** | Chat + API | Long code generation, architecture discussion |
-| **ChatGPT (OpenAI)** | Chat + API | Explanation, debugging, general coding tasks |
-| **Gemini Code Assist** | IDE plugin | Google Cloud / GCP-integrated development |
-| **Amazon Q** | IDE plugin | AWS-integrated development |
-| **Aider** | CLI tool | Terminal-based AI pair programming with git |
-
----
-
-### How These Tools Actually Work (High Level)
+### How These Tools Work (High Level)
 
 ```
-Your Prompt / Code Context
+Your prompt + code context
          │
          ▼
-  ┌─────────────────────────────────┐
+  ┌──────────────────────────────────┐
   │        Large Language Model      │
-  │   (Trained on billions of lines  │
-  │    of code from GitHub, docs,    │
+  │   (trained on huge amounts of    │
+  │    code from GitHub, docs,       │
   │    Stack Overflow, papers...)    │
-  └─────────────────────────────────┘
+  └──────────────────────────────────┘
          │
          ▼
-    Generated Tokens  →  Code Output
+   Generated tokens  →  code output
 ```
 
-**Key concepts to understand:**
+Four ideas worth knowing:
 
-- **Context window**: The amount of text the model can "see" at once (8K → 200K+ tokens)
-- **Temperature**: Controls randomness — lower = more deterministic code
-- **Training cutoff**: The model doesn't know about libraries released after its training date
-- **Hallucination**: The model confidently generates plausible-but-wrong code
+- **Context window**: how much text the model can "see" at once. This ranges from a few thousand tokens in older models to hundreds of thousands (or more) today.
+- **Temperature**: how random the output is. Lower means more predictable code.
+- **Training cutoff**: the model doesn't know about libraries or versions released after it was trained.
+- **Hallucination**: the model confidently writes code that looks right but isn't, for example calling a function that doesn't exist.
+
+### GitHub Copilot in VS Code
+
+| Feature | What it does |
+|---------|--------------|
+| Inline suggestions | Grey "ghost text" as you type; press Tab to accept |
+| Copilot Chat | Ask questions about your code in a side panel |
+| `/explain` | Explain the selected code |
+| `/fix` | Suggest a fix for a bug in the selection |
+| `/tests` | Generate unit tests |
+| `/doc` | Generate docstrings / comments |
+| Agent mode | Carry out multi-step tasks across files on its own |
+
+**Quick recap**
+
+- Tools range from autocomplete (Copilot inline) to chat (ChatGPT, Claude) to agents (Copilot agent mode, Claude Code, Aider).
+- Under the hood they're all large language models predicting the next tokens.
+- Remember the limits: context window, training cutoff and hallucination.
 
 ---
 
-### GitHub Copilot in VS Code — Key Features
+## 3. The Art of Prompting
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  GitHub Copilot Features                                 │
-│                                                          │
-│  ① Inline Suggestions    — Tab to accept as you type    │
-│  ② Copilot Chat          — Ask questions about code     │
-│  ③ /explain              — Explain selected code        │
-│  ④ /fix                  — Fix a bug in selection       │
-│  ⑤ /tests                — Generate unit tests         │
-│  ⑥ /doc                  — Generate docstrings         │
-│  ⑦ Agent Mode            — Multi-step autonomous tasks │
-└─────────────────────────────────────────────────────────┘
-```
+What you get out of an AI tool depends heavily on what you put in. Of everything in this notebook, prompting is the skill you'll use every day.
 
----
+### What a Good Code Prompt Contains
 
-## Section 3 — The Art of Prompting
+| Part | Example |
+|------|---------|
+| Role | "You are a senior Python backend developer." |
+| Context | "I'm building a FastAPI app with PostgreSQL." |
+| Task | "Create a user registration endpoint." |
+| Specifics | "Use Pydantic v2 and hash passwords with bcrypt." |
+| Constraints | "Follow REST conventions and add error handling." |
+| Format | "Include type hints and docstrings." |
 
-The quality of AI output is **directly proportional to the quality of your prompt**. This is the most important skill to develop.
+You won't need all six every time, but the more of them you include, the less the AI has to guess.
 
-### The Anatomy of a Great Code Prompt
+### Weak Prompt vs. Strong Prompt
 
-```
-┌────────────────────────────────────────────────────────────────┐
-│  ROLE       — "You are a senior Python backend developer"       │
-│  CONTEXT    — "I'm building a FastAPI app with PostgreSQL"      │
-│  TASK       — "Create a user registration endpoint"            │
-│  SPECIFICS  — "Use Pydantic v2, hash passwords with bcrypt"    │
-│  CONSTRAINTS— "Follow RESTful conventions, add error handling" │
-│  FORMAT     — "Include type hints and docstrings"              │
-└────────────────────────────────────────────────────────────────┘
+**Weak:**
+
+```text
+make a login api
 ```
 
-### Bad Prompt vs. Good Prompt
+**Strong:**
 
-**❌ Weak prompt:**
+```text
+You are a senior Python developer. I'm building a FastAPI application.
 
-    make a login api
+Create a POST /auth/login endpoint that:
+- Accepts email and password in the request body (use Pydantic v2 BaseModel)
+- Queries a SQLAlchemy User model (assume it has id, email, hashed_password fields)
+- Verifies the password using passlib bcrypt
+- Returns a JWT access token (use python-jose)
+- Raises HTTPException 401 if credentials are invalid
+- Includes type hints and a brief docstring
 
-**✅ Strong prompt:**
+Do not create the full app — just the router function and the Pydantic schemas.
+```
 
-    You are a senior Python developer. I'm building a FastAPI application.
-
-    Create a POST /auth/login endpoint that:
-    - Accepts email and password in the request body (use Pydantic v2 BaseModel)
-    - Queries a SQLAlchemy User model (assume it has id, email, hashed_password fields)
-    - Verifies the password using passlib bcrypt
-    - Returns a JWT access token (use python-jose)
-    - Raises HTTPException 401 if credentials are invalid
-    - Includes type hints and a brief docstring
-
-    Do not create the full app — just the router function and the Pydantic schemas.
-
----
+The weak prompt leaves the AI to guess the framework, the database, the password hashing and the response format. The strong one answers all of those up front, and the last line stops it from generating a whole app you didn't ask for.
 
 ### Prompting Patterns for Developers
 
-| Pattern | When to Use | Example |
-|----|----|----|
-| **Scaffolding** | Starting a new project/module | "Create a FastAPI project structure for a blog API" |
-| **Completion** | Filling in a function body | "Complete this function that parses CSV and returns a list of dicts" |
-| **Refactoring** | Improving existing code | "Refactor this to use async/await and add error handling" |
-| **Debugging** | Finding bugs | "This function raises KeyError on line 12. Here's the traceback: [...]" |
-| **Testing** | Writing tests | "Write pytest tests for this endpoint covering happy path and 4xx errors" |
-| **Documentation** | Adding docs | "Add OpenAPI descriptions and Pydantic field descriptions to this model" |
-| **Translation** | Converting code | "Convert this Django ORM query to raw SQLAlchemy 2.0" |
+| Pattern | When to use | Example |
+|---------|-------------|---------|
+| Scaffolding | Starting a new project or module | "Create a FastAPI project structure for a blog API" |
+| Completion | Filling in a function body | "Complete this function that parses CSV and returns a list of dicts" |
+| Refactoring | Improving existing code | "Refactor this to use async/await and add error handling" |
+| Debugging | Finding bugs | "This function raises KeyError on line 12. Here's the traceback: [...]" |
+| Testing | Writing tests | "Write pytest tests for this endpoint covering the happy path and 4xx errors" |
+| Documentation | Adding docs | "Add OpenAPI descriptions and Pydantic field descriptions to this model" |
+| Translation | Converting code | "Convert this Django ORM query to SQLAlchemy 2.0" |
+
+### Live Demo: Weak vs. Better Prompt
+
+The cell below shows the kind of code you typically get back from each prompt.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# LIVE DEMO: Simulating what AI tools produce
-# We'll look at a progression of prompts and the kind of output
-# a tool like GitHub Copilot or Claude would generate.
-# ──────────────────────────────────────────────────────────────
-
 # Prompt 1 (weak): "make a function to validate email"
-# Typical AI output — minimal, no edge cases:
-
+# Typical AI output: minimal, no edge cases
 def validate_email_weak(email):
     return "@" in email
 
 
 # Prompt 2 (better): "Write a Python function that validates an email address
 # using a regex. Return True if valid, False otherwise. Add type hints."
-# Typical AI output — more robust:
-
+# Typical AI output: more careful
 import re
 
 def validate_email(email: str) -> bool:
     """Validate an email address using a regex pattern."""
-    pattern = r'^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$'
+    pattern = r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
     return bool(re.match(pattern, email))
 
 
-# Test it
 test_emails = [
     "student@kings.edu.np",
     "not-an-email",
@@ -230,24 +232,32 @@ test_emails = [
     "@nodomain.com",
 ]
 
-print("Email Validation Results:")
-print("-" * 40)
+print(f"{'email':<30} {'weak':<8} better")
+print("-" * 46)
 for email in test_emails:
-    result = "✓ Valid" if validate_email(email) else "✗ Invalid"
-    print(f"  {result}: {email}")
+    print(f"{email:<30} {str(validate_email_weak(email)):<8} {validate_email(email)}")
 ```
+
+    email                          weak     better
+    ----------------------------------------------
+    student@kings.edu.np           True     True
+    not-an-email                   False    False
+    missing@domain                 True     False
+    valid.user+tag@example.co.uk   True     True
+    @nodomain.com                  True     False
+
+
+The weak version accepts `missing@domain` and `@nodomain.com`. The better prompt asked for something specific, so it got something specific.
+
+### Critical Thinking: Review an AI-Generated Function
+
+The AI also produced this password checker. Read it carefully before you run it. What would you change?
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# CRITICAL THINKING EXERCISE
-# The AI also generated this password checker. Can you spot
-# what's wrong with it before running it?
-# ──────────────────────────────────────────────────────────────
-
 def check_password_strength(password: str) -> str:
     """
-    AI-generated function — review before trusting!
+    AI-generated function. Review before trusting!
     Returns 'weak', 'medium', or 'strong' based on password rules.
     """
     score = 0
@@ -261,30 +271,102 @@ def check_password_strength(password: str) -> str:
     if any(c in "!@#$%^&*" for c in password):
         score += 1
 
-    # BUG: The thresholds don't account for the max score being 4
-    # Also: printing the password is a security anti-pattern!
-    print(f"Checking password: {password}")  # ← NEVER DO THIS IN PRODUCTION
+    print(f"Checking password: {password}")
 
     if score <= 1:
         return "weak"
-    elif score <= 3:   # ← 'medium' catches score 2 and 3
+    elif score <= 3:
         return "medium"
     else:
         return "strong"
 
 
-# Discussion: What are the problems?
-# 1. Logging the password to stdout (OWASP A09 - Security Logging failure)
-# 2. No protection against extremely short passwords (score=1 still passes 'medium')
-# 3. Only 8 chars minimum — modern standards recommend 12+
-# This is exactly the kind of code that requires human review!
-
 print("Strength:", check_password_strength("Secret1!"))
+print("Strength:", check_password_strength("Ab1!"))   # only 4 characters
 ```
+
+    Checking password: Secret1!
+    Strength: strong
+    Checking password: Ab1!
+    Strength: medium
+
+
+### Exercise 1: Spot the Problems
+
+List at least three problems with `check_password_strength`. Look at the output above for one big hint.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+1. It prints the password to stdout. Passwords must never end up in logs
+   (OWASP A09, Security Logging and Monitoring Failures).
+2. Length is just one point out of four, so a 4-character password like
+   "Ab1!" still scores 3 and is rated "medium".
+3. The minimum length is 8. Current guidance (e.g. NIST) is to encourage
+   longer passwords; 12+ is a common recommendation.
+4. Lowercase letters are never checked, and the "special character" list
+   is very short (no "-", "_", "?", ...).
+5. It only scores character classes. It doesn't reject common passwords
+   such as "Password1!".
+```
+
+</details>
+
+### Exercise 2: Fix It
+
+Write `check_password_strength_fixed(password)` that:
+
+- never prints the password
+- returns `"weak"` for anything shorter than 12 characters, whatever else it contains
+- otherwise counts lowercase, uppercase, digit and "anything else" (symbol), and returns `"strong"` if all four are present, `"medium"` otherwise
+
+
+```python
+# Exercise 2: your code here
+def check_password_strength_fixed(password: str) -> str:
+    ...
+
+# Tests (uncomment when ready):
+# assert check_password_strength_fixed("Ab1!") == "weak"
+# assert check_password_strength_fixed("abcdefghijkl") == "medium"
+# assert check_password_strength_fixed("Correct-Horse-9") == "strong"
+# print("Exercise 2 passed")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+def check_password_strength_fixed(password: str) -> str:
+    if len(password) < 12:
+        return "weak"
+    checks = [
+        any(c.islower() for c in password),
+        any(c.isupper() for c in password),
+        any(c.isdigit() for c in password),
+        any(not c.isalnum() for c in password),
+    ]
+    return "strong" if all(checks) else "medium"
+
+
+assert check_password_strength_fixed("Ab1!") == "weak"
+assert check_password_strength_fixed("abcdefghijkl") == "medium"
+assert check_password_strength_fixed("Correct-Horse-9") == "strong"
+print("Exercise 2 passed")
+```
+
+</details>
+
+**Quick recap**
+
+- A good prompt gives role, context, task, specifics, constraints and format.
+- Vague prompts get vague code; specific prompts get specific code.
+- Always read AI output: the password checker looked fine but leaked passwords and rated `Ab1!` as medium.
 
 ---
 
-## Section 4 — AI-Assisted FastAPI Development
+## 4. AI-Assisted FastAPI Development
 
 ### The Workflow in Practice
 
@@ -297,7 +379,7 @@ print("Strength:", check_password_strength("Secret1!"))
 
 ### Example Prompt Sent to an AI
 
-```
+```text
 Build a FastAPI application for a simple task manager with:
 
 - SQLite database using SQLAlchemy 2.0 (async not required)
@@ -309,25 +391,20 @@ Build a FastAPI application for a simple task manager with:
 - Keep everything in a single file for simplicity
 ```
 
-### What the AI Generated (and what we reviewed)
+### What the AI Generated (After Review)
 
-The following code is a **reviewed and corrected** version of AI output:
+Below is the AI's output **after** we reviewed it and fixed one problem (the `created_at` default, see the table after the code). It is stored in a string so the cell runs without starting a server. To run it for real, save the string as `main.py` and run `uvicorn main:app --reload`.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# AI-Generated + Human-Reviewed: Task Manager FastAPI App
-# This is the kind of scaffold an AI produces in ~10 seconds.
-# We walk through it to understand EVERY part.
-# ──────────────────────────────────────────────────────────────
-
-# NOTE: This cell shows the code structure. To actually run this,
-# you would save it as main.py and run: uvicorn main:app --reload
+# AI-generated + human-reviewed: Task Manager FastAPI app.
+# An AI produces a scaffold like this in seconds. Your job is to
+# understand every line of it.
 
 code = '''
 # main.py — AI-assisted scaffold, human-reviewed
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import FastAPI, Depends, HTTPException
@@ -349,7 +426,8 @@ class Task(Base):
     title       = Column(String(200), nullable=False)
     description = Column(String(1000), default="")
     completed   = Column(Boolean, default=False)
-    created_at  = Column(DateTime, default=datetime.utcnow)
+    # Reviewed: AI used datetime.utcnow (deprecated since Python 3.12)
+    created_at  = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
 Base.metadata.create_all(bind=engine)
 
@@ -427,9 +505,9 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.commit()
 '''
 
-print("Task Manager API scaffold generated by AI.")
+print("Task Manager API scaffold (AI-generated, human-reviewed)")
 print("Character count:", len(code))
-print("\nKey patterns used (that YOU need to understand):")
+print("\nPatterns you need to understand before you can trust it:")
 patterns = [
     "SQLAlchemy 2.0 DeclarativeBase (not the old declarative_base())",
     "Pydantic v2 model_config = {'from_attributes': True}",
@@ -442,58 +520,98 @@ for i, p in enumerate(patterns, 1):
     print(f"  {i}. {p}")
 ```
 
-### What the AI Got Right — and What Needed Fixing
+    Task Manager API scaffold (AI-generated, human-reviewed)
+    Character count: 3500
+    
+    Patterns you need to understand before you can trust it:
+      1. SQLAlchemy 2.0 DeclarativeBase (not the old declarative_base())
+      2. Pydantic v2 model_config = {'from_attributes': True}
+      3. Dependency injection with Depends(get_db)
+      4. model_dump(exclude_unset=True) for partial updates
+      5. HTTPException for consistent error responses
+      6. status_code=201 for POST, 204 for DELETE
 
-| Aspect | AI Output | Human Fix Needed? |
-|----|----|----|
-| SQLAlchemy setup | Used modern `DeclarativeBase` | ✅ Correct |
-| Pydantic schemas | Used `model_config` (v2 style) | ✅ Correct |
-| PATCH endpoint | Used `exclude_unset=True` | ✅ Correct |
-| `check_same_thread` | Added for SQLite | ✅ Correct |
-| Field validation | Added `min_length`, `max_length` | ✅ AI did it |
-| `datetime.utcnow` | Used (deprecated in Python 3.12+) | ⚠️ Should use `datetime.now(timezone.utc)` |
-| No auth layer | No authentication | ⚠️ Fine for demo, not for production |
-| No pagination | Returns all tasks | ⚠️ Would need `skip`/`limit` at scale |
 
-**Lesson:** AI gets 80-90% right. Your job is to spot the remaining 10-20%.
+### What the AI Got Right, and What Needed Fixing
 
----
+| Aspect | AI output | Verdict |
+|--------|-----------|---------|
+| SQLAlchemy setup | Used the 2.0 `DeclarativeBase` | Correct |
+| Model columns | Used `Column(...)` and `db.query(...)` | Works, but SQLAlchemy 2.0 prefers `Mapped[...]`/`mapped_column()` and `select()`. Fine for a demo. |
+| Pydantic schemas | Used `model_config` (v2 style) | Correct |
+| PATCH endpoint | Used `exclude_unset=True` | Correct |
+| `check_same_thread` | Added for SQLite | Correct |
+| Field validation | Added `min_length`, `max_length` | Correct |
+| `created_at` default | Used `datetime.utcnow` (deprecated in Python 3.12+) | **Fixed** above to `datetime.now(timezone.utc)` |
+| Authentication | None | Fine for a demo, not for production |
+| Pagination | Returns every task | Would need `skip`/`limit` at scale |
 
-### ✍️ Exercise: Prompt-and-Review (10 minutes)
+Most of the scaffold was right. The useful work, and the part you can't hand to the AI, is spotting the handful of things that weren't.
 
-Using your AI tool of choice (GitHub Copilot Chat / ChatGPT / Claude), send this prompt and review the output:
+### Exercise 3: Prompt and Review (10 minutes)
 
-```
+Send this prompt to your AI tool of choice and review what comes back:
+
+```text
 Add a GET /tasks/search endpoint to the Task Manager API above.
 It should accept a query parameter `q` and return tasks where
 the title contains the search string (case-insensitive).
 Use SQLAlchemy's ilike() for the filter.
 ```
 
-Check: 1. Does it use `ilike()` correctly? 2. Does it handle the case where `q` is empty? 3. Is the route registered before `/tasks/{task_id}` to avoid conflict?
+Check:
+
+1. Does it use `ilike()` correctly?
+2. What happens when `q` is empty or missing?
+3. Is the route registered **before** `/tasks/{task_id}`? If not, FastAPI matches `/tasks/search` against `/tasks/{task_id}` first and returns a 422 error because `"search"` isn't an integer.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+from fastapi import Query
+
+# Must be defined ABOVE @app.get("/tasks/{task_id}")
+@app.get("/tasks/search", response_model=list[TaskResponse])
+def search_tasks(
+    q: str = Query(..., min_length=1, description="Text to search for in titles"),
+    db: Session = Depends(get_db),
+):
+    """Return tasks whose title contains q (case-insensitive)."""
+    return db.query(Task).filter(Task.title.ilike(f"%{q}%")).all()
+
+# q is required and must be at least 1 character, so an empty or missing
+# q returns a 422 validation error instead of every task.
+```
+
+</details>
+
+**Quick recap**
+
+- Give the AI a precise spec (database, models, endpoints, versions) and it can produce a working scaffold quickly.
+- Then review it line by line: we found a deprecated `datetime.utcnow` and missing auth/pagination.
+- Route order matters in FastAPI: fixed paths like `/tasks/search` go before `/tasks/{task_id}`.
 
 ---
 
-## Section 5 — AI-Assisted Django Development
+## 5. AI-Assisted Django Development
 
-### When to Use Django vs FastAPI
+### When to Use Django vs. FastAPI
 
 | Criteria | Django | FastAPI |
-|----|----|----|
-| Full-stack web app | ✅ Best choice | ❌ Not designed for it |
-| Admin panel needed | ✅ Built-in | ❌ Must build manually |
-| High-performance async API | ⚠️ Possible but heavier | ✅ Built for this |
-| Rapid prototyping with DB | ✅ Migrations + ORM | ✅ Also good |
-| Built-in auth system | ✅ Complete | ❌ Must add yourself |
-| API documentation | ⚠️ Needs DRF + drf-spectacular | ✅ Automatic with Swagger UI |
+|----------|--------|---------|
+| Full-stack web app (pages, forms, templates) | Best choice | Not designed for it |
+| Admin panel | Built in | You build it yourself |
+| High-performance async API | Possible, but heavier | Built for this |
+| Rapid prototyping with a database | Migrations + ORM included | Also good (with SQLAlchemy + Alembic) |
+| Authentication | Complete system built in | You add it yourself |
+| API documentation | Needs DRF + drf-spectacular | Automatic Swagger UI |
 
----
+### Generating Models with AI
 
-### AI-Assisted Django: Generating Models
+Prompt sent to the AI:
 
-**Prompt sent to AI:**
-
-```
+```text
 Create Django models for a blog platform with:
 - User profile (extends Django's built-in User with bio and avatar_url)
 - Post model (title, content, author FK to User, published_at, is_published, slug)
@@ -506,10 +624,7 @@ a custom manager on Post that returns only published posts.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# AI-Generated Django Models — Blog Platform
-# Display the generated code and annotate the key decisions
-# ──────────────────────────────────────────────────────────────
+# AI-generated Django models for a blog platform, with our review notes.
 
 django_models_code = '''
 # models.py — AI-generated, human-reviewed
@@ -596,7 +711,7 @@ print("Django models generated by AI")
 print("=" * 50)
 
 review_points = {
-    "✅ AI got right": [
+    "What the AI got right": [
         "Used OneToOneField (not ForeignKey) for UserProfile",
         "Custom manager correctly overrides get_queryset()",
         "auto_now_add vs auto_now used correctly",
@@ -604,7 +719,7 @@ review_points = {
         "on_delete=CASCADE on all ForeignKeys",
         "Auto-sets published_at when first published",
     ],
-    "⚠️ Things to discuss": [
+    "Things to discuss": [
         "Slug auto-generation: what happens with duplicate titles?",
         "No max_length on TextField fields (fine, but intentional?)",
         "No signal to auto-create UserProfile on User creation",
@@ -615,20 +730,87 @@ review_points = {
 for category, points in review_points.items():
     print(f"\n{category}:")
     for point in points:
-        print(f"  • {point}")
+        print(f"  - {point}")
 ```
 
-### AI-Generated Django Admin Configuration
+    Django models generated by AI
+    ==================================================
+    
+    What the AI got right:
+      - Used OneToOneField (not ForeignKey) for UserProfile
+      - Custom manager correctly overrides get_queryset()
+      - auto_now_add vs auto_now used correctly
+      - ManyToManyField with blank=True (not null=True)
+      - on_delete=CASCADE on all ForeignKeys
+      - Auto-sets published_at when first published
+    
+    Things to discuss:
+      - Slug auto-generation: what happens with duplicate titles?
+      - No max_length on TextField fields (fine, but intentional?)
+      - No signal to auto-create UserProfile on User creation
+      - published_at ordering may show unpublished posts oddly
 
-One of the most powerful AI-assisted tasks is configuring Django Admin. It's repetitive, boilerplate-heavy, and AI excels at it:
+
+### Exercise 4: Fix the Duplicate Slug Problem
+
+One of the review points above asks what happens when two posts have the same title. `slugify("Hello World")` gives `hello-world` both times, and the second save fails because `slug` is `unique=True`.
+
+Write a plain-Python helper `unique_slug(title, existing)` that returns `slugify(title)` if it's free, otherwise adds `-2`, `-3`, ... until it finds an unused slug. Use the simple `slugify` below so you don't need Django installed.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
+import re
+
+def slugify(text: str) -> str:
+    """Simplified version of django.utils.text.slugify."""
+    text = re.sub(r"[^\w\s-]", "", text.lower()).strip()
+    return re.sub(r"[-\s]+", "-", text)
+
+
+# Exercise 4: your code here
+def unique_slug(title: str, existing: set[str]) -> str:
+    ...
+
+# Tests (uncomment when ready):
+# assert unique_slug("Hello World", set()) == "hello-world"
+# assert unique_slug("Hello World", {"hello-world"}) == "hello-world-2"
+# assert unique_slug("Hello World", {"hello-world", "hello-world-2"}) == "hello-world-3"
+# print("Exercise 4 passed")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+def unique_slug(title: str, existing: set[str]) -> str:
+    base = slugify(title)
+    slug, n = base, 2
+    while slug in existing:
+        slug = f"{base}-{n}"
+        n += 1
+    return slug
+
+
+assert unique_slug("Hello World", set()) == "hello-world"
+assert unique_slug("Hello World", {"hello-world"}) == "hello-world-2"
+assert unique_slug("Hello World", {"hello-world", "hello-world-2"}) == "hello-world-3"
+print("Exercise 4 passed")
+
+# In the real Post.save(), "existing" would come from the database:
+#   set(Post.objects.filter(slug__startswith=base).values_list("slug", flat=True))
+```
+
+</details>
+
+### AI-Generated Django Admin Configuration
+
+Django admin setup is a great job for AI: it's repetitive, full of boilerplate, and easy to check by opening the admin page.
+
+
+```python
 # Prompt: "Generate Django admin.py for the blog models above.
 #          Include list_display, search_fields, list_filter,
 #          prepopulated_fields for slugs, and inline for comments."
-# ──────────────────────────────────────────────────────────────
 
 admin_code = '''
 # admin.py — AI-generated in ~3 seconds
@@ -677,26 +859,42 @@ print("Django admin.py — AI-generated output")
 print("-" * 50)
 print("Time to generate manually: ~15-20 minutes")
 print("Time with AI:              ~30 seconds")
-print("\nThis is the productivity multiplier.")
-print("The AI knows Django admin's API better than most developers.")
-print("\nBut YOU need to know what it means to verify it!")
+print("\nThis is where AI saves real time: it knows the admin API well.")
+print("But you still need to know what each option does to check it.")
 ```
+
+    Django admin.py — AI-generated output
+    --------------------------------------------------
+    Time to generate manually: ~15-20 minutes
+    Time with AI:              ~30 seconds
+    
+    This is where AI saves real time: it knows the admin API well.
+    But you still need to know what each option does to check it.
+
+
+**Quick recap**
+
+- Pick Django for full-stack apps with admin and auth; pick FastAPI for lean, async APIs.
+- AI is very good at Django boilerplate: models, managers, `admin.py`.
+- Review the design questions it skips, like duplicate slugs or auto-creating a `UserProfile`.
 
 ---
 
-## Section 6 — AI for Infrastructure: Docker & Nginx
+## 6. AI for Infrastructure: Docker & Nginx
 
-### Infrastructure as Code — AI's Comfort Zone
+### Why AI Is Good at Infrastructure Files
 
-Docker configurations are: - Pattern-heavy (same structure for every app type) - Easy to forget details (exposed ports, volume mounts, healthchecks) - Time-consuming to look up from scratch
+Docker configuration is:
 
-This makes them a **perfect target for AI generation**.
+- **pattern-heavy**: every app of the same type looks much the same
+- **easy to get slightly wrong**: a missing port, volume or healthcheck
+- **slow to look up** from scratch every time
 
----
+That makes it a good fit for AI generation, as long as you check the result.
 
-### Prompt for Full Stack Docker Setup
+### Prompt for a Full-Stack Docker Setup
 
-```
+```text
 Generate a production-ready docker-compose.yml for a Django application with:
 - Django app running with gunicorn (web service)
 - PostgreSQL 16 database (db service)
@@ -713,14 +911,12 @@ Requirements:
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# AI-Generated Docker Compose — Reviewed & Annotated
-# ──────────────────────────────────────────────────────────────
+# AI-generated Docker Compose, Nginx config and Dockerfile, with review notes.
 
 docker_compose = '''
-# docker-compose.yml — AI-generated, production-ready pattern
-
-version: "3.9"
+# docker-compose.yml (AI-generated, reviewed)
+# Reviewed: removed the AI's `version: "3.9"` line. Compose v2 ignores it
+# and prints a warning that it is obsolete.
 
 services:
 
@@ -779,7 +975,7 @@ volumes:
 '''
 
 nginx_conf = '''
-# nginx/nginx.conf — AI-generated Nginx config
+# nginx/nginx.conf (AI-generated)
 
 upstream django {
     server web:8000;
@@ -808,7 +1004,7 @@ server {
 '''
 
 dockerfile = '''
-# Dockerfile — AI-generated multi-stage build
+# Dockerfile (AI-generated multi-stage build)
 
 FROM python:3.12-slim AS builder
 WORKDIR /app
@@ -843,11 +1039,11 @@ decisions = [
     "Secrets via environment variables, not hardcoded",
     "Named volumes (not bind mounts) for production data",
     "Multi-stage Dockerfile (builder → final) reduces image size",
-    "X-Forwarded-For headers set in Nginx for Django ALLOWED_HOSTS",
+    "Host and X-Forwarded-* headers passed on, so Django sees the real host and client IP",
     "Static files served by Nginx, not gunicorn",
 ]
 for d in decisions:
-    print(f"  ✅ {d}")
+    print(f"  [ok]    {d}")
 
 print("\nWhat AI missed (always check):")
 missed = [
@@ -855,18 +1051,76 @@ missed = [
     "Django migration command on startup",
     "Rate limiting in Nginx",
     "Log rotation configuration",
+    "Prompt asked Nginx to proxy only /api/; the config proxies everything at /",
+    "collectstatic runs at build time, so settings must import without real secrets",
+    "Dockerfile runs as root (no USER line) and has no CMD of its own",
 ]
 for m in missed:
-    print(f"  ⚠️  {m}")
+    print(f"  [check] {m}")
 ```
+
+    Infrastructure files generated by AI:
+    ==================================================
+      docker-compose.yml        (58 lines)
+      nginx/nginx.conf          (26 lines)
+      Dockerfile                (14 lines)
+    
+    Key decisions AI made correctly:
+      [ok]    postgres:16-alpine (not latest — pinned version)
+      [ok]    healthcheck with condition: service_healthy (not just depends_on)
+      [ok]    Secrets via environment variables, not hardcoded
+      [ok]    Named volumes (not bind mounts) for production data
+      [ok]    Multi-stage Dockerfile (builder → final) reduces image size
+      [ok]    Host and X-Forwarded-* headers passed on, so Django sees the real host and client IP
+      [ok]    Static files served by Nginx, not gunicorn
+    
+    What AI missed (always check):
+      [check] HTTPS/TLS configuration (needs certbot or cert volume)
+      [check] Django migration command on startup
+      [check] Rate limiting in Nginx
+      [check] Log rotation configuration
+      [check] Prompt asked Nginx to proxy only /api/; the config proxies everything at /
+      [check] collectstatic runs at build time, so settings must import without real secrets
+      [check] Dockerfile runs as root (no USER line) and has no CMD of its own
+
+
+### Exercise 5: Write a Follow-Up Prompt
+
+The review found several gaps (no migrations on startup, root user in the Dockerfile, `/api/` vs `/` proxying). Write **one** follow-up prompt that asks the AI to fix the Dockerfile and the Nginx config without rewriting the parts that were already fine.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+Here are the Dockerfile and nginx.conf you generated earlier: [paste both].
+
+Please make these changes and keep everything else the same:
+
+1. Dockerfile: create a non-root user and switch to it before the app runs.
+   Install packages into a virtual environment (/opt/venv) instead of
+   /root/.local so the non-root user can use them.
+2. Dockerfile: add a CMD that starts gunicorn on 0.0.0.0:8000.
+3. nginx.conf: proxy only /api/ (and /admin/) to Django. Keep serving
+   /static/ directly.
+
+Show the full updated files, then list each change in one line so I can
+review it.
+```
+
+</details>
+
+**Quick recap**
+
+- Infrastructure files follow strong patterns, so AI drafts them well.
+- Check the details: pinned image versions, healthchecks, secrets in `.env`, non-root users.
+- Compare the output with your prompt: here the AI proxied `/` when we asked for `/api/`.
+- Follow-up prompts work best when you list exact changes and say "keep everything else".
 
 ---
 
-## Section 7 — AI Agents in Development
+## 7. AI Agents in Development
 
 ### From Autocomplete to Agents
-
-There's an important spectrum to understand:
 
 ```
 AUTOCOMPLETE          CHAT            AGENT
@@ -881,16 +1135,14 @@ AUTOCOMPLETE          CHAT            AGENT
                                    fixes errors"
 ```
 
----
-
 ### What Makes Something an "Agent"?
 
-An **AI agent** is a system that:
+An **AI agent** is a system that loops through four steps:
 
-1.  **Perceives** its environment (reads files, browses docs, runs commands)
-2.  **Reasons** about what to do next (LLM decides the next step)
-3.  **Acts** using tools (writes files, runs code, calls APIs)
-4.  **Observes** the result and **iterates** (reads error output, tries again)
+1. **Perceive** its environment (read files, browse docs, run commands)
+2. **Reason** about what to do next (the LLM picks the next step)
+3. **Act** using tools (write files, run code, call APIs)
+4. **Observe** the result and **iterate** (read the error output, try again)
 
 ```
        Goal: "Add pagination to the FastAPI endpoint"
@@ -913,30 +1165,29 @@ An **AI agent** is a system that:
     └─────────────────────────────┘
               │
               ▼
-           Done! (or iterate)
+         Done (or loop again)
 ```
 
----
+### Agent Tools for Developers
 
-### Real AI Agent Tools for Developers
+| Tool | What it does | Kind |
+|------|--------------|------|
+| GitHub Copilot agent mode | Works across your whole VS Code workspace | Coding agent |
+| Cursor (agent / Composer) | Multi-file editing agent inside the editor | Coding agent |
+| Claude Code | Terminal agent that reads, edits and runs code in your repo | Coding agent |
+| Aider | CLI agent that reads/writes files and commits to git | Coding agent |
+| Devin | Commercial "autonomous software engineer" | Experimental agent |
+| LangChain / LangGraph | Build your own agents in Python | Framework |
+| CrewAI | Multi-agent orchestration | Framework |
+| AutoGen (Microsoft) | Multi-agent conversation framework | Framework |
 
-| Tool | What It Does | Agent Capability |
-|----|----|----|
-| **GitHub Copilot Agent Mode** | Works across your whole VS Code workspace | High |
-| **Cursor Composer** | Multi-file editing agent | High |
-| **Aider** | CLI agent that reads/writes files and commits to git | High |
-| **Devin** | Fully autonomous software engineer | Experimental |
-| **LangChain/LangGraph** | Build your own agents in Python | Framework |
-| **CrewAI** | Multi-agent orchestration framework | Framework |
-| **AutoGen (Microsoft)** | Multi-agent conversation framework | Framework |
+### Demo: An Agent Loop in Plain Python
+
+The cell below fakes the LLM part (the steps are written in advance) so you can see the loop itself. In a real agent, the LLM would choose each step after reading the previous result.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# DEMO: Building a simple AI agent loop from scratch
-# This illustrates HOW agents work under the hood.
-# (Uses no external AI library — pure Python simulation)
-# ──────────────────────────────────────────────────────────────
+# A simple agent loop, simulated in pure Python (no AI library needed).
 
 import json
 from typing import Callable
@@ -977,7 +1228,7 @@ def simulate_agent(goal: str, planned_steps: list[dict]) -> None:
     In production, each step would be decided by the LLM
     based on the previous tool output.
     """
-    print(f"🤖 AGENT GOAL: {goal}")
+    print(f"AGENT GOAL: {goal}")
     print("=" * 60)
 
     for step_num, step in enumerate(planned_steps, 1):
@@ -993,10 +1244,10 @@ def simulate_agent(goal: str, planned_steps: list[dict]) -> None:
             result = TOOLS[tool_name](**args)
             print(f"  Result: {result}")
         else:
-            print(f"  Result: ERROR — unknown tool '{tool_name}'")
+            print(f"  Result: ERROR - unknown tool '{tool_name}'")
 
     print("\n" + "=" * 60)
-    print("✅ Agent completed task")
+    print("Agent finished all steps")
 
 
 # Simulated agent execution plan (in reality, the LLM decides each step)
@@ -1031,53 +1282,97 @@ simulate_agent(
 )
 ```
 
----
+    AGENT GOAL: Add a health check endpoint to the FastAPI app
+    ============================================================
+    
+    Step 1: [read_file]
+      Reason: Read existing code to understand current structure
+      Args:   {"path": "main.py"}
+      Result: from fastapi import FastAPI
+    app = FastAPI()
+    
+    
+    Step 2: [write_file]
+      Reason: Write updated main.py with health endpoint added
+      Args:   {"path": "main.py", "content": "from fastapi import FastAPI\napp = FastAPI()\n\n@app.get('/health')\ndef health_check():\n    return {'status': 'ok'}\n"}
+      Result: SUCCESS: Wrote 113 bytes to main.py
+    
+    Step 3: [run_tests]
+      Reason: Verify nothing is broken after the change
+      Args:   {"test_path": "test_main.py"}
+      Result: PASSED: 3 tests passed in 0.42s
+    
+    ============================================================
+    Agent finished all steps
 
-## Section 8 — Pitfalls, Hallucinations & Security
 
-### The 5 Biggest Risks of Vibe Coding
+### Exercise 6: Give the Agent a New Tool
 
-```
- ┌─────────────────────────────────────────────────────────────┐
- │  RISK 1: HALLUCINATIONS                                      │
- │  AI invents functions, parameters, and libraries that don't  │
- │  exist. It sounds confident. It is wrong.                    │
- ├─────────────────────────────────────────────────────────────┤
- │  RISK 2: OUTDATED CODE                                       │
- │  AI training has a cutoff. It may generate Pydantic v1 code  │
- │  when you're using v2, or deprecated Django patterns.        │
- ├─────────────────────────────────────────────────────────────┤
- │  RISK 3: SECURITY VULNERABILITIES                            │
- │  AI may generate code with SQL injection, hardcoded secrets, │
- │  or missing authentication guards.                           │
- ├─────────────────────────────────────────────────────────────┤
- │  RISK 4: SKILL ATROPHY                                       │
- │  Accepting AI output without understanding it prevents you   │
- │  from growing. You become dependent on the tool.             │
- ├─────────────────────────────────────────────────────────────┤
- │  RISK 5: LICENSING / IP ISSUES                               │
- │  AI may reproduce copyrighted code from training data.       │
- │  Know your organization's AI use policy.                     │
- └─────────────────────────────────────────────────────────────┘
-```
-
----
-
-### Hallucination Examples
+Add a `list_files` tool that returns the names of the mock files (`main.py`, `requirements.txt`) as a comma-separated string. Register it in `TOOLS` and run `simulate_agent` with a plan whose **first** step is `list_files`.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# SPOT THE HALLUCINATIONS
-# Each of these snippets contains an AI hallucination.
-# Can you find what's wrong before running the code?
-# ──────────────────────────────────────────────────────────────
+# Exercise 6: your code here
+
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+MOCK_FILES = ["main.py", "requirements.txt"]
+
+def list_files_tool() -> str:
+    """Simulated directory listing."""
+    return ", ".join(MOCK_FILES)
+
+TOOLS["list_files"] = list_files_tool
+
+simulate_agent(
+    goal="Find out what the project contains",
+    planned_steps=[
+        {"tool": "list_files", "args": {}, "reason": "See which files exist"},
+        {"tool": "read_file", "args": {"path": "requirements.txt"},
+         "reason": "Check which libraries are used"},
+    ],
+)
+```
+
+</details>
+
+**Quick recap**
+
+- Autocomplete suggests a line, chat answers a question, an agent carries out a multi-step task.
+- An agent is an LLM in a loop: perceive, reason, act with tools, observe, repeat.
+- The tools are ordinary functions; the LLM just decides which one to call next.
+
+---
+
+## 8. Pitfalls, Hallucinations & Security
+
+### The Five Biggest Risks of Vibe Coding
+
+| Risk | What happens |
+|------|--------------|
+| 1. Hallucinations | The AI invents functions, parameters or libraries that don't exist. It sounds confident. It's wrong. |
+| 2. Outdated code | Training has a cutoff. You may get Pydantic v1 code when you use v2, or old Django patterns. |
+| 3. Security holes | SQL injection, hardcoded secrets, missing permission checks. |
+| 4. Skill atrophy | If you accept code you don't understand, you stop learning and come to depend on the tool. |
+| 5. Licensing / IP | The AI may reproduce copyrighted code from its training data. Know your organisation's AI policy. |
+
+### Hallucination Examples
+
+Each snippet below contains a mistake an AI really does make. Try to spot it before reading the comment.
+
+
+```python
+# Spot the hallucinations: each snippet contains a typical AI mistake.
 
 print("=" * 60)
-print("HALLUCINATION EXAMPLES — Spot the Bug")
+print("HALLUCINATION EXAMPLES: spot the bug")
 print("=" * 60)
 
-# ── Example 1: Non-existent FastAPI parameter ──────────────────
+# Example 1: non-existent FastAPI parameter
 example_1 = '''
 # AI generated this. What's wrong?
 from fastapi import FastAPI
@@ -1087,9 +1382,10 @@ app = FastAPI()
 async def get_items(limit: int = Query(default=10, max_value=100)):
     ...  # Bug: FastAPI's Query uses `le=` not `max_value=`
          # Correct: Query(default=10, le=100)
+         # (Query is also never imported.)
 '''
 
-# ── Example 2: Invented Django ORM method ─────────────────────
+# Example 2: invented Django ORM method
 example_2 = '''
 # AI generated this. What's wrong?
 # "Use the .recent() manager method to get the latest 5 posts."
@@ -1098,7 +1394,7 @@ posts = Post.objects.recent(5)  # Bug: .recent() does not exist!
                                  # Correct: Post.objects.order_by('-created_at')[:5]
 '''
 
-# ── Example 3: Invented Pydantic feature ──────────────────────
+# Example 3: outdated Pydantic API
 example_3 = '''
 # AI generated this Pydantic v2 code. What's wrong?
 from pydantic import BaseModel
@@ -1107,12 +1403,13 @@ class User(BaseModel):
     name: str
     age: int
 
-    @validator("age")      # Bug: @validator is Pydantic v1!
+    @validator("age")      # Bug: @validator is the Pydantic v1 API
     def age_must_be_positive(cls, v):
-        ...                # Correct v2: use @field_validator
+        ...                # (deprecated in v2, and not imported here)
+                           # Correct v2: @field_validator("age") + @classmethod
 '''
 
-# ── Example 4: Security hallucination ─────────────────────────
+# Example 4: insecure advice
 example_4 = '''
 # AI said: "Here's how to hash a password securely"
 import hashlib
@@ -1125,10 +1422,10 @@ def hash_password(password: str) -> str:
 '''
 
 examples = [
-    ("FastAPI — wrong Query parameter name", "max_value= doesn't exist → use le="),
-    ("Django ORM — invented method", ".recent() doesn't exist → use .order_by()"),
-    ("Pydantic v2 — wrong decorator", "@validator is v1 → use @field_validator"),
-    ("Security — broken hash function", "MD5 is broken for passwords → use bcrypt"),
+    ("FastAPI - wrong Query parameter name", "max_value= doesn't exist -> use le="),
+    ("Django ORM - invented method", ".recent() doesn't exist -> use .order_by()"),
+    ("Pydantic v2 - outdated decorator", "@validator is the v1 API -> use @field_validator"),
+    ("Security - broken hash function", "MD5 is broken for passwords -> use bcrypt or argon2"),
 ]
 
 print("\nHallucination Summary:")
@@ -1139,12 +1436,33 @@ for i, (category, fix) in enumerate(examples, 1):
     print()
 ```
 
+    ============================================================
+    HALLUCINATION EXAMPLES: spot the bug
+    ============================================================
+    
+    Hallucination Summary:
+    ------------------------------------------------------------
+      1. FastAPI - wrong Query parameter name
+         Fix: max_value= doesn't exist -> use le=
+    
+      2. Django ORM - invented method
+         Fix: .recent() doesn't exist -> use .order_by()
+    
+      3. Pydantic v2 - outdated decorator
+         Fix: @validator is the v1 API -> use @field_validator
+    
+      4. Security - broken hash function
+         Fix: MD5 is broken for passwords -> use bcrypt or argon2
+    
+
+
+### Common Security Issues in AI-Generated Code
+
+These map to categories from the [OWASP Top 10](https://owasp.org/www-project-top-ten/) (2021 numbering).
+
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# OWASP TOP 10 ISSUES IN AI-GENERATED CODE
-# Demonstrating common security pitfalls
-# ──────────────────────────────────────────────────────────────
+# OWASP Top 10 issues that show up in AI-generated code.
 
 print("Common OWASP Issues in AI-Generated Python Code")
 print("=" * 60)
@@ -1157,8 +1475,8 @@ security_issues = [
     },
     {
         "owasp": "A02 - Cryptographic Failures",
-        "ai_code": "token = base64.b64encode(user.id.encode()).decode()  # NOT a token!",
-        "fix": "Use python-jose with JWT or a dedicated secrets library",
+        "ai_code": "token = base64.b64encode(str(user.id).encode()).decode()  # NOT a token!",
+        "fix": "Use a signed JWT (e.g. PyJWT) or secrets.token_urlsafe() for random tokens",
     },
     {
         "owasp": "A03 - Injection",
@@ -1171,83 +1489,143 @@ security_issues = [
         "fix": "SECRET_KEY = os.environ['DJANGO_SECRET_KEY']  # From env vars",
     },
     {
-        "owasp": "A09 - Security Logging",
+        "owasp": "A09 - Security Logging and Monitoring Failures",
         "ai_code": "print(f'Login attempt: {username} / {password}')",
         "fix": "Never log passwords. Log: 'Login attempt for user {username}'",
     },
 ]
 
 for issue in security_issues:
-    print(f"\n⚠️  {issue['owasp']}")
+    print(f"\n{issue['owasp']}")
     print(f"   AI Generated: {issue['ai_code'].splitlines()[0]}")
-    print(f"   ✅ Fix:       {issue['fix']}")
+    print(f"   Fix:          {issue['fix']}")
 ```
+
+    Common OWASP Issues in AI-Generated Python Code
+    ============================================================
+    
+    A01 - Broken Access Control
+       AI Generated: @app.delete('/users/{user_id}')
+       Fix:          Always verify current_user.id == user_id or current_user.is_admin
+    
+    A02 - Cryptographic Failures
+       AI Generated: token = base64.b64encode(str(user.id).encode()).decode()  # NOT a token!
+       Fix:          Use a signed JWT (e.g. PyJWT) or secrets.token_urlsafe() for random tokens
+    
+    A03 - Injection
+       AI Generated: cursor.execute(f"SELECT * FROM users WHERE name = '{name}'")
+       Fix:          Use parameterized queries: cursor.execute('...WHERE name = %s', (name,))
+    
+    A05 - Security Misconfiguration
+       AI Generated: SECRET_KEY = 'dev-secret-key-12345'  # Hardcoded in settings.py
+       Fix:          SECRET_KEY = os.environ['DJANGO_SECRET_KEY']  # From env vars
+    
+    A09 - Security Logging and Monitoring Failures
+       AI Generated: print(f'Login attempt: {username} / {password}')
+       Fix:          Never log passwords. Log: 'Login attempt for user {username}'
+
+
+### Exercise 7: Fix the SQL Injection
+
+The function below is the A03 example in runnable form, using an in-memory SQLite database. Pass it the name `x' OR '1'='1` and it returns **every** user. Rewrite it with a parameterised query so that input returns nothing.
+
+
+```python
+import sqlite3
+
+conn = sqlite3.connect(":memory:")
+conn.execute("CREATE TABLE users (name TEXT, email TEXT)")
+conn.executemany("INSERT INTO users VALUES (?, ?)",
+                 [("alice", "alice@example.com"), ("bob", "bob@example.com")])
+
+def find_user_unsafe(name: str):
+    return conn.execute(f"SELECT * FROM users WHERE name = '{name}'").fetchall()
+
+print(find_user_unsafe("alice"))
+print(find_user_unsafe("x' OR '1'='1"))   # leaks every row
+
+
+# Exercise 7: your code here
+def find_user_safe(name: str):
+    ...
+
+# Tests (uncomment when ready):
+# assert find_user_safe("alice") == [("alice", "alice@example.com")]
+# assert find_user_safe("x' OR '1'='1") == []
+# print("Exercise 7 passed")
+```
+
+    [('alice', 'alice@example.com')]
+    [('alice', 'alice@example.com'), ('bob', 'bob@example.com')]
+
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+def find_user_safe(name: str):
+    # The ? placeholder sends name as data, never as part of the SQL text.
+    return conn.execute("SELECT * FROM users WHERE name = ?", (name,)).fetchall()
+
+
+assert find_user_safe("alice") == [("alice", "alice@example.com")]
+assert find_user_safe("x' OR '1'='1") == []
+print("Exercise 7 passed")
+```
+
+</details>
+
+**Quick recap**
+
+- The big five risks: hallucinations, outdated code, security holes, skill atrophy, licensing.
+- Hallucinations look plausible: `max_value=`, `.recent()`, `@validator` in v2.
+- Check AI code against the OWASP list: access control, crypto, injection, config, logging.
+- Parameterised queries, hashed passwords (bcrypt/argon2) and secrets from env vars are non-negotiable.
 
 ---
 
-## Section 9 — What AI Cannot Replace
+## 9. What AI Cannot Replace
 
 ### The Human Edge
 
-Despite rapid improvements, AI coding assistants consistently struggle with:
+AI assistants keep getting better, but they still struggle with these:
 
-```
-┌───────────────────────────────────────────────────────────┐
-│                                                           │
-│  🧠 PROBLEM UNDERSTANDING                                 │
-│     AI doesn't know what your business actually needs.    │
-│     It optimizes for the prompt, not the real problem.    │
-│                                                           │
-│  🏗️  SYSTEM ARCHITECTURE                                  │
-│     Choosing between microservices vs monolith,           │
-│     event-driven vs request-response, requires            │
-│     domain knowledge and long-term thinking.              │
-│                                                           │
-│  🔍 DEBUGGING COMPLEX SYSTEMS                             │
-│     Race conditions, distributed tracing, memory leaks,   │
-│     and intermittent failures require human intuition.    │
-│                                                           │
-│  🤝 COMMUNICATION & REQUIREMENTS                          │
-│     Translating fuzzy stakeholder needs into precise      │
-│     technical specifications is deeply human.             │
-│                                                           │
-│  ⚖️  ETHICAL & PRODUCT JUDGMENT                           │
-│     "Should we build this feature?"                       │
-│     "Is this data usage appropriate?"                     │
-│     AI cannot answer these questions responsibly.         │
-│                                                           │
-│  🔐 SECURITY REVIEW                                       │
-│     Threat modeling, penetration testing, and             │
-│     understanding business risk require deep expertise.   │
-│                                                           │
-└───────────────────────────────────────────────────────────┘
-```
+| Area | Why it still needs you |
+|------|------------------------|
+| Problem understanding | The AI doesn't know what your users or business actually need. It optimises for the prompt, not the real problem. |
+| System architecture | Monolith or microservices? Event-driven or request-response? These need domain knowledge and long-term thinking. |
+| Debugging complex systems | Race conditions, memory leaks and intermittent failures in distributed systems need careful investigation and intuition. |
+| Communication & requirements | Turning fuzzy stakeholder wishes into a precise spec is a human conversation. |
+| Ethical & product judgement | "Should we build this?" "Is this use of data appropriate?" The AI can't answer these responsibly. |
+| Security review | Threat modelling, penetration testing and understanding business risk need real expertise. |
 
----
+### Fundamentals Make AI More Useful
 
-### The Fundamentals Amplify AI's Value
+| Programmer | How much AI helps | Risk |
+|------------|-------------------|------|
+| Strong fundamentals | A lot: it speeds up what they already know how to do | Low: they spot mistakes |
+| Intermediate | Quite a lot: it fills knowledge gaps quickly | Medium: may miss subtle issues |
+| Beginner (weak fundamentals) | Less than you'd think: they can't tell if it's right | High: blind trust in wrong code |
 
-| Programmer Type | AI Value Gained | Risk |
-|----|----|----|
-| **Strong fundamentals** | Very high — AI accelerates expert intuition | Low — can spot mistakes |
-| **Intermediate skills** | High — fills knowledge gaps quickly | Medium — may miss subtle issues |
-| **Beginner (weak fundamentals)** | Low — can't evaluate correctness | High — blind trust in wrong code |
+> **The paradox of vibe coding:** AI is most valuable to those who need it least, and most dangerous to those who need it most.
 
-> **The paradox of vibe coding**: AI is most valuable to those who need it least, and most dangerous to those who need it most.
+### Class Discussion (5 minutes)
+
+1. Think of a project you've worked on. Which parts would AI have helped with most? Which parts would have been dangerous to hand over?
+2. If AI can write code, what should computer science education focus on?
+3. How do you check that AI-generated code is correct?
+
+**Quick recap**
+
+- AI can't understand your users, choose your architecture, or make ethical calls for you.
+- Hard debugging and security review still need human expertise.
+- Strong fundamentals are what make AI useful; without them, AI is a risk.
 
 ---
 
-### 💬 Class Discussion (5 minutes)
+## 10. Best Practices & Responsible Workflow
 
-> 1.  Think of a project you've worked on. Which parts would AI have helped most? Which parts would have been dangerous to delegate?
-> 2.  If AI can write code, what should computer science education focus on?
-> 3.  How do you verify that AI-generated code is correct?
-
----
-
-## Section 10 — Best Practices & Responsible Workflow
-
-### The Professional AI-Assisted Development Workflow
+### The Professional AI-Assisted Workflow
 
 ```
          YOU define the goal
@@ -1255,7 +1633,7 @@ Despite rapid improvements, AI coding assistants consistently struggle with:
                   │
                   ▼
          ┌────────────────┐
-    ┌────►   GENERATE     │  ← Write clear, specific prompt
+    ┌───►│   GENERATE     │  ← Write a clear, specific prompt
     │    └────────────────┘
     │             │
     │             ▼
@@ -1270,39 +1648,32 @@ Despite rapid improvements, AI coding assistants consistently struggle with:
     │             │
     │             ▼
     │    ┌────────────────┐
-    └────┤   TEST         │  ← Write tests, run them
+    └────┤     TEST       │  ← Write tests, run them
          └────────────────┘
                   │
                   ▼
-             OWN IT ✅
+               OWN IT
          (You are responsible
           for this code now)
 ```
 
----
-
 ### The Golden Rules
 
-1.  **Never accept code you don't understand.** If you can't explain what a function does line by line, keep asking the AI to explain until you can.
+1. **Never accept code you don't understand.** If you can't explain a function line by line, keep asking the AI to explain it until you can.
+2. **Always run the code.** AI code can look right and still be wrong. Test it with real inputs.
+3. **Security-review everything**, especially authentication, database queries, input validation and secret handling.
+4. **Pin your library versions.** The AI may be writing for a different version than the one you have installed.
+5. **Iterate with feedback.** Paste the actual error message back to the AI. The best follow-up prompts include it.
+6. **Use AI for what it's good at:** boilerplate, documentation, tests and refactoring. Keep system design for yourself.
+7. **Keep building your fundamentals.** The more you know, the better you'll be at working with AI.
 
-2.  **Always run the code.** AI-generated code may look correct and fail silently. Test with real inputs.
+### Demo: Debugging with AI
 
-3.  **Security-review everything.** Especially: authentication, database queries, input validation, and secret handling.
-
-4.  **Pin your library versions.** AI may generate for a different version than you're using.
-
-5.  **Iterate with feedback.** Paste error messages back to the AI. The best prompts often include the actual error.
-
-6.  **Use AI for what it's best at.** Boilerplate, documentation, test generation, refactoring — not system design.
-
-7.  **Keep building your fundamentals.** The more you know, the more effective your AI collaboration becomes.
+Here's rule 5 in action. We find a bug, write a good prompt about it, apply the fix and test it.
 
 
 ```python
-# ──────────────────────────────────────────────────────────────
-# DEMO: Effective AI-assisted debugging workflow
-# This simulates the feedback loop developers use with AI
-# ──────────────────────────────────────────────────────────────
+# Simulating the debug -> prompt -> fix -> test loop with an AI assistant.
 
 print("Debugging Workflow with AI Assistance")
 print("=" * 60)
@@ -1321,7 +1692,7 @@ print("\nStep 1: Observe unexpected behaviour")
 result = calculate_discount_buggy(100, 20)  # Expecting $80, passing 20%
 print(f"  Price: $100, Discount: 20%")
 print(f"  Expected: $80.00")
-print(f"  Got:      ${result:.2f}  ← WRONG! (treated 20 as 2000%!)")
+print(f"  Got:      ${result:.2f}  <- wrong: 20 was treated as 2000%")
 
 # Step 3: Good prompt to AI (include context + error)
 prompt_to_ai = '''
@@ -1339,10 +1710,10 @@ What's wrong and how do I fix it?
 print("\nStep 2: Craft a precise prompt to AI")
 print("-" * 40)
 print("Good prompt includes:")
-print("  ✅ The actual code")
-print("  ✅ The inputs used")
-print("  ✅ The expected output")
-print("  ✅ The actual output received")
+print("  - the actual code")
+print("  - the inputs used")
+print("  - the expected output")
+print("  - the actual output received")
 
 # Step 4: AI explains and provides fix
 print("\nStep 3: AI Response (simulated)")
@@ -1369,7 +1740,7 @@ all_pass = True
 for price, pct, expected in test_cases:
     result = calculate_discount_fixed(price, pct)
     passed = abs(result - expected) < 0.001
-    status = "✅" if passed else "❌"
+    status = "PASS" if passed else "FAIL"
     print(f"  {status} discount({price}, {pct}%) = ${result:.3f} (expected ${expected:.3f})")
     if not passed:
         all_pass = False
@@ -1377,162 +1748,238 @@ for price, pct, expected in test_cases:
 print(f"\nAll tests passed: {all_pass}")
 ```
 
+    Debugging Workflow with AI Assistance
+    ============================================================
+    
+    Step 1: Observe unexpected behaviour
+      Price: $100, Discount: 20%
+      Expected: $80.00
+      Got:      $-1900.00  <- wrong: 20 was treated as 2000%
+    
+    Step 2: Craft a precise prompt to AI
+    ----------------------------------------
+    Good prompt includes:
+      - the actual code
+      - the inputs used
+      - the expected output
+      - the actual output received
+    
+    Step 3: AI Response (simulated)
+    ----------------------------------------
+    The bug: discount_pct should be divided by 100 if passed as
+    a percentage (0-100) rather than a fraction (0.0-1.0).
+    
+    Step 4: Apply and verify the fix
+    ----------------------------------------
+      PASS discount(100.0, 20%) = $80.000 (expected $80.000)
+      PASS discount(200.0, 50%) = $100.000 (expected $100.000)
+      PASS discount(99.99, 10%) = $89.991 (expected $89.991)
+      PASS discount(0.0, 100%) = $0.000 (expected $0.000)
+    
+    All tests passed: True
 
-```python
-# ──────────────────────────────────────────────────────────────
-# FINAL EXERCISE: Prompt Engineering Challenge
-# Write prompts for each of the following tasks.
-# Share your best prompt with the class.
-# ──────────────────────────────────────────────────────────────
 
-print("Prompt Engineering Challenge")
-print("=" * 60)
-print()
-print("For each task below, write a prompt you would send to")
-print("GitHub Copilot Chat or Claude to get the best result.")
-print()
+### Exercise 8: Prompt Engineering Challenge
 
-challenges = [
-    {
-        "num": 1,
-        "task": "Django REST Framework viewset",
-        "description": (
-            "Create a DRF ViewSet for the Post model from our blog app. "
-            "It should support list, retrieve, create, update, destroy. "
-            "Only authenticated users can create/update/delete."
-        ),
-        "hint": "Mention: DRF version, permission classes, serializer requirements",
-    },
-    {
-        "num": 2,
-        "task": "FastAPI middleware for request timing",
-        "description": (
-            "Add middleware to the FastAPI app that logs the HTTP method, "
-            "path, status code, and response time for every request."
-        ),
-        "hint": "Mention: use Python's logging module, not print(); async middleware",
-    },
-    {
-        "num": 3,
-        "task": "Docker multi-stage build for FastAPI",
-        "description": (
-            "Write a Dockerfile that uses a multi-stage build to produce "
-            "a minimal FastAPI production image under 200MB."
-        ),
-        "hint": "Mention: python:3.12-slim, pip install --user, copy from builder",
-    },
-    {
-        "num": 4,
-        "task": "Pytest fixtures for FastAPI",
-        "description": (
-            "Write pytest fixtures for testing the Task Manager API. "
-            "Use an in-memory SQLite database that resets between tests."
-        ),
-        "hint": "Mention: TestClient, override_dependency for get_db, scope='function'",
-    },
-]
+For each task, write the prompt you would send to Copilot Chat or Claude. Use the checklist from Section 3 (role, context, task, specifics, constraints, format). Then compare with the example prompt, and if you have time, share your best one with the class.
 
-for challenge in challenges:
-    print(f"Challenge {challenge['num']}: {challenge['task']}")
-    print(f"  Task: {challenge['description']}")
-    print(f"  Hint: {challenge['hint']}")
-    print()
-    print(f"  Your prompt:")
-    print(f"  " + "_" * 50)
-    print()
-    print()
+#### Challenge 1: Django REST Framework ViewSet
+
+Create a DRF ViewSet for the `Post` model from our blog app. It should support list, retrieve, create, update and destroy. Only authenticated users can create, update or delete.
+
+*Hint:* mention the DRF version, permission classes and serializer requirements.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+You are an experienced Django developer. I'm using Django 5 and
+Django REST Framework 3.15.
+
+Using the Post model below [paste models.py], create:
+- a PostSerializer (ModelSerializer) exposing id, title, slug, content,
+  author (read-only, username), tags, is_published, published_at
+- a PostViewSet (ModelViewSet) supporting list, retrieve, create,
+  update, partial_update and destroy
+- permission_classes = [IsAuthenticatedOrReadOnly] so anyone can read
+  but only logged-in users can write
+- perform_create() that sets author to request.user
+- the router registration for urls.py
+
+Use type hints where they make sense. Don't change the model.
 ```
 
+</details>
+
+#### Challenge 2: FastAPI Middleware for Request Timing
+
+Add middleware to the FastAPI app that logs the HTTP method, path, status code and response time for every request.
+
+*Hint:* mention Python's `logging` module (not `print()`) and async middleware.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+I have a FastAPI app (FastAPI 0.115, Python 3.12) in main.py.
+
+Write an HTTP middleware using @app.middleware("http") that, for every
+request, logs one line with:
+- HTTP method
+- path
+- response status code
+- response time in milliseconds (use time.perf_counter())
+
+Requirements:
+- Use the standard logging module with a logger named "app.requests",
+  not print()
+- The middleware must be async and must not change the response
+- Also log (at ERROR level) if the handler raises, then re-raise
+
+Show only the middleware function and the logging setup.
+```
+
+</details>
+
+#### Challenge 3: Docker Multi-Stage Build for FastAPI
+
+Write a Dockerfile that uses a multi-stage build to produce a minimal FastAPI production image under 200 MB.
+
+*Hint:* mention `python:3.12-slim`, `pip install --user` and copying from the builder stage.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+Write a multi-stage Dockerfile for a FastAPI app.
+
+Project layout: app/main.py contains `app = FastAPI()`; dependencies are
+in requirements.txt (fastapi, uvicorn[standard], sqlalchemy).
+
+Requirements:
+- Builder stage: python:3.12-slim, install dependencies with
+  pip install --user --no-cache-dir
+- Final stage: python:3.12-slim, copy only the installed packages
+  from the builder and the app/ folder
+- Run as a non-root user
+- PYTHONUNBUFFERED=1 and PYTHONDONTWRITEBYTECODE=1
+- EXPOSE 8000 and CMD running uvicorn on 0.0.0.0:8000
+- Final image must be under 200 MB
+
+Add a short comment above each step explaining why it's there.
+```
+
+</details>
+
+#### Challenge 4: Pytest Fixtures for FastAPI
+
+Write pytest fixtures for testing the Task Manager API. Use an in-memory SQLite database that resets between tests.
+
+*Hint:* mention `TestClient`, overriding the `get_db` dependency, and `scope="function"`.
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```text
+I'm testing the FastAPI Task Manager app below [paste main.py].
+It uses SQLAlchemy 2.0 and a get_db() dependency.
+
+Write a conftest.py with pytest fixtures that:
+- create an in-memory SQLite engine (sqlite:// with StaticPool and
+  check_same_thread=False so all connections share one database)
+- create all tables before each test and drop them after
+  (scope="function", so every test starts empty)
+- override the get_db dependency with app.dependency_overrides
+- provide a `client` fixture using fastapi.testclient.TestClient
+
+Then write two example tests using the client: creating a task returns
+201, and getting a missing task returns 404.
+```
+
+</details>
+
+**Quick recap**
+
+- Follow the loop: generate, review, refine, test, own.
+- Never accept code you can't explain, and always run it.
+- When debugging with AI, give it the code, the input, the expected output and the actual output.
+- Good prompts name versions, constraints and exactly what you want back.
+
 ---
 
-## Lecture Summary
+## Summary & Cheat Sheet
 
-### What We Covered
-
-| Section | Key Takeaway |
-|----|----|
-| Vibe Coding | It's a spectrum. Professionals use AI as a collaborator, not a replacement. |
-| AI Toolkit | Copilot, Cursor, Claude, Aider — each has a role. Know your tools. |
-| Prompting | Specificity is everything. Context + constraints = better output. |
-| FastAPI | AI scaffolds 80-90% correctly. You identify and fix the rest. |
-| Django | AI excels at models, admin, migrations. Business logic needs you. |
-| Docker | Infrastructure config is pattern-heavy — AI's comfort zone. |
-| Agents | Agents combine LLMs with tools for multi-step autonomous tasks. |
-| Pitfalls | Hallucinations, outdated code, security flaws. Always review. |
-| Human Edge | Architecture, debugging, ethics, and communication remain human. |
+| Topic | Remember this |
+|-------|---------------|
+| Vibe coding | It's a spectrum. Professionals use AI as a collaborator, not a replacement. |
+| AI toolkit | Copilot, Cursor, Claude, Aider: each has its place. Know your tools and their limits. |
+| Prompting | Be specific. Context + constraints = better output. |
+| FastAPI | AI scaffolds most of an API correctly. You find and fix the rest. |
+| Django | AI is great at models and admin. Business rules need you. |
+| Docker | Infrastructure files are pattern-heavy, so AI drafts them well. Check every detail. |
+| Agents | An LLM in a loop, using tools to finish multi-step tasks. |
+| Pitfalls | Hallucinations, outdated APIs, security holes. Always review. |
+| Human edge | Architecture, hard debugging, ethics and communication stay with you. |
 | Workflow | Generate → Review → Refine → Test → Own. Never skip review. |
-
----
 
 ### The Mindset
 
-> **AI is a junior developer who is very fast, never sleeps, knows every framework's docs, but sometimes confidently makes things up and has no idea what your business needs.**
+> Think of AI as a very fast junior developer who never sleeps and has read every framework's docs, but who sometimes makes things up with total confidence and has no idea what your business needs.
 >
-> **Your job is to be the senior developer who reviews, guides, corrects, and takes responsibility.**
-
----
+> Your job is to be the senior developer who reviews, guides, corrects and takes responsibility.
 
 ### Recommended Resources
 
-| Resource                       | Link                                   |
-|--------------------------------|----------------------------------------|
-| GitHub Copilot Docs            | https://docs.github.com/en/copilot     |
-| Andrej Karpathy on vibe coding | https://x.com/karpathy                 |
-| Aider (CLI AI coding)          | https://aider.chat                     |
-| LangChain Docs                 | https://python.langchain.com           |
-| OWASP Top 10                   | https://owasp.org/www-project-top-ten/ |
-| Prompt Engineering Guide       | https://www.promptingguide.ai          |
-
----
+| Resource | Link |
+|----------|------|
+| GitHub Copilot docs | https://docs.github.com/en/copilot |
+| Andrej Karpathy (origin of "vibe coding") | https://x.com/karpathy |
+| Aider (CLI AI coding) | https://aider.chat |
+| LangChain docs | https://python.langchain.com |
+| OWASP Top 10 | https://owasp.org/www-project-top-ten/ |
+| Prompt Engineering Guide | https://www.promptingguide.ai |
 
 ### Assignment Preview
 
-> Using AI assistance, build a **REST API** for a topic of your choice using **FastAPI** or **Django REST Framework**.
->
-> Requirements: - At least 3 models with relationships - Full CRUD for at least one resource - JWT authentication - A `Dockerfile` and `docker-compose.yml` that runs the app - A `PROMPTS.md` file documenting the prompts you used and what changes you made to the AI output
->
-> **The `PROMPTS.md` file is the most important deliverable** — it shows you reviewed, understood, and improved the AI's work.
+Using AI assistance, build a **REST API** on a topic of your choice using **FastAPI** or **Django REST Framework**.
 
+Requirements:
 
-```python
-# ──────────────────────────────────────────────────────────────
-# End of Lecture — Quick Self-Assessment
-# ──────────────────────────────────────────────────────────────
+- At least 3 models with relationships
+- Full CRUD for at least one resource
+- JWT authentication
+- A `Dockerfile` and `docker-compose.yml` that run the app
+- A `PROMPTS.md` file documenting the prompts you used and what you changed in the AI output
 
-quiz = [
-    {
-        "q": "What is the most important thing to do with AI-generated code?",
-        "a": "Read and understand every line before using it.",
-    },
-    {
-        "q": "What is a hallucination in the context of AI coding tools?",
-        "a": "When AI confidently generates code that uses non-existent functions or APIs.",
-    },
-    {
-        "q": "Name two things that make a prompt more effective.",
-        "a": "Specific context (framework, version, constraints) and a clear task definition.",
-    },
-    {
-        "q": "What is the difference between an AI autocomplete and an AI agent?",
-        "a": "An agent can take multi-step actions using tools (read files, run tests, write code) autonomously.",
-    },
-    {
-        "q": "Why are developers with strong fundamentals more effective at using AI?",
-        "a": "They can evaluate AI output, spot mistakes, and guide the AI toward correct solutions.",
-    },
-]
+**`PROMPTS.md` is the most important deliverable.** It shows that you reviewed, understood and improved the AI's work.
 
-print("Self-Assessment Questions")
-print("=" * 60)
-print("Think through each answer before revealing it.")
-print()
+### Self-Assessment
 
-for i, item in enumerate(quiz, 1):
-    print(f"Q{i}: {item['q']}")
-    print(f"  → {item['a']}")
-    print()
+Answer each question in your head (or on paper) before opening the answers.
 
-print("=" * 60)
-print("Great work today. Keep building. Keep thinking critically.")
-print("The best AI-assisted developers are the best developers.")
+1. What is the most important thing to do with AI-generated code?
+2. What is a hallucination in the context of AI coding tools?
+3. Name two things that make a prompt more effective.
+4. What is the difference between AI autocomplete and an AI agent?
+5. Why are developers with strong fundamentals more effective at using AI?
+
+<details markdown="1">
+<summary>Show answers</summary>
+
+```text
+1. Read and understand every line before using it.
+2. When the AI confidently generates code that uses functions, parameters
+   or APIs that don't exist.
+3. Specific context (framework, versions, constraints) and a clear task.
+4. An agent takes multi-step actions with tools (reads files, writes code,
+   runs tests) and reacts to the results; autocomplete only suggests the
+   next bit of code.
+5. They can judge the AI's output, spot its mistakes and steer it toward
+   a correct solution.
 ```
+
+</details>
+
+### What's Next
+
+Next up is the **Project Description (PRG400)**. You're allowed to use AI tools on the course project, but you must be able to explain every line you submit, so put this notebook's workflow into practice there.

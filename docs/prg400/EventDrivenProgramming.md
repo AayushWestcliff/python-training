@@ -1,39 +1,59 @@
 # Event-Driven Programming in Python
 
-> *"Don't call us, we'll call you."*\
-> — The Hollywood Principle (a.k.a. Inversion of Control)
+> *"Don't call us, we'll call you."* (the Hollywood Principle, also known as Inversion of Control)
 
----
+In most programs you've written so far, **you** decide the order things happen. In an event-driven program, **events** decide: a button click, a message arriving, a timer going off. This notebook builds the idea up one step at a time, from plain callbacks to an event emitter, a home-made event loop, and finally Python's own `asyncio`.
 
-In traditional programming, **you** decide the order things happen. In event-driven programming, **events** decide.
+You already live in an event-driven world:
 
-Think about it: - You don't keep checking if someone texted you — your phone **notifies** you - A waiter doesn't keep asking "ready to order?" every second — you **signal** them - A fire alarm doesn't check every room — the **smoke triggers** it
+- You don't keep checking whether someone texted you. Your phone **notifies** you.
+- A waiter doesn't ask "ready to order?" every second. You **signal** them.
+- A fire alarm doesn't walk from room to room. The **smoke triggers** it.
 
-This is the core idea: **react to things when they happen**, rather than constantly checking.
+The idea is the same every time: **react when something happens** instead of constantly checking.
 
----
+### Learning Objectives
 
-### What We'll Cover
+By the end of this notebook you will be able to:
 
-| Section | Topic                     | Key Concept                         |
-|---------|---------------------------|-------------------------------------|
-| 1       | Callbacks                 | Functions that respond to events    |
-| 2       | Building an Event System  | The Observer pattern in action      |
-| 3       | The Event Loop            | The engine behind event-driven code |
-| 4       | `asyncio` & `async/await` | Python's built-in async framework   |
-| 5       | Real-World Patterns       | Putting it all together             |
-
----
+1. Pass functions around as callbacks, including separate success and error callbacks
+2. Explain why deeply nested callbacks ("callback hell") are hard to work with
+3. Build an event emitter (the Observer pattern) and register listeners with a decorator
+4. Describe what an event loop does by building a small one yourself
+5. Write coroutines with `async def` / `await` and run them concurrently with `asyncio.gather` and `asyncio.create_task`
+6. Handle errors and timeouts in async code
+7. Use three common async patterns: an async event emitter, producer/consumer queues, and retry with backoff
 
 ### Prerequisites
 
-- Functions (including `*args`, `**kwargs`)
-- Classes and OOP basics
-- Decorators (helpful, not required)
+- Python 3.10 or newer
+- Functions, including `*args`, `**kwargs` and `lambda`
+- Classes and OOP basics (see the OOP notebook)
+- Decorators help, but aren't required
+
+### How to Use This Notebook
+
+- Run the cells **from top to bottom**. Later cells reuse things defined earlier, such as `EventEmitter`.
+- The `asyncio` cells use `await` directly at the top level of a cell. That works in Jupyter. In a normal `.py` script you'd put the code in an `async def main()` and call `asyncio.run(main())`.
+- Some examples use random numbers or timings, so your output can differ a little from the saved output. That's expected.
+- **Try It** cells are for you. Write your answer first, then open *Show solution* to compare.
+- Each section ends with a **Quick recap**. Read only the recaps when revising before an exam.
+
+### What We'll Cover
+
+| Section | Topic | Main idea |
+|---|---|---|
+| 1 | Callbacks | Functions that respond to events |
+| 2 | Building an Event System | The Observer pattern in action |
+| 3 | The Event Loop | The engine behind event-driven code |
+| 4 | `asyncio` and `async`/`await` | Python's built-in async framework |
+| 5 | Real-World Patterns | Putting it all together |
 
 ---
 
 ## Warm-Up: Synchronous vs Event-Driven Thinking
+
+Two quick questions before any code. Think about your answer, then open it.
 
 ### Question 1: What's wrong with this restaurant?
 
@@ -47,20 +67,21 @@ Synchronous Restaurant:
 6. Waiter delivers Order B
 ```
 
-<details>
-<summary>Click to reveal the problem!</summary>
+<details markdown="1">
+<summary>Show answer</summary>
 
-**The waiter is BLOCKED!** While waiting for one order, they can't serve anyone else.
+The waiter is **blocked**. While waiting for one order, they can't serve anyone else.
 
-A real restaurant works event-driven:
-1. Waiter takes Order A, sends to kitchen
-2. Waiter takes Order B, sends to kitchen
-3. Waiter takes Order C, sends to kitchen
-4. **Kitchen signals**: "Order A ready!" -> Waiter delivers it
-5. **Kitchen signals**: "Order C ready!" -> Waiter delivers it
-6. **Kitchen signals**: "Order B ready!" -> Waiter delivers it
+A real restaurant is event-driven:
 
-The waiter **reacts to events** (food being ready) instead of **blocking** on each order!
+1. Waiter takes Order A, sends it to the kitchen
+2. Waiter takes Order B, sends it to the kitchen
+3. Waiter takes Order C, sends it to the kitchen
+4. Kitchen signals "Order A ready!", waiter delivers it
+5. Kitchen signals "Order C ready!", waiter delivers it
+6. Kitchen signals "Order B ready!", waiter delivers it
+
+The waiter **reacts to events** (food being ready) instead of standing still until each order is done.
 
 </details>
 
@@ -72,33 +93,36 @@ The waiter **reacts to events** (food being ready) instead of **blocking** on ea
 - D) A chat app that shows messages when they arrive
 - E) A security camera that records when motion is detected
 
-<details>
-<summary>Click to reveal!</summary>
+<details markdown="1">
+<summary>Show answer</summary>
 
-**B, D, and E** are event-driven!
+**B, D and E** are event-driven.
 
-- **B**: The code *waits* for a click event, then *reacts*
-- **D**: Messages *arrive* as events, the UI *reacts* by displaying them
-- **E**: Motion *triggers* an event, recording *reacts* to it
+- **B**: the code waits for a click, then reacts.
+- **D**: messages arrive as events, and the UI reacts by showing them.
+- **E**: motion triggers an event, and recording is the reaction.
 
-A and C are **sequential/synchronous** — they process things in a fixed order.
+A and C are **sequential**: they process things in a fixed order that the program decides.
 
 </details>
+
+**Quick recap**
+
+- Synchronous code does one thing at a time and waits (blocks) until each step is finished.
+- Event-driven code reacts when something happens instead of waiting or constantly checking.
 
 ---
 
 ## 1. Callback Functions: The Building Block
 
----
-
-A **callback** is a function you pass to another function, to be **called back** later when something happens.
+A **callback** is a function you hand to another function, so that it can be **called back** later, when something happens.
 
 ```
-You:     "Hey, when you're done cooking, CALL me BACK."
-Kitchen: "Sure, I'll call your function when the event occurs."
+You:     "When the food is ready, call me back."
+Kitchen: "Sure. I'll call your function when it's done."
 ```
 
-This works because in Python, **functions are first-class objects** — you can pass them around like any other value.
+This works because in Python **functions are first-class objects**: you can store them in variables and pass them around like any other value.
 
 
 ```python
@@ -122,6 +146,8 @@ print(f"Same object? {say_hello is greet}")
     Type: <class 'function'>
     Same object? True
 
+
+Notice that `say_hello = greet` has **no parentheses**. We're not calling `greet`, we're giving the same function a second name. The `()` is what actually runs a function.
 
 ### 1.1 Your First Callback
 
@@ -161,13 +187,13 @@ download_file("https://example.com/file.txt", save_to_disk)
     Saving to disk: <contents of https://example.com/file.txt>
 
 
-### Key Insight
+`download_file` doesn't know or care what `on_complete` does. It does its job and then calls whatever function it was given. Pass a different function and you get different behaviour, without changing `download_file` at all.
 
-`download_file` doesn't know or care what `on_complete` does. It just **calls it back** when the work is done. This is **separation of concerns** — the downloader handles downloading, the callback handles what to do with the result.
+That's **separation of concerns**: the downloader handles downloading, and the callback decides what to do with the result.
 
 ### 1.2 Callbacks with Lambda Functions
 
-For short callbacks, you can use **lambda** (anonymous functions):
+For short, one-line callbacks you can use a **lambda** (a small function without a name) instead of a full `def`:
 
 
 ```python
@@ -192,9 +218,9 @@ print(f"As text: {as_text}")
     As text: ['#1', '#2', '#3', '#4', '#5']
 
 
-### 1.3 Callbacks for Success AND Failure
+### 1.3 Callbacks for Success and Failure
 
-Real-world operations can **succeed or fail**. A common pattern is to provide two callbacks:
+Real operations can **succeed or fail**. A common pattern is to pass two callbacks: one for each outcome.
 
 
 ```python
@@ -230,6 +256,9 @@ for i in range(5):
     Got user: Alice (role: admin)
     
     Fetching user 42...
+    Got user: Alice (role: admin)
+    
+    Fetching user 42...
     ERROR: User 42 not found in database
     
     Fetching user 42...
@@ -238,13 +267,17 @@ for i in range(5):
     Fetching user 42...
     Got user: Alice (role: admin)
     
-    Fetching user 42...
-    Got user: Alice (role: admin)
 
 
-### Try It Yourself: Callback Calculator
+Your output will differ each time you run this, because of `random`. The point is the split of jobs: `fetch_user` decides **which** callback to call, and the caller decides **what** each callback does.
 
-Complete the `calculate` function below. It should: 1. Perform the operation 2. Call `on_result` with the answer 3. Call `on_error` if something goes wrong (like division by zero)
+### Try It: Callback Calculator
+
+Complete the `calculate` function below. It should:
+
+1. Run `operation(a, b)`
+2. Pass the answer to `on_result`
+3. Pass the error to `on_error` if something goes wrong (for example, dividing by zero)
 
 
 ```python
@@ -266,10 +299,19 @@ calculate(10, 3, lambda a, b: a + b,
 calculate(10, 0, lambda a, b: a / b,
           on_result=lambda r: print(f"Result: {r}"),
           on_error=lambda e: print(f"Error: {e}"))
+
+
+# Tests (uncomment after finishing):
+# got = []
+# calculate(6, 7, lambda a, b: a * b, on_result=got.append, on_error=got.append)
+# assert got == [42]
+# calculate(1, 0, lambda a, b: a / b, on_result=got.append, on_error=got.append)
+# assert isinstance(got[-1], ZeroDivisionError)
+# print("✓ Callback calculator works!")
 ```
 
-<details>
-<summary>Solution</summary>
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
 def calculate(a, b, operation, on_result, on_error):
@@ -284,7 +326,7 @@ def calculate(a, b, operation, on_result, on_error):
 
 ### 1.4 Callback Hell (The Problem)
 
-Callbacks are great for simple cases, but they can get **ugly** when you chain many together:
+Callbacks are fine for one step. They get ugly when each step needs the result of the previous one, because every step has to be nested **inside** the one before:
 
 
 ```python
@@ -313,7 +355,7 @@ step1(lambda token:
 )
 
 # Imagine 10 steps deep... This is called "Callback Hell"
-# async/await (Section 4) solves this elegantly!
+# async/await (Section 4) fixes this: the same steps read top to bottom.
 ```
 
     Step 1: Authenticating...
@@ -322,23 +364,30 @@ step1(lambda token:
     Final result: done
 
 
+Only three steps, and it's already hard to see what runs when. Each step lives inside the previous step's lambda, so the code drifts to the right like a pyramid. Add error handling at every level and it gets much worse. Keep this picture in mind: in Section 4 we'll write the same flow with `async`/`await`.
+
+**Quick recap**
+
+- A callback is a function passed to another function, to be called later.
+- Functions are objects: `greet` is the function itself, `greet()` calls it.
+- Success/error callback pairs let the caller decide how to handle each outcome.
+- Nesting many callbacks inside each other leads to "callback hell".
+
 ---
 
 ## 2. Building an Event System (Observer Pattern)
 
----
+One callback is useful, but real applications have **many events**, and each event can have **many listeners**. Let's build an **event emitter**: an object that
 
-A single callback is useful, but real applications have **many events** with **many listeners**. Let's build an **Event Emitter** — an object that:
+1. lets you **register** callbacks for named events (`on`), and
+2. **emits** an event, calling every callback registered for it (`emit`).
 
-1.  Lets you **register** callbacks for named events
-2.  **Emits** events, calling all registered callbacks
-
-This is the **Observer Pattern** in action.
+This is the **Observer pattern**. The emitter doesn't know who's listening; it just tells everyone who signed up.
 
 
 ```python
 class EventEmitter:
-    """A simple event system — register callbacks and emit events."""
+    """A simple event system: register callbacks and emit events."""
 
     def __init__(self):
         self._listeners = {}  # {event_name: [list of callbacks]}
@@ -380,6 +429,8 @@ emitter.emit("user_login", "Alice")
     [LOG] Alice logged in
     [ANALYTICS] Login event for Alice
 
+
+Three listeners, one `emit`, three reactions. The code that emits `"user_login"` doesn't need to know anything about logging or analytics. Those parts of the program simply subscribe.
 
 ### 2.1 Real-World Example: Online Store Events
 
@@ -454,9 +505,15 @@ store.purchase("tablet", 499)
       FAILED: tablet - Out of stock
 
 
-### Try It Yourself: Chat Room Events
+`OnlineStore` only announces **what happened** (`purchase_complete`, `low_stock`, `purchase_failed`). Receipts, analytics and warnings are wired up outside the class. To add, say, an email when stock runs low, you'd add one more `store.events.on(...)` line and leave `OnlineStore` untouched.
 
-Build a `ChatRoom` class using `EventEmitter` that emits these events: - `"user_joined"` — when someone joins (pass the username) - `"message"` — when someone sends a message (pass username and text) - `"user_left"` — when someone leaves (pass the username)
+### Try It: Chat Room Events
+
+Build a `ChatRoom` class that uses `EventEmitter` and emits these events:
+
+- `"user_joined"` when someone joins (pass the username)
+- `"message"` when someone sends a message (pass the username and the text)
+- `"user_left"` when someone leaves (pass the username)
 
 
 ```python
@@ -493,10 +550,24 @@ room.join("Bob")
 room.send_message("Alice", "Hey everyone!")
 room.send_message("Bob", "Hi Alice!")
 room.leave("Alice")
+
+
+# Tests (uncomment after finishing):
+# test_room = ChatRoom("Test")
+# seen = []
+# test_room.events.on("user_joined", lambda u: seen.append(("joined", u)))
+# test_room.events.on("message", lambda u, t: seen.append(("message", u, t)))
+# test_room.events.on("user_left", lambda u: seen.append(("left", u)))
+# test_room.join("Ann")
+# test_room.send_message("Ann", "hi")
+# test_room.leave("Ann")
+# assert seen == [("joined", "Ann"), ("message", "Ann", "hi"), ("left", "Ann")]
+# assert test_room.users == []
+# print("✓ ChatRoom works!")
 ```
 
-<details>
-<summary>Solution</summary>
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
 class ChatRoom:
@@ -521,7 +592,7 @@ class ChatRoom:
 
 ### 2.2 Decorator Syntax for Event Registration
 
-We can make our event system even cleaner with decorators:
+Writing `emitter.on("event", func)` after every function gets repetitive. A decorator lets you register a function right where you define it:
 
 
 ```python
@@ -549,7 +620,7 @@ def check_auth(method, path):
         print(f"[AUTH] Checking credentials for {path}")
 
 @server.listener("error")
-def handle_error(code, message):
+def handle_server_error(code, message):
     print(f"[ERROR {code}] {message}")
 
 
@@ -573,13 +644,24 @@ server.emit("error", 404, "Page not found")
     [ERROR 404] Page not found
 
 
+`@server.listener("request")` calls `server.on("request", log_request)` for you and then returns the function unchanged, so `log_request` is still a normal function you can call yourself. Web frameworks such as Flask and FastAPI use exactly this trick to register routes (`@app.get("/")`).
+
+**Quick recap**
+
+- An event emitter keeps a dictionary of `event name -> list of callbacks`.
+- `on()` subscribes a callback, `emit()` calls every subscriber, `off()` unsubscribes.
+- The code that emits an event doesn't need to know who is listening (loose coupling).
+- A decorator can register a listener at the point where the function is defined.
+
 ---
 
 ## 3. The Event Loop: The Engine Behind It All
 
----
+An **event loop** is a loop that:
 
-An **event loop** is a loop that: 1. Waits for events to occur 2. Dispatches them to the right handlers 3. Goes back to waiting
+1. waits for events to occur,
+2. sends each event to the right handler, and
+3. goes back to waiting.
 
 ```
 while running:
@@ -588,7 +670,7 @@ while running:
     handler(event)
 ```
 
-Every GUI app, web server, and game engine has one. Let's build a simple one!
+Every GUI app, web server and game engine has one. Let's build a simple one.
 
 
 ```python
@@ -650,7 +732,7 @@ class SimpleEventLoop:
             elif self._timers:
                 time.sleep(0.01)
             else:
-                # No events, no timers — we're done
+                # No events, no timers: we're done
                 break
 
         print("Event loop finished.")
@@ -680,42 +762,50 @@ loop.run()
       Hello, Alice!
       Hello, Bob!
       Tick #1
+
+
       Tick #2
       ALARM: Wake up!
     Event loop finished.
 
 
+Look at the order. The three posted events run first, in the order they were queued. The scheduled events wait until their time comes, so `Tick #2` (0.3 s) fires before the alarm (0.5 s), even though the alarm was scheduled first. When the queue is empty and no timers are left, the loop ends. (You could also stop it early by posting a `"__STOP__"` event.)
+
 ### How This Connects to `asyncio`
 
-Our `SimpleEventLoop` above is a toy version of what Python's `asyncio` does under the hood:
+Our `SimpleEventLoop` is a toy version of what Python's `asyncio` does for real:
 
-| Our Event Loop                 | `asyncio`                  |
-|--------------------------------|----------------------------|
-| `loop.post(event)`             | Scheduling a coroutine     |
-| `loop.register(type, handler)` | `async def` functions      |
-| `loop.schedule(delay, ...)`    | `asyncio.sleep()` / timers |
-| `loop.run()`                   | `asyncio.run()`            |
-| Event queue                    | The asyncio task queue     |
+| Our `SimpleEventLoop` | `asyncio` |
+|---|---|
+| `loop.post(event)` puts work in the queue | `asyncio.create_task(coro)` schedules a coroutine |
+| Handlers run when their event comes up | Coroutines resume when what they're waiting for is ready |
+| `loop.schedule(delay, ...)` | `asyncio.sleep(delay)` and other timers |
+| `loop.run()` | `asyncio.run(main())` |
+| The event queue | The loop's internal queue of ready work |
 
-Now let's see the real thing!
+One big difference: our handlers always run from start to finish. An `asyncio` coroutine can **pause in the middle** at an `await` and let other code run. That's what we'll look at next.
+
+**Quick recap**
+
+- An event loop repeatedly takes the next event and runs its handler.
+- Events can be queued straight away or scheduled for later with a timer.
+- `asyncio` is a production-quality event loop; coroutines are what it runs.
 
 ---
 
-## 4. `asyncio` — Python's Async Framework
+## 4. `asyncio`: Python's Async Framework
 
----
-
-`asyncio` is Python's built-in library for writing **concurrent** code using `async/await` syntax.
+`asyncio` is Python's built-in library for writing **concurrent** code with the `async`/`await` syntax. "Concurrent" here means many tasks make progress during the same period of time, by taking turns while the others are waiting.
 
 ### Key Vocabulary
 
-| Term | What It Means | Analogy |
-|----|----|----|
+| Term | What it means | Analogy |
+|---|---|---|
 | **Coroutine** | A function that can pause and resume | A bookmark in a book |
-| **`async def`** | Declares a coroutine function | "This function can pause" |
-| **`await`** | Pauses until a result is ready | "I'll wait here, but others can go" |
-| **Event Loop** | Manages and schedules coroutines | The restaurant manager |
-| **Task** | A coroutine wrapped for concurrent execution | An order ticket |
+| **`async def`** | Defines a coroutine function | "This function can pause" |
+| **`await`** | Pause here until the result is ready | "I'll wait here, others can go ahead" |
+| **Event loop** | Schedules and runs coroutines | The restaurant manager |
+| **Task** | A coroutine scheduled to run concurrently | An order ticket |
 
 ### 4.1 Your First Coroutine
 
@@ -737,13 +827,15 @@ print(f"Result: {result}")
 ```
 
     Hello, Alice! (waiting 1s...)
+
+
     Goodbye, Alice! (after 1s)
     Result: Alice done
 
 
-### Important: `await` vs no `await`
+### 4.2 `await` vs No `await`
 
-A common mistake — what happens if you forget `await`?
+The most common beginner mistake: forgetting `await`. What happens then?
 
 
 ```python
@@ -764,16 +856,51 @@ print(f"Type: {type(result_right)}")
 result_wrong.close()
 ```
 
-    Without await: <coroutine object greet at 0x10a92cc10>
+    Without await: <coroutine object greet at 0x10bd8ac80>
     Type: <class 'coroutine'>
     
     With await: Hello!
     Type: <class 'str'>
 
 
-### 4.2 Running Tasks Concurrently with `asyncio.gather`
+Calling an `async def` function does **not** run it. It only builds a coroutine object, like a recipe that hasn't been cooked yet. `await` is what actually runs it and hands you the return value. The `.close()` at the end tidies up the coroutine we never ran, so Python doesn't warn about it.
 
-This is where async gets **powerful** — doing multiple things at once!
+Now remember the pyramid from Section 1.4? Here are the same three steps written with `async`/`await`:
+
+
+```python
+# The callback-hell example from Section 1.4, rewritten with async/await
+
+async def authenticate():
+    print("Step 1: Authenticating...")
+    return "auth_token_123"
+
+async def fetch_data(token):
+    print(f"Step 2: Fetching data with {token}...")
+    return {"users": ["Alice", "Bob"]}
+
+async def process(data):
+    print(f"Step 3: Processing {len(data['users'])} users...")
+    return "done"
+
+
+token = await authenticate()
+data = await fetch_data(token)
+result = await process(data)
+print(f"Final result: {result}")
+```
+
+    Step 1: Authenticating...
+    Step 2: Fetching data with auth_token_123...
+    Step 3: Processing 2 users...
+    Final result: done
+
+
+Same steps, same output, but each step is one line and the code reads top to bottom. You could also wrap all three lines in a single `try/except` to handle errors, which is very awkward with nested callbacks.
+
+### 4.3 Running Tasks Concurrently with `asyncio.gather`
+
+Here's where async really pays off: doing several things during the same wait.
 
 
 ```python
@@ -816,10 +943,16 @@ print(f"Orders: {results}")
 
     === Sequential (one at a time) ===
       Starting coffee: Espresso
+
+
       Coffee ready: Espresso
       Starting coffee: Latte
+
+
       Coffee ready: Latte
       Starting coffee: Cappuccino
+
+
       Coffee ready: Cappuccino
     Total time: 6.0s
     Orders: ['Espresso (hot)', 'Latte (hot)', 'Cappuccino (hot)']
@@ -828,6 +961,8 @@ print(f"Orders: {results}")
       Starting coffee: Espresso
       Starting coffee: Latte
       Starting coffee: Cappuccino
+
+
       Coffee ready: Espresso
       Coffee ready: Latte
       Coffee ready: Cappuccino
@@ -835,11 +970,14 @@ print(f"Orders: {results}")
     Orders: ['Espresso (hot)', 'Latte (hot)', 'Cappuccino (hot)']
 
 
-Notice the difference! - **Sequential**: ~6 seconds (2 + 2 + 2) - **Concurrent**: ~2 seconds (all 3 run at the same time!)
+- **Sequential**: about 6 seconds (2 + 2 + 2)
+- **Concurrent**: about 2 seconds, because all three coffees wait at the same time
 
-`asyncio.gather` starts all coroutines, and while one is "sleeping" (waiting for I/O), the others can run.
+While one coroutine is sleeping (in real code: waiting for the network or the disk), the event loop runs the others. `gather` returns the results in the same order you passed the coroutines in.
 
-### 4.3 `asyncio.create_task` — Fire and Forget
+### 4.4 `asyncio.create_task`: Start Now, Collect Later
+
+`gather` starts coroutines and waits for them in one go. `create_task` splits that into two steps: it schedules a coroutine to start **as soon as the event loop gets a chance**, and gives you back a `Task` object you can await later.
 
 
 ```python
@@ -875,15 +1013,27 @@ await main()
       [Backup] Started
       [Email] Started
       [Report] Started
+
+
     Still working...
+
+
       [Email] Finished after 1s
+
+
       [Backup] Finished after 2s
+
+
       [Report] Finished after 3s
     
     All done! Completed: ['Backup', 'Email', 'Report']
 
 
-### 4.4 Error Handling in Async Code
+Look at the output order. "Tasks created! Doing other work..." is printed **before** any task starts. Creating a task only schedules it; the tasks actually start at the next `await` (`asyncio.sleep(0.5)`), when `main` hands control back to the event loop.
+
+Always keep a reference to the tasks you create (here `task1`, `task2`, `task3`) and await them at some point. The event loop only keeps a weak reference to a task, so a task nobody refers to can disappear before it finishes.
+
+### 4.5 Error Handling in Async Code
 
 
 ```python
@@ -919,15 +1069,21 @@ for r in results:
 ```
 
     === try/except ===
+
+
     Caught error: API Call: Connection refused!
     
     === gather with return_exceptions ===
+
+
       OK: Task A: Success!
       FAILED: Task B: Connection refused!
       OK: Task C: Success!
 
 
-### 4.5 Timeouts — Don't Wait Forever
+Without `return_exceptions=True`, the first exception would be raised straight out of `gather` and you wouldn't get the other results back. With it, each exception is returned in the results list in its normal position, so you can check every result one by one.
+
+### 4.6 Timeouts: Don't Wait Forever
 
 
 ```python
@@ -947,12 +1103,16 @@ except asyncio.TimeoutError:
 ```
 
     Calling slow API...
+
+
     Timed out after 2 seconds! The API was too slow.
 
 
-### Try It Yourself: Async Web Scraper Simulation
+`wait_for` cancels `slow_api_call` when the 2 seconds are up, so this cell takes about 2 seconds, not 10. (Since Python 3.11, `asyncio.TimeoutError` is just another name for the built-in `TimeoutError`.)
 
-Complete the `fetch_page` coroutine and use `asyncio.gather` to fetch all pages concurrently.
+### Try It: Async Web Scraper Simulation
+
+Complete the `fetch_page` coroutine, then use `asyncio.gather` to fetch all five pages concurrently. Each page takes at most 2 seconds, so the whole thing should take about 2 seconds, not 5 to 10.
 
 
 ```python
@@ -988,10 +1148,19 @@ start = time.time()
 # for page in results:
 #     print(f"  {page['url']} -> {page['size']} bytes")
 # print(f"\nTotal time: {time.time() - start:.1f}s")
+
+
+# Tests (uncomment after finishing):
+# assert len(results) == 5
+# assert time.time() - start < 2.5, "The pages should be fetched concurrently"
+# page = await fetch_page("https://example.com/test")
+# assert page["url"] == "https://example.com/test"
+# assert 1000 <= page["size"] <= 5000
+# print("✓ Scraper works!")
 ```
 
-<details>
-<summary>Solution</summary>
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
 async def fetch_page(url):
@@ -1014,9 +1183,9 @@ print(f"\nTotal time: {time.time() - start:.1f}s")
 
 </details>
 
-### 4.6 Async Generators and `async for`
+### 4.7 Async Generators and `async for`
 
-Just like regular generators yield values one at a time, **async generators** yield values with `await` in between:
+A normal generator `yield`s values one at a time. An **async generator** can also `await` between values, which makes it a good fit for data that arrives over time:
 
 
 ```python
@@ -1038,17 +1207,29 @@ print("Done!")
 ```
 
     Reading sensor data...
-      [TempSensor-A] Reading #1: 23.8C (OK)
-      [TempSensor-A] Reading #2: 23.1C (OK)
-      [TempSensor-A] Reading #3: 25.4C (OK)
-      [TempSensor-A] Reading #4: 26.8C (OK)
-      [TempSensor-A] Reading #5: 28.9C (HIGH)
+
+
+      [TempSensor-A] Reading #1: 23.7C (OK)
+
+
+      [TempSensor-A] Reading #2: 23.0C (OK)
+
+
+      [TempSensor-A] Reading #3: 23.6C (OK)
+
+
+      [TempSensor-A] Reading #4: 26.1C (OK)
+
+
+      [TempSensor-A] Reading #5: 21.6C (OK)
     Done!
 
 
-### 4.7 Async Context Managers
+`async for` asks the generator for the next value and waits (without blocking other tasks) until it's ready. Your temperatures will be different each run.
 
-Just like `with open(...)` manages file resources, `async with` manages **async resources**:
+### 4.8 Async Context Managers
+
+`with open(...)` makes sure a file gets closed. `async with` does the same job for resources whose setup or cleanup needs to `await`, like network or database connections:
 
 
 ```python
@@ -1068,7 +1249,7 @@ class AsyncDatabaseConnection:
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        """Called when exiting 'async with' — even if there's an error!"""
+        """Called when exiting 'async with': even if there's an error!"""
         print(f"Closing connection to {self.db_name}...")
         await asyncio.sleep(0.2)  # Simulate cleanup
         self.connected = False
@@ -1082,7 +1263,7 @@ class AsyncDatabaseConnection:
         return [{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]
 
 
-# Use it with 'async with' — connection is automatically cleaned up!
+# Use it with 'async with': connection is automatically cleaned up!
 async with AsyncDatabaseConnection("mydb") as db:
     results = await db.query("SELECT * FROM users")
     print(f"  Results: {results}")
@@ -1091,25 +1272,42 @@ async with AsyncDatabaseConnection("mydb") as db:
 ```
 
     Connecting to mydb...
+
+
     Connected to mydb!
       Executing: SELECT * FROM users
+
+
       Results: [{'id': 1, 'name': 'Alice'}, {'id': 2, 'name': 'Bob'}]
     Closing connection to mydb...
+
+
     Connection closed.
 
+
+`__aenter__` and `__aexit__` are the async versions of `__enter__` and `__exit__`. Because they're `async`, connecting and disconnecting can `await` without freezing other tasks. `__aexit__` runs even if the code inside the block raises an error, so the connection is always closed.
+
+**Quick recap**
+
+- `async def` defines a coroutine; calling it only creates a coroutine object. `await` runs it.
+- `asyncio.gather` runs several coroutines concurrently and returns results in argument order.
+- `asyncio.create_task` starts a coroutine in the background; keep the task and await it later.
+- Use `try/except`, `return_exceptions=True` and `asyncio.wait_for` to handle errors and timeouts.
+- `async for` consumes async generators; `async with` manages async resources.
 
 ---
 
 ## 5. Real-World Patterns: Putting It All Together
 
----
-
 ### 5.1 Pattern: Async Event Emitter
 
-Combining our EventEmitter with asyncio for async handlers:
+Let's combine the `EventEmitter` from Section 2 with `asyncio`, so that handlers can be coroutines:
 
 
 ```python
+import inspect
+
+
 class AsyncEventEmitter:
     """An event emitter that supports async handlers."""
 
@@ -1128,7 +1326,7 @@ class AsyncEventEmitter:
 
         tasks = []
         for callback in self._listeners[event]:
-            if asyncio.iscoroutinefunction(callback):
+            if inspect.iscoroutinefunction(callback):
                 tasks.append(callback(*args, **kwargs))
             else:
                 callback(*args, **kwargs)  # Sync handlers run immediately
@@ -1169,16 +1367,24 @@ print("(Email and push ran concurrently!)")
       [LOG] Notification for Alice: Server is down!
       Sending email to Alice...
       Sending push notification to Alice...
+
+
       Push sent to Alice!
+
+
       Email sent to Alice!
     
     All notifications sent in 1.0s
     (Email and push ran concurrently!)
 
 
-### 5.2 Pattern: Producer-Consumer with `asyncio.Queue`
+The two async handlers run together through `gather`, so sending everything takes about 1 second (the slower handler), not 1.5. The sync logger runs immediately inside `emit`, which is why its line appears first.
 
-A classic pattern where one coroutine produces data and another consumes it:
+`inspect.iscoroutinefunction` tells us whether a handler was defined with `async def`. (Older code uses `asyncio.iscoroutinefunction`, which is deprecated since Python 3.14.)
+
+### 5.2 Pattern: Producer/Consumer with `asyncio.Queue`
+
+A classic pattern: one coroutine **produces** work and puts it on a queue, others **consume** it.
 
 
 ```python
@@ -1226,33 +1432,51 @@ print("\nKitchen closed!")
 
     Kitchen is open!
     
+
+
       [NEW ORDER] Burger
       [Chef Alice] Cooking Burger...
+
+
       [NEW ORDER] Pizza
       [Chef Bob] Cooking Pizza...
+      [Chef Alice] Burger READY! (took 0.7s)
+
+
       [NEW ORDER] Pasta
-      [Chef Alice] Burger READY! (took 1.1s)
       [Chef Alice] Cooking Pasta...
+      [Chef Bob] Pizza READY! (took 0.8s)
+
+
       [NEW ORDER] Salad
-      [NEW ORDER] Soup
-      [Chef Bob] Pizza READY! (took 1.4s)
       [Chef Bob] Cooking Salad...
-      [Chef Alice] Pasta READY! (took 0.8s)
-      [Chef Alice] Cooking Soup...
+
+
+      [NEW ORDER] Soup
+
+
       [NEW ORDER] Steak
-      [Chef Alice] Soup READY! (took 0.8s)
-      [Chef Alice] Cooking Steak...
-      [Chef Bob] Salad READY! (took 1.0s)
+      [Chef Alice] Pasta READY! (took 1.5s)
+      [Chef Alice] Cooking Soup...
+
+
+      [Chef Bob] Salad READY! (took 1.4s)
+      [Chef Bob] Cooking Steak...
+
+
+      [Chef Bob] Steak READY! (took 0.7s)
       [Chef Bob] No more orders, going home!
-      [Chef Alice] Steak READY! (took 0.7s)
+      [Chef Alice] Soup READY! (took 1.4s)
       [Chef Alice] No more orders, going home!
     
     Kitchen closed!
 
 
+The `None` at the end is a **sentinel** (also called a *poison pill*): it tells a chef there's no more work. Each chef that receives it puts it back on the queue, so the other chef gets the message too. The order of the lines will vary between runs because the timings are random.
+
 ### 5.3 Pattern: Async Retry with Exponential Backoff
 
-A practical pattern for handling flaky network calls:
+A practical pattern for flaky network calls: if a call fails, wait a bit and try again, waiting longer each time.
 
 
 ```python
@@ -1293,17 +1517,31 @@ print(f"\nSuccess! Got: {result}")
     Calling flaky API with retry...
       Attempt 1 failed: Server unavailable
       Retrying in 0.5s...
+
+
       Attempt 2 failed: Server unavailable
       Retrying in 1.0s...
+
+
     
     Success! Got: {'status': 'ok', 'data': [1, 2, 3]}
 
+
+Each failure doubles the wait (0.5 s, then 1 s, then 2 s, ...). Waiting longer each time gives a struggling server room to recover instead of hammering it with requests. If every attempt fails, the bare `raise` passes the last error on to the caller.
+
+**Quick recap**
+
+- An async event emitter can run all coroutine handlers for an event concurrently with `gather`.
+- `asyncio.Queue` connects producers and consumers; a sentinel such as `None` signals "no more work".
+- Retry with exponential backoff: try, wait, try again, doubling the wait each time.
 
 ---
 
 ## Quiz Time: Test Your Understanding
 
-### Q1: What does this print?
+For each question, **predict the answer first**, then run the cell and open the answer.
+
+### Q1: What does this print, and in what order?
 
 
 ```python
@@ -1321,8 +1559,19 @@ await asyncio.gather(a(), b())
 print("5")
 ```
 
-<details>
-<summary>Click to reveal!</summary>
+    1
+    3
+
+
+    4
+
+
+    2
+    5
+
+
+<details markdown="1">
+<summary>Show answer</summary>
 
 ```
 1
@@ -1332,17 +1581,19 @@ print("5")
 5
 ```
 
-
 **Why?**
-- `a()` and `b()` start together, both print their first line (`1`, `3`)
-- Both hit `await asyncio.sleep()` — they *pause* and yield control
-- `b()` has a shorter sleep (0.5s), so it resumes first and prints `4`
-- `a()` resumes after 1s and prints `2`
-- `gather` finishes, so `5` prints last
+
+- `a()` and `b()` start together, and both print their first line (`1`, `3`).
+- Both reach `await asyncio.sleep()`, pause, and hand control back to the event loop.
+- `b()` has the shorter sleep (0.5 s), so it resumes first and prints `4`.
+- `a()` resumes after 1 s and prints `2`.
+- `gather` finishes, so `5` is printed last.
 
 </details>
 
 ### Q2: What's wrong with this code?
+
+Run it and read the error message. Can you explain it?
 
 
 ```python
@@ -1351,52 +1602,88 @@ async def get_data():
     return {"key": "value"}
 
 data = get_data()
-print(data["key"])
+try:
+    print(data["key"])
+except TypeError as e:
+    print(f"TypeError: {e}")
+finally:
+    data.close()  # tidy up the coroutine object we never awaited
 ```
 
-<details>
-<summary>Click to reveal!</summary>
+    TypeError: 'coroutine' object is not subscriptable
 
-**Missing `await`!** `data = get_data()` returns a coroutine object, not the dict.
+
+<details markdown="1">
+<summary>Show answer</summary>
+
+**The `await` is missing.** `data = get_data()` returns a coroutine object, not the dictionary, and you can't index a coroutine with `["key"]`.
 
 Fix: `data = await get_data()`
 
-This is the #1 most common asyncio mistake.
+This is the most common asyncio mistake of all.
 
 </details>
 
-### Q3: Which runs faster and why?
+### Q3: Which option runs faster, and why?
+
+Both options fetch the same three (pretend) URLs. Each fetch takes 1 second. Guess the two times before you run it.
 
 
 ```python
+async def fetch(url):
+    await asyncio.sleep(1)  # pretend each request takes 1 second
+    return f"<html from {url}>"
+
+url1, url2, url3 = "/a", "/b", "/c"
+
 # Option A
+start = time.time()
 r1 = await fetch(url1)
 r2 = await fetch(url2)
 r3 = await fetch(url3)
+print(f"Option A: {time.time() - start:.1f}s")
 
 # Option B
+start = time.time()
 r1, r2, r3 = await asyncio.gather(fetch(url1), fetch(url2), fetch(url3))
+print(f"Option B: {time.time() - start:.1f}s")
 ```
 
-<details>
-<summary>Click to reveal!</summary>
+    Option A: 3.0s
 
-**Option B is faster!**
 
-- **Option A**: Sequential. Waits for each fetch to complete before starting the next. Total time = sum of all fetch times.
-- **Option B**: Concurrent. All three fetches run at the same time. Total time = max of all fetch times.
+    Option B: 1.0s
 
-If each fetch takes 1 second: A = 3s, B = 1s.
+
+<details markdown="1">
+<summary>Show answer</summary>
+
+**Option B is faster.**
+
+- **Option A** is sequential. It waits for each fetch to finish before starting the next. Total time = the **sum** of all fetch times (3 s).
+- **Option B** is concurrent. All three fetches wait at the same time. Total time = the **longest** single fetch (1 s).
 
 </details>
+
+**Quick recap**
+
+- Coroutines started with `gather` interleave at every `await`; shorter waits finish first.
+- A missing `await` gives you a coroutine object instead of a result.
+- Awaiting one call after another is sequential; use `gather` to overlap the waiting.
 
 ---
 
 ## Final Challenge: Async Task Pipeline
 
-Build an async pipeline that processes "orders" through multiple stages. Each stage is a coroutine that transforms the order.
+Build an async pipeline that pushes "orders" through several stages. Each stage is a coroutine that takes an order and returns the updated order.
 
-**Requirements:** 1. Create an `AsyncPipeline` class with `add_stage(name, handler)` and `process(item)` methods 2. Each stage's handler is an async function that takes an item and returns a transformed item 3. `process()` should run the item through all stages **sequentially** (output of one is input to next) 4. Add logging that shows each stage starting/finishing 5. Process multiple orders **concurrently** using `asyncio.gather`
+**Requirements:**
+
+1. Create an `AsyncPipeline` class with `add_stage(name, handler)` and `process(item)` methods.
+2. Each stage's handler is an async function that takes an item and returns a transformed item.
+3. `process()` runs the item through all stages **one after another** (the output of one stage is the input to the next).
+4. Print a log line as each stage starts and finishes.
+5. Process several orders **concurrently** using `asyncio.gather`.
 
 
 ```python
@@ -1465,10 +1752,19 @@ orders = [
 # print("="*50)
 # for order in results:
 #     print(f"  Order #{order['id']}: {order['item']} -> ${order['total']:.2f} (discount: ${order['discount']:.2f})")
+
+
+# Tests (uncomment after finishing):
+# assert [name for name, _ in pipeline.stages] == ["Validate", "Calculate Total", "Apply Discount"]
+# by_id = {order["id"]: order for order in results}
+# assert by_id[1]["validated"] and round(by_id[1]["total"], 2) == 899.10
+# assert by_id[2]["total"] == 75 and by_id[2]["discount"] == 0
+# assert round(by_id[3]["total"], 2) == 630.00
+# print("✓ Pipeline works!")
 ```
 
-<details>
-<summary>Solution</summary>
+<details markdown="1">
+<summary>Show solution</summary>
 
 ```python
 class AsyncPipeline:
@@ -1483,6 +1779,7 @@ class AsyncPipeline:
         for name, handler in self.stages:
             print(f"  [Order #{item['id']}] Stage: {name}...")
             result = await handler(result)
+            print(f"  [Order #{item['id']}] Finished: {name}")
         print(f"  [Order #{item['id']}] Pipeline complete!")
         return result
 
@@ -1494,14 +1791,19 @@ pipeline.add_stage("Apply Discount", apply_discount)
 
 results = await asyncio.gather(*[pipeline.process(order) for order in orders])
 
-print("\n" + "="*50)
+print("\n" + "=" * 50)
 print("PROCESSED ORDERS")
-print("="*50)
+print("=" * 50)
 for order in results:
     print(f"  Order #{order['id']}: {order['item']} -> ${order['total']:.2f} (discount: ${order['discount']:.2f})")
 ```
 
 </details>
+
+**Quick recap**
+
+- Inside one order, the stages run in sequence because each needs the previous result.
+- Across orders, `gather` runs the pipelines concurrently, so the three orders overlap.
 
 ---
 
@@ -1509,28 +1811,25 @@ for order in results:
 
 ### Callbacks
 
-
 ```python
 # Pass a function to be called later
 def do_work(on_done):
     result = heavy_computation()
-    on_done(result)  # Call back!
+    on_done(result)  # call back!
 
 do_work(lambda r: print(f"Got: {r}"))
 ```
 
 ### Event Emitter (Observer Pattern)
 
-
 ```python
 emitter = EventEmitter()
-emitter.on("event_name", handler_func)   # Subscribe
-emitter.emit("event_name", data)          # Publish
-emitter.off("event_name", handler_func)   # Unsubscribe
+emitter.on("event_name", handler_func)   # subscribe
+emitter.emit("event_name", data)         # publish
+emitter.off("event_name", handler_func)  # unsubscribe
 ```
 
 ### asyncio Essentials
-
 
 ```python
 import asyncio
@@ -1543,43 +1842,45 @@ async def my_task():
 # Run coroutines concurrently
 results = await asyncio.gather(task1(), task2(), task3())
 
-# Fire-and-forget task
+# Start a task in the background, await it later
 task = asyncio.create_task(my_task())
+result = await task
 
 # Timeout
 result = await asyncio.wait_for(slow_task(), timeout=5.0)
 
-# Producer-consumer
+# Producer/consumer
 queue = asyncio.Queue()
 await queue.put(item)
 item = await queue.get()
+
+# In a .py script (not in Jupyter)
+asyncio.run(main())
 ```
 
 ### When to Use What
 
-| Situation                       | Use                                  |
-|---------------------------------|--------------------------------------|
-| Simple "do X when Y happens"    | Callback function                    |
-| Many listeners for named events | Event Emitter                        |
-| I/O-bound concurrent operations | `asyncio` + `async/await`            |
-| CPU-bound parallel processing   | `multiprocessing` (not covered here) |
+| Situation | Use |
+|---|---|
+| Simple "do X when Y happens" | A callback function |
+| Many listeners for named events | An event emitter |
+| Many I/O-bound operations at once (network, disk) | `asyncio` with `async`/`await` |
+| CPU-heavy work in parallel | `multiprocessing` (not covered here) |
 
 ### Key Takeaways
 
-1.  **Callbacks** are functions passed to other functions to be called later
-2.  **Event emitters** let you decouple *what happens* from *who cares about it*
-3.  **`async/await`** makes async code read like synchronous code (no callback hell!)
-4.  **`asyncio.gather`** is your go-to for running things concurrently
-5.  Always **`await`** your coroutines — forgetting it is the #1 async bug
+1. **Callbacks** are functions passed to other functions to be called later.
+2. **Event emitters** separate *what happened* from *who cares about it*.
+3. **`async`/`await`** lets async code read like normal top-to-bottom code, with no callback hell.
+4. **`asyncio.gather`** is your go-to for running things concurrently.
+5. Always **`await`** your coroutines. Forgetting it is the number one async bug.
 
----
-
-## Further Reading
+### Further Reading
 
 - [Official asyncio docs](https://docs.python.org/3/library/asyncio.html)
 - [Real Python: Async IO in Python](https://realpython.com/async-io-python/)
 - [Python Concurrency with asyncio (book)](https://www.manning.com/books/python-concurrency-with-asyncio)
 
----
+### What's Next
 
-*Next up: We'll see how these patterns are used in web frameworks (FastAPI, Django Channels) and real-time applications!*
+The next notebook, **Async Programming**, goes much deeper into `asyncio`: `TaskGroup`, cancellation, locks, semaphores, mixing blocking code with async code, and a small async web crawler. Later, the **FastAPI** notebook shows these ideas in a real web framework.

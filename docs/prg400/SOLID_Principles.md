@@ -1,23 +1,51 @@
 # SOLID Principles in Python
 
-SOLID is an acronym representing five fundamental design principles of object-oriented programming and design. These principles help developers create more maintainable, understandable, and flexible software.
+SOLID is a set of five design rules for object-oriented code. In this notebook we take each rule, look at a small piece of code that breaks it, fix it, and then use all five together in an order-processing example.
 
-| Letter | Principle | Description |
-|--------|-----------|-------------|
-| **S** | Single Responsibility | A class should have only one reason to change |
-| **O** | Open/Closed | Open for extension, closed for modification |
-| **L** | Liskov Substitution | Subtypes must be substitutable for their base types |
-| **I** | Interface Segregation | Many specific interfaces are better than one general interface |
-| **D** | Dependency Inversion | Depend on abstractions, not concretions |
+### Learning Objectives
+
+By the end of this notebook you will be able to:
+
+1. Explain each of the five SOLID principles in your own words
+2. Spot code that breaks a principle (the "code smell")
+3. Refactor that code using small classes, abstract base classes and dependency injection
+4. Write fake (mock) objects to test a class without a real database or email server
+5. Combine the principles in a small but realistic design
+
+### Prerequisites
+
+- The **OOP Foundations** notebook (classes, inheritance, composition, dataclasses)
+- Python 3.10 or newer
+- Basic idea of an abstract class (`from abc import ABC, abstractmethod`). We'll recap it as we go.
+
+### How to Use This Notebook
+
+- Run the cells **from top to bottom**. Some later cells reuse classes defined earlier.
+- Every principle has a **bad example** and a **good example**. Run both and compare the output before reading the explanation.
+- The **Practice Exercises** at the end are for you. Write your answer first, then open *Show solution* to compare.
+- Each section ends with a **Quick recap**. Read only the recaps when revising before an exam.
+
+### The Five Principles at a Glance
+
+| Letter | Principle | In one line |
+|---|---|---|
+| **S** | Single Responsibility | A class should have only one reason to change. |
+| **O** | Open/Closed | Add new behaviour by adding code, not by editing working code. |
+| **L** | Liskov Substitution | A subclass must work anywhere its parent class works. |
+| **I** | Interface Segregation | Many small interfaces beat one big one. |
+| **D** | Dependency Inversion | Depend on abstractions, not on concrete classes. |
+
+Don't try to memorise the table yet. It will make much more sense after you've seen the examples.
 
 ---
+
 ## 1. Single Responsibility Principle (SRP)
 
-> **"A class should have only one reason to change."**
+> *"A class should have only one reason to change."*
 
-Each class should focus on doing one thing well. This makes the code easier to understand, test, and maintain.
+A good way to test this: ask **who** might ask you to change the class. If the answer is "HR, the database team *and* the managers", the class is doing too many jobs.
 
-### ❌ Bad Example - Violating SRP
+### Bad Example: One Class, Three Jobs
 
 
 ```python
@@ -49,7 +77,15 @@ print(emp.generate_report())
     Employee Report: John Doe, Annual Salary: $60000
 
 
-### ✅ Good Example - Following SRP
+This works, but look at who would ask us to edit `Employee`:
+
+- HR changes how pay is calculated, so we edit `calculate_pay`.
+- We move from one database to another, so we edit `save_to_database`.
+- The manager wants a new report layout, so we edit `generate_report`.
+
+Three different reasons to change one class. Every edit risks breaking the other two jobs.
+
+### Good Example: Split by Responsibility
 
 
 ```python
@@ -78,9 +114,9 @@ class EmployeeRepository:
     def save(self, employee: Employee):
         print(f"Saving {employee.name} to database...")
     
-    def find_by_name(self, name: str) -> Employee:
-        # Database lookup logic here
-        pass
+    def find_by_name(self, name: str) -> Employee | None:
+        # Database lookup logic would go here
+        return None
 
 
 class EmployeeReportGenerator:
@@ -108,14 +144,33 @@ print(EmployeeReportGenerator.generate_detailed_report(emp))
     Monthly: $5000.00
 
 
+Now each class has one job:
+
+- `Employee` just holds the data.
+- `PayrollCalculator` knows the pay rules.
+- `EmployeeRepository` talks to the database.
+- `EmployeeReportGenerator` builds reports.
+
+If the report layout changes, we only touch `EmployeeReportGenerator`. Payroll can't break by accident.
+
+SRP does **not** mean "one method per class". `PayrollCalculator` has two methods, and that's fine, because both are about pay.
+
+**Quick recap**
+
+- SRP: a class should have one reason to change, i.e. one job.
+- Ask *who* would request a change. Several different people means several responsibilities.
+- Fix it by moving each job into its own small class.
+- One responsibility can still mean several related methods.
+
 ---
+
 ## 2. Open/Closed Principle (OCP)
 
-> **"Software entities should be open for extension, but closed for modification."**
+> *"Software entities should be open for extension, but closed for modification."*
 
-You should be able to add new functionality without changing existing code. This is typically achieved through inheritance or composition.
+In plain words: when a new requirement arrives, you should be able to **add** a new class instead of **editing** code that already works and is already tested.
 
-### ❌ Bad Example - Violating OCP
+### Bad Example: A Growing `if/elif` Chain
 
 
 ```python
@@ -141,7 +196,9 @@ print(f"VIP discount: ${calc.calculate_discount('vip', 100)}")
     VIP discount: $30.0
 
 
-### ✅ Good Example - Following OCP
+Every new customer type (student, staff, festival offer...) means opening `calculate_discount` and adding another `elif`. The method keeps growing, and each edit can break the cases that already worked.
+
+### Good Example: One Class per Discount
 
 
 ```python
@@ -208,14 +265,30 @@ print(f"Seasonal (25%): ${amount} -> ${seasonal_calc.apply_discount(amount)}")
     Seasonal (25%): $100 -> $75.0
 
 
+What just happened:
+
+- `DiscountStrategy` is an **abstract base class**. It says "every discount must have a `calculate` method" but doesn't say how.
+- Each discount type is its own small class.
+- `DiscountCalculator` only knows about `DiscountStrategy`. It has no idea which discount it was given.
+
+We added `SeasonalDiscount` **without touching** `DiscountCalculator`. That is the Open/Closed principle in action. (This shape is also called the *Strategy pattern*; you'll meet it again in the Design Patterns notebook.)
+
+**Quick recap**
+
+- OCP: extend behaviour by adding new code, not by editing working code.
+- A long `if/elif` on a "type" string is the classic warning sign.
+- Fix it with an abstract base class and one subclass per variation.
+- The class that *uses* the strategies never needs to change when a new one is added.
+
 ---
+
 ## 3. Liskov Substitution Principle (LSP)
 
-> **"Objects of a superclass should be replaceable with objects of its subclasses without breaking the application."**
+> *"Objects of a superclass should be replaceable with objects of its subclasses without breaking the application."*
 
-If class B is a subclass of class A, then we should be able to replace A with B without disrupting the behavior of our program.
+If `B` inherits from `A`, any code written for an `A` must still work when you hand it a `B`. Same methods, same behaviour that the caller expects, no surprises.
 
-### ❌ Bad Example - Violating LSP
+### Bad Example: Square Inherits from Rectangle
 
 
 ```python
@@ -281,10 +354,17 @@ print_area(square)
     Expected area: 50, Actual area: 100
 
 
-### ✅ Good Example - Following LSP
+What just happened: `print_area` sets the width to 5 and the height to 10 and expects an area of 50. That's a fair expectation for any rectangle.
+
+But `Square` overrides the setters so that changing one side changes both. Setting the height to 10 also sets the width to 10, so we get 100.
+
+In maths a square *is* a rectangle. In code, it doesn't **behave** like our `Rectangle` (whose sides can change independently), so it shouldn't inherit from it.
+
+### Good Example: A Shared `Shape` Base Class
 
 
 ```python
+import math
 from abc import ABC, abstractmethod
 
 # GOOD: Use a common abstraction that both shapes can properly implement
@@ -327,11 +407,9 @@ class Circle(Shape):
         self.radius = radius
     
     def area(self) -> float:
-        import math
         return math.pi * self.radius ** 2
     
     def perimeter(self) -> float:
-        import math
         return 2 * math.pi * self.radius
 
 
@@ -357,14 +435,26 @@ for shape in shapes:
     Circle: Area: 78.54, Perimeter: 31.42
 
 
+Now `Rectangle`, `Square` and `Circle` are siblings. They all promise the same thing (`area()` and `perimeter()`), and they all keep that promise. `print_shape_info` works for every one of them with no special cases.
+
+A useful test for LSP: if you ever write `if isinstance(shape, Square): ...` to work around a subclass, the design probably breaks LSP.
+
+**Quick recap**
+
+- LSP: a subclass must work anywhere its parent works, with no surprises.
+- "Is-a" in real life doesn't automatically mean "is-a" in code. Check the *behaviour*.
+- Warning signs: overridden methods that change the meaning, or `isinstance` checks to handle one subclass.
+- Fix it by inheriting from a common, more general base class instead.
+
 ---
+
 ## 4. Interface Segregation Principle (ISP)
 
-> **"Clients should not be forced to depend on interfaces they do not use."**
+> *"Clients should not be forced to depend on interfaces they do not use."*
 
-Instead of one large interface, it's better to have many smaller, more specific interfaces. Classes should only implement the methods they need.
+Python has no `interface` keyword. An abstract base class full of `@abstractmethod`s plays that role. ISP says: keep those small and focused, so a class only signs up for the methods it can really provide.
 
-### ❌ Bad Example - Violating ISP
+### Bad Example: One Big `Worker` Interface
 
 
 ```python
@@ -437,7 +527,9 @@ dev.code()
     Developer is coding
 
 
-### ✅ Good Example - Following ISP
+`Robot` has to write `eat()` and `sleep()` just to satisfy the abstract class, so it raises `NotImplementedError`. Any code that loops over workers and calls `worker.eat()` will crash on a robot. A method that only raises is a strong sign the interface is too big.
+
+### Good Example: Small, Focused Interfaces
 
 
 ```python
@@ -530,16 +622,29 @@ robot.code()
     Robot is coding
 
 
+Each class now picks only the interfaces it needs through multiple inheritance. `Robot` is `Workable` and `Codeable`, nothing more. Code that needs something that can eat should ask for an `Eatable`, and a robot simply won't be one.
+
+**Quick recap**
+
+- ISP: don't force a class to implement methods it can't use.
+- A method whose only job is `raise NotImplementedError` is a red flag.
+- Split one big abstract class into several small ones.
+- A class can inherit from several small interfaces at once.
+
 ---
+
 ## 5. Dependency Inversion Principle (DIP)
 
-> **"High-level modules should not depend on low-level modules. Both should depend on abstractions."**
+> *"High-level modules should not depend on low-level modules. Both should depend on abstractions."*
+>
+> *"Abstractions should not depend on details. Details should depend on abstractions."*
 
-> **"Abstractions should not depend on details. Details should depend on abstractions."**
+- **High-level** code is your business logic, e.g. "create a user and welcome them".
+- **Low-level** code is the details, e.g. "talk to MySQL", "send an email".
 
-This principle promotes loose coupling between classes by introducing abstractions (interfaces) between them.
+DIP says the business logic shouldn't be glued to one particular database or email service.
 
-### ❌ Bad Example - Violating DIP
+### Bad Example: `UserService` Creates Its Own Dependencies
 
 
 ```python
@@ -581,7 +686,11 @@ service.create_user("John", "john@example.com")
     Sending email to john@example.com: Welcome, John!
 
 
-### ✅ Good Example - Following DIP
+`UserService` builds a `MySQLDatabase` and an `EmailService` inside `__init__`. To switch to PostgreSQL or SMS, we'd have to edit `UserService`. Worse, we can't test it without a real MySQL server and a real mail server.
+
+(Side note: we build SQL with an f-string here only to keep the demo short. Real code must use parameterised queries to avoid SQL injection.)
+
+### Good Example: Depend on Abstractions
 
 
 ```python
@@ -671,7 +780,15 @@ service2.create_user("Jane", "+1234567890")
     SMS to +1234567890: Welcome, Jane!
 
 
-### Testing with DIP - Mock Implementations
+What just happened:
+
+- `Database` and `NotificationService` are abstractions (abstract base classes).
+- `UserService` asks for them in `__init__` instead of creating them. Passing dependencies in like this is called **dependency injection**.
+- The caller decides which concrete classes to use. Swapping MySQL + email for PostgreSQL + SMS needed **zero** changes to `UserService`.
+
+### Testing with Mock Implementations
+
+The biggest everyday benefit of DIP is testing. We can hand `UserService` fake objects that just record what happened.
 
 
 ```python
@@ -720,16 +837,34 @@ print(f"Notifications sent: {mock_notifier.sent_messages}")
     Notifications sent: [('test@test.com', 'Welcome, TestUser!')]
 
 
----
-## Real-World Example: Order Processing System
+No database, no emails, but we still checked that `create_user` ran the right query and sent the right message. This is exactly how unit tests for real applications are written (Python's `unittest.mock` makes it even shorter).
 
-Let's combine all SOLID principles in a practical example.
+**Quick recap**
+
+- DIP: business logic should depend on abstractions, not on specific databases or services.
+- Pass dependencies in through `__init__` (dependency injection) instead of creating them inside.
+- Swapping an implementation then needs no change to the high-level class.
+- Fake/mock implementations make testing easy.
+
+---
+
+## 6. Putting It Together: Order Processing System
+
+Now let's use all five principles in one small system. As you read each cell, look for the principle named in its first comment:
+
+| Cell | Principle on show |
+|---|---|
+| Data classes | **SRP**: each class just holds one kind of data |
+| Interfaces | **ISP**: one small abstract class per job |
+| Concrete implementations | **OCP**: add new payment or discount types without editing old ones |
+| `OrderService` | **DIP**: depends only on the abstractions |
+| Any implementation can replace another | **LSP** |
 
 
 ```python
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 
@@ -756,7 +891,7 @@ class Order:
     id: str
     items: List[OrderItem]
     customer_email: str
-    created_at: datetime = None
+    created_at: Optional[datetime] = None
     
     def __post_init__(self):
         if self.created_at is None:
@@ -914,6 +1049,8 @@ class OrderService:
         return False
 ```
 
+Notice that `OrderService` never mentions credit cards, PayPal, percentages or e-mail. It only talks to the five abstractions. Let's give it some real parts and run an order.
+
 
 ```python
 # === Putting it all together ===
@@ -967,6 +1104,15 @@ order_service.process_order(order)
 
 
 
+What just happened, step by step:
+
+1. Subtotal: 999.99 + 2 × 49.99 + 79.99 = **1179.96**
+2. 10% discount: **118.00**, leaving 1061.96
+3. 13% tax on that: **138.06**
+4. Total: **1200.02**, charged to the credit card, saved, and the customer is emailed.
+
+Now the same `OrderService` class with a completely different set of parts:
+
 
 ```python
 # Easy to swap implementations!
@@ -1013,21 +1159,284 @@ bulk_order_service.process_order(bulk_order)
 
 
 
+This order has 10 items, so `BulkDiscount` gives 15% off. We switched payment method, discount rule and tax rate without changing a single line of `OrderService`.
+
+**Quick recap**
+
+- Real designs use all five principles together; they support each other.
+- Small classes (SRP) behind small interfaces (ISP) are easy to extend (OCP) and swap (LSP).
+- The high-level `OrderService` depends only on abstractions (DIP), so it's easy to configure and test.
+
 ---
-## Summary
 
-| Principle | Key Idea | Benefit |
-|-----------|----------|--------|
-| **SRP** | One class, one responsibility | Easier testing and maintenance |
-| **OCP** | Extend without modifying | Reduces risk of breaking existing code |
-| **LSP** | Subclasses are substitutable | Reliable polymorphism |
-| **ISP** | Small, specific interfaces | No forced implementations |
-| **DIP** | Depend on abstractions | Loose coupling, easy testing |
+## 7. Practice Exercises
 
-### Key Takeaways
+Four short exercises, one or two principles each. Write your code in the cell, uncomment the tests, and run it. Only then open the solution.
 
-1. **Start simple** - Don't over-engineer. Apply SOLID when complexity grows.
-2. **Use abstractions** - Python's `ABC` module helps define interfaces.
-3. **Dependency Injection** - Pass dependencies instead of creating them inside classes.
-4. **Composition over inheritance** - Often leads to more flexible code.
-5. **Test-Driven Development** - SOLID principles naturally emerge when writing testable code.
+### Exercise 1 (SRP): Split the Invoice
+
+The class below calculates a total **and** formats text. Split it into:
+
+- `Invoice`: holds `customer` and `items` (a list of `(name, price)` tuples) and has a `total()` method
+- `InvoiceFormatter`: has a `format(invoice)` method returning `"Invoice for <customer>: Rs <total>"`
+
+```python
+class InvoiceEverything:
+    def __init__(self, customer, items):
+        self.customer = customer
+        self.items = items
+
+    def total(self):
+        return sum(price for _, price in self.items)
+
+    def as_text(self):
+        return f"Invoice for {self.customer}: Rs {self.total()}"
+```
+
+
+```python
+# Exercise 1: Your code here
+class Invoice:
+    def __init__(self, customer: str, items: list[tuple[str, float]]):
+        # TODO
+        pass
+
+    def total(self) -> float:
+        # TODO
+        pass
+
+
+class InvoiceFormatter:
+    def format(self, invoice: Invoice) -> str:
+        # TODO
+        pass
+
+# Test your code (uncomment to run):
+# inv = Invoice("Asha", [("Pen", 20), ("Book", 150)])
+# assert inv.total() == 170
+# assert InvoiceFormatter().format(inv) == "Invoice for Asha: Rs 170"
+# assert not hasattr(inv, "format")
+# print("Exercise 1 passed!")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class Invoice:
+    def __init__(self, customer: str, items: list[tuple[str, float]]):
+        self.customer = customer
+        self.items = items
+
+    def total(self) -> float:
+        return sum(price for _, price in self.items)
+
+
+class InvoiceFormatter:
+    def format(self, invoice: Invoice) -> str:
+        return f"Invoice for {invoice.customer}: Rs {invoice.total()}"
+```
+
+</details>
+
+### Exercise 2 (OCP): Add New Discounts Without Editing Old Code
+
+Using the `DiscountStrategy` base class from Section 2, add two **new** classes. Don't change any existing class.
+
+- `StudentDiscount`: 15% off
+- `FlatDiscount(amount)`: a fixed amount off, but never more than the bill itself
+
+
+```python
+# Exercise 2: Your code here
+class StudentDiscount(DiscountStrategy):
+    # TODO
+    pass
+
+
+class FlatDiscount(DiscountStrategy):
+    # TODO
+    pass
+
+# Test your code (uncomment to run):
+# assert StudentDiscount().calculate(200) == 30
+# assert FlatDiscount(50).calculate(200) == 50
+# assert FlatDiscount(50).calculate(30) == 30
+# print("Exercise 2 passed!")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class StudentDiscount(DiscountStrategy):
+    def calculate(self, amount: float) -> float:
+        return amount * 0.15
+
+
+class FlatDiscount(DiscountStrategy):
+    def __init__(self, amount: float):
+        self.amount = amount
+
+    def calculate(self, amount: float) -> float:
+        return min(self.amount, amount)
+```
+
+</details>
+
+### Exercise 3 (LSP + ISP): Birds That Can't Fly
+
+A common mistake is a `Bird` class with a `fly()` method, and then a `Penguin` whose `fly()` raises an error. Fix the design:
+
+- `Bird` (base class) has `eat()` returning `"<name> is eating"`
+- `FlyingBird(Bird)` adds `fly()` returning `"<name> is flying"`
+- `Sparrow` is a `FlyingBird`; `Penguin` is a plain `Bird` with a `swim()` method returning `"<name> is swimming"`
+
+Each bird gets its name through `__init__`.
+
+
+```python
+# Exercise 3: Your code here
+class Bird:
+    # TODO
+    pass
+
+
+class FlyingBird(Bird):
+    # TODO
+    pass
+
+
+class Sparrow(FlyingBird):
+    pass
+
+
+class Penguin(Bird):
+    # TODO
+    pass
+
+# Test your code (uncomment to run):
+# birds = [Sparrow("Jack"), Penguin("Pingu")]
+# assert [b.eat() for b in birds] == ["Jack is eating", "Pingu is eating"]
+# assert Sparrow("Jack").fly() == "Jack is flying"
+# assert Penguin("Pingu").swim() == "Pingu is swimming"
+# assert not hasattr(Penguin("Pingu"), "fly")
+# print("Exercise 3 passed!")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+class Bird:
+    def __init__(self, name: str):
+        self.name = name
+
+    def eat(self) -> str:
+        return f"{self.name} is eating"
+
+
+class FlyingBird(Bird):
+    def fly(self) -> str:
+        return f"{self.name} is flying"
+
+
+class Sparrow(FlyingBird):
+    pass
+
+
+class Penguin(Bird):
+    def swim(self) -> str:
+        return f"{self.name} is swimming"
+```
+
+</details>
+
+### Exercise 4 (DIP): A Testable Weather Reporter
+
+`WeatherReporter` should not call a real weather API directly. Instead:
+
+- Write an abstract class `TemperatureSource` with an abstract method `read_celsius()`
+- Write `WeatherReporter`, which receives a `TemperatureSource` in `__init__` and has `report()` returning `"It is <temp>°C"`
+- Write `FakeSource(value)`, a `TemperatureSource` that always returns `value`, so we can test without the internet
+
+
+```python
+# Exercise 4: Your code here
+from abc import ABC, abstractmethod
+
+
+class TemperatureSource(ABC):
+    # TODO
+    pass
+
+
+class WeatherReporter:
+    # TODO
+    pass
+
+
+class FakeSource(TemperatureSource):
+    # TODO
+    pass
+
+# Test your code (uncomment to run):
+# assert WeatherReporter(FakeSource(25)).report() == "It is 25°C"
+# assert WeatherReporter(FakeSource(-3)).report() == "It is -3°C"
+# print("Exercise 4 passed!")
+```
+
+<details markdown="1">
+<summary>Show solution</summary>
+
+```python
+from abc import ABC, abstractmethod
+
+
+class TemperatureSource(ABC):
+    @abstractmethod
+    def read_celsius(self) -> float:
+        pass
+
+
+class WeatherReporter:
+    def __init__(self, source: TemperatureSource):
+        self.source = source
+
+    def report(self) -> str:
+        return f"It is {self.source.read_celsius()}°C"
+
+
+class FakeSource(TemperatureSource):
+    def __init__(self, value: float):
+        self.value = value
+
+    def read_celsius(self) -> float:
+        return self.value
+```
+
+</details>
+
+---
+
+## Summary & Cheat Sheet
+
+| Principle | Remember this | Warning sign | Usual fix |
+|---|---|---|---|
+| **SRP** | One class, one job | Many unrelated reasons to edit a class | Split it into smaller classes |
+| **OCP** | Add code, don't edit working code | A long `if/elif` on a type name | Abstract base class + one subclass per case |
+| **LSP** | Subclasses must keep the parent's promises | Overrides that change meaning, `isinstance` workarounds | Inherit from a more general base class |
+| **ISP** | Small, focused interfaces | Methods that only `raise NotImplementedError` | Split the big interface |
+| **DIP** | Depend on abstractions | Classes creating their own database/email objects | Pass dependencies in through `__init__` |
+
+### Tips for Real Projects
+
+1. **Start simple.** Don't add abstractions "just in case". Apply SOLID when the code starts to hurt.
+2. **Use `ABC`** to describe what a class must be able to do.
+3. **Inject dependencies** instead of creating them inside the class.
+4. **Prefer composition over inheritance.** It's usually more flexible.
+5. **Write tests.** Code that is easy to test usually follows SOLID already.
+
+### What's Next
+
+The **Design Patterns** notebook shows ready-made solutions (Strategy, Factory, Observer and more) that are built directly on these principles. You've already used the Strategy pattern in Section 2.
