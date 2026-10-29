@@ -1,4 +1,4 @@
-## **OOP Foundations in Python**
+# OOP Foundations in Python
 
 
 ### **Learning Objectives**
